@@ -1,0 +1,8 @@
+.main_layout {
+    width: 100vw;
+}
+.main_layout .main_outlet {
+    background-color: #f3f4f9;
+    width: 100%;
+    padding: 3rem;
+}
