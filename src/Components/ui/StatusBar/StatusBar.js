@@ -3,8 +3,6 @@ import { StatusBarStyle } from './style.js'
 
 const StatusBar = (props) => {
     const { status, className, variant = 'green', style = 'row', ...rest } = props
-
-    // Khi tiến độ đạt một mức nhất định, thanh tiến độ sẽ đổi màu
     const getColor = () => {
         if (status < 40) {
             return theme.color.red

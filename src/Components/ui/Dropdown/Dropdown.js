@@ -3,21 +3,6 @@ import clsx from 'clsx'
 import useStyles from './style'
 import { InputLabel, Box, MenuItem, Select } from '@mui/material'
 
-const getOptionColorClasses = ({ selected, highlighted, disabled }) => {
-    let classes = ''
-    if (disabled) {
-        classes += 'text-slate-400 dark:text-slate-700'
-    } else {
-        if (selected) {
-            classes += ' bg-purple-100 dark:bg-purple-950 text-purple-950 dark:text-purple-50'
-        } else if (highlighted) {
-            classes += ' bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-300'
-        }
-        classes += ' hover:dark:bg-slate-800 hover:bg-slate-100 hover:dark:text-slate-300 hover:text-slate-900'
-    }
-    return classes
-}
-
 function Dropdown(props) {
     const { className = '', list, label, ...rest } = props
     const { classes } = useStyles({})
