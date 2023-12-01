@@ -2,30 +2,19 @@ import { useState } from 'react'
 import { Icon } from '@iconify/react'
 import { APP_ICON } from '../../../Utils/Constants'
 import { CustomAvatar } from './style.js'
+import useUploadImage from '../../../hook/uploadImage'
 
 const Avatar = (props) => {
-    const { src, size = 'sm', className = '', upload, badge } = props
-
-    const [avatarSrc, setAvatarSrc] = useState(src)
-
-    const handleImageUpload = (event, setAvatarSrc) => {
-        let file = event.target.files[0]
-        let reader = new FileReader()
-        reader.onloadend = () => {
-            setAvatarSrc(reader.result)
-        }
-
-        if (file) {
-            reader.readAsDataURL(file)
-        }
-    }
+    const { src = '', size = 'sm', className = '', upload, badge } = props
+    const [imageSrc, setimageSrc] = useState(src)
+    const { handleImageUpload } = useUploadImage()
 
     return (
         <CustomAvatar className={` avt-${size} relative  ${className}  `}>
-            {avatarSrc ? (
+            {imageSrc ? (
                 <img
                     className={`h-full w-full rounded-full border-[3px] border-white object-cover`}
-                    src={avatarSrc}
+                    src={imageSrc}
                     alt="Avatar"
                 />
             ) : (
@@ -45,11 +34,7 @@ const Avatar = (props) => {
                         icon={APP_ICON.i_camera}
                         className="h-4 w-4 cursor-pointer text-gray-500 transition duration-300 hover:text-gray-700"
                     />
-                    <input
-                        type="file"
-                        className="hidden"
-                        onChange={(event) => handleImageUpload(event, setAvatarSrc)}
-                    />
+                    <input type="file" className="hidden" onChange={(event) => handleImageUpload(event, setimageSrc)} />
                 </label>
             )}
         </CustomAvatar>
