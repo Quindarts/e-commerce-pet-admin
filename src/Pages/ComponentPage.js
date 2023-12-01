@@ -8,6 +8,8 @@ import StatusBar from '../Components/ui/StatusBar/StatusBar.js'
 import { useState } from 'react'
 import Dropdown from '../Components/ui/Dropdown/Dropdown.js'
 import InputUpload from '../Components/ui/InputUpload/InputUpload.js'
+import { Typography, Box } from '@mui/material'
+import ChartBar from '../Components/ui/Chart/Bar/ChartBar.js'
 
 const avatars = [
     {
@@ -32,6 +34,20 @@ const user = {
     avt: 'https://img.freepik.com/premium-vector/avatar-icon-smiley-face-man_1692-130.jpg',
     email: 'tntt@gmail.com',
 }
+const series = [
+    {
+        label: 'Dog Food',
+        data: [2423, 2210, 764, 1879, 1478, 1373, 1891, 2171, 620, 1269, 724, 1707, 1188, 1879],
+    },
+    {
+        label: 'Cat Food',
+        data: [2362, 2254, 1962, 1336, 586, 1069, 2194, 1629, 2173, 2031, 1757, 862, 2446],
+    },
+    {
+        label: 'Other',
+        data: [1145, 1214, 975, 2266, 1768, 2341, 747, 1282, 1780, 1766, 2115, 1720, 2000],
+    },
+]
 function ComponentPage() {
     const demo = 50
     const [status, setStatus] = useState(demo)
@@ -51,26 +67,32 @@ function ComponentPage() {
         { title: 'phuc', value: 30 },
     ]
     return (
-        <div className="component_page">
+        <Box className="component_page">
             ComponentPage
             <p>Viết các Components chung tại đây</p>
+            <Typography variant="h6" color="initial">
+                Chart bar
+            </Typography>
+            <Box>
+                <ChartBar series={series} numCategory={3} />
+            </Box>
             <h1 className="my-3 font-[800]">Avatar</h1>
-            <div className="flex gap-5">
-                <div>
+            <Box className="flex gap-5">
+                <Box>
                     <h1 className="mt-3 font-bold">Avatar sm</h1>
                     <AvatarGroup avatars={avatars} maxVisible={2} className="mt-3" size="sm" />
-                </div>
-                <div>
+                </Box>
+                <Box>
                     <h1 className="mt-3 font-bold">Avatar md</h1>
                     <AvatarGroup avatars={avatars} maxVisible={3} className="mt-3" size="md" upload badge={true} />
-                </div>
-                <div>
+                </Box>
+                <Box>
                     <h1 className="mt-3 font-bold">Avatar lg</h1>
                     <AvatarGroup avatars={avatars} maxVisible={4} className="mt-3" size="lg" upload />
-                </div>
-            </div>
+                </Box>
+            </Box>
             <h1 className="my-3 font-[800]">Button</h1>
-            <div>
+            <Box>
                 <Button className="m-1" size="lg" color="primary">
                     btn-primary-lg
                 </Button>
@@ -115,9 +137,9 @@ function ComponentPage() {
                 <Button className="m-1" color="grey" icon variant="outline">
                     <Icon icon={APP_ICON.i_invoice} />
                 </Button>
-            </div>
+            </Box>
             <h1 className="my-3 font-[800]">Status Bar</h1>
-            <div>
+            <Box>
                 <StatusBar
                     className="bg-orange-100"
                     variant="blue"
@@ -125,36 +147,36 @@ function ComponentPage() {
                     handleResetClick={handleResetClick}
                     status={status}
                 ></StatusBar>
-                <div> {status} %</div>
-            </div>
+                <Box> {status} %</Box>
+            </Box>
             <Button onClick={handleCompleteClick}>Complete</Button>
             <Button onClick={handleResetClick}>Rest</Button>
             <h1 className="mt-3 font-bold">PopupUser</h1>
-            <div>
+            <Box>
                 <PopupUser user={user} />
-            </div>
+            </Box>
             <h1 className="mt-3 font-bold">Accordin</h1>
             <h1 className="mt-3 font-bold">Toast</h1>
             <h1 className="mt-3 font-bold">Modal</h1>
             <h1 className="mt-3 font-bold">Upload image</h1>
-            <div>
+            <Box>
                 <InputUpload listUpload={warehouseItem} />
-            </div>
+            </Box>
             <h1 className="mt-3 font-bold">Dropdown</h1>
-            <div>
-                <div>
+            <Box>
+                <Box>
                     <Dropdown list={listDrop} label="labelDropdown" onChange={(e) => setValueDrop(e.target.value)} />
-                </div>
+                </Box>
                 <h1>value:{valueDrop} </h1>
-            </div>
+            </Box>
             <h1 className="mt-3 font-bold">Texfield</h1>
-            <div>
-                <div className="flex w-full gap-[2rem]">
+            <Box>
+                <Box className="flex w-full gap-[2rem]">
                     <Textfield className="my-3 w-1/2" label="Username" type="text" />
                     <Textfield className="my-3 w-1/2" label="Password" type="password" />
-                </div>
-            </div>
-        </div>
+                </Box>
+            </Box>
+        </Box>
     )
 }
 
