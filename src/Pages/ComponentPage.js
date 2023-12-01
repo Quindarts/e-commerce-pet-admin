@@ -5,10 +5,8 @@ import { APP_ICON } from '../Utils/Constants.js'
 import Textfield from '../Components/ui/Textfield/Textfield.js'
 import PopupUser from '../Components/ui/Popup/PopupUser.js'
 import StatusBar from '../Components/ui/StatusBar/StatusBar.js'
-
-import Textfield from '../Components/ui/Textfield/Textfield.js'
-import PopupUser from '../Components/ui/Popup/PopupUser.js'
-import { theme } from '../Theme/theme.js'
+import { useState } from 'react'
+import Dropdown from '../Components/ui/Dropdown/Dropdown.js'
 
 const avatars = [
     {
@@ -32,17 +30,20 @@ function ComponentPage() {
     const demo = 50
     const [status, setStatus] = useState(demo)
 
-    //Giúp tăng % tiến độ mỗi lần click
     const handleCompleteClick = () => {
         if (status < 100) {
-            setStatus(status + 10) //callback?
+            setStatus(status + 10)
         }
     }
-    // Reset lại toàn bộ (tiến độ lẫn thanh tiến độ)
     const handleResetClick = () => {
         setStatus(0)
     }
-
+    const [valueDrop, setValueDrop] = useState('')
+    const listDrop = [
+        { title: 'quang', value: 10 },
+        { title: 'long', value: 20 },
+        { title: 'phuc', value: 30 },
+    ]
     return (
         <div className="component_page">
             ComponentPage
@@ -130,6 +131,13 @@ function ComponentPage() {
             <h1 className="mt-3 font-bold">Toast</h1>
             <h1 className="mt-3 font-bold">Modal</h1>
             <h1 className="mt-3 font-bold">Badge</h1>
+            <h1 className="mt-3 font-bold">Dropdown</h1>
+            <div>
+                <div>
+                    <Dropdown list={listDrop} label="labelDropdown" onChange={(e) => setValueDrop(e.target.value)} />
+                </div>
+                <h1>value:{valueDrop} </h1>
+            </div>
             <h1 className="mt-3 font-bold">Texfield</h1>
             <div>
                 <div className="flex w-full gap-[2rem]">

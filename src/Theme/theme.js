@@ -24,6 +24,7 @@ const color = {
     light_blue: '#299cdb',
     dark_blue: '#2385ba',
     light_sky: '#abb9e8',
+    
     purple: '#6559cc',
     pink: '#f672a7',
     pink_900: '#ff316f',
