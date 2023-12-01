@@ -1,6 +1,7 @@
 import Snackbar from '@mui/material/Snackbar';
 import Button from '@mui/material/Button';
 import React, { useState } from 'react';
+import { CustomToast, MainToast } from './style';
 
 function Toast({ open, handleClose }) {
   return (
@@ -20,7 +21,7 @@ function Toast({ open, handleClose }) {
   );
 }
 
-function ParentComponent() {
+function Toast({ size, appearance, open, handleClose, children, ...rest }) {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -42,4 +43,4 @@ function ParentComponent() {
   );
 }
 
-export default ParentComponent;
+export default Toast;

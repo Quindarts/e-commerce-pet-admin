@@ -7,6 +7,7 @@ import PopupUser from '../Components/ui/Popup/PopupUser.js'
 import StatusBar from '../Components/ui/StatusBar/StatusBar.js'
 import { useState } from 'react'
 import Dropdown from '../Components/ui/Dropdown/Dropdown.js'
+import Toast from '../Components/ui/Toast/Toast.js'
 
 const avatars = [
     {
@@ -44,6 +45,13 @@ function ComponentPage() {
         { title: 'long', value: 20 },
         { title: 'phuc', value: 30 },
     ]
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
     return (
         <div className="component_page">
             ComponentPage
@@ -129,6 +137,9 @@ function ComponentPage() {
             </div>
             <h1 className="mt-3 font-bold">Accordin</h1>
             <h1 className="mt-3 font-bold">Toast</h1>
+            <div>
+                <Button onClick={handleOpen}>Open Toast</Button>
+</div>
             <h1 className="mt-3 font-bold">Modal</h1>
             <h1 className="mt-3 font-bold">Badge</h1>
             <h1 className="mt-3 font-bold">Dropdown</h1>
@@ -145,6 +156,7 @@ function ComponentPage() {
                     <Textfield className="my-3 w-1/2" label="Password" type="password" />
                 </div>
             </div>
+            <Toast open={open} handleClose={handleClose} />
         </div>
     )
 }
