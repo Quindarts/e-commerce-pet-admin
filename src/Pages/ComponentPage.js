@@ -7,6 +7,8 @@ import PopupUser from '../Components/ui/Popup/PopupUser.js'
 import StatusBar from '../Components/ui/StatusBar/StatusBar.js'
 import { useState } from 'react'
 import Dropdown from '../Components/ui/Dropdown/Dropdown.js'
+import Modal from '../Components/ui/Modal/Modal.js'
+import React from 'react';
 
 const avatars = [
     {
@@ -44,6 +46,17 @@ function ComponentPage() {
         { title: 'long', value: 20 },
         { title: 'phuc', value: 30 },
     ]
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     return (
         <div className="component_page">
             ComponentPage
@@ -130,6 +143,13 @@ function ComponentPage() {
             <h1 className="mt-3 font-bold">Accordin</h1>
             <h1 className="mt-3 font-bold">Toast</h1>
             <h1 className="mt-3 font-bold">Modal</h1>
+            <div>
+                <Button variant="contained" onClick={handleOpen}>
+                    Open Modal
+                </Button>
+            </div>
+
+
             <h1 className="mt-3 font-bold">Badge</h1>
             <h1 className="mt-3 font-bold">Dropdown</h1>
             <div>
@@ -145,6 +165,13 @@ function ComponentPage() {
                     <Textfield className="my-3 w-1/2" label="Password" type="password" />
                 </div>
             </div>
+
+            <Modal open={open} size="fat" appearance="bottom_left" handleClose={handleClose}>
+            <div className="flex w-full gap-[2rem]">
+                    <Textfield className="my-3 w-1/2" label="Username" type="text" />
+                    <Textfield className="my-3 w-1/2" label="Password" type="password" />
+                </div>
+            </Modal>
         </div>
     )
 }
