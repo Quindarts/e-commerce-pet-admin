@@ -136,10 +136,10 @@ function ComponentPage() {
             <h1 className="mt-3 font-bold">Accordin</h1>
             <h1 className="mt-3 font-bold">Toast</h1>
             <h1 className="mt-3 font-bold">Modal</h1>
-            <h1 className="mt-3 font-bold">Badge</h1>
-            <h1>
+            <h1 className="mt-3 font-bold">Upload image</h1>
+            <div>
                 <InputUpload listUpload={warehouseItem} />
-            </h1>
+            </div>
             <h1 className="mt-3 font-bold">Dropdown</h1>
             <div>
                 <div>
