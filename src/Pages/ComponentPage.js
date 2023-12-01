@@ -167,10 +167,6 @@ function ComponentPage() {
             </div>
 
             <Modal open={open} size="fat" appearance="bottom_left" handleClose={handleClose}>
-            <div className="flex w-full gap-[2rem]">
-                    <Textfield className="my-3 w-1/2" label="Username" type="text" />
-                    <Textfield className="my-3 w-1/2" label="Password" type="password" />
-                </div>
             </Modal>
         </div>
     )
