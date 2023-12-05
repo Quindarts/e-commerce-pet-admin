@@ -1,4 +1,3 @@
-import * as React from 'react'
 import clsx from 'clsx'
 import useStyles from './style'
 import { InputLabel, Box, MenuItem, Select } from '@mui/material'

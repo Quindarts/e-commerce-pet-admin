@@ -9,6 +9,7 @@ import { useState } from 'react'
 import Dropdown from '../Components/ui/Dropdown/Dropdown.js'
 import Modal from '../Components/ui/Modal/Modal.js'
 import React from 'react';
+import InputUpload from '../Components/ui/InputUpload/InputUpload.js'
 
 const avatars = [
     {
@@ -21,6 +22,11 @@ const avatars = [
         src: 'https://media.istockphoto.com/id/1247693979/photo/close-up-portrait-of-young-smiling-handsome-man-wearing-blue-shirt-and-glasses-feeling.jpg?s=612x612&w=0&k=20&c=PgpEGomO4XLVvRHlFxuqneqm0E68_zYkXVqzr5WN_eo=',
     },
     { src: '' },
+]
+const warehouseItem = [
+    'https://product.hstatic.net/200000312481/product/olc31003_b15f9f049c014a9d9c709cf0aa6ab353_master.jpg',
+    'https://product.hstatic.net/200000312481/product/olc31002_1_c01afc3a5c614cb2880b3740179ed447_master.jpg',
+    'https://product.hstatic.net/200000312481/product/aho2002_1_4c1c4e1db1ed4450b31da91840bf92d7_master.jpg',
 ]
 const user = {
     firstName: 'Than Nguyen Thanh',
@@ -151,6 +157,10 @@ function ComponentPage() {
 
 
             <h1 className="mt-3 font-bold">Badge</h1>
+            <h1 className="mt-3 font-bold">Upload image</h1>
+            <div>
+                <InputUpload listUpload={warehouseItem} />
+            </div>
             <h1 className="mt-3 font-bold">Dropdown</h1>
             <div>
                 <div>
