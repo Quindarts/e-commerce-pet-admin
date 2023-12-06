@@ -10,7 +10,7 @@ import Dropdown from '../Components/ui/Dropdown/Dropdown.js'
 import Snackbar from '../Components/ui/Toast/Snackbar.js'
 import { SnackbarProvider} from 'notistack';
 import InputUpload from '../Components/ui/InputUpload/InputUpload.js'
-
+import PopupNoti from '../Components/ui/Popup/PopupNoti.js'
 const avatars = [
     {
         src: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
@@ -22,6 +22,18 @@ const avatars = [
         src: 'https://media.istockphoto.com/id/1247693979/photo/close-up-portrait-of-young-smiling-handsome-man-wearing-blue-shirt-and-glasses-feeling.jpg?s=612x612&w=0&k=20&c=PgpEGomO4XLVvRHlFxuqneqm0E68_zYkXVqzr5WN_eo=',
     },
     { src: '' },
+]
+const names = [
+    {
+        name: 'Bob',
+    },
+    {
+        name: 'Bill',
+    },
+    {
+        name: 'Ben',
+    },
+    { name: '' },
 ]
 const warehouseItem = [
     'https://product.hstatic.net/200000312481/product/olc31003_b15f9f049c014a9d9c709cf0aa6ab353_master.jpg',
@@ -138,6 +150,10 @@ function ComponentPage() {
             <h1 className="mt-3 font-bold">PopupUser</h1>
             <div>
                 <PopupUser user={user} />
+            </div>
+            <h1 className="mt-3 font-bold">PopupNoti</h1>
+            <div>
+            <PopupNoti avatars={avatars} names={names} user={user} />
             </div>
             <h1 className="mt-3 font-bold">Accordin</h1>
             <h1 className="mt-3 font-bold">Toast</h1>
