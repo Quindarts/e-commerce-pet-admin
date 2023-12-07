@@ -3,11 +3,6 @@ import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Modal } from '@mui/material';
 
-const sizes = {
-  'square': { width: 400, height: 400 },
-  'tall': { width: 300, height: 600 },
-  'fat': { width: 500, height: 300 },
-};
 
 const animations = {
   'bottom_left': keyframes`
@@ -48,21 +43,58 @@ const animations = {
     `,
 };
 
-const MainModal = styled.div(({ size, appearance }) => ({
+
+const MainModal = styled.div(({ appearance }) => ({
   position: 'absolute',
-  ...sizes[size],
-  backgroundColor: '#ffffff',
   boxShadow: 24,
   padding: '1rem',
-  animation: `${animations[appearance]} 1s`,
+  animation: `${animations[appearance]} 0.5s`,
   animationFillMode: 'forwards',
   borderRadius: '10px',
+
+  
+  '@media (max-width: 600px)': {
+    ...sizes['mobile'],
+  },
+  '@media (min-width: 601px) and (max-width: 900px)': {
+    ...sizes['tablet'],
+  },
+  '@media (min-width: 901px) and (max-width: 1200px)': {
+    ...sizes['laptop'],
+  },
+  '@media (min-width: 1201px)': {
+    ...sizes['desktop'],
+  },
 }));
+const Modal1 = styled(MainModal)`
+  background-color: red;
+
+  height: 25rem;
+`;
+
+const Modal2 = styled(MainModal)`
+  background-color: yellow;
+
+  height: 30rem; 
+`;
+
+const Modal3 = styled(MainModal)`
+  background-color: green;
+  height: 20rem; 
+`;
+
 
 const CustomModal = styled(Modal)`
  &{
   color: white,
  }
 `
+const sizes = {
+  'mobile': { width: '90%' }, 
+  'tablet': { width: '70%' }, 
+  'laptop': { width: '60%' }, 
+  'desktop': { width: '50%' }, 
+};
 
-export { MainModal, CustomModal }
+
+export {MainModal, Modal1, Modal2, Modal3, CustomModal };

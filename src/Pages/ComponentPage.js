@@ -7,7 +7,8 @@ import PopupUser from '../Components/ui/Popup/PopupUser.js'
 import StatusBar from '../Components/ui/StatusBar/StatusBar.js'
 import { useState } from 'react'
 import Dropdown from '../Components/ui/Dropdown/Dropdown.js'
-import Modal from '../Components/ui/Modal/Modal.js'
+import { useModal, CustomModal } from '../Components/ui/Modal/Modal.js'
+import {Modal1, Modal2, Modal3} from '../Components/ui/Modal/style.js'
 import React from 'react';
 import InputUpload from '../Components/ui/InputUpload/InputUpload.js'
 
@@ -35,9 +36,11 @@ const user = {
     email: 'tntt@gmail.com',
 }
 function ComponentPage() {
+    const modal1 = useModal();
+    const modal2 = useModal();
+  const modal3 = useModal();
     const demo = 50
     const [status, setStatus] = useState(demo)
-
     const handleCompleteClick = () => {
         if (status < 100) {
             setStatus(status + 10)
@@ -52,16 +55,6 @@ function ComponentPage() {
         { title: 'long', value: 20 },
         { title: 'phuc', value: 30 },
     ]
-
-    const [open, setOpen] = React.useState(false);
-
-    const handleOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
 
     return (
         <div className="component_page">
@@ -150,12 +143,36 @@ function ComponentPage() {
             <h1 className="mt-3 font-bold">Toast</h1>
             <h1 className="mt-3 font-bold">Modal</h1>
             <div>
-                <Button variant="contained" onClick={handleOpen}>
-                    Open Modal
-                </Button>
-            </div>
+      <button type="button" onClick={modal1.toggle}>
+        Open Modal 1
+      </button>
+      <CustomModal open={modal1.isOpen} onClose={modal1.toggle}>
+        <Modal1 appearance="center">
+          <h2>Hello, World! This is Modal 1</h2>
+          <p>This is a custom modal!</p>
+        </Modal1>
+      </CustomModal>
 
+      <button type="button" onClick={modal2.toggle}>
+        Open Modal 2
+      </button>
+      <CustomModal open={modal2.isOpen} onClose={modal2.toggle}>
+        <Modal2 appearance="left">
+          <h2>Hello, World! This is Modal 2</h2>
+          <p>This is a custom modal!</p>
+        </Modal2>
+      </CustomModal>
 
+      <button type="button" onClick={modal3.toggle}>
+        Open Modal 3
+      </button>
+      <CustomModal open={modal3.isOpen} onClose={modal3.toggle}>
+        <Modal3 appearance="right">
+          <h2>Hello, World! This is Modal 3</h2>
+          <p>This is a custom modal!</p>
+        </Modal3>
+      </CustomModal>
+    </div>
             <h1 className="mt-3 font-bold">Badge</h1>
             <h1 className="mt-3 font-bold">Upload image</h1>
             <div>
@@ -175,9 +192,6 @@ function ComponentPage() {
                     <Textfield className="my-3 w-1/2" label="Password" type="password" />
                 </div>
             </div>
-
-            <Modal open={open} size="fat" appearance="bottom_left" handleClose={handleClose}>
-            </Modal>
         </div>
     )
 }
