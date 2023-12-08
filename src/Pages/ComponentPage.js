@@ -33,7 +33,8 @@ const names = [
     {
         name: 'Ben',
     },
-    { name: '' },
+    { name: 'Bin' },
+    { name: 'Ban' },
 ]
 const warehouseItem = [
     'https://product.hstatic.net/200000312481/product/olc31003_b15f9f049c014a9d9c709cf0aa6ab353_master.jpg',
