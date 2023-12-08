@@ -10,7 +10,8 @@ import Dropdown from '../Components/ui/Dropdown/Dropdown.js'
 import Snackbar from '../Components/ui/Toast/Snackbar.js'
 import { SnackbarProvider} from 'notistack';
 import InputUpload from '../Components/ui/InputUpload/InputUpload.js'
-import PopupNoti from '../Components/ui/Popup/PopupNoti.js'
+import PopupServ from '../Components/ui/Popup/PopupServ.js'
+
 const avatars = [
     {
         src: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
@@ -151,9 +152,10 @@ function ComponentPage() {
             <div>
                 <PopupUser user={user} />
             </div>
-            <h1 className="mt-3 font-bold">PopupNoti</h1>
+        
+            <h1 className="mt-3 font-bold">PopupServ</h1>
             <div>
-            <PopupNoti avatars={avatars} names={names} user={user} />
+            <PopupServ avatars={avatars} names={names} />
             </div>
             <h1 className="mt-3 font-bold">Accordin</h1>
             <h1 className="mt-3 font-bold">Toast</h1>
