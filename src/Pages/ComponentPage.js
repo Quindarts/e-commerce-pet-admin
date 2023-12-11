@@ -7,6 +7,9 @@ import PopupUser from '../Components/ui/Popup/PopupUser.js'
 import StatusBar from '../Components/ui/StatusBar/StatusBar.js'
 import { useState } from 'react'
 import Dropdown from '../Components/ui/Dropdown/Dropdown.js'
+import { Link } from 'react-router-dom';
+import { APP_ROUTER } from '../Utils/Constants';
+import SearchTable from '../Components/ui/Search/SearchTable.js'
 
 const avatars = [
     {
@@ -44,6 +47,59 @@ function ComponentPage() {
         { title: 'long', value: 20 },
         { title: 'phuc', value: 30 },
     ]
+    const data = [
+        {
+          Product: "Light Airpod",
+          Producer: "Apple",
+          ID: "PD0001",
+          Category: "Air Pod",
+          Cost: "$432",
+          Extra: "Yes",
+          Priority: "High",
+          Edit: "Edit",
+        },
+        {
+          Product: "Air Pod 2",
+          Producer: "Apple",
+          ID: "PD0002",
+          Category: "Air Pod",
+          Cost: "$432",
+          Extra: "No",
+          Priority: "Medium",
+          Edit: "Edit",
+        },
+        {
+          Product: "Nike Shoe",
+          Producer: "Nike",
+          ID: "PD0003",
+          Category: "Shoe",
+          Cost: "$123",
+          Extra: "No",
+          Priority: "Low",
+          Edit: "Edit",
+        },
+        {
+          Product: "Light Airpod",
+          Producer: "Apple",
+          ID: "PD0001",
+          Category: "Air Pod",
+          Cost: "$432",
+          Extra: "Yes",
+          Priority: "High",
+          Edit: "Edit",
+        },
+      ];
+    
+      const columns = [
+        "Product",
+        "Producer",
+        "ID",
+        "Category",
+        "Cost",
+        "Extra",
+        "Priority",
+        "Edit",
+      ];
     return (
         <div className="component_page">
             ComponentPage
@@ -144,6 +200,15 @@ function ComponentPage() {
                     <Textfield className="my-3 w-1/2" label="Username" type="text" />
                     <Textfield className="my-3 w-1/2" label="Password" type="password" />
                 </div>
+            </div>
+            <div className="container mx-auto p-4">
+      <h1 className="font-bold mt-3">Search Table Component</h1>
+      <SearchTable data={data} columns={columns} />
+    </div>
+            <div>
+            <Link to={APP_ROUTER.LOGIN}>
+                <button>Go to Login Page</button>
+            </Link>
             </div>
         </div>
     )

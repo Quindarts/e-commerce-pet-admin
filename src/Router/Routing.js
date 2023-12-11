@@ -6,6 +6,9 @@ import HomePage from '../Pages/Home/HomePage'
 import ProductPage from '../Pages/ProductPage/ProductPage'
 import OrderPage from '../Pages/OrderPage/OrderPage'
 import UserPage from '../Pages/UserPage/UserPage'
+import LoginPage from '../Pages/LoginPage/LoginPage'
+import RegisterPage from '../Pages/RegisterPage/RegisterPage'
+
 function Routing() {
     return (
         <Routes>
@@ -16,6 +19,9 @@ function Routing() {
                 <Route path={APP_ROUTER.USER} element={<UserPage />} />
                 <Route path={APP_ROUTER.HOME} element={<HomePage />} />
                 <Route path={APP_ROUTER.COMPONENT} element={<ComponentPage />} />
+                <Route path={APP_ROUTER.LOGIN} element={<LoginPage />} />
+                <Route path={APP_ROUTER.REGISTER} element={<RegisterPage />} />
+
             </Route>
         </Routes>
     )
