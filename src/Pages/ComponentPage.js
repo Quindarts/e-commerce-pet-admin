@@ -10,6 +10,7 @@ import Dropdown from '../Components/ui/Dropdown/Dropdown.js'
 import { Link } from 'react-router-dom';
 import { APP_ROUTER } from '../Utils/Constants';
 import SearchTable from '../Components/ui/Search/SearchTable.js'
+import SearchHead from '../Components/ui/Search/SearchHead.js'
 
 const avatars = [
     {
@@ -81,7 +82,7 @@ function ComponentPage() {
         {
           Product: "Light Airpod",
           Producer: "Apple",
-          ID: "PD0001",
+          ID: "PD0004",
           Category: "Air Pod",
           Cost: "$432",
           Extra: "Yes",
@@ -100,6 +101,12 @@ function ComponentPage() {
         "Priority",
         "Edit",
       ];
+      const [filter, setFilter] = useState("");
+      const [isOpen, setIsOpen] = useState(false);
+    
+      const handleSearch = (query) => {
+        setFilter(query);
+      };
     return (
         <div className="component_page">
             ComponentPage
@@ -201,6 +208,16 @@ function ComponentPage() {
                     <Textfield className="my-3 w-1/2" label="Password" type="password" />
                 </div>
             </div>
+            <h1 className="mt-3 font-bold">Search</h1>
+            <div className="container mx-auto">
+      <button onClick={() => setIsOpen(!isOpen)}>Open Search</button>
+      <SearchHead
+        placeholder="Search..."
+        onSearch={handleSearch}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
+</div>
             <div className="container mx-auto p-4">
       <h1 className="font-bold mt-3">Search Table Component</h1>
       <SearchTable data={data} columns={columns} />

@@ -8,38 +8,32 @@ function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(''); // Add a state to store the error message
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-
-    // Check if the email already exists in local storage
-    const existingUser = localStorage.getItem(email);
-    if (existingUser) {
-      // If the email is already registered, show an error message
-      setError('This email is already taken. Please use a different email or login.');
+  
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      setError("Passwords do not match!");
       return;
     }
-
-    const apiEndpoint = 'http://localhost:3000/auth/register';
-
-    const response = await fetch(apiEndpoint, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ firstName, lastName, email, password }),
-    });
-
-    if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-        // Handle successful registration here (e.g., navigate to another page, store the token, etc.)
-    } else {
-        console.error('Registration failed');
-        // Handle registration failure here (e.g., show an error message)
-    }
+  
+    // Create a new user object
+    const newUser = { firstName, lastName, email, password };
+  
+    // Get the existing users from local storage
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+  
+    // Add the new user to the array
+    users.push(newUser);
+  
+    // Save the updated array to local storage
+    localStorage.setItem("users", JSON.stringify(users));
+  
+    console.log(newUser); // Log the user data
   };
-
+  
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
 <form onSubmit={handleSubmit} className="w-full p-8 bg-white rounded shadow" style={{ maxWidth: '600px' }}>  
@@ -92,6 +86,17 @@ function RegisterPage() {
       onChange={(e) => setPassword(e.target.value)}
     />
   </div>
+  <div className="mb-4">
+  <input
+    className="w-full px-3 py-4 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+    id="confirmPassword"
+    type="password"
+    placeholder="Confirm Password"
+    value={confirmPassword}
+    onChange={(e) => setConfirmPassword(e.target.value)}
+  />
+</div>
+
   <div className="mb-4 text-center text-red-500 font-bold">{error}</div>
         
         <div className="mb-6 text-center">

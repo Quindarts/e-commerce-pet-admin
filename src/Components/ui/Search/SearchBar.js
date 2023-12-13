@@ -7,15 +7,7 @@ function SearchBar({ placeholder, onSearch }) {
   const inputRef = useRef(null);
 
   useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === "Enter") {
-        onSearch(query);
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
+    onSearch(query); // Call onSearch every time query changes
   }, [query, onSearch]);
 
   const handleClear = () => {

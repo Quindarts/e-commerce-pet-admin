@@ -5,31 +5,23 @@ import { APP_ROUTER } from '../../Utils/Constants';
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(''); // Add a state to store the error message
+  const [error, setError] = useState(''); 
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    // Check if the email exists in local storage
-    const existingUser = localStorage.getItem(email);
-    if (!existingUser) {
-      // If the email is not registered, show an error message
-      setError('This email is not registered. Please use a different email or sign up.');
-      return;
-    }
-
-    // Parse the user data from JSON to object
-    const userObject = JSON.parse(existingUser);
-
-    // Check if the password matches the stored password
-    if (password === userObject.password) {
-      // Handle successful login here (e.g., navigate to another page, store the token, etc.)
-    } else {
-      // Show an error message
-      setError('Wrong password!');
+  
+    
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const user = users.find(
+      (user) => user.email === email && user.password === password
+    );
+    if (user) {
+     
+      localStorage.setItem("loggedInUser", JSON.stringify(user));
+      console.log(user); 
+      setError("Invalid email or password");
     }
   };
-
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
     <form onSubmit={handleSubmit} className="w-full p-8 bg-white rounded shadow" style={{ maxWidth: '600px' }}>
