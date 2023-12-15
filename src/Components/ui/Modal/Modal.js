@@ -1,22 +1,19 @@
-import React from 'react';
-import Button from '@mui/material/Button';
-import { CustomModal, MainModal } from './style';
+import React from 'react'
+import Button from '@mui/material/Button'
+import { CustomModal, MainModal } from './style'
+import { Icon } from '@iconify/react'
 
 function Modal({ size, appearance, open, handleClose, children, ...rest }) {
-
-  return (
-    <CustomModal open={open}
-      onClose={handleClose}
-      {...rest}
-    >
-      <MainModal size={size} appearance={appearance}>
-      <Button onClick={handleClose} style={{ position: 'absolute', right: 0, top: 0 }}>
-          X
-        </Button>
-        {children}
-      </MainModal>
-    </CustomModal>
-  );
+    return (
+        <CustomModal open={open} onClose={handleClose} {...rest}>
+            <MainModal size={size} appearance={appearance}>
+                <button onClick={handleClose}>
+                    <Icon icon="ep:close-bold" width={18} className="text-gray-700" />
+                </button>
+                {children}
+            </MainModal>
+        </CustomModal>
+    )
 }
 
-export default Modal;
+export default Modal
