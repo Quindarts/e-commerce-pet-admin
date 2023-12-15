@@ -38,13 +38,10 @@ function RegisterPage() {
       console.error("Error during API call: ", error);
     }
   
-    // Get the existing users from local storage
     const users = JSON.parse(localStorage.getItem("users")) || [];
   
-    // Add the new user to the array
     users.push(newUser);
   
-    // Save the updated array to local storage
     localStorage.setItem("users", JSON.stringify(users));
   
     console.log(newUser); 

@@ -20,12 +20,13 @@ function Textfield(props) {
     const [showPassword, setShowPassword] = useState(false)
 
     const handleClickShowPassword = () => setShowPassword((show) => !show)
+    const helperTextValue = error ? helperText : "";
 
     return (
         <div className={`${className} relative `}>
             <TextFieldCustomMUI
                 label={label}
-                helperText={helperText}
+                helperText={helperTextValue}
                 type={showPassword ? 'text' : type}
                 className={`textfield w-full textfield-${variant} text-${type} textfield-${size}`}
                 error={error}

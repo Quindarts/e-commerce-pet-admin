@@ -65,7 +65,7 @@ function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-            helperText={<span style={{color: email && /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email) ? "#ffffff" : "#ff0000"}}>Invalid email format.</span>}
+            helperText={<span style={{color: email && /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)}}>Invalid email format.</span>}
             error={email && email.length > 0 && !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)}
           />
         </div>
