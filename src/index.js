@@ -4,12 +4,27 @@ import './Styles/index.css'
 import { ThemeProvider } from '@mui/material/styles'
 import { BrowserRouter } from 'react-router-dom'
 import { theme } from './Theme/theme'
+import { SnackbarProvider } from 'notistack'
+import { StyledMaterialDesignContent } from './Components/ui/Toast/style'
+import Toast from './Components/ui/Toast/Snackbar'
+import { delay } from 'q'
 const root = ReactDOM.createRoot(document.getElementById('root'))
-
 root.render(
     <BrowserRouter>
         <ThemeProvider theme={theme}>
-            <App />
+            <SnackbarProvider
+                delay={100}
+                maxSnack={5}
+                iconVariant={{
+                    success: '✅',
+                    error: '✖️',
+                    warning: '⚠️',
+                    info: 'ℹ️',
+                }}
+                Components={{ success: StyledMaterialDesignContent, toast: Toast }}
+            >
+                <App />
+            </SnackbarProvider>
         </ThemeProvider>
     </BrowserRouter>,
 )

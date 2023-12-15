@@ -7,9 +7,9 @@ import PopupUser from '../Components/ui/Popup/PopupUser.js'
 import StatusBar from '../Components/ui/StatusBar/StatusBar.js'
 import { useState } from 'react'
 import Dropdown from '../Components/ui/Dropdown/Dropdown.js'
-import Snackbar from '../Components/ui/Toast/Snackbar.js'
-import { SnackbarProvider} from 'notistack';
 import InputUpload from '../Components/ui/InputUpload/InputUpload.js'
+import { SnackbarContent, useSnackbar } from 'notistack'
+import Toast from '../Components/ui/Toast/Snackbar.js'
 
 const avatars = [
     {
@@ -35,11 +35,8 @@ const user = {
     email: 'tntt@gmail.com',
 }
 function ComponentPage() {
-    
-    
     const demo = 50
     const [status, setStatus] = useState(demo)
-
     const handleCompleteClick = () => {
         if (status < 100) {
             setStatus(status + 10)
@@ -54,8 +51,18 @@ function ComponentPage() {
         { title: 'long', value: 20 },
         { title: 'phuc', value: 30 },
     ]
+    const { enqueueSnackbar } = useSnackbar()
 
-   
+    const handleSnackbar = () => {
+        enqueueSnackbar(
+            <div className="flex">
+                Helo <h1>Le minh quang</h1>
+                <img src={user.avt} alt="" width={50} />
+            </div>,
+            { variant: 'success' },
+        )
+    }
+
     return (
         <div className="component_page">
             ComponentPage
@@ -142,15 +149,8 @@ function ComponentPage() {
             <h1 className="mt-3 font-bold">Accordin</h1>
             <h1 className="mt-3 font-bold">Toast</h1>
             <div>
-            <SnackbarProvider maxSnack={3}>
-                            <Snackbar message="This is a success message!" variant="success" styleName="success" />
-<Snackbar message="This is an error message!" variant="error" styleName="error" />
-<Snackbar message="This is a warning message!" variant="warning" styleName="warning" />
-<Snackbar message="This is an info message!" variant="info" styleName="info" />
-
-    </SnackbarProvider>
-      </div>
-
+                <Button onClick={() => handleSnackbar()}>click me!</Button>
+            </div>
             <h1 className="mt-3 font-bold">Modal</h1>
             <h1 className="mt-3 font-bold">Upload image</h1>
             <div>
@@ -170,7 +170,6 @@ function ComponentPage() {
                     <Textfield className="my-3 w-1/2" label="Password" type="password" />
                 </div>
             </div>
-           
         </div>
     )
 }

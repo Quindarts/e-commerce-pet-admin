@@ -1,18 +1,13 @@
-import * as React from 'react';
-import { useSnackbar } from 'notistack';
-import Button from '../Button/Button';
-import { styles } from './style';
+import * as React from 'react'
+import { SnackbarContent } from 'notistack'
 
-const Snackbar = ({ message = 'Default message', variant = 'default', styleName }) => {
-  const { enqueueSnackbar } = useSnackbar();
+function Toast(props, ref) {
+    const { id, message, allowDownload, ...other } = props
+    return (
+        <SnackbarContent className="bg-orange-400" ref={ref} role="alert" {...other}>
+            {message}
+        </SnackbarContent>
+    )
+}
 
-  const handleSnackbar = () => {
-    enqueueSnackbar(message, { variant });
-  };
-
-  return (
-      <Button style={styles[styleName]} onClick={handleSnackbar}>Show snackbar</Button>
-  );
-};
-
-export default Snackbar;
+export default React.forwardRef(Toast)
