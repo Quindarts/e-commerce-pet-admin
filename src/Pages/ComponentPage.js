@@ -54,13 +54,7 @@ function ComponentPage() {
     const { enqueueSnackbar } = useSnackbar()
 
     const handleSnackbar = () => {
-        enqueueSnackbar(
-            <div className="flex">
-                Helo <h1>Le minh quang</h1>
-                <img src={user.avt} alt="" width={50} />
-            </div>,
-            { variant: 'success' },
-        )
+        enqueueSnackbar(<div>helo</div>, { variant: 'toast' })
     }
 
     return (

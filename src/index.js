@@ -7,7 +7,6 @@ import { theme } from './Theme/theme'
 import { SnackbarProvider } from 'notistack'
 import { StyledMaterialDesignContent } from './Components/ui/Toast/style'
 import Toast from './Components/ui/Toast/Snackbar'
-import { delay } from 'q'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
     <BrowserRouter>
@@ -15,6 +14,7 @@ root.render(
             <SnackbarProvider
                 delay={100}
                 maxSnack={5}
+                autoHideDuration={1000}
                 iconVariant={{
                     success: '✅',
                     error: '✖️',
