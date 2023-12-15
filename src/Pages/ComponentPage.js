@@ -8,7 +8,6 @@ import StatusBar from '../Components/ui/StatusBar/StatusBar.js'
 import { useState } from 'react'
 import Dropdown from '../Components/ui/Dropdown/Dropdown.js'
 import Modal from '../Components/ui/Modal/Modal.js'
-import Snackbar from '../Components/ui/Toast/Snackbar.js'
 import InputUpload from '../Components/ui/InputUpload/InputUpload.js'
 import PopupServ from '../Components/ui/Popup/PopupServ.js'
 import { useTranslation } from 'react-i18next'
@@ -56,9 +55,6 @@ const listLanguage = [
 ]
 
 function ComponentPage() {
-    const modal1 = useModal();
-    const modal2 = useModal();
-  const modal3 = useModal();
     const demo = 50
     const [status, setStatus] = useState(demo)
     const handleCompleteClick = () => {

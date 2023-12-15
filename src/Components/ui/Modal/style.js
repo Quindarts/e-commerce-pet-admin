@@ -45,7 +45,8 @@ const animations = {
 
 const MainModal = styled.div(({ size, appearance }) => ({
     position: 'absolute',
-    ...sizes[size],
+    width: 500,
+    height: 500,
     backgroundColor: '#ffffff',
     boxShadow: 24,
     padding: '1rem',
