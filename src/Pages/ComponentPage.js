@@ -8,7 +8,7 @@ import StatusBar from '../Components/ui/StatusBar/StatusBar.js'
 import { useState } from 'react'
 import Dropdown from '../Components/ui/Dropdown/Dropdown.js'
 import Modal from '../Components/ui/Modal/Modal.js'
-import React from 'react';
+import React from 'react'
 import InputUpload from '../Components/ui/InputUpload/InputUpload.js'
 
 const avatars = [
@@ -53,15 +53,17 @@ function ComponentPage() {
         { title: 'phuc', value: 30 },
     ]
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false)
+    const [optionModal, setOpTionModal] = useState('center')
 
-    const handleOpen = () => {
-        setOpen(true);
-    };
+    const handleOpen = (option) => {
+        setOpen(true)
+        setOpTionModal(option)
+    }
 
     const handleClose = () => {
-        setOpen(false);
-    };
+        setOpen(false)
+    }
 
     return (
         <div className="component_page">
@@ -149,13 +151,35 @@ function ComponentPage() {
             <h1 className="mt-3 font-bold">Accordin</h1>
             <h1 className="mt-3 font-bold">Toast</h1>
             <h1 className="mt-3 font-bold">Modal</h1>
-            <div>
-                <Button variant="contained" onClick={handleOpen}>
-                    Open Modal
+            <div className="flex flex-wrap gap-3">
+                <Button variant="contained" onClick={() => handleOpen('bottom_left')}>
+                    Modal bottom left
+                </Button>
+                <Button variant="contained" onClick={() => handleOpen('top')}>
+                    Modal top
+                </Button>
+                <Button variant="contained" onClick={() => handleOpen('top_right')}>
+                    Modal top_right
+                </Button>
+                <Button variant="contained" onClick={() => handleOpen('left')}>
+                    Modal left
+                </Button>
+                <Button variant="contained" onClick={() => handleOpen('right')}>
+                    Modal right
+                </Button>
+                <Button variant="contained" onClick={() => handleOpen('bottom_right')}>
+                    Modal bottom_right
+                </Button>
+                <Button variant="contained" onClick={() => handleOpen('bottom')}>
+                    Modal bottom
+                </Button>
+                <Button variant="contained" onClick={() => handleOpen('top_left')}>
+                    Modal top_left
+                </Button>
+                <Button variant="contained" onClick={() => handleOpen('center')}>
+                    Modal center
                 </Button>
             </div>
-
-
             <h1 className="mt-3 font-bold">Badge</h1>
             <h1 className="mt-3 font-bold">Upload image</h1>
             <div>
@@ -175,9 +199,7 @@ function ComponentPage() {
                     <Textfield className="my-3 w-1/2" label="Password" type="password" />
                 </div>
             </div>
-
-            <Modal open={open} size="fat" appearance="bottom_left" handleClose={handleClose}>
-            </Modal>
+            <Modal key={1} open={open} size="fat" appearance={optionModal} handleClose={handleClose}></Modal>
         </div>
     )
 }

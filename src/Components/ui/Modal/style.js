@@ -2,7 +2,7 @@
 import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Modal } from '@mui/material'
-
+import { theme } from '../../../Theme/theme'
 const sizes = {
     square: { width: 400, height: 400 },
     tall: { width: 300, height: 600 },
@@ -54,9 +54,15 @@ const MainModal = styled.div(({ size, appearance }) => ({
     backgroundColor: '#ffffff',
     boxShadow: 24,
     padding: '1rem',
-    animation: `${animations[appearance]} 1s`,
+    animation: `${animations[appearance]} 0.4s`,
     animationFillMode: 'forwards',
     borderRadius: '10px',
+    color: theme.color.gray_600,
+    button: {
+        position: 'absolute',
+        top: 10,
+        right: 10,
+    },
 }))
 
 const CustomModal = styled(Modal)`
