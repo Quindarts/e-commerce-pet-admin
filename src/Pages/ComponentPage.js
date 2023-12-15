@@ -7,10 +7,13 @@ import PopupUser from '../Components/ui/Popup/PopupUser.js'
 import StatusBar from '../Components/ui/StatusBar/StatusBar.js'
 import { useState } from 'react'
 import Dropdown from '../Components/ui/Dropdown/Dropdown.js'
-import { useModal, CustomModal } from '../Components/ui/Modal/Modal.js'
-import {Modal1, Modal2, Modal3} from '../Components/ui/Modal/style.js'
-import React from 'react';
+import Modal from '../Components/ui/Modal/Modal.js'
+import Snackbar from '../Components/ui/Toast/Snackbar.js'
 import InputUpload from '../Components/ui/InputUpload/InputUpload.js'
+import PopupServ from '../Components/ui/Popup/PopupServ.js'
+import { useTranslation } from 'react-i18next'
+import i18n from '../translation/i18n.js'
+import PopupLang from '../Components/ui/Popup/PopupLang.js'
 
 const avatars = [
     {
@@ -24,6 +27,18 @@ const avatars = [
     },
     { src: '' },
 ]
+const names = [
+    {
+        name: 'Bob',
+    },
+    {
+        name: 'Bill',
+    },
+    {
+        name: 'Ben',
+    },
+    { name: '' },
+]
 const warehouseItem = [
     'https://product.hstatic.net/200000312481/product/olc31003_b15f9f049c014a9d9c709cf0aa6ab353_master.jpg',
     'https://product.hstatic.net/200000312481/product/olc31002_1_c01afc3a5c614cb2880b3740179ed447_master.jpg',
@@ -35,6 +50,11 @@ const user = {
     avt: 'https://img.freepik.com/premium-vector/avatar-icon-smiley-face-man_1692-130.jpg',
     email: 'tntt@gmail.com',
 }
+const listLanguage = [
+    { title: 'Vietnamese', value: 'vi' },
+    { title: 'English', value: 'en' },
+]
+
 function ComponentPage() {
     const modal1 = useModal();
     const modal2 = useModal();
@@ -55,6 +75,22 @@ function ComponentPage() {
         { title: 'long', value: 20 },
         { title: 'phuc', value: 30 },
     ]
+
+    const [open, setOpen] = useState(false)
+    const [optionModal, setOpTionModal] = useState('center')
+
+    const handleOpen = (option) => {
+        setOpen(true)
+        setOpTionModal(option)
+    }
+
+    const handleClose = () => {
+        setOpen(false)
+    }
+    const handleChangeLanguage = (value) => {
+        i18n.changeLanguage(value)
+    }
+    const { t } = useTranslation()
 
     return (
         <div className="component_page">
@@ -139,40 +175,48 @@ function ComponentPage() {
             <div>
                 <PopupUser user={user} />
             </div>
-            <h1 className="mt-3 font-bold">Accordin</h1>
-            <h1 className="mt-3 font-bold">Toast</h1>
-            <h1 className="mt-3 font-bold">Modal</h1>
+            <h1 className="mt-3 font-bold">PopupServ</h1>
             <div>
-      <button type="button" onClick={modal1.toggle}>
-        Open Modal 1
-      </button>
-      <CustomModal open={modal1.isOpen} onClose={modal1.toggle}>
-        <Modal1 appearance="center">
-          <h2>Hello, World! This is Modal 1</h2>
-          <p>This is a custom modal!</p>
-        </Modal1>
-      </CustomModal>
-
-      <button type="button" onClick={modal2.toggle}>
-        Open Modal 2
-      </button>
-      <CustomModal open={modal2.isOpen} onClose={modal2.toggle}>
-        <Modal2 appearance="left">
-          <h2>Hello, World! This is Modal 2</h2>
-          <p>This is a custom modal!</p>
-        </Modal2>
-      </CustomModal>
-
-      <button type="button" onClick={modal3.toggle}>
-        Open Modal 3
-      </button>
-      <CustomModal open={modal3.isOpen} onClose={modal3.toggle}>
-        <Modal3 appearance="right">
-          <h2>Hello, World! This is Modal 3</h2>
-          <p>This is a custom modal!</p>
-        </Modal3>
-      </CustomModal>
-    </div>
+                <PopupServ avatars={avatars} names={names} />
+            </div>
+            <h1 className="mt-3 font-bold">Accordin</h1>
+            <h1 className="mt-3 font-bold">Snackbar</h1>
+  
+            <h1 className="mt-3 font-bold">Modal</h1>
+            <div className="flex flex-wrap gap-3">
+                <Button variant="contained" onClick={() => handleOpen('bottom_left')}>
+                    Modal bottom left
+                </Button>
+                <Button variant="contained" onClick={() => handleOpen('top')}>
+                    Modal top
+                </Button>
+                <Button variant="contained" onClick={() => handleOpen('top_right')}>
+                    Modal top_right
+                </Button>
+                <Button variant="contained" onClick={() => handleOpen('left')}>
+                    Modal left
+                </Button>
+                <Button variant="contained" onClick={() => handleOpen('right')}>
+                    Modal right
+                </Button>
+                <Button variant="contained" onClick={() => handleOpen('bottom_right')}>
+                    Modal bottom_right
+                </Button>
+                <Button variant="contained" onClick={() => handleOpen('bottom')}>
+                    Modal bottom
+                </Button>
+                <Button variant="contained" onClick={() => handleOpen('top_left')}>
+                    Modal top_left
+                </Button>
+                <Button variant="contained" onClick={() => handleOpen('center')}>
+                    Modal center
+                </Button>
+            </div>
+            <h1 className="mt-3 font-bold">Select language</h1>
+            <h1>{t('content.text')}</h1>
+            <div>
+                <PopupLang list={listLanguage} handleChangeLanguage={handleChangeLanguage} />
+            </div>
             <h1 className="mt-3 font-bold">Badge</h1>
             <h1 className="mt-3 font-bold">Upload image</h1>
             <div>
@@ -180,9 +224,7 @@ function ComponentPage() {
             </div>
             <h1 className="mt-3 font-bold">Dropdown</h1>
             <div>
-                <div>
-                    <Dropdown list={listDrop} label="labelDropdown" onChange={(e) => setValueDrop(e.target.value)} />
-                </div>
+                <Dropdown list={listDrop} label="labelDropdown" onChange={(e) => setValueDrop(e.target.value)} />
                 <h1>value:{valueDrop} </h1>
             </div>
             <h1 className="mt-3 font-bold">Texfield</h1>
@@ -192,6 +234,7 @@ function ComponentPage() {
                     <Textfield className="my-3 w-1/2" label="Password" type="password" />
                 </div>
             </div>
+            <Modal key={1} open={open} size="fat" appearance={optionModal} handleClose={handleClose}></Modal>
         </div>
     )
 }
