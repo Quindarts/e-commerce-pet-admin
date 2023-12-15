@@ -12,6 +12,9 @@ import Snackbar from '../Components/ui/Toast/Snackbar.js'
 import { SnackbarProvider } from 'notistack'
 import InputUpload from '../Components/ui/InputUpload/InputUpload.js'
 import PopupServ from '../Components/ui/Popup/PopupServ.js'
+import { useTranslation } from 'react-i18next'
+import i18n from '../translation/i18n.js'
+import PopupLang from '../Components/ui/Popup/PopupLang.js'
 
 const avatars = [
     {
@@ -48,6 +51,11 @@ const user = {
     avt: 'https://img.freepik.com/premium-vector/avatar-icon-smiley-face-man_1692-130.jpg',
     email: 'tntt@gmail.com',
 }
+const listLanguage = [
+    { title: 'Vietnamese', value: 'vi' },
+    { title: 'English', value: 'en' },
+]
+
 function ComponentPage() {
     const demo = 50
     const [status, setStatus] = useState(demo)
@@ -78,6 +86,10 @@ function ComponentPage() {
     const handleClose = () => {
         setOpen(false)
     }
+    const handleChangeLanguage = (value) => {
+        i18n.changeLanguage(value)
+    }
+    const { t } = useTranslation()
 
     return (
         <div className="component_page">
@@ -206,6 +218,11 @@ function ComponentPage() {
                     Modal center
                 </Button>
             </div>
+            <h1 className="mt-3 font-bold">Select language</h1>
+            <h1>{t('content.text')}</h1>
+            <div>
+                <PopupLang list={listLanguage} handleChangeLanguage={handleChangeLanguage} />
+            </div>
             <h1 className="mt-3 font-bold">Badge</h1>
             <h1 className="mt-3 font-bold">Upload image</h1>
             <div>
@@ -213,9 +230,7 @@ function ComponentPage() {
             </div>
             <h1 className="mt-3 font-bold">Dropdown</h1>
             <div>
-                <div>
-                    <Dropdown list={listDrop} label="labelDropdown" onChange={(e) => setValueDrop(e.target.value)} />
-                </div>
+                <Dropdown list={listDrop} label="labelDropdown" onChange={(e) => setValueDrop(e.target.value)} />
                 <h1>value:{valueDrop} </h1>
             </div>
             <h1 className="mt-3 font-bold">Texfield</h1>

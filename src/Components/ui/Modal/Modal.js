@@ -1,5 +1,3 @@
-import React from 'react'
-import Button from '@mui/material/Button'
 import { CustomModal, MainModal } from './style'
 import { Icon } from '@iconify/react'
 
