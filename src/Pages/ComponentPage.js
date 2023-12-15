@@ -7,7 +7,7 @@ import PopupUser from '../Components/ui/Popup/PopupUser.js'
 import StatusBar from '../Components/ui/StatusBar/StatusBar.js'
 import { useState } from 'react'
 import Dropdown from '../Components/ui/Dropdown/Dropdown.js'
-import Snackbar from '../Components/ui/Toast/Snackbar.js'
+import Snackbar from '../Components/ui/Snackbar/Snackbar.js'
 import { SnackbarProvider} from 'notistack';
 import InputUpload from '../Components/ui/InputUpload/InputUpload.js'
 
