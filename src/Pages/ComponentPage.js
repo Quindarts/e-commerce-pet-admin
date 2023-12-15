@@ -8,8 +8,10 @@ import StatusBar from '../Components/ui/StatusBar/StatusBar.js'
 import { useState } from 'react'
 import Dropdown from '../Components/ui/Dropdown/Dropdown.js'
 import Modal from '../Components/ui/Modal/Modal.js'
-import React from 'react'
+import Snackbar from '../Components/ui/Toast/Snackbar.js'
+import { SnackbarProvider } from 'notistack'
 import InputUpload from '../Components/ui/InputUpload/InputUpload.js'
+import PopupServ from '../Components/ui/Popup/PopupServ.js'
 
 const avatars = [
     {
@@ -22,6 +24,18 @@ const avatars = [
         src: 'https://media.istockphoto.com/id/1247693979/photo/close-up-portrait-of-young-smiling-handsome-man-wearing-blue-shirt-and-glasses-feeling.jpg?s=612x612&w=0&k=20&c=PgpEGomO4XLVvRHlFxuqneqm0E68_zYkXVqzr5WN_eo=',
     },
     { src: '' },
+]
+const names = [
+    {
+        name: 'Bob',
+    },
+    {
+        name: 'Bill',
+    },
+    {
+        name: 'Ben',
+    },
+    { name: '' },
 ]
 const warehouseItem = [
     'https://product.hstatic.net/200000312481/product/olc31003_b15f9f049c014a9d9c709cf0aa6ab353_master.jpg',
@@ -148,8 +162,20 @@ function ComponentPage() {
             <div>
                 <PopupUser user={user} />
             </div>
+            <h1 className="mt-3 font-bold">PopupServ</h1>
+            <div>
+                <PopupServ avatars={avatars} names={names} />
+            </div>
             <h1 className="mt-3 font-bold">Accordin</h1>
             <h1 className="mt-3 font-bold">Toast</h1>
+            <div>
+                <SnackbarProvider maxSnack={3}>
+                    <Snackbar message="This is a success message!" variant="success" styleName="success" />
+                    <Snackbar message="This is an error message!" variant="error" styleName="error" />
+                    <Snackbar message="This is a warning message!" variant="warning" styleName="warning" />
+                    <Snackbar message="This is an info message!" variant="info" styleName="info" />
+                </SnackbarProvider>
+            </div>
             <h1 className="mt-3 font-bold">Modal</h1>
             <div className="flex flex-wrap gap-3">
                 <Button variant="contained" onClick={() => handleOpen('bottom_left')}>

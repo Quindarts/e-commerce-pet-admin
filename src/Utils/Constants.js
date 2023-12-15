@@ -14,6 +14,7 @@ export const APP_ROUTER = {
 }
 
 export const APP_ICON = {
+    i_menu: 'fe:app-menu',
     list: 'ph:list',
     product: 'fluent-mdl2:product-release',
     order: 'carbon:order-details',
