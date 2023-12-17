@@ -23,6 +23,7 @@ const flagReducer = (state, action) => {
     }
 }
 const PopupLang = (props) => {
+    
     const { list, handleChangeLanguage } = props
     const { handleActive, menuRef, classes } = useClickOutside()
     const [state, dispatch] = useReducer(flagReducer, { flag: 'emojione:flag-for-vietnam' })
