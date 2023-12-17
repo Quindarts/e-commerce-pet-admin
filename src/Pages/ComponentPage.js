@@ -8,13 +8,13 @@ import StatusBar from '../Components/ui/StatusBar/StatusBar.js'
 import { useState } from 'react'
 import Dropdown from '../Components/ui/Dropdown/Dropdown.js'
 import Modal from '../Components/ui/Modal/Modal.js'
-import Snackbar from '../Components/ui/Toast/Snackbar.js'
-import { SnackbarProvider } from 'notistack'
 import InputUpload from '../Components/ui/InputUpload/InputUpload.js'
 import PopupServ from '../Components/ui/Popup/PopupServ.js'
 import { useTranslation } from 'react-i18next'
 import i18n from '../translation/i18n.js'
 import PopupLang from '../Components/ui/Popup/PopupLang.js'
+import Avatar from '../Components/ui/Avatar/Avatar.js'
+import { useSnackbar } from "notistack";
 
 const avatars = [
     {
@@ -86,6 +86,26 @@ function ComponentPage() {
     const handleClose = () => {
         setOpen(false)
     }
+
+    const { enqueueSnackbar } = useSnackbar();
+
+    function showTopRightSuccessSnackbar() {
+        enqueueSnackbar("Success!", { variant: "success", anchorOrigin: { vertical: 'top', horizontal: 'right' } });
+        }
+
+    function showBottomRightErrorSnackbar() {
+        enqueueSnackbar("An error occurred", { variant: "error", anchorOrigin: { vertical: 'bottom', horizontal: 'right' } });
+        }
+    function showBottomLeftWarningSnackbar() {
+        enqueueSnackbar("Warning", { variant: "warning", anchorOrigin: { vertical: 'bottom', horizontal: 'left' } });
+            }
+    function showTopLeftInfoSnackbar() {
+        enqueueSnackbar("Information", { variant: "info", anchorOrigin: { vertical: 'top', horizontal: 'left' } });
+                }
+    function showBottomRightCustomSnackbar() {
+         enqueueSnackbar("Custom Variant", { variant: "customVariant", anchorOrigin: { vertical: 'bottom', horizontal: 'right' } });
+                    }
+    
     const handleChangeLanguage = (value) => {
         i18n.changeLanguage(value)
     }
@@ -181,12 +201,11 @@ function ComponentPage() {
             <h1 className="mt-3 font-bold">Accordin</h1>
             <h1 className="mt-3 font-bold">Toast</h1>
             <div>
-                <SnackbarProvider maxSnack={3}>
-                    <Snackbar message="This is a success message!" variant="success" styleName="success" />
-                    <Snackbar message="This is an error message!" variant="error" styleName="error" />
-                    <Snackbar message="This is a warning message!" variant="warning" styleName="warning" />
-                    <Snackbar message="This is an info message!" variant="info" styleName="info" />
-                </SnackbarProvider>
+            <button onClick={showTopRightSuccessSnackbar}>Default Top Right </button>;
+            <button onClick={showBottomRightErrorSnackbar}>Custom Icon Bottom Right </button>;
+            <button onClick={showBottomLeftWarningSnackbar}>Override Bottom Left </button>;
+            <button onClick={showTopLeftInfoSnackbar}>Overdrive Top Left </button>;
+            <button onClick={showBottomRightCustomSnackbar}>Custom Appear</button>;
             </div>
             <h1 className="mt-3 font-bold">Modal</h1>
             <div className="flex flex-wrap gap-3">
@@ -224,6 +243,11 @@ function ComponentPage() {
                 <PopupLang list={listLanguage} handleChangeLanguage={handleChangeLanguage} />
             </div>
             <h1 className="mt-3 font-bold">Badge</h1>
+            <div>
+            <Avatar src='https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80' size="sm" badge={{status: "online",color:"green",position: "top-left",animation: "blink-badge"}} />
+            <Avatar src='https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80' size="md" badge={{status: "offline",position: "top-right"}} />
+            <Avatar src='https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80' size="lg" badge={{status: "private",position: "bottom-right"}} />
+        </div>
             <h1 className="mt-3 font-bold">Upload image</h1>
             <div>
                 <InputUpload listUpload={warehouseItem} />

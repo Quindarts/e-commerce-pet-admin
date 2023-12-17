@@ -7,7 +7,8 @@ export const StyledButton = styled(Button)`
 `;
 
 export const styles = {
-  
+  default:{backgroundColor: 'white', color: 'black'},
+  customVariant:{backgroundColor: 'pink', color: 'white'},
   success: { backgroundColor: 'green', color: 'white' },
   error: { backgroundColor: 'red', color: 'white' },
   warning: { backgroundColor: 'orange', color: 'black' },
