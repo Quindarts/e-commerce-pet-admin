@@ -3,11 +3,6 @@ import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Modal } from '@mui/material'
 import { theme } from '../../../Theme/theme'
-const sizes = {
-    square: { width: 400, height: 400 },
-    tall: { width: 300, height: 600 },
-    fat: { width: 500, height: 300 },
-}
 
 const animations = {
     bottom_left: keyframes`
@@ -50,7 +45,8 @@ const animations = {
 
 const MainModal = styled.div(({ size, appearance }) => ({
     position: 'absolute',
-    ...sizes[size],
+    width: 500,
+    height: 500,
     backgroundColor: '#ffffff',
     boxShadow: 24,
     padding: '1rem',
@@ -63,12 +59,33 @@ const MainModal = styled.div(({ size, appearance }) => ({
         top: 10,
         right: 10,
     },
+    '@media (max-width: 600px)': {
+      ...sizes['mobile'],
+    },
+    '@media (min-width: 601px) and (max-width: 900px)': {
+      ...sizes['tablet'],
+    },
+    '@media (min-width: 901px) and (max-width: 1200px)': {
+      ...sizes['laptop'],
+    },
+    '@media (min-width: 1201px)': {
+      ...sizes['desktop'],
+    },
 }))
 
-const CustomModal = styled(Modal)`
-    & {
-        color: white;
-    }
-`
 
-export { MainModal, CustomModal }
+
+const CustomModal = styled(Modal)`
+ &{
+  color: white,
+ }
+`
+const sizes = {
+  'mobile': { width: '90%' }, 
+  'tablet': { width: '70%' }, 
+  'laptop': { width: '60%' }, 
+  'desktop': { width: '50%' }, 
+};
+
+
+export {MainModal, CustomModal };
