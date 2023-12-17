@@ -1,34 +1,23 @@
-import React from 'react';
-import {useSnackbar, MaterialDesignContent,SnackbarContent } from 'notistack'
-import styled from '@emotion/styled';
-import { forwardRef } from "react";
+import React from 'react'
+import { useSnackbar, SnackbarContent } from 'notistack'
+import styled from '@emotion/styled'
+import { forwardRef } from 'react'
+import { Box } from '@mui/material'
 
-interface Props {
-  id: string;
-  message: string;
-  variant: 'success' | 'error' | 'warning' | 'info' | 'customVariant';
- }
+function CustomVariantSnackbar(props, ref) {
+    const { closeSnackbar } = useSnackbar()
+    const handleCloseSnackbar = () => closeSnackbar(id)
+    const { id, message, allowDownload, image, ...other } = props
+    return (
+        <SnackbarContent ref={ref} role="alert" {...other}>
+            <Box className="bg-orange-400 text-black p-2 rounded-lg border-black flex justify-between items-center w-full" >
+                {message}
+                <button className="cursor-pointer text-xl text-white" onClick={handleCloseSnackbar}>
+                    Close
+                </button>
+            </Box>
+        </SnackbarContent>
+    )
+}
 
- export const StyledMaterialDesignContent = styled(MaterialDesignContent)(() => ({
-  '&.notistack-MuiContent-warning': {
-    backgroundColor: '#2D7738',
-  },
-  '&.notistack-MuiContent-info': {
-    backgroundColor: '#970C0C',
-  },
-}));
-
-
-export const CustomVariantSnackbar = React.forwardRef(({ id,message }, ref) => {
-  const { closeSnackbar } = useSnackbar();
-  const handleCloseSnackbar = () => closeSnackbar(id);
-  
-  return (
-    <SnackbarContent ref={ref}>
-      <div className = "bg-gray-800 text-white fixed bottom-5 left-5 z-50 p-2 rounded-lg flex justify-between items-center h-screen w-screen" >
-      <span>{message}</span>
-      <button className="text-white text-xl cursor-pointer" onClick={handleCloseSnackbar}>Close</button>
-      </div>
-      </SnackbarContent>
-  )
-})
+export default React.forwardRef(CustomVariantSnackbar)

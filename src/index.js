@@ -7,7 +7,8 @@ import { theme } from './Theme/theme'
 import { I18nextProvider } from 'react-i18next'
 import i18n from './translation/i18n'
 import { SnackbarProvider } from 'notistack'
-import { StyledMaterialDesignContent, CustomVariantSnackbar } from './Components/ui/Snackbar/Snackbar'
+import { StyledMaterialDesignContent } from './Components/ui/Snackbar/style'
+import  CustomVariantSnackbar from './Components/ui/Snackbar/Snackbar'
 import { Zoom } from '@mui/material'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
@@ -24,6 +25,8 @@ root.render(
                         customVariant: CustomVariantSnackbar,
                         warning: StyledMaterialDesignContent,
                         info: StyledMaterialDesignContent,
+                        success: StyledMaterialDesignContent,
+                        error: StyledMaterialDesignContent,
                     }}
                     autoHideDuration={3000}
                     anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}

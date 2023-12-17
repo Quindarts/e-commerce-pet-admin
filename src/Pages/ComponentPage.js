@@ -60,7 +60,6 @@ const listLanguage = [
 function ComponentPage() {
     const demo = 50
     const [status, setStatus] = useState(demo)
-
     const handleCompleteClick = () => {
         if (status < 100) {
             setStatus(status + 10)
@@ -75,6 +74,7 @@ function ComponentPage() {
         { title: 'long', value: 20 },
         { title: 'phuc', value: 30 },
     ]
+    const { enqueueSnackbar } = useSnackbar()
 
     const [open, setOpen] = useState(false)
     const [optionModal, setOpTionModal] = useState('center')
@@ -87,8 +87,6 @@ function ComponentPage() {
     const handleClose = () => {
         setOpen(false)
     }
-
-    const { enqueueSnackbar } = useSnackbar()
 
     function showTopRightSuccessSnackbar() {
         enqueueSnackbar('Success!', { variant: 'success', anchorOrigin: { vertical: 'top', horizontal: 'right' } })

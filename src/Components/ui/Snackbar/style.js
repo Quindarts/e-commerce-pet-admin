@@ -1,16 +1,23 @@
 import styled from '@emotion/styled'
-import * as React from 'react'
 import { Button } from '@mui/material'
+import { MaterialDesignContent } from 'notistack'
 
 export const StyledButton = styled(Button)`
     border-radius: 4px;
 `
 
-export const styles = {
-    default: { backgroundColor: 'white', color: 'black' },
-    customVariant: { backgroundColor: 'pink', color: 'white' },
-    success: { backgroundColor: 'green', color: 'white' },
-    error: { backgroundColor: 'red', color: 'white' },
-    warning: { backgroundColor: 'orange', color: 'black' },
-    info: { backgroundColor: 'blue', color: 'white' },
-}
+export const StyledMaterialDesignContent = styled(MaterialDesignContent)(() => ({
+    '&.notistack-MuiContent-warning': {
+      backgroundColor: '#f8e06a',
+      color:'black'
+    },
+    '&.notistack-MuiContent-info': {
+      backgroundColor: '#299cdb',
+    },
+    '&.notistack-MuiContent-success': {
+        backgroundColor: '#4fd06b',
+      },
+      '&.notistack-MuiContent-error': {
+        backgroundColor: '#ff0000',
+      }, 
+  }));
