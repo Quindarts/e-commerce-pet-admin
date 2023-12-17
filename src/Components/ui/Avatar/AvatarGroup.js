@@ -2,7 +2,6 @@ import React from 'react'
 import Avatar from './Avatar.js'
 import { CustomAvatarGroup } from './style.js'
 const AvatarGroup = (props) => {
-    
     const { avatars, maxVisible, handleAvatar, size = 'md', className = '', upload, setAvatarSrc, ...rest } = props
     return (
         <CustomAvatarGroup className={`flex -space-x-2 ${className}`}>
