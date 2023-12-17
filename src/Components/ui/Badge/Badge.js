@@ -42,12 +42,4 @@ const Badge = ({ size = 'sm', status = 'online', color, position = 'bottom-right
     return <BadgeWrapper size={badgeSize} color={badgeColor} animation={animation} position={position} />
 }
 
-Badge.propTypes = {
-    size: PropTypes.oneOf(['sm', 'md', 'lg']),
-    status: PropTypes.oneOf(['online', 'offline', 'private']),
-    color: PropTypes.string,
-    animation: PropTypes.oneOf(['none', 'blink 1s infinite']),
-    position: PropTypes.oneOf(['top-left', 'top-right', 'bottom-left', 'bottom-right']),
-}
-
 export default Badge
