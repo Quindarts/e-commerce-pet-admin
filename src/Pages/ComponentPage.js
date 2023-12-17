@@ -145,6 +145,11 @@ function ComponentPage() {
                     <Textfield className="my-3 w-1/2" label="Password" type="password" />
                 </div>
             </div>
+            <div>
+            <Link to={APP_ROUTER.LOGIN}>
+                <button>Go to Login Page</button>
+            </Link>
+            </div>
         </div>
     )
 }
