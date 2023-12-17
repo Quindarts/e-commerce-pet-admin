@@ -21,7 +21,6 @@ function Routing() {
                 <Route path={APP_ROUTER.COMPONENT} element={<ComponentPage />} />
                 <Route path={APP_ROUTER.LOGIN} element={<LoginPage />} />
                 <Route path={APP_ROUTER.REGISTER} element={<RegisterPage />} />
-
             </Route>
         </Routes>
     )
