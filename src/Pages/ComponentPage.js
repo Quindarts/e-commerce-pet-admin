@@ -14,7 +14,8 @@ import { useTranslation } from 'react-i18next'
 import i18n from '../translation/i18n.js'
 import PopupLang from '../Components/ui/Popup/PopupLang.js'
 import Avatar from '../Components/ui/Avatar/Avatar.js'
-import { useSnackbar } from "notistack";
+import { useSnackbar } from 'notistack'
+import { Zoom } from '@mui/material'
 
 const avatars = [
     {
@@ -87,25 +88,32 @@ function ComponentPage() {
         setOpen(false)
     }
 
-    const { enqueueSnackbar } = useSnackbar();
+    const { enqueueSnackbar } = useSnackbar()
 
     function showTopRightSuccessSnackbar() {
-        enqueueSnackbar("Success!", { variant: "success", anchorOrigin: { vertical: 'top', horizontal: 'right' } });
-        }
+        enqueueSnackbar('Success!', { variant: 'success', anchorOrigin: { vertical: 'top', horizontal: 'right' } })
+    }
 
     function showBottomRightErrorSnackbar() {
-        enqueueSnackbar("An error occurred", { variant: "error", anchorOrigin: { vertical: 'bottom', horizontal: 'right' } });
-        }
+        enqueueSnackbar('An error occurred', {
+            variant: 'error',
+            TransitionComponent: Zoom,
+            anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
+        })
+    }
     function showBottomLeftWarningSnackbar() {
-        enqueueSnackbar("Warning", { variant: "warning", anchorOrigin: { vertical: 'bottom', horizontal: 'left' } });
-            }
+        enqueueSnackbar('Warning', { variant: 'warning', anchorOrigin: { vertical: 'bottom', horizontal: 'left' } })
+    }
     function showTopLeftInfoSnackbar() {
-        enqueueSnackbar("Information", { variant: "info", anchorOrigin: { vertical: 'top', horizontal: 'left' } });
-                }
+        enqueueSnackbar('Information', { variant: 'info', anchorOrigin: { vertical: 'top', horizontal: 'left' } })
+    }
     function showBottomRightCustomSnackbar() {
-         enqueueSnackbar("Custom Variant", { variant: "customVariant", anchorOrigin: { vertical: 'bottom', horizontal: 'right' } });
-                    }
-    
+        enqueueSnackbar('Custom Variant', {
+            variant: 'customVariant',
+            anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
+        })
+    }
+
     const handleChangeLanguage = (value) => {
         i18n.changeLanguage(value)
     }
@@ -200,12 +208,12 @@ function ComponentPage() {
             </div>
             <h1 className="mt-3 font-bold">Accordin</h1>
             <h1 className="mt-3 font-bold">Toast</h1>
-            <div>
-            <button onClick={showTopRightSuccessSnackbar}>Default Top Right </button>;
-            <button onClick={showBottomRightErrorSnackbar}>Custom Icon Bottom Right </button>;
-            <button onClick={showBottomLeftWarningSnackbar}>Override Bottom Left </button>;
-            <button onClick={showTopLeftInfoSnackbar}>Overdrive Top Left </button>;
-            <button onClick={showBottomRightCustomSnackbar}>Custom Appear</button>;
+            <div className="flex flex-wrap gap-3">
+                <Button onClick={showTopRightSuccessSnackbar}>Default Top Right </Button>
+                <Button onClick={showBottomRightErrorSnackbar}>Custom Icon Bottom Right </Button>
+                <Button onClick={showBottomLeftWarningSnackbar}>Override Bottom Left </Button>
+                <Button onClick={showTopLeftInfoSnackbar}>Overdrive Top Left </Button>
+                <Button onClick={showBottomRightCustomSnackbar}>Custom Appear</Button>
             </div>
             <h1 className="mt-3 font-bold">Modal</h1>
             <div className="flex flex-wrap gap-3">
@@ -244,10 +252,22 @@ function ComponentPage() {
             </div>
             <h1 className="mt-3 font-bold">Badge</h1>
             <div>
-            <Avatar src='https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80' size="sm" badge={{status: "online",color:"green",position: "top-left",animation: "blink-badge"}} />
-            <Avatar src='https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80' size="md" badge={{status: "offline",position: "top-right"}} />
-            <Avatar src='https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80' size="lg" badge={{status: "private",position: "bottom-right"}} />
-        </div>
+                <Avatar
+                    src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                    size="sm"
+                    badge={{ status: 'online', color: 'green', position: 'top-left', animation: 'blink-badge' }}
+                />
+                <Avatar
+                    src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                    size="md"
+                    badge={{ status: 'offline', position: 'top-right' }}
+                />
+                <Avatar
+                    src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                    size="lg"
+                    badge={{ status: 'private', position: 'bottom-right' }}
+                />
+            </div>
             <h1 className="mt-3 font-bold">Upload image</h1>
             <div>
                 <InputUpload listUpload={warehouseItem} />

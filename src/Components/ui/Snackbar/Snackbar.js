@@ -1,7 +1,6 @@
 import React from 'react';
-import {useSnackbar, MaterialDesignContent } from 'notistack'
+import {useSnackbar, MaterialDesignContent,SnackbarContent } from 'notistack'
 import styled from '@emotion/styled';
-import { css } from '@emotion/react'
 import { forwardRef } from "react";
 
 interface Props {
@@ -19,44 +18,17 @@ interface Props {
   },
 }));
 
-const SnackbarContainer = css`
-  background-color: #323232;
-  color: white;
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  z-index: 9999;
-  padding: 10px 20px;
-  border-radius: 4px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-`
 
-const CloseButton = css`
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-`
 export const CustomVariantSnackbar = React.forwardRef(({ id,message }, ref) => {
   const { closeSnackbar } = useSnackbar();
   const handleCloseSnackbar = () => closeSnackbar(id);
-  const styles = css`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background-color: #fddc6c;
-  color: #000;
-`;
+  
   return (
-
-    <div css={SnackbarContainer} ref={ref}>
-            <span>{message}</span>
-      <button css={CloseButton} onClick={handleCloseSnackbar}>Close</button>
-    </div>
-
+    <SnackbarContent ref={ref}>
+      <div className = "bg-gray-800 text-white fixed bottom-5 left-5 z-50 p-2 rounded-lg flex justify-between items-center h-screen w-screen" >
+      <span>{message}</span>
+      <button className="text-white text-xl cursor-pointer" onClick={handleCloseSnackbar}>Close</button>
+      </div>
+      </SnackbarContent>
   )
 })

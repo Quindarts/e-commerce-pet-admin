@@ -25,7 +25,15 @@ const Avatar = (props) => {
                 />
             )}
 
-{badge && <Badge size={size} status={badge.status} color={badge.color} position={badge.position} animation={badge.animation}/>} 
+            {badge && (
+                <Badge
+                    size={size}
+                    status={badge.status}
+                    color={badge.color}
+                    position={badge.position}
+                    animation={badge.animation}
+                />
+            )}
             {upload && (
                 <label className="absolute bottom-0 right-0">
                     <Icon

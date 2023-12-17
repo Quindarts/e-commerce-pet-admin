@@ -32,7 +32,7 @@ module.exports = {
                     '75%': { opacity: 0.3, transform: ' translateY(-75px), translateZ(-6px)' },
                     '100%': { opacity: 0, transform: ' translateY(-100px) , translateZ(-20px)', display: 'none' },
                 },
-                blink: {  
+                blink: {
                     '0%, 100%': { opacity: 1 },
                     '50%': { opacity: 0 },
                 },
@@ -41,7 +41,7 @@ module.exports = {
                 'waving-hand': 'wave 1s ease-in-out infinite',
                 'showDown-popup': 'showDown 0.2s ease-in-out ',
                 'showOn-popup': 'showOn 0.2s ease-in-out forwards',
-                'blink-badge': 'blink 1s infinite',  
+                'blink-badge': 'blink 1s infinite',
             },
         },
     },

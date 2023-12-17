@@ -1,27 +1,19 @@
 import React, { useState } from 'react'
-import './styles.css';
-import { APP_ICON, COLOR, NavItem } from '../../../Utils/Constants';
-import { Icon } from '@iconify/react';
-import { Link, useLocation } from 'react-router-dom';
-import logo from '../../../assets/img/logo.svg';
+import './styles.css'
+import { APP_ICON, COLOR, NavItem } from '../../../Utils/Constants'
+import { Icon } from '@iconify/react'
+import { Link, useLocation } from 'react-router-dom'
+import logo from '../../../assets/img/logo.svg'
 
 function Navbar() {
     let location = useLocation()
     const [openNav, setOpenNav] = useState(true)
     const handleOpenNav = () => {
-        setOpenNav(!openNav)    
+        setOpenNav(!openNav)
     }
     return (
-        <div
-            className={`bg-dark1 navbar font-bold text-[${COLOR.gray_dark}] ${
-                openNav ? 'open_nav' : 'close_nav'
-            }`}
-        >
-            <div
-                className={`my-[1rem] flex items-center justify-between  ${
-                    openNav && 'mx-[2rem]'
-                }`}
-            >
+        <div className={`bg-dark1 navbar font-bold text-[${COLOR.gray_dark}] ${openNav ? 'open_nav' : 'close_nav'}`}>
+            <div className={`my-[1rem] flex items-center justify-between  ${openNav && 'mx-[2rem]'}`}>
                 {openNav && (
                     <div className="flex w-[5rem] gap-2 text-[1.6rem] font-[800]">
                         <img src={logo} width={20} alt="" />
