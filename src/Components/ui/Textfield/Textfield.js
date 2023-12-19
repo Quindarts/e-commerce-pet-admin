@@ -1,26 +1,17 @@
+import { useState } from 'react'
 import { IconButton } from '@mui/material'
 import { Icon } from '@iconify/react'
 import { APP_ICON } from '../../../Utils/Constants'
-import { useState } from 'react'
 import { TextFieldCustomMUI } from './style'
 
 function Textfield(props) {
-    const {
-        className,
-        type = 'text',
-        label,
-        variant = 'container',
-        helperText,
-        error,
-        icon,
-        size = 'xl',
-        ...rest
-    } = props
+    const { id, type, label, variant, helperText, error, icon, size, field, form } = props
+    const className = 'some-class-name'
 
+    // Define the showPassword and handleClickShowPassword variables as states and functions
     const [showPassword, setShowPassword] = useState(false)
 
     const handleClickShowPassword = () => setShowPassword((show) => !show)
-
     return (
         <div className={`${className} relative `}>
             <TextFieldCustomMUI
@@ -29,7 +20,9 @@ function Textfield(props) {
                 type={showPassword ? 'text' : type}
                 className={`textfield w-full textfield-${variant} text-${type} textfield-${size}`}
                 error={error}
-                {...rest}
+                value={field?.value}
+                onChange={field?.onChange}
+                onBlur={field?.onBlur}
             />
             {type === 'password' && (
                 <IconButton
