@@ -8,16 +8,15 @@ export const StyledButton = styled(Button)`
 
 export const StyledMaterialDesignContent = styled(MaterialDesignContent)(() => ({
     '&.notistack-MuiContent-warning': {
-      backgroundColor: '#f8e06a',
-      color:'black'
+        backgroundColor: '#dd7a01',
     },
     '&.notistack-MuiContent-info': {
-      backgroundColor: '#299cdb',
+        backgroundColor: '#299cdb',
     },
     '&.notistack-MuiContent-success': {
         backgroundColor: '#4fd06b',
-      },
-      '&.notistack-MuiContent-error': {
-        backgroundColor: '#ff0000',
-      }, 
-  }));
+    },
+    '&.notistack-MuiContent-error': {
+        backgroundColor: '#ba0517',
+    },
+}))

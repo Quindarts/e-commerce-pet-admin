@@ -11,23 +11,20 @@ import CustomVariantSnackbar from './Components/ui/Snackbar/Snackbar'
 import { Zoom } from '@mui/material'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
-
+const themeSnackbar = {
+    customVariant: CustomVariantSnackbar,
+    warning: StyledMaterialDesignContent,
+    info: StyledMaterialDesignContent,
+    success: StyledMaterialDesignContent,
+    error: StyledMaterialDesignContent,
+}
 root.render(
     <ThemeProvider theme={theme}>
         <I18nextProvider i18n={i18n}>
             <ThemeProvider theme={theme}>
                 <SnackbarProvider
                     TransitionComponent={Zoom}
-                    iconVariant={{
-                        error: '✖️',
-                    }}
-                    Components={{
-                        customVariant: CustomVariantSnackbar,
-                        warning: StyledMaterialDesignContent,
-                        info: StyledMaterialDesignContent,
-                        success: StyledMaterialDesignContent,
-                        error: StyledMaterialDesignContent,
-                    }}
+                    Components={themeSnackbar}
                     autoHideDuration={3000}
                     anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                 >
