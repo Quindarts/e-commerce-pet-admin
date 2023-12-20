@@ -3,8 +3,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { BadgeWrapper } from './style.js'
 
-const Badge = ({ size = 'sm', status = 'online', color, position = 'bottom-right' }) => {
+const Badge = ({ size = 'sm', status = 'online', color, position = 'bottom-right', number }) => {
     let animation, badgeColor, badgeSize
+    let displayNumber = number;
+    if (number > 99) {
+      displayNumber = '99+';
+    }
+  
 
     switch (status) {
         case 'online':
@@ -39,7 +44,7 @@ const Badge = ({ size = 'sm', status = 'online', color, position = 'bottom-right
     }
     console.log(animation)
 
-    return <BadgeWrapper size={badgeSize} color={badgeColor} animation={animation} position={position} />
+    return <BadgeWrapper size={badgeSize} color={badgeColor} animation={animation} position={position}>{displayNumber}</BadgeWrapper>
 }
 
 export default Badge
