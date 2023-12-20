@@ -1,39 +1,39 @@
 .open_nav {
-  width: 20rem;
-  animation: closeNav 0.2s ease-in;
+    width: 20rem;
+    animation: closeNav 0.2s ease-in;
 }
 .close_nav {
-  width: 5rem;
-  animation: openNav 0.2s ease-in;
+    width: 5rem;
+    animation: openNav 0.2s ease-in;
 }
 @keyframes closeNav {
-  0% {
-    width: 5rem;
-  }
-  25% {
-    width: 5rem;
-  }
-  50% {
-    width: 10rem;
-  }
-  75% {
-    width: 15rem;
-  }
-  100% {
-    width: 20rem;
-  }
+    0% {
+        width: 5rem;
+    }
+    25% {
+        width: 5rem;
+    }
+    50% {
+        width: 10rem;
+    }
+    75% {
+        width: 15rem;
+    }
+    100% {
+        width: 20rem;
+    }
 }
 @keyframes openNav {
-  0% {
-    width: 20rem;
-  }
-  25% {
-    width: 15rem;
-  }
-  50% {
-    width: 10rem;
-  }
-  100% {
-    width: 5rem;
-  }
+    0% {
+        width: 20rem;
+    }
+    25% {
+        width: 15rem;
+    }
+    50% {
+        width: 10rem;
+    }
+    100% {
+        width: 5rem;
+    }
 }

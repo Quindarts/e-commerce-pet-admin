@@ -1,5 +1,7 @@
 import { CustomModal, MainModal } from './style'
 import { Icon } from '@iconify/react'
+import { useState } from 'react';
+import React from 'react';
 
 function Modal({ size, appearance, open, handleClose, children, ...rest }) {
     return (
@@ -12,6 +14,19 @@ function Modal({ size, appearance, open, handleClose, children, ...rest }) {
             </MainModal>
         </CustomModal>
     )
+}
+
+function useModal() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  function toggle() {
+    setIsOpen(!isOpen);
+  }
+
+  return {
+    isOpen,
+    toggle,
+  }
 }
 
 export default Modal
