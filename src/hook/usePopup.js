@@ -10,16 +10,18 @@ export default function useClickOutside() {
         setActive(false)
     }
     const menuRef = useRef()
+
     useEffect(() => {
         const handleUnActive = (e) => {
             if (!menuRef.current.contains(e.target)) setActive(false)
         }
+
         document.addEventListener('mousedown', handleUnActive)
         return () => {
             document.removeEventListener('mousedown', handleUnActive)
         }
     }, [])
-    
+
     const classes = clsx(
         { 'animate-showOn-popup ': !active },
         'block absolute z-50 rounded bg-white pb-1 pt-4 align-top shadow-lg animate-showDown-popup ',

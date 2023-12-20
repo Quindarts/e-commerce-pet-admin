@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLoaderData, useParams } from 'react-router-dom'
 import { APP_ROUTER } from '../../Utils/Constants'
 
 function HomePage() {

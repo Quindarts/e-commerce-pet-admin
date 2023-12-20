@@ -15,6 +15,7 @@ export const BadgeWrapper = styled('span')`
     width: ${(props) => props.size};
     border: 2px solid white;
     border-radius: 50%;
+
     background-color: ${(props) => props.color};
     animation: ${(props) =>
         props.animation.includes('blink')
