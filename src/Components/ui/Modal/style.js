@@ -48,7 +48,7 @@ const MainModal = styled.div(({ size, appearance }) => ({
     width: 500,
     height: 500,
     backgroundColor: '#ffffff',
-    boxShadow: 24,
+    boxShadow: '0 0 0 50vmax rgba(0,0,0,.5)',
     padding: '1rem',
     animation: `${animations[appearance]} 0.4s`,
     animationFillMode: 'forwards',
@@ -59,33 +59,30 @@ const MainModal = styled.div(({ size, appearance }) => ({
         top: 10,
         right: 10,
     },
-    '@media (max-width: 600px)': {
-      ...sizes['mobile'],
+    '@media (max-width: 767px)': {
+        ...sizes['mobile'],
     },
-    '@media (min-width: 601px) and (max-width: 900px)': {
-      ...sizes['tablet'],
+    '@media (min-width: 768px) and (max-width: 900px)': {
+        ...sizes['tablet'],
     },
     '@media (min-width: 901px) and (max-width: 1200px)': {
-      ...sizes['laptop'],
+        ...sizes['laptop'],
     },
     '@media (min-width: 1201px)': {
-      ...sizes['desktop'],
+        ...sizes['desktop'],
     },
 }))
 
-
-
 const CustomModal = styled(Modal)`
- &{
-  color: white,
- }
+    & {
+        color: white;
+    }
 `
 const sizes = {
-  'mobile': { width: '90%' }, 
-  'tablet': { width: '70%' }, 
-  'laptop': { width: '60%' }, 
-  'desktop': { width: '50%' }, 
-};
+    mobile: { width: '100%', height: '98vh' },
+    tablet: { width: '100%', height: '98vh' },
+    laptop: { width: '75%', height: '80vh' },
+    desktop: { width: '50%', height: '55vh' },
+}
 
-
-export {MainModal, CustomModal };
+export { MainModal, CustomModal }
