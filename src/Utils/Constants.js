@@ -1,16 +1,18 @@
 export const APP_ROUTER = {
-    HOME: '/home',
     INDEX: '/',
+
+    //
+    HOME: '/home',
     COMPONENT: '/component',
     USER: '/user',
     ORDER: '/order',
     PRODUCT: '/product',
     ADD_PRODUCT: '/product/add-product',
 
-    AUTH: '/auth',
+    AUTH: 'auth',
     LOGIN: '/auth/login',
     REGISTER: '/auth/register',
-    CHANGE_PASSWORD: '/auth/change-password',
+    CHANGE_PASSWORD: 'change-password',
 }
 
 export const APP_ICON = {
