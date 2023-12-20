@@ -7,7 +7,17 @@ import PopupUser from '../Components/ui/Popup/PopupUser.js'
 import StatusBar from '../Components/ui/StatusBar/StatusBar.js'
 import { useState } from 'react'
 import Dropdown from '../Components/ui/Dropdown/Dropdown.js'
-import { Link } from 'react-router-dom'
+import Modal from '../Components/ui/Modal/Modal.js'
+import InputUpload from '../Components/ui/InputUpload/InputUpload.js'
+import PopupServ from '../Components/ui/Popup/PopupServ.js'
+import { useTranslation } from 'react-i18next'
+import i18n from '../translation/i18n.js'
+import PopupLang from '../Components/ui/Popup/PopupLang.js'
+import Avatar from '../Components/ui/Avatar/Avatar.js'
+import { useSnackbar } from 'notistack'
+import { Zoom } from '@mui/material'
+import { Link } from 'react-router-dom';
+
 
 const avatars = [
     {
@@ -21,16 +31,37 @@ const avatars = [
     },
     { src: '' },
 ]
+const names = [
+    {
+        name: 'Bob',
+    },
+    {
+        name: 'Bill',
+    },
+    {
+        name: 'Ben',
+    },
+    { name: '' },
+]
+const warehouseItem = [
+    'https://product.hstatic.net/200000312481/product/olc31003_b15f9f049c014a9d9c709cf0aa6ab353_master.jpg',
+    'https://product.hstatic.net/200000312481/product/olc31002_1_c01afc3a5c614cb2880b3740179ed447_master.jpg',
+    'https://product.hstatic.net/200000312481/product/aho2002_1_4c1c4e1db1ed4450b31da91840bf92d7_master.jpg',
+]
 const user = {
     firstName: 'Than Nguyen Thanh',
     lastName: 'Thien',
     avt: 'https://img.freepik.com/premium-vector/avatar-icon-smiley-face-man_1692-130.jpg',
     email: 'tntt@gmail.com',
 }
+const listLanguage = [
+    { title: 'Vietnamese', value: 'vi' },
+    { title: 'English', value: 'en' },
+]
+
 function ComponentPage() {
     const demo = 50
     const [status, setStatus] = useState(demo)
-
     const handleCompleteClick = () => {
         if (status < 100) {
             setStatus(status + 10)
@@ -45,6 +76,49 @@ function ComponentPage() {
         { title: 'long', value: 20 },
         { title: 'phuc', value: 30 },
     ]
+    const { enqueueSnackbar } = useSnackbar()
+
+    const [open, setOpen] = useState(false)
+    const [optionModal, setOpTionModal] = useState('center')
+
+    const handleOpen = (option) => {
+        setOpen(true)
+        setOpTionModal(option)
+    }
+
+    const handleClose = () => {
+        setOpen(false)
+    }
+
+    function showTopRightSuccessSnackbar() {
+        enqueueSnackbar('Success!', { variant: 'success', anchorOrigin: { vertical: 'top', horizontal: 'right' } })
+    }
+
+    function showBottomRightErrorSnackbar() {
+        enqueueSnackbar('An error occurred', {
+            variant: 'error',
+            TransitionComponent: Zoom,
+            anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
+        })
+    }
+    function showBottomLeftWarningSnackbar() {
+        enqueueSnackbar('Warning', { variant: 'warning', anchorOrigin: { vertical: 'bottom', horizontal: 'left' } })
+    }
+    function showTopLeftInfoSnackbar() {
+        enqueueSnackbar('Information', { variant: 'info', anchorOrigin: { vertical: 'top', horizontal: 'left' } })
+    }
+    function showBottomRightCustomSnackbar() {
+        enqueueSnackbar('Custom Variant', {
+            variant: 'customVariant',
+            anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
+        })
+    }
+
+    const handleChangeLanguage = (value) => {
+        i18n.changeLanguage(value)
+    }
+    const { t } = useTranslation()
+
     return (
         <div className="component_page">
             ComponentPage
@@ -128,15 +202,79 @@ function ComponentPage() {
             <div>
                 <PopupUser user={user} />
             </div>
+            <h1 className="mt-3 font-bold">PopupServ</h1>
+            <div>
+                <PopupServ avatars={avatars} names={names} />
+            </div>
             <h1 className="mt-3 font-bold">Accordin</h1>
             <h1 className="mt-3 font-bold">Toast</h1>
+            <div className="flex flex-wrap gap-3">
+                <Button onClick={showTopRightSuccessSnackbar}>Default Top Right </Button>
+                <Button onClick={showBottomRightErrorSnackbar}>Custom Icon Bottom Right </Button>
+                <Button onClick={showBottomLeftWarningSnackbar}>Override Bottom Left </Button>
+                <Button onClick={showTopLeftInfoSnackbar}>Overdrive Top Left </Button>
+                <Button onClick={showBottomRightCustomSnackbar}>Custom Appear</Button>
+            </div>
             <h1 className="mt-3 font-bold">Modal</h1>
+            <div className="flex flex-wrap gap-3">
+                <Button variant="contained" onClick={() => handleOpen('bottom_left')}>
+                    Modal bottom left
+                </Button>
+                <Button variant="contained" onClick={() => handleOpen('top')}>
+                    Modal top
+                </Button>
+                <Button variant="contained" onClick={() => handleOpen('top_right')}>
+                    Modal top_right
+                </Button>
+                <Button variant="contained" onClick={() => handleOpen('left')}>
+                    Modal left
+                </Button>
+                <Button variant="contained" onClick={() => handleOpen('right')}>
+                    Modal right
+                </Button>
+                <Button variant="contained" onClick={() => handleOpen('bottom_right')}>
+                    Modal bottom_right
+                </Button>
+                <Button variant="contained" onClick={() => handleOpen('bottom')}>
+                    Modal bottom
+                </Button>
+                <Button variant="contained" onClick={() => handleOpen('top_left')}>
+                    Modal top_left
+                </Button>
+                <Button variant="contained" onClick={() => handleOpen('center')}>
+                    Modal center
+                </Button>
+            </div>
+            <h1 className="mt-3 font-bold">Select language</h1>
+            <h1>{t('content.text')}</h1>
+            <div>
+                <PopupLang list={listLanguage} handleChangeLanguage={handleChangeLanguage} />
+            </div>
             <h1 className="mt-3 font-bold">Badge</h1>
+            <div>
+                <Avatar
+                    src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                    size="sm"
+                    badge={{ status: 'online', color: 'green', position: 'top-left', animation: 'blink-badge' }}
+                />
+                <Avatar
+                    src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                    size="md"
+                    badge={{ status: 'offline', position: 'top-right' }}
+                />
+                <Avatar
+                    src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                    size="lg"
+                    badge={{ status: 'private', position: 'bottom-right' }}
+                />
+            </div>
+            <h1 className="mt-3 font-bold">Upload image</h1>
+            <div>
+                <InputUpload listUpload={warehouseItem} />
+            </div>
             <h1 className="mt-3 font-bold">Dropdown</h1>
             <div>
-                <div>
-                    <Dropdown list={listDrop} label="labelDropdown" onChange={(e) => setValueDrop(e.target.value)} />
-                </div>
+                <Dropdown list={listDrop} label="labelDropdown" onChange={(e) => setValueDrop(e.target.value)} />
                 <h1>value:{valueDrop} </h1>
             </div>
             <h1 className="mt-3 font-bold">Texfield</h1>
@@ -146,6 +284,7 @@ function ComponentPage() {
                     <Textfield className="my-3 w-1/2" label="Password" type="password" />
                 </div>
             </div>
+            <Modal key={1} open={open} size="fat" appearance={optionModal} handleClose={handleClose}></Modal>
             <div>
             <Link to={APP_ROUTER.LOGIN}>
                 <button>Go to Login Page</button>

@@ -4,6 +4,7 @@ import { APP_ROUTER } from '../../Utils/Constants'
 import * as yup from 'yup'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import Textfield from '../../Components/ui/Textfield/Textfield'
+import { useSnackbar } from 'notistack'
 
 const schema = yup.object().shape({
     email: yup.string().required('Email is required').email('Email is invalid'),
@@ -18,12 +19,23 @@ const schema = yup.object().shape({
 })
 
 function LoginPage() {
+    const { enqueueSnackbar } = useSnackbar()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
 
     const handleSubmit = async (event) => {
         event.preventDefault()
+        const users = JSON.parse(localStorage.getItem('users')) || []
+        const user = users.find((user) => user.email === email && user.password === password)
+        if (!user) {
+            enqueueSnackbar('Invalid email or password', { variant: 'error' })
+            return
+        }
+        if (user.role !== 'admin') {
+            enqueueSnackbar('You do not have the necessary authorities to access this page', { variant: 'error' })
+            return
+        }
 
         try {
             const response = await fetch('http://localhost:3000/auth/login', {
@@ -42,22 +54,16 @@ function LoginPage() {
             if (contentType && contentType.indexOf('application/json') !== -1) {
                 const data = await response.json()
                 console.log('API response: ', data)
+                enqueueSnackbar('Logged in successfully', { variant: 'success' })
             } else {
                 console.error("Oops, we haven't got JSON!")
             }
         } catch (error) {
+            enqueueSnackbar('An error occurred', { variant: 'error' })
             console.error('Error during API call: ', error)
         }
-
-        const users = JSON.parse(localStorage.getItem('users')) || []
-        const user = users.find((user) => user.email === email && user.password === password)
-        if (user) {
-            localStorage.setItem('loggedInUser', JSON.stringify(user))
-            console.log(user)
-        } else {
-            setError('Invalid email or password')
-        }
     }
+
     return (
         <div className="flex min-h-screen items-center justify-center bg-gray-100">
             <Formik
@@ -107,28 +113,27 @@ function LoginPage() {
                                 name="email"
                                 render={({ field, form }) => (
                                     <Textfield
+                                        {...field}
                                         field={field}
                                         form={form}
                                         className="focus:shadow-outline w-full appearance-none px-3 py-1 text-sm leading-tight text-gray-700 focus:outline-none"
                                         id="email"
                                         type="email"
                                         label="Email"
-                                        value={field.value} // Use the field.value instead of the value prop
-                                        onChange={field.onChange} // Use the field.onChange instead of the custom onChange
                                         pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                                        helperText={
-                                            <span
-                                                style={{
-                                                    color:
-                                                        field.value &&
-                                                        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
-                                                            field.value,
-                                                        ),
-                                                }}
-                                            >
-                                                Invalid email Format.
-                                            </span>
-                                        }
+                                        // helperText={
+                                        //     <span
+                                        //         style={{
+                                        //             color:
+                                        //                 field.value &&
+                                        //                 /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
+                                        //                     field.value,
+                                        //                 ),
+                                        //         }}
+                                        //     >
+                                        //         Invalid email Format.
+                                        //     </span>
+                                        // }
                                         error={
                                             field.value &&
                                             field.value.length > 0 &&
@@ -143,28 +148,27 @@ function LoginPage() {
                                 name="password"
                                 render={({ field, form }) => (
                                     <Textfield
+                                        {...field}
                                         field={field}
                                         form={form}
                                         className="focus:shadow-outline mb-3 w-full appearance-none px-3 py-1 text-sm leading-tight text-gray-700 focus:outline-none"
                                         id="password"
                                         type="password"
                                         label="Password"
-                                        value={field.value} // Use the field.value instead of the value prop
-                                        onChange={field.onChange} // Use the field.onChange instead of the custom onChange
                                         pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
-                                        helperText={
-                                            <span
-                                                style={{
-                                                    color:
-                                                        field.value &&
-                                                        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(field.value)
-                                                            ? '#ffffff'
-                                                            : '#ff0000',
-                                                }}
-                                            >
-                                                Minimum eight characters, at least one letter and one number.
-                                            </span>
-                                        }
+                                        // helperText={
+                                        //     <span
+                                        //         style={{
+                                        //             color:
+                                        //                 field.value &&
+                                        //                 /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(field.value)
+                                        //                     ? '#ffffff'
+                                        //                     : '#ff0000',
+                                        //         }}
+                                        //     >
+                                        //         Minimum eight characters, at least one letter and one number.
+                                        //     </span>
+                                        // }
                                         error={
                                             field.value &&
                                             field.value.length > 0 &&
@@ -174,7 +178,6 @@ function LoginPage() {
                                 )}
                             />
                         </div>
-                        <div className="mb-4 text-center font-bold text-red-500">{error}</div>
                         <div className="mb-4 flex items-center">
                             <input className="mr-2 leading-tight" type="checkbox" id="rememberMe" />
                             <label className="text-sm font-bold text-gray-700" htmlFor="rememberMe">
