@@ -6,8 +6,6 @@ import { TextFieldCustomMUI } from './style'
 
 function Textfield(props) {
     const {
-        id,
-        field,
         className,
         type = 'text',
         label,
@@ -31,9 +29,6 @@ function Textfield(props) {
                 type={showPassword ? 'text' : type}
                 className={`textfield w-full textfield-${variant} text-${type} textfield-${size}`}
                 error={error}
-                value={field.value}
-                onChange={field.onChange}
-                onBlur={field.onBlur}
                 {...rest}
             />
             {type === 'password' && (
