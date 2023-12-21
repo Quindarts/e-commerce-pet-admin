@@ -121,19 +121,19 @@ function LoginPage() {
                                         type="email"
                                         label="Email"
                                         pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                                        // helperText={
-                                        //     <span
-                                        //         style={{
-                                        //             color:
-                                        //                 field.value &&
-                                        //                 /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
-                                        //                     field.value,
-                                        //                 ),
-                                        //         }}
-                                        //     >
-                                        //         Invalid email Format.
-                                        //     </span>
-                                        // }
+                                        helperText={
+                                            <span
+                                                style={{
+                                                    color:
+                                                        field.value &&
+                                                        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
+                                                            field.value,
+                                                        ),
+                                                }}
+                                            >
+                                                Invalid email Format.
+                                            </span>
+                                        }
                                         error={
                                             field.value &&
                                             field.value.length > 0 &&
@@ -156,19 +156,19 @@ function LoginPage() {
                                         type="password"
                                         label="Password"
                                         pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
-                                        // helperText={
-                                        //     <span
-                                        //         style={{
-                                        //             color:
-                                        //                 field.value &&
-                                        //                 /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(field.value)
-                                        //                     ? '#ffffff'
-                                        //                     : '#ff0000',
-                                        //         }}
-                                        //     >
-                                        //         Minimum eight characters, at least one letter and one number.
-                                        //     </span>
-                                        // }
+                                        helperText={
+                                            <span
+                                                style={{
+                                                    color:
+                                                        field.value &&
+                                                        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(field.value)
+                                                            ? '#ffffff'
+                                                            : '#ff0000',
+                                                }}
+                                            >
+                                                Minimum eight characters, at least one letter and one number.
+                                            </span>
+                                        }
                                         error={
                                             field.value &&
                                             field.value.length > 0 &&
