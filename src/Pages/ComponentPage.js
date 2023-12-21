@@ -16,6 +16,7 @@ import PopupLang from '../Components/ui/Popup/PopupLang.js'
 import Avatar from '../Components/ui/Avatar/Avatar.js'
 import { useSnackbar } from 'notistack'
 import { Zoom } from '@mui/material'
+import { BadgeWrapper } from '../Components/ui/Badge/Badge.js'
 
 const avatars = [
     {
@@ -249,22 +250,25 @@ function ComponentPage() {
                 <PopupLang list={listLanguage} handleChangeLanguage={handleChangeLanguage} />
             </div>
             <h1 className="mt-3 font-bold">Badge</h1>
-            <div>
-                <Avatar
-                    src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-                    size="sm"
-                    badge={{ status: 'online', color: 'green', position: 'top-left', animation: 'blink-badge' }}
-                />
-                <Avatar
-                    src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-                    size="md"
-                    badge={{ status: 'offline', position: 'top-right',number:10 }}
-                />
-                <Avatar
-                    src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-                    size="lg"
-                    badge={{ status: 'private', position: 'bottom-right',number:100 }}
-                />
+            <div className="flex flex-wrap gap-10">
+                <BadgeWrapper status="online" variant="dot" >
+                    <Avatar
+                        src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                        size="sm"
+                    />
+                </BadgeWrapper>
+                <BadgeWrapper status="online" number={10}>
+                    <Avatar
+                        src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                        size="md"
+                    />
+                </BadgeWrapper>
+                <BadgeWrapper status="online" number={100}>
+                    <Avatar
+                        src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                        size="lg"
+                    />
+                </BadgeWrapper>
             </div>
             <h1 className="mt-3 font-bold">Upload image</h1>
             <div>

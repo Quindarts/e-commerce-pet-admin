@@ -1,26 +1,41 @@
-import Badge from '@mui/material/Badge';
-import Avatar from '@mui/material/Avatar';
-import { green, grey, red } from '@mui/material/colors';
+import Badge from '@mui/material/Badge'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { styled } from '@mui/material/styles'
 
-export function BadgeWrapper({ status, number, children }) {
- const badgeColor = status === 'online' ? green[500] : status === 'offline' ? grey[500] : red[500];
- const badgeContent = number > 99 ? '99+' : number;
+const theme = createTheme({
+    palette: {
+        success: {
+            main: '#4fd06b',
+        },
+    },
+})
 
- return (
-  <Badge
-    color="secondary"
-    badgeContent={badgeContent}
-    style={{
-      backgroundColor: badgeColor,
-      animation: status === 'online' ? 'blink 1s infinite' : 'none',
-    }}
-    overlap="circular"
-    anchorOrigin={{
-      vertical: 'top',
-      horizontal: 'right',
-    }}
-  >
-    {children}
-  </Badge>
- );
+const StyledBadge = styled(Badge)(({ theme }) => ({
+    '& .MuiBadge-badge': {
+        border: `2px solid #fff`,
+    },
+}))
+
+export function BadgeWrapper({ status, number, children, variant, anchorOrigin }) {
+    const badgeContent = number > 99 ? '99+' : number
+
+    return (
+        <ThemeProvider theme={theme}>
+            <StyledBadge
+                color="success"
+                badgeContent={badgeContent}
+                className={status === 'online' ? 'animate-blink' : ''}
+                overlap="circular"
+                anchorOrigin={anchorOrigin}
+                variant={variant}
+                componentsProps={{
+                    badge: {
+                        style: { color: '#ffffff' },
+                    },
+                }}
+            >
+                {children}
+            </StyledBadge>
+        </ThemeProvider>
+    )
 }
