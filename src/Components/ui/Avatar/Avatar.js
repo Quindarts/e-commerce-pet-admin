@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react'
 import { APP_ICON } from '../../../Utils/Constants'
 import { CustomAvatar } from './style.js'
 import useUploadImage from '../../../hook/uploadImage'
-import Badge from '../Badge/Badge'
+import {BadgeWrapper} from '../Badge/Badge'
 
 const Avatar = (props) => {
     const { src = '', size = 'sm', className = '', upload, badge } = props

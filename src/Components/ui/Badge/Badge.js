@@ -1,50 +1,26 @@
-// Badge.js
-import React from 'react'
-import PropTypes from 'prop-types'
-import { BadgeWrapper } from './style.js'
+import Badge from '@mui/material/Badge';
+import Avatar from '@mui/material/Avatar';
+import { green, grey, red } from '@mui/material/colors';
 
-const Badge = ({ size = 'sm', status = 'online', color, position = 'bottom-right', number }) => {
-    let animation, badgeColor, badgeSize
-    let displayNumber = number;
-    if (number > 99) {
-      displayNumber = '99+';
-    }
-  
+export function BadgeWrapper({ status, number, children }) {
+ const badgeColor = status === 'online' ? green[500] : status === 'offline' ? grey[500] : red[500];
+ const badgeContent = number > 99 ? '99+' : number;
 
-    switch (status) {
-        case 'online':
-            animation = 'blink 1s infinite'
-            badgeColor = color
-            break
-        case 'offline':
-            animation = 'none'
-            badgeColor = 'gray'
-            break
-        case 'private':
-            animation = 'none'
-            badgeColor = 'red'
-            break
-        default:
-            animation = 'blink 1s infinite'
-            badgeColor = color
-    }
-
-    switch (size) {
-        case 'sm':
-            badgeSize = '0.7rem'
-            break
-        case 'md':
-            badgeSize = '0.9rem'
-            break
-        case 'lg':
-            badgeSize = '1.1rem'
-            break
-        default:
-            badgeSize = '0.9rem'
-    }
-    console.log(animation)
-
-    return <BadgeWrapper size={badgeSize} color={badgeColor} animation={animation} position={position}>{displayNumber}</BadgeWrapper>
+ return (
+  <Badge
+    color="secondary"
+    badgeContent={badgeContent}
+    style={{
+      backgroundColor: badgeColor,
+      animation: status === 'online' ? 'blink 1s infinite' : 'none',
+    }}
+    overlap="circular"
+    anchorOrigin={{
+      vertical: 'top',
+      horizontal: 'right',
+    }}
+  >
+    {children}
+  </Badge>
+ );
 }
-
-export default Badge
