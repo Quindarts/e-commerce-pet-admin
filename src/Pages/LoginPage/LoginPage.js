@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { APP_ROUTER } from '../../Utils/Constants'
+import { Formik, Form, Field } from 'formik'
 import * as yup from 'yup'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
 import Textfield from '../../Components/ui/Textfield/Textfield'
 import { useSnackbar } from 'notistack'
 
@@ -20,44 +20,39 @@ const schema = yup.object().shape({
 
 function LoginPage() {
     const { enqueueSnackbar } = useSnackbar()
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [error, setError] = useState('')
 
-    const handleSubmit = async (event) => {
-        event.preventDefault()
-        const users = JSON.parse(localStorage.getItem('users')) || []
-        const user = users.find((user) => user.email === email && user.password === password)
-        if (!user) {
-            enqueueSnackbar('Invalid email or password', { variant: 'error' })
-            return
-        }
-        if (user.role !== 'admin') {
-            enqueueSnackbar('You do not have the necessary authorities to access this page', { variant: 'error' })
-            return
-        }
-
+    const handleSubmit = async (values, actions) => {
         try {
-            const response = await fetch('http://localhost:3000/auth/login', {
+            const response = await fetch('http://localhost:5000/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, password }),
+                body: JSON.stringify(values),
             })
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`)
             }
 
-            const contentType = response.headers.get('content-type')
-            if (contentType && contentType.indexOf('application/json') !== -1) {
-                const data = await response.json()
-                console.log('API response: ', data)
-                enqueueSnackbar('Logged in successfully', { variant: 'success' })
-            } else {
-                console.error("Oops, we haven't got JSON!")
+            const data = await response.json()
+
+            if (!data.user) {
+                enqueueSnackbar('This account has not been registered', { variant: 'error' })
+                return
             }
+
+            if (!data.success) {
+                enqueueSnackbar('Invalid password', { variant: 'error' })
+                return
+            }
+
+            if (data.user.role !== 'admin') {
+                enqueueSnackbar('You are not an Admin', { variant: 'error' })
+                return
+            }
+
+            enqueueSnackbar(data.message, { variant: 'success' })
         } catch (error) {
             enqueueSnackbar('An error occurred', { variant: 'error' })
             console.error('Error during API call: ', error)
@@ -66,41 +61,9 @@ function LoginPage() {
 
     return (
         <div className="flex min-h-screen items-center justify-center bg-gray-100">
-            <Formik
-                initialValues={{ password: '', email: '' }}
-                validationSchema={schema}
-                onSubmit={async (values, actions) => {
-                    try {
-                        const response = await fetch('http://localhost:3000/auth/login', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({ email, password }),
-                        })
-
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`)
-                        }
-
-                        const contentType = response.headers.get('content-type')
-                        if (contentType && contentType.indexOf('application/json') !== -1) {
-                            const data = await response.json()
-                            console.log('API response: ', data)
-                        } else {
-                            console.error("Oops, we haven't got JSON!")
-                        }
-                    } catch (error) {
-                        console.error('Error during API call: ', error)
-                    }
-                }}
-            >
-                {({ isSubmitting }) => (
-                    <Form
-                        onSubmit={handleSubmit}
-                        className="w-full rounded bg-white p-8 shadow"
-                        style={{ maxWidth: '600px' }}
-                    >
+            <Formik initialValues={{ password: '', email: '' }} validationSchema={schema} onSubmit={handleSubmit}>
+                {({ isSubmitting, handleBlur, handleChange, values, errors, touched }) => (
+                    <Form className="w-full rounded bg-white p-8 shadow" style={{ maxWidth: '600px' }}>
                         <h2 className="mb-4 text-center text-2xl font-bold text-gray-900">Sign in to Uko</h2>
                         <div className="mb-4 flex justify-center">
                             <span className="text-gray-500">New Here?</span>
@@ -109,73 +72,31 @@ function LoginPage() {
                             </Link>
                         </div>
                         <div className="mb-4">
-                            <Field
+                            <Textfield
+                                placeholder="example@gmail.com"
+                                className="focus:shadow-outline w-full appearance-none px-3 py-1 text-sm leading-tight text-gray-700 focus:outline-none"
+                                label="Email address"
+                                id="email"
                                 name="email"
-                                render={({ field, form }) => (
-                                    <Textfield
-                                        {...field}
-                                        field={field}
-                                        form={form}
-                                        className="focus:shadow-outline w-full appearance-none px-3 py-1 text-sm leading-tight text-gray-700 focus:outline-none"
-                                        id="email"
-                                        type="email"
-                                        label="Email"
-                                        pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                                        helperText={
-                                            <span
-                                                style={{
-                                                    color:
-                                                        field.value &&
-                                                        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
-                                                            field.value,
-                                                        ),
-                                                }}
-                                            >
-                                                Invalid email Format.
-                                            </span>
-                                        }
-                                        error={
-                                            field.value &&
-                                            field.value.length > 0 &&
-                                            !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(field.value)
-                                        }
-                                    />
-                                )}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.email}
+                                helperText={touched.email && errors.email ? errors.email : ''}
+                                error={touched.email && errors.email ? true : false}
                             />
                         </div>
                         <div className="mb-6">
-                            <Field
+                            <Textfield
                                 name="password"
-                                render={({ field, form }) => (
-                                    <Textfield
-                                        {...field}
-                                        field={field}
-                                        form={form}
-                                        className="focus:shadow-outline mb-3 w-full appearance-none px-3 py-1 text-sm leading-tight text-gray-700 focus:outline-none"
-                                        id="password"
-                                        type="password"
-                                        label="Password"
-                                        pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
-                                        helperText={
-                                            <span
-                                                style={{
-                                                    color:
-                                                        field.value &&
-                                                        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(field.value)
-                                                            ? '#ffffff'
-                                                            : '#ff0000',
-                                                }}
-                                            >
-                                                Minimum eight characters, at least one letter and one number.
-                                            </span>
-                                        }
-                                        error={
-                                            field.value &&
-                                            field.value.length > 0 &&
-                                            !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(field.value)
-                                        }
-                                    />
-                                )}
+                                id="password"
+                                className="focus:shadow-outline mb-3 w-full appearance-none px-3 py-1 text-sm leading-tight text-gray-700 focus:outline-none"
+                                label="Password"
+                                type="password"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.password}
+                                helperText={touched.password && errors.password ? errors.password : ''}
+                                error={touched.password && errors.password ? true : false}
                             />
                         </div>
                         <div className="mb-4 flex items-center">

@@ -17,6 +17,7 @@ root.render(
         <I18nextProvider i18n={i18n}>
             <ThemeProvider theme={theme}>
                 <SnackbarProvider
+                    maxSnack={5}
                     TransitionComponent={Zoom}
                     iconVariant={{
                         error: '✖️',
