@@ -10,10 +10,12 @@ export default function useClickOutside() {
         setActive(false)
     }
     const menuRef = useRef()
+
     useEffect(() => {
         const handleUnActive = (e) => {
             if (!menuRef.current.contains(e.target)) setActive(false)
         }
+
         document.addEventListener('mousedown', handleUnActive)
         return () => {
             document.removeEventListener('mousedown', handleUnActive)
