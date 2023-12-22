@@ -249,28 +249,26 @@ function ComponentPage() {
             <div>
                 <PopupLang list={listLanguage} handleChangeLanguage={handleChangeLanguage} />
             </div>
-            <h1 className="mt-3 font-bold">Badge</h1>
-            <div className="flex flex-wrap gap-10 mb-4">
+            <h1 className="mt-3 font-bold">Badge and Status Cards</h1>
+            <div className="my-5 flex flex-wrap gap-20">
                 <BadgeWrapper
-                    status="online"
                     variant="dot"
-                    number={10}
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="round"
-                    type="success"
+                    type="green"
+                    border={true}
                 >
-                    {' '}
                     <Avatar
                         src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
                         size="sm"
                     />
                 </BadgeWrapper>
                 <BadgeWrapper
-                    status="online"
-                    number={10}
+                    badgeContent={10}
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="round"
-                    type="custom"
+                    type="green"
+                    border={true}
                 >
                     <Avatar
                         src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
@@ -278,11 +276,11 @@ function ComponentPage() {
                     />
                 </BadgeWrapper>
                 <BadgeWrapper
-                    status="online"
-                    number={100}
+                    badgeContent={1000}
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="round"
-                    type="success"
+                    type="green"
+                    border={true}
                 >
                     <Avatar
                         src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
@@ -290,85 +288,65 @@ function ComponentPage() {
                     />
                 </BadgeWrapper>
             </div>
-            <div className="flex flex-wrap gap-10 mb-4">
+            <div className="mb-10 flex flex-wrap gap-40">
                 <BadgeWrapper
-                    status="online"
-                    variant="dot"
-                    number={10}
+                    badgeContent="Pending Payment"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                    shape="round"
-                    type="success"
-                >
-                    {' '}
-                    <Avatar
-                        src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-                        size="sm"
-                    />
-                </BadgeWrapper>
+                    shape="square"
+                    type="blue"
+                ></BadgeWrapper>
                 <BadgeWrapper
-                    status="online"
-                    number={10}
+                    badgeContent="Approved"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                    shape="round"
-                    type="success"
-                >
-                    <Avatar
-                        src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-                        size="md"
-                    />
-                </BadgeWrapper>
+                    shape="square"
+                    type="green"
+                ></BadgeWrapper>
                 <BadgeWrapper
-                    status="online"
-                    number={100}
+                    badgeContent="30% Off"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                    shape="round"
-                    type="success"
-                >
-                    <Avatar
-                        src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-                        size="lg"
-                    />
-                </BadgeWrapper>
+                    shape="square"
+                    type="pink"
+                ></BadgeWrapper>
             </div>
-            <div className="flex flex-wrap gap-10 mb-4">
+            <div className="mb-10 flex flex-wrap gap-40">
                 <BadgeWrapper
-                    status="online"
-                    variant="dot"
-                    number={10}
+                    badgeContent={4}
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="round"
-                    type="success"
-                >
-                    {' '}
-                    <Avatar
-                        src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-                        size="sm"
-                    />
-                </BadgeWrapper>
+                    type="blue"
+                ></BadgeWrapper>
                 <BadgeWrapper
-                    status="online"
-                    number={10}
+                    badgeContent="Active"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="round"
-                    type="success"
-                >
-                    <Avatar
-                        src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-                        size="md"
-                    />
-                </BadgeWrapper>
+                    type="green"
+                ></BadgeWrapper>
                 <BadgeWrapper
-                    status="online"
-                    number={100}
+                    badgeContent="Blocked"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="round"
-                    type="success"
-                >
-                    <Avatar
-                        src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-                        size="lg"
-                    />
-                </BadgeWrapper>
+                    type="red"
+                ></BadgeWrapper>
+            </div>
+            <div className="mb-10 flex flex-wrap gap-40">
+                <BadgeWrapper
+                    badgeContent="325"
+                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                    shape="round"
+                    type="gray"
+                ></BadgeWrapper>
+                <BadgeWrapper
+                    badgeContent="Out of Stock"
+                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                    shape="square"
+                    type="red_text"
+                ></BadgeWrapper>
+                <BadgeWrapper
+                    badgeContent="Available"
+                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                    shape="square"
+                    type="green_text"
+                ></BadgeWrapper>
             </div>
             <h1 className="mt-3 font-bold">Upload image</h1>
             <div>

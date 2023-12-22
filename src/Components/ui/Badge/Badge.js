@@ -9,7 +9,7 @@ const createDynamicTheme = (type, badgeColor) => {
         case 'green':
             theme = createTheme({
                 palette: {
-                    success: {
+                    green: {
                         main: COLOR.green,
                     },
                     text: {
@@ -18,10 +18,10 @@ const createDynamicTheme = (type, badgeColor) => {
                 },
             })
             break
-        case 'info':
+        case 'blue':
             theme = createTheme({
                 palette: {
-                    info: {
+                    blue: {
                         main: COLOR.badge_blue,
                     },
                     text: {
@@ -30,10 +30,10 @@ const createDynamicTheme = (type, badgeColor) => {
                 },
             })
             break
-        case 'error':
+        case 'red':
             theme = createTheme({
                 palette: {
-                    error: {
+                    red: {
                         main: COLOR.red,
                     },
                     text: {
@@ -42,10 +42,10 @@ const createDynamicTheme = (type, badgeColor) => {
                 },
             })
             break
-        case 'warning':
+        case 'red_text':
             theme = createTheme({
                 palette: {
-                    warning: {
+                    red_text: {
                         main: COLOR.gray_light,
                     },
                     text: {
@@ -54,10 +54,10 @@ const createDynamicTheme = (type, badgeColor) => {
                 },
             })
             break
-        case 'seccondary':
+        case 'gray':
             theme = createTheme({
                 palette: {
-                    seccondary: {
+                    gray: {
                         main: COLOR.gray_light,
                     },
                     text: {
@@ -66,22 +66,22 @@ const createDynamicTheme = (type, badgeColor) => {
                 },
             })
             break
-        case 'primary':
+        case 'green_text':
             theme = createTheme({
                 palette: {
-                    success: {
-                        main: COLOR.red,
+                    green_text: {
+                        main: COLOR.gray_light,
                     },
                     text: {
-                        primary: COLOR.white,
+                        primary: COLOR.green,
                     },
                 },
             })
             break
-        case 'custom':
+        case 'pink':
             theme = createTheme({
                 palette: {
-                    custom: {
+                    pink: {
                         main: COLOR.light_pink,
                     },
                     text: {
@@ -95,24 +95,24 @@ const createDynamicTheme = (type, badgeColor) => {
     }
     return theme
 }
-const StyledBadgeRound = styled(Badge)(({ theme }) => ({
+const StyledBadgeRound = styled(Badge)(({ theme, border }) => ({
     '& .MuiBadge-badge': {
-        borderRadius: '50%',
-        border: `2px solid #fff`,
+        border: border ? `2px solid #fff` : 'none',
         maxWidth: '150px',
+        whiteSpace: 'nowrap',
     },
 }))
 
-const StyledBadgeSquare = styled(Badge)(({ theme }) => ({
+const StyledBadgeSquare = styled(Badge)(({ theme, border }) => ({
     '& .MuiBadge-badge': {
         borderRadius: '4px',
-        border: `2px solid #fff`,
         maxWidth: '150px',
+        whiteSpace: 'nowrap',
+        border: border ? `2px solid #fff` : 'none',
     },
 }))
 
-export function BadgeWrapper({ status, number, children, variant, anchorOrigin, type, shape }) {
-    const badgeContent = typeof number !== 'undefined' ? (number > 99 ? '99+' : number) : 'Hello, world!'
+export function BadgeWrapper({ border, badgeContent, children, variant, anchorOrigin, type, shape }) {
     const theme = createDynamicTheme(type)
     let StyledBadge
 
@@ -131,6 +131,7 @@ export function BadgeWrapper({ status, number, children, variant, anchorOrigin, 
         <ThemeProvider theme={theme}>
             <StyledBadge
                 color={type}
+                max={999}
                 badgeContent={badgeContent}
                 style={{
                     fontSize: '1px',
@@ -138,6 +139,11 @@ export function BadgeWrapper({ status, number, children, variant, anchorOrigin, 
                 overlap="circular"
                 anchorOrigin={anchorOrigin}
                 variant={variant}
+                sx={{
+                    '& .MuiBadge-badge': {
+                        border: border ? `2px solid #fff` : 'none',
+                    },
+                }}
                 componentsProps={{
                     badge: {
                         style: { color: theme.palette.text.primary },
