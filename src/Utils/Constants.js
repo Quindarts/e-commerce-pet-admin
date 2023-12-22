@@ -124,4 +124,9 @@ export const COLOR = {
     light_blue: '#299cdb',
     dark_blue: '#2385ba',
     light_sky: '#abb9e8',
+    green: '#27ce88',
+    badge_blue: '#2499ef',
+    red: '#ff316f',
+    light_pink:'#ffe8ef',
 }
+
