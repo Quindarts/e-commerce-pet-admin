@@ -5,9 +5,10 @@ import { Formik, Form, Field } from 'formik'
 import * as yup from 'yup'
 import Textfield from '../../Components/ui/Textfield/Textfield'
 import { useSnackbar } from 'notistack'
+import axiosConfig from './axios'
 
 const schema = yup.object().shape({
-    email: yup.string().required('Email is required').email('Email is invalid'),
+    // userName: yup.string().required('userName is required').userName('userName is invalid'),
     password: yup
         .string()
         .required('Password is required')
@@ -22,46 +23,43 @@ function Login() {
     const { enqueueSnackbar } = useSnackbar()
 
     const handleSubmit = async (values, actions) => {
-        try {
-            const response = await fetch('http://localhost:5000/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(values),
-            })
+        console.log(values)
+        console.log('hello')
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`)
-            }
-
-            const data = await response.json()
-
-            if (!data.user) {
-                enqueueSnackbar('This account has not been registered', { variant: 'error' })
-                return
-            }
-
-            if (!data.success) {
-                enqueueSnackbar('Invalid password', { variant: 'error' })
-                return
-            }
-
-            if (data.user.role !== 'admin') {
-                enqueueSnackbar('You are not an Admin', { variant: 'error' })
-                return
-            }
-
-            enqueueSnackbar(data.message, { variant: 'success' })
-        } catch (error) {
-            enqueueSnackbar('An error occurred', { variant: 'error' })
-            console.error('Error during API call: ', error)
+        // try {
+        const response = await axiosConfig.post('/auth/login', values)
+        console.log(response)
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`)
         }
+
+        const data = await response.json()
+
+        if (!data.user) {
+            enqueueSnackbar('This account has not been registered', { variant: 'error' })
+            return
+        }
+
+        if (!data.success) {
+            enqueueSnackbar('Invalid password', { variant: 'error' })
+            return
+        }
+
+        if (data.user.role !== 'admin') {
+            enqueueSnackbar('You are not an Admin', { variant: 'error' })
+            return
+        }
+
+        enqueueSnackbar(data.message, { variant: 'success' })
+        // } catch (error) {
+        //     enqueueSnackbar('An error occurred', { variant: 'error' })
+        //     console.error('Error during API call: ', error)
+        // }
     }
 
     return (
         <div className="flex min-h-screen items-center justify-center bg-gray-100">
-            <Formik initialValues={{ password: '', email: '' }} validationSchema={schema} onSubmit={handleSubmit}>
+            <Formik initialValues={{ password: '', userName: '' }} validationSchema={schema} onSubmit={handleSubmit}>
                 {({ isSubmitting, handleBlur, handleChange, values, errors, touched }) => (
                     <Form className="w-full rounded bg-white p-8 shadow" style={{ maxWidth: '600px' }}>
                         <h2 className="mb-4 text-center text-2xl font-bold text-gray-900">Sign in to Uko</h2>
@@ -75,14 +73,14 @@ function Login() {
                             <Textfield
                                 placeholder="example@gmail.com"
                                 className="focus:shadow-outline w-full appearance-none px-3 py-1 text-sm leading-tight text-gray-700 focus:outline-none"
-                                label="Email address"
-                                id="email"
-                                name="email"
+                                label="userName"
+                                id="userName"
+                                name="userName"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.email}
-                                helperText={touched.email && errors.email ? errors.email : ''}
-                                error={touched.email && errors.email ? true : false}
+                                value={values.userName}
+                                // helperText={touched.userName && errors.userName ? errors.userName : ''}
+                                // error={touched.userName && errors.userName ? true : false}
                             />
                         </div>
                         <div className="mb-6">
