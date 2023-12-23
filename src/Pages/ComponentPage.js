@@ -290,11 +290,12 @@ function ComponentPage() {
             </div>
             <div className="mb-10 flex flex-wrap gap-40">
                 <BadgeWrapper
+                    className="mt-15"
                     badgeContent="Pending Payment"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="square"
                     type="blue"
-                ></BadgeWrapper>
+                />
                 <BadgeWrapper
                     badgeContent="Approved"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
