@@ -1,26 +1,56 @@
-import styled from '@emotion/styled'
-import { keyframes, css } from '@emotion/react'
+import { Badge } from '@mui/material'
+import { styled } from '@mui/material/styles'
+import { createTheme } from '@mui/material/styles'
+import { COLOR } from '../../../Utils/Constants'
 
-const blink = keyframes`
-    0% { opacity: 1; }
-    50% { opacity: 0.5; }
-    100% { opacity: 1; }
-`
+export function getStyledBadge(shape) {
+    switch (shape) {
+        case 'round':
+            return StyledBadgeRound
+        case 'square':
+            return StyledBadgeSquare
+        default:
+            return Badge
+    }
+}
 
-export const BadgeWrapper = styled('span')`
-    position: absolute;
-    ${(props) => props.position.split('-')[0]}: 0;
-    ${(props) => props.position.split('-')[1]}: 0;
-    height: ${(props) => props.size};
-    width: ${(props) => props.size};
-    border: 2px solid white;
-    border-radius: 50%;
+export const StyledBadgeRound = styled(Badge)(({ theme, border }) => ({
+    '& .MuiBadge-badge': {
+        border: border ? `2px solid #fff` : 'none',
+        maxWidth: '150px',
+        whiteSpace: 'nowrap',
+        color: theme.palette.text.primary,
+    },
+}))
 
-    background-color: ${(props) => props.color};
-    animation: ${(props) =>
-        props.animation.includes('blink')
-            ? css`
-                  ${blink} 1s infinite
-              `
-            : 'none'};
-`
+export const StyledBadgeSquare = styled(StyledBadgeRound)(({ theme }) => ({
+    '& .MuiBadge-badge': {
+        borderRadius: '4px',
+    },
+}))
+const colorMap = {
+    green: { main: COLOR.green, text: COLOR.white },
+    blue: { main: COLOR.badge_blue, text: COLOR.white },
+    red: { main: COLOR.red, text: COLOR.white },
+    red_text: { main: COLOR.gray_light, text: COLOR.red },
+    gray: { main: COLOR.gray_light, text: COLOR.gray_dark },
+    green_text: { main: COLOR.gray_light, text: COLOR.green },
+    pink: { main: COLOR.light_pink, text: COLOR.red },
+}
+
+export const createDynamicTheme = (type) => {
+    const colors = colorMap[type]
+    if (colors) {
+        return createTheme({
+            palette: {
+                [type]: {
+                    main: colors.main,
+                },
+                text: {
+                    primary: colors.text,
+                },
+            },
+        })
+    }
+    return createTheme()
+}
