@@ -15,6 +15,7 @@ export function BadgeWrapper({ border, badgeContent, children, variant, anchorOr
                 anchorOrigin={anchorOrigin}
                 variant={variant}
                 border={border}
+                theme={theme}
             >
                 {children}
             </StyledBadge>
