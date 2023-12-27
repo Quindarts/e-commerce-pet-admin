@@ -17,6 +17,7 @@ import Avatar from '../Components/ui/Avatar/Avatar.js'
 import { useSnackbar } from 'notistack'
 import { Zoom } from '@mui/material'
 import { BadgeWrapper } from '../Components/ui/Badge/Badge.js'
+import { theme } from '../Theme/theme.js'
 
 const avatars = [
     {
@@ -252,6 +253,7 @@ function ComponentPage() {
             <h1 className="mt-3 font-bold">Badge and Status Cards</h1>
             <div className="my-5 flex flex-wrap gap-20">
                 <BadgeWrapper
+                    theme={theme}
                     variant="dot"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="round"
@@ -264,6 +266,7 @@ function ComponentPage() {
                     />
                 </BadgeWrapper>
                 <BadgeWrapper
+                    theme={theme}
                     badgeContent={10}
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="round"
@@ -275,21 +278,24 @@ function ComponentPage() {
                         size="md"
                     />
                 </BadgeWrapper>
-                <BadgeWrapper
-                    badgeContent={1000}
-                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                    shape="round"
-                    type="green"
-                    border={true}
+                <Avatar
+                    src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                    size="lg"
                 >
-                    <Avatar
-                        src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-                        size="lg"
-                    />
-                </BadgeWrapper>
+                    <BadgeWrapper
+                        badgeContent={1000}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                        shape="round"
+                        type="green"
+                        border={true}
+                    >
+                        {/* Add your content here */}
+                    </BadgeWrapper>
+                </Avatar>
             </div>
             <div className="mb-10 flex flex-wrap gap-40">
                 <BadgeWrapper
+                    theme={theme}
                     className="mt-15"
                     badgeContent="Pending Payment"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -297,12 +303,14 @@ function ComponentPage() {
                     type="blue"
                 />
                 <BadgeWrapper
+                    theme={theme}
                     badgeContent="Approved"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="square"
                     type="green"
                 ></BadgeWrapper>
                 <BadgeWrapper
+                    theme={theme}
                     badgeContent="30% Off"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="square"
@@ -311,18 +319,21 @@ function ComponentPage() {
             </div>
             <div className="mb-10 flex flex-wrap gap-40">
                 <BadgeWrapper
+                    theme={theme}
                     badgeContent={4}
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="round"
                     type="blue"
                 ></BadgeWrapper>
                 <BadgeWrapper
+                    theme={theme}
                     badgeContent="Active"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="round"
                     type="green"
                 ></BadgeWrapper>
                 <BadgeWrapper
+                    theme={theme}
                     badgeContent="Blocked"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="round"
@@ -331,18 +342,21 @@ function ComponentPage() {
             </div>
             <div className="mb-10 flex flex-wrap gap-40">
                 <BadgeWrapper
+                    theme={theme}
                     badgeContent="325"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="round"
                     type="gray"
                 ></BadgeWrapper>
                 <BadgeWrapper
+                    theme={theme}
                     badgeContent="Out of Stock"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="square"
                     type="red_text"
                 ></BadgeWrapper>
                 <BadgeWrapper
+                    theme={theme}
                     badgeContent="Available"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="square"

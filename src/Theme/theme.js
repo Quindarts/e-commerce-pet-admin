@@ -27,10 +27,10 @@ const color = {
     jade: '#27ce88',
     badge_blue: '#2499ef',
     // red: '#ff316f',
-    light_pink:'#ffe8ef',
+    light_pink: '#ffe8ef',
     purple: '#6559cc',
     pink: '#f672a7',
-    pink_900: '#ff316f',     
+    pink_900: '#ff316f',
     red: '#f06548',
     dark_red: '#cc563d',
     orange: '#f1963b',
@@ -43,3 +43,4 @@ const color = {
 export const theme = createTheme({
     color: color,
 })
+

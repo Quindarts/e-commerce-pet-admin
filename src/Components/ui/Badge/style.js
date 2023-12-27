@@ -1,34 +1,24 @@
 import Badge from '@mui/material/Badge'
 import { styled } from '@mui/material/styles'
 import { createTheme } from '@mui/material/styles'
-import { COLOR } from '../../../Utils/Constants'
 import { theme } from '../../../Theme/theme'
 
-export function getStyledBadge(shape) {
-    switch (shape) {
-        case 'round':
-            return StyledBadgeRound
-        case 'square':
-            return StyledBadgeSquare
-        default:
-            return Badge
-    }
-}
-export const StyledBadgeRound = styled(({ theme, border, ...other }) => <Badge {...other} />)(({ theme, border }) => ({
-    '& .MuiBadge-badge': {
-        border: border ? `2px solid #fff` : 'none',
-        maxWidth: '150px',
-        whiteSpace: 'nowrap',
-        color: theme.palette.text.primary,
-    },
-}))
+export const StyledBadge = styled(({ shape, border, className, ...other }) => (
+    <Badge className={className} {...other} />
+))(({ shape, border, theme }) => {
+    const borderStyle = border ? `2px solid #fff` : 'none'
+    const borderRadius = shape === 'square' ? '4px' : ''
 
-export const StyledBadgeSquare = styled(StyledBadgeRound)(({ theme }) => ({
-    '& .MuiBadge-badge': {
-        borderRadius: '4px',
-        color: theme.palette.text.primary,
-    },
-}))
+    return {
+        '& .MuiBadge-badge': {
+            border: borderStyle,
+            borderRadius: borderRadius,
+            maxWidth: '150px',
+            whiteSpace: 'nowrap',
+            color: theme.palette.text.primary,
+        },
+    }
+})
 
 const colorMap = {
     green: { main: theme.color.jade, text: theme.color.white },

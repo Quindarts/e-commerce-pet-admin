@@ -6,7 +6,7 @@ function MainLayout() {
 
     return (
         <div className="main_layout flex">
-            {alert(window.localStorage.getItem('user'))}
+            {/* {alert(window.localStorage.getItem('user'))} */}
 
             <Navbar />
             <div className="main_outlet">
