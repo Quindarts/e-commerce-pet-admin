@@ -1,14 +1,31 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { APP_ROUTER } from '../../Utils/Constants';
-import { Formik, Form, Field } from 'formik';
-import * as yup from 'yup';
-import Textfield from '../../Components/ui/Textfield/Textfield';
-import { useSnackbar } from 'notistack';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { APP_ICON, APP_ROUTER } from '../../Utils/Constants'
+import { Formik, Form, Field } from 'formik'
+import * as yup from 'yup'
+import Textfield from '../../Components/ui/Textfield/Textfield'
+import { useSnackbar } from 'notistack'
+import './style.css'
+import { Icon } from '@iconify/react'
 
 const schema = yup.object().shape({
-    firstName: yup.string().required('First name is required'),
-    lastName: yup.string().required('Last name is required'),
+    firstName: yup
+        .string()
+        .required('First name is required')
+        .matches(/^[a-zA-Z]+$/, 'First name should only contain alphabets'),
+    lastName: yup
+        .string()
+        .required('Last name is required')
+        .matches(/^[a-zA-Z]+$/, 'Last name should only contain alphabets'),
+    userName: yup
+        .string()
+        .required('Username is required')
+        .min(8, 'Username must be at least 8 characters')
+        .max(32, 'Username must be no more than 32 characters')
+        .matches(/[A-Za-z]/, 'Username must include at least one letter')
+        .matches(/\d/, 'Username must include at least one number')
+        .matches(/^[a-zA-Z0-9]+$/, 'Username cannot include special characters'),
+
     email: yup.string().required('Email is required').email('Email is invalid'),
     password: yup
         .string()
@@ -22,16 +39,15 @@ const schema = yup.object().shape({
         .string()
         .required('Confirm password is required')
         .oneOf([yup.ref('password'), null], 'Passwords must match'),
-});
+})
 
 function Register() {
-    const { enqueueSnackbar } = useSnackbar();
+    const { enqueueSnackbar } = useSnackbar()
 
     const handleSubmit = async (values, actions) => {
-        
         if (values.password !== values.confirmPassword) {
-            enqueueSnackbar('Passwords do not match!', { variant: 'error' });
-            return;
+            enqueueSnackbar('Passwords do not match!', { variant: 'error' })
+            return
         }
 
         try {
@@ -41,41 +57,49 @@ function Register() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(values),
-            });
+            })
 
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error(`HTTP error! status: ${response.status}`)
             }
 
-            const data = await response.json();
+            const data = await response.json()
 
             if (data.success) {
-                enqueueSnackbar(data.message, { variant: 'success' });
+                enqueueSnackbar(data.message, { variant: 'success' })
             } else {
-                enqueueSnackbar(data.message, { variant: 'error' });
+                enqueueSnackbar(data.message, { variant: 'error' })
             }
         } catch (error) {
-            enqueueSnackbar('An error occurred', { variant: 'error' });
-            console.error('Error during API call: ', error);
+            enqueueSnackbar('An error occurred', { variant: 'error' })
+            console.error('Error during API call: ', error)
         }
-    };
+    }
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-gray-100">
-            <Formik initialValues={{ firstName: '', lastName: '', password: '', email: '', confirmPassword: '' }} validationSchema={schema} onSubmit={handleSubmit}>
+        <div className="grid-template-areas-2 md:grid-template-areas-4 grid min-h-screen bg-gray-100">
+            <Formik
+                initialValues={{ firstName: '', lastName: '', password: '', email: '', confirmPassword: '' }}
+                validationSchema={schema}
+                onSubmit={handleSubmit}
+                className="form"
+            >
                 {({ isSubmitting, handleBlur, handleChange, values, errors, touched }) => (
-                    <Form className="w-full rounded bg-white p-8 shadow" style={{ maxWidth: '600px' }}>
-                        <h2 className="mb-4 text-center text-2xl font-bold text-gray-900">Sign up to Uko</h2>
+                    <Form className="box w-full justify-self-center px-8 pb-16 pt-8">
+                        <div className="mb-6 flex items-center justify-center">
+                            <img src="https://uko-react.vercel.app/static/logo/logo.svg" width="40" alt="Logo"></img>
+                        </div>
+                        <h2 className="mb-1 text-center text-2xl font-bold text-gray-900">Sign Up to Uko</h2>
                         <div className="mb-4 flex justify-center">
                             <span className="text-gray-500">Have an account?</span>
                             <Link to={APP_ROUTER.LOGIN}>
-                                <button className="ml-2 text-blue-500 hover:text-blue-700">Login</button>
+                                <button className="mb-5 ml-2 text-blue-500 hover:text-blue-700">Login</button>
                             </Link>
                         </div>
-                        <div className=" grid md:flex md:justify-between">
+                        <div className="mb-4 grid px-3 py-1 md:flex md:justify-between">
                             <Textfield
                                 placeholder="First Name"
-                                className="focus:shadow-outline mb-4 w-full appearance-none px-3 py-1 text-sm leading-tight text-gray-700 focus:outline-none md:mb-0 md:mr-2"
+                                className="focus:shadow-outline mb-6 w-full appearance-none text-sm leading-tight text-gray-700 focus:outline-none md:mb-0 md:mr-2"
                                 id="firstName"
                                 type="text"
                                 label="First Name"
@@ -87,7 +111,7 @@ function Register() {
                             />
                             <Textfield
                                 placeholder="Last Name"
-                                className="focus:shadow-outline mt-4 w-full appearance-none px-3 py-1 text-sm leading-tight text-gray-700 focus:outline-none md:ml-2 md:mt-0"
+                                className="focus:shadow-outline w-full appearance-none text-sm leading-tight text-gray-700 focus:outline-none md:ml-2 md:mt-0"
                                 id="lastName"
                                 type="text"
                                 label="Last Name"
@@ -96,6 +120,19 @@ function Register() {
                                 value={values.lastName}
                                 helperText={touched.lastName && errors.lastName ? errors.lastName : ''}
                                 error={touched.lastName && errors.lastName ? true : false}
+                            />
+                        </div>
+                        <div className=" mb-4 grid md:flex md:justify-between">
+                            <Textfield
+                                className="focus:shadow-outline w-full appearance-none px-3 py-1 text-sm leading-tight text-gray-700 focus:outline-none"
+                                label="Username"
+                                id="userName"
+                                name="userName"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.userName}
+                                helperText={touched.userName && errors.userName ? errors.userName : ''}
+                                error={touched.userName && errors.userName ? true : false}
                             />
                         </div>
                         <div className="mb-4">
@@ -126,7 +163,7 @@ function Register() {
                                 error={touched.password && errors.password ? true : false}
                             />
                         </div>
-                        <div className="mb-4">
+                        <div className="mb-5">
                             <Textfield
                                 placeholder="Confirm Password"
                                 className="focus:shadow-outline mb-3 w-full appearance-none px-3 py-1 text-sm leading-tight text-gray-700 focus:outline-none"
@@ -136,7 +173,9 @@ function Register() {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.confirmPassword}
-                                helperText={touched.confirmPassword && errors.confirmPassword ? errors.confirmPassword : ''}
+                                helperText={
+                                    touched.confirmPassword && errors.confirmPassword ? errors.confirmPassword : ''
+                                }
                                 error={touched.confirmPassword && errors.confirmPassword ? true : false}
                             />
                         </div>
@@ -148,40 +187,49 @@ function Register() {
                                 Sign Up
                             </button>
                             <p className="mt-4 text-sm text-gray-500">
-                                By signing up, I agree to UI Lib Terms of Service & Privacy Policy
+                                By signing up, I agree to UI Lib{' '}
+                                <span className="cursor-pointer text-blue-500 hover:text-blue-700">
+                                    Terms of Service & Privacy Policy
+                                </span>
                             </p>
                         </div>
                         <div className="relative mb-6">
-                            <span className="transForm absolute -top-3 left-1/2 -translate-x-1/2 rounded bg-white px-2 py-1 text-sm text-gray-500">
+                            <span className="transForm absolute -top-3 left-1/2 -translate-x-1/2 rounded bg-gray-100 px-2 py-1 text-sm text-gray-500">
                                 OR
                             </span>
                             <hr className="border-gray-400" />
                         </div>
                         <div className="flex flex-col gap-4">
                             <button
-                                className="text-darkgray focus:shadow-outline w-full rounded-lg border border-blue-200 bg-white px-4 py-2 font-bold hover:bg-blue-200 focus:outline-none"
+                                className="text-darkgray focus:shadow-outline w-full rounded-lg border border-blue-200 bg-gray-100 px-4 py-2 font-bold focus:outline-none"
                                 type="button"
                             >
-                                Sign in with Google
+                                <Icon icon={APP_ICON.i_google} /> Sign with Google
                             </button>
                             <button
-                                className="text-darkgray focus:shadow-outline w-full rounded-lg border border-blue-200 bg-white px-4 py-2 font-bold hover:bg-blue-200 focus:outline-none"
+                                className="text-darkgray focus:shadow-outline w-full rounded-lg border border-blue-200 bg-gray-100 px-4 py-2 font-bold focus:outline-none"
                                 type="button"
                             >
-                                Sign in with Facebook
+                                <Icon icon={APP_ICON.i_facebook} /> Sign in with Facebook
                             </button>
                             <button
-                                className="text-darkgray focus:shadow-outline w-full rounded-lg border border-blue-200 bg-white px-4 py-2 font-bold hover:bg-blue-200 focus:outline-none"
+                                className="text-darkgray focus:shadow-outline w-full rounded-lg border border-blue-200 bg-gray-100 px-4 py-2 font-bold focus:outline-none"
                                 type="button"
                             >
+                                <Icon icon={APP_ICON.i_twitter} />
                                 Sign in with Twitter
                             </button>
                         </div>
                     </Form>
                 )}
             </Formik>
+            <img
+                className="image "
+                src="https://images.unsplash.com/photo-1515266591878-f93e32bc5937?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Unsplash Image"
+            />
         </div>
-    );
+    )
 }
 
-export default Register;
+export default Register

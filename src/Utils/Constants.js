@@ -16,6 +16,8 @@ export const APP_ROUTER = {
 }
 
 export const APP_ICON = {
+    i_twitter: 'logos:twitter',
+    i_google: 'flat-color-icons:google',
     i_menu: 'fe:app-menu',
     list: 'ph:list',
     product: 'fluent-mdl2:product-release',
@@ -42,7 +44,7 @@ export const APP_ICON = {
     i_arrow_redo: 'ion:arrow-redo',
     i_flag: 'tabler:flag-filled',
     i_messenger: 'ri:messenger-fill',
-    i_facebook: 'ri:facebook-fill',
+    i_facebook: 'logos:facebook',
     i_carrie_page: 'fa6-solid:s',
     i_mess_phone: 'el-phone-alt',
     i_arrow_down_box_1: 'bxs-down-arrow',
