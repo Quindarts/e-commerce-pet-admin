@@ -1,12 +1,12 @@
 import { ThemeProvider } from '@mui/material/styles'
 import { createDynamicTheme, StyledBadge } from './style.js'
 
-export function BadgeWrapper({ border, badgeContent, children, variant, anchorOrigin, type, shape, className }) {
+export function BadgeWrapper({ border, badgeContent, children, variant, anchorOrigin, type, shape }) {
+    const theme = createDynamicTheme(type)
 
     return (
-      
+        <ThemeProvider theme={theme}>
             <StyledBadge
-                className={className}
                 color={type}
                 max={999}
                 badgeContent={badgeContent}
@@ -14,10 +14,10 @@ export function BadgeWrapper({ border, badgeContent, children, variant, anchorOr
                 anchorOrigin={anchorOrigin}
                 variant={variant}
                 border={border}
-                shape={shape}
+                theme={theme}
             >
                 {children}
             </StyledBadge>
-
+        </ThemeProvider>
     )
 }
