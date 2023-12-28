@@ -24,7 +24,10 @@ const color = {
     light_blue: '#299cdb',
     dark_blue: '#2385ba',
     light_sky: '#abb9e8',
-
+    jade: '#27ce88',
+    badge_blue: '#2499ef',
+    // red: '#ff316f',
+    light_pink: '#ffe8ef',
     purple: '#6559cc',
     pink: '#f672a7',
     pink_900: '#ff316f',
@@ -40,3 +43,4 @@ const color = {
 export const theme = createTheme({
     color: color,
 })
+

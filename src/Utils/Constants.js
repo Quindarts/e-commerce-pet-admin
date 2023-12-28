@@ -125,3 +125,4 @@ export const COLOR = {
     dark_blue: '#2385ba',
     light_sky: '#abb9e8',
 }
+

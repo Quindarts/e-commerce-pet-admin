@@ -1,23 +1,9 @@
 import { Icon } from '@iconify/react'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef} from 'react'
 import Button from '../Button/Button'
 import { APP_ICON } from '../../../Utils/Constants'
 import clsx from 'clsx'
-
-function useClickOutside(ref, handler) {
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (ref.current && !ref.current.contains(event.target)) {
-                handler()
-            }
-        }
-        document.addEventListener('click', handleClickOutside)
-        return () => {
-            document.removeEventListener('click', handleClickOutside)
-        }
-    }, [ref, handler])
-}
 
 const PopupServ = (props) => {
     const { className } = props
@@ -30,12 +16,6 @@ const PopupServ = (props) => {
     const handleOpen = () => {
         setPopupOpen(true)
     }
-
-    const handleClose = () => {
-        setPopupOpen(false)
-    }
-
-    useClickOutside(popupRef, handleClose)
 
     return (
         <div className={` relative inline-block ${className}`} ref={popupRef}>
