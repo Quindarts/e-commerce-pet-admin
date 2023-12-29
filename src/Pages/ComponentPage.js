@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react'
 import AvatarGroup from '../Components/ui/Avatar/AvatarGroup.js'
 import Button from '../Components/ui/Button/Button.js'
-import { APP_ICON } from '../Utils/Constants.js'
+import { APP_ICON, APP_ROUTER } from '../Utils/Constants.js'
 import Textfield from '../Components/ui/Textfield/Textfield.js'
 import PopupUser from '../Components/ui/Popup/PopupUser.js'
 import StatusBar from '../Components/ui/StatusBar/StatusBar.js'
@@ -16,11 +16,8 @@ import PopupLang from '../Components/ui/Popup/PopupLang.js'
 import Avatar from '../Components/ui/Avatar/Avatar.js'
 import { useSnackbar } from 'notistack'
 import { Zoom } from '@mui/material'
-import { BadgeWrapper } from '../Components/ui/Badge/Badge.js'
 import { Link } from 'react-router-dom'
-import { APP_ROUTER } from '../Utils/Constants'
-import SearchTable from '../Components/ui/Search/SearchTable.js'
-import SearchHead from '../Components/ui/Search/SearchHead.js'
+import { BadgeWrapper } from '../Components/ui/Badge/Badge.js'
 
 const avatars = [
     {
@@ -420,15 +417,6 @@ function ComponentPage() {
                 </div>
             </div>
             <Modal key={1} open={open} size="fat" appearance={optionModal} handleClose={handleClose}></Modal>
-            <h1 className="mt-3 font-bold">Search</h1>
-            <div className="container mx-auto">
-                <button onClick={() => setIsOpen(!isOpen)}>Open Search</button>
-                <SearchHead placeholder="Search..." onSearch={handleSearch} isOpen={isOpen} setIsOpen={setIsOpen} />
-            </div>
-            <div className="container mx-auto p-4">
-                <h1 className="mt-3 font-bold">Search Table Component</h1>
-                <SearchTable data={data} columns={columns} />
-            </div>
             <div>
                 <Link to={APP_ROUTER.LOGIN}>
                     <button>Go to Login Page</button>

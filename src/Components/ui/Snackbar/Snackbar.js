@@ -1,7 +1,5 @@
 import React from 'react'
 import { useSnackbar, SnackbarContent } from 'notistack'
-import styled from '@emotion/styled'
-import { forwardRef } from 'react'
 import { Box } from '@mui/material'
 
 function CustomVariantSnackbar(props, ref) {
