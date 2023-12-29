@@ -15,7 +15,8 @@ import i18n from '../translation/i18n.js'
 import PopupLang from '../Components/ui/Popup/PopupLang.js'
 import Avatar from '../Components/ui/Avatar/Avatar.js'
 import { useSnackbar } from 'notistack'
-import { Zoom } from '@mui/material'
+import { Box, Zoom } from '@mui/material'
+import Table from '../Components/ui/Table/Table.js'
 
 const avatars = [
     {
@@ -266,6 +267,14 @@ function ComponentPage() {
                     badge={{ status: 'private', position: 'bottom-right' }}
                 />
             </div>
+            <h1 className="mt-3 font-bold">Table</h1>
+            <Box className="w-full">
+                <Table
+                    hasCheckbox
+                    columns={[{ field: 'ID' }, { field: 'First name' }, { field: 'Last name' }]}
+                    rows={[]}
+                />
+            </Box>
             <h1 className="mt-3 font-bold">Upload image</h1>
             <div>
                 <InputUpload listUpload={warehouseItem} />
