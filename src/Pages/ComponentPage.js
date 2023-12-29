@@ -8,7 +8,7 @@ import StatusBar from '../Components/ui/StatusBar/StatusBar.js'
 import { useState } from 'react'
 import Dropdown from '../Components/ui/Dropdown/Dropdown.js'
 import Snackbar from '../Components/ui/Toast/Snackbar.js'
-import { SnackbarProvider} from 'notistack';
+import { SnackbarProvider } from 'notistack'
 import InputUpload from '../Components/ui/InputUpload/InputUpload.js'
 import PopupNoti from '../Components/ui/Popup/PopupNoti.js'
 const avatars = [
@@ -26,12 +26,15 @@ const avatars = [
 const names = [
     {
         name: 'Bob',
+        message: 'Changed an issue from this project',
     },
     {
         name: 'Bill',
+        message: 'Nice Work! You really nailed it. Keep it Up Man',
     },
     {
         name: 'Ben',
+        message: 'Nice Work! You really nailed it. Keep it Up Man',
     },
     { name: 'Bin' },
     { name: 'Ban' },
@@ -48,8 +51,6 @@ const user = {
     email: 'tntt@gmail.com',
 }
 function ComponentPage() {
-    
-    
     const demo = 50
     const [status, setStatus] = useState(demo)
 
@@ -68,7 +69,6 @@ function ComponentPage() {
         { title: 'phuc', value: 30 },
     ]
 
-   
     return (
         <div className="component_page">
             ComponentPage
@@ -154,20 +154,18 @@ function ComponentPage() {
             </div>
             <h1 className="mt-3 font-bold">PopupNoti</h1>
             <div>
-            <PopupNoti avatars={avatars} names={names} user={user} />
+                <PopupNoti avatars={avatars} names={names} user={user} />
             </div>
             <h1 className="mt-3 font-bold">Accordin</h1>
             <h1 className="mt-3 font-bold">Toast</h1>
             <div>
-            <SnackbarProvider maxSnack={3}>
-                            <Snackbar message="This is a success message!" variant="success" styleName="success" />
-<Snackbar message="This is an error message!" variant="error" styleName="error" />
-<Snackbar message="This is a warning message!" variant="warning" styleName="warning" />
-<Snackbar message="This is an info message!" variant="info" styleName="info" />
-
-    </SnackbarProvider>
-      </div>
-
+                <SnackbarProvider maxSnack={3}>
+                    <Snackbar message="This is a success message!" variant="success" styleName="success" />
+                    <Snackbar message="This is an error message!" variant="error" styleName="error" />
+                    <Snackbar message="This is a warning message!" variant="warning" styleName="warning" />
+                    <Snackbar message="This is an info message!" variant="info" styleName="info" />
+                </SnackbarProvider>
+            </div>
             <h1 className="mt-3 font-bold">Modal</h1>
             <h1 className="mt-3 font-bold">Upload image</h1>
             <div>
@@ -187,7 +185,6 @@ function ComponentPage() {
                     <Textfield className="my-3 w-1/2" label="Password" type="password" />
                 </div>
             </div>
-           
         </div>
     )
 }
