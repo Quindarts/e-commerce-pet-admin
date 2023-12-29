@@ -8,6 +8,7 @@ import { useSnackbar } from 'notistack'
 import axiosConfig from './axios'
 import './style.css'
 import { Icon } from '@iconify/react'
+import Button from '../../Components/ui/Button/Button'
 
 const schema = yup.object().shape({
     userName: yup
@@ -83,11 +84,9 @@ function Login() {
 
                         <h2 className="mb-1 text-center text-2xl font-bold text-gray-900">Sign in to Uko</h2>
                         <div className="mb-4 flex justify-center">
-                            <span className="text-gray-500">New Here?</span>
+                            <span className="mb-5 text-gray-500">New Here?</span>
                             <Link to={APP_ROUTER.REGISTER}>
-                                <button className="mb-5 ml-2 text-blue-500 hover:text-blue-700">
-                                    Create an account!
-                                </button>
+                                <span className="ml-2 text-blue-500 hover:text-blue-700">Create an account!</span>
                             </Link>
                         </div>
                         <div className=" mb-4 grid md:flex md:justify-between">
@@ -130,39 +129,50 @@ function Login() {
                             </a>
                         </div>
                         <div className="mb-6 text-center">
-                            <button
-                                className="focus:shadow-outline w-full rounded-lg bg-blue-500 px-4 py-2 font-bold text-gray-100 hover:bg-blue-700 focus:outline-none"
+                            <Button
+                                className="focus:shadow-outline mb-5 w-full px-4 py-2 font-bold focus:outline-none"
                                 type="submit"
+                                color="primary"
+                                size="sm"
                             >
                                 Sign In
-                            </button>
+                            </Button>
                         </div>
-                        <div className="relative mb-6">
+                        <div className="relative mb-10">
                             <span className="transForm absolute -top-3 left-1/2 -translate-x-1/2 rounded bg-gray-100 px-2 py-1 text-sm text-gray-500">
                                 OR
                             </span>
                             <hr className="border-gray-400" />
                         </div>
                         <div className="flex flex-col gap-4">
-                            <button
-                                className="text-darkgray focus:shadow-outline w-full rounded-lg border border-blue-200 bg-gray-100 px-4 py-2 font-bold focus:outline-none"
+                            <Button
+                                className="text-darkgray focus:shadow-outline w-full rounded-lg border  border-blue-200 bg-gray-100 px-4 py-2 font-bold focus:outline-none"
                                 type="button"
+                                variant="outline"
+                                size="sm"
+                                color="primary"
                             >
                                 <Icon icon={APP_ICON.i_google} /> Sign with Google
-                            </button>
-                            <button
+                            </Button>
+                            <Button
                                 className="text-darkgray focus:shadow-outline w-full rounded-lg border border-blue-200 bg-gray-100 px-4 py-2 font-bold focus:outline-none"
                                 type="button"
+                                variant="outline"
+                                size="sm"
+                                color="primary"
                             >
-                                <Icon icon={APP_ICON.i_facebook} /> Sign in with Facebook
-                            </button>
-                            <button
+                                <Icon icon={APP_ICON.i_facebook} /> Signin with Facebook
+                            </Button>
+                            <Button
                                 className="text-darkgray focus:shadow-outline w-full rounded-lg border border-blue-200 bg-gray-100 px-4 py-2 font-bold focus:outline-none"
                                 type="button"
+                                variant="outline"
+                                size="sm"
+                                color="primary"
                             >
                                 <Icon icon={APP_ICON.i_twitter} />
-                                Sign in with Twitter
-                            </button>
+                                Signin with Twitter
+                            </Button>
                         </div>
                     </Form>
                 )}
