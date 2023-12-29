@@ -5,7 +5,16 @@ import { useNavigate } from 'react-router-dom'
 import { APP_ROUTER } from '../../../Utils/Constants'
 import { css } from '@emotion/react'
 
-function useClickOutside(ref, handler) {
+export const usePopup = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const ref = useRef(null);
+
+    useClickOutside(ref, () => setIsOpen(false));
+
+    return { isOpen, ref, setIsOpen };
+}
+
+const useClickOutside = (ref, handler) => {
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (ref.current && !ref.current.contains(event.target)) {
@@ -13,14 +22,13 @@ function useClickOutside(ref, handler) {
             }
         }
 
-        document.addEventListener('click', handleClickOutside)
+        document.addEventListener('mousedown', handleClickOutside)
 
         return () => {
-            document.removeEventListener('click', handleClickOutside)
+            document.removeEventListener('mousedown', handleClickOutside)
         }
     }, [ref, handler])
 }
-
 const tabStyles = css`
     transition: all 0.3s ease-in-out;
 
@@ -30,37 +38,36 @@ const tabStyles = css`
 `
 
 const PopupNoti = (props) => {
-    const { avatars, names, user, className } = props
-    const [isOpenPopUp, setPopupOpen] = useState(false)
+    const { avatars, names, user, className, position = 'bottom-right', isOpenPopUp, setIsOpen } = props
     const [selectedTab, setSelectedTab] = useState('Messages')
     const navigate = useNavigate()
     const popupNoti = useRef(null)
 
-    const handleOpen = () => {
-        setPopupOpen(true)
-    }
-
-    const handleClose = () => {
-        setPopupOpen(false)
+    const handleClosePopupNoti = () => {
+        setIsOpen(false)
     }
 
     const handleMenuItem = (link) => {
         navigate(link)
-        handleClose()
+        handleClosePopupNoti()
     }
 
-    useClickOutside(popupNoti, handleClose)
+    useClickOutside(popupNoti, handleClosePopupNoti)
+    const positionClasses = {
+        'top-left': 'bottom-full right-full',
+        'top-right': 'bottom-full left-full',
+        'bottom-left': 'top-full right-full',
+        'bottom-right': 'top-full left-full',
+        'middle-left': 'top-1/2 right-full transform translate-y-[-50%]',
+        'middle-right': 'top-1/2 left-full transform translate-y-[-50%]',
+    }
 
     return (
         <div className={`relative inline-block ${className}`} ref={popupNoti}>
-            <button
-                onClick={handleOpen}
-                className="flex items-center rounded-full bg-gray-200 py-2 pl-4 pr-2 text-gray-500 hover:bg-gray-300"
-            >
-                Popup Notifications
-            </button>
             {isOpenPopUp && (
-                <div className={`absolute z-10 h-auto w-96 rounded border border-gray-200 bg-white py-2 shadow-lg`}>
+                <div
+                    className={`absolute z-10 h-auto w-96 rounded border border-gray-200 bg-white py-2 shadow-lg ${positionClasses[position]}`}
+                >
                     <div className="border-b border-gray-200 px-8 py-4">
                         <h2 className="font-bold">Notifications</h2>
                     </div>

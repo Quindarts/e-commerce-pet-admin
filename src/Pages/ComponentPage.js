@@ -11,6 +11,7 @@ import Snackbar from '../Components/ui/Toast/Snackbar.js'
 import { SnackbarProvider } from 'notistack'
 import InputUpload from '../Components/ui/InputUpload/InputUpload.js'
 import PopupNoti from '../Components/ui/Popup/PopupNoti.js'
+import { usePopup } from '../Components/ui/Popup/PopupNoti.js'
 const avatars = [
     {
         src: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
@@ -53,6 +54,11 @@ const user = {
 function ComponentPage() {
     const demo = 50
     const [status, setStatus] = useState(demo)
+    const popup = usePopup()
+
+    const handlePopupNotiOpen = () => {
+        popup.setIsOpen(true)
+    }
 
     const handleCompleteClick = () => {
         if (status < 100) {
@@ -154,7 +160,17 @@ function ComponentPage() {
             </div>
             <h1 className="mt-3 font-bold">PopupNoti</h1>
             <div>
-                <PopupNoti avatars={avatars} names={names} user={user} />
+                <Button onClick={handlePopupNotiOpen} className="m-1" size="lg" color="grey" icon>
+                    <Icon icon={APP_ICON.i_pen} />
+                </Button>
+                <PopupNoti
+                    isOpenPopUp={popup.isOpen}
+                    {...popup}
+                    avatars={avatars}
+                    names={names}
+                    user={user}
+                    position="bottom-right"
+                />
             </div>
             <h1 className="mt-3 font-bold">Accordin</h1>
             <h1 className="mt-3 font-bold">Toast</h1>
