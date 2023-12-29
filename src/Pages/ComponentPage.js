@@ -17,8 +17,8 @@ import Avatar from '../Components/ui/Avatar/Avatar.js'
 import { useSnackbar } from 'notistack'
 import { Zoom } from '@mui/material'
 import { BadgeWrapper } from '../Components/ui/Badge/Badge.js'
-import { Link } from 'react-router-dom';
-import { APP_ROUTER } from '../Utils/Constants';
+import { Link } from 'react-router-dom'
+import { APP_ROUTER } from '../Utils/Constants'
 import SearchTable from '../Components/ui/Search/SearchTable.js'
 import SearchHead from '../Components/ui/Search/SearchHead.js'
 
@@ -124,63 +124,54 @@ function ComponentPage() {
 
     const data = [
         {
-          Product: "Light Airpod",
-          Producer: "Apple",
-          ID: "PD0001",
-          Category: "Air Pod",
-          Cost: "$432",
-          Extra: "Yes",
-          Priority: "High",
-          Edit: "Edit",
+            Product: 'Light Airpod',
+            Producer: 'Apple',
+            ID: 'PD0001',
+            Category: 'Air Pod',
+            Cost: '$432',
+            Extra: 'Yes',
+            Priority: 'High',
+            Edit: 'Edit',
         },
         {
-          Product: "Air Pod 2",
-          Producer: "Apple",
-          ID: "PD0002",
-          Category: "Air Pod",
-          Cost: "$432",
-          Extra: "No",
-          Priority: "Medium",
-          Edit: "Edit",
+            Product: 'Air Pod 2',
+            Producer: 'Apple',
+            ID: 'PD0002',
+            Category: 'Air Pod',
+            Cost: '$432',
+            Extra: 'No',
+            Priority: 'Medium',
+            Edit: 'Edit',
         },
         {
-          Product: "Nike Shoe",
-          Producer: "Nike",
-          ID: "PD0003",
-          Category: "Shoe",
-          Cost: "$123",
-          Extra: "No",
-          Priority: "Low",
-          Edit: "Edit",
+            Product: 'Nike Shoe',
+            Producer: 'Nike',
+            ID: 'PD0003',
+            Category: 'Shoe',
+            Cost: '$123',
+            Extra: 'No',
+            Priority: 'Low',
+            Edit: 'Edit',
         },
         {
-          Product: "Light Airpod",
-          Producer: "Apple",
-          ID: "PD0004",
-          Category: "Air Pod",
-          Cost: "$432",
-          Extra: "Yes",
-          Priority: "High",
-          Edit: "Edit",
+            Product: 'Light Airpod',
+            Producer: 'Apple',
+            ID: 'PD0004',
+            Category: 'Air Pod',
+            Cost: '$432',
+            Extra: 'Yes',
+            Priority: 'High',
+            Edit: 'Edit',
         },
-      ];
-    
-      const columns = [
-        "Product",
-        "Producer",
-        "ID",
-        "Category",
-        "Cost",
-        "Extra",
-        "Priority",
-        "Edit",
-      ];
-      const [filter, setFilter] = useState("");
-      const [isOpen, setIsOpen] = useState(false);
-    
-      const handleSearch = (query) => {
-        setFilter(query);
-      };
+    ]
+
+    const columns = ['Product', 'Producer', 'ID', 'Category', 'Cost', 'Extra', 'Priority', 'Edit']
+    const [filter, setFilter] = useState('')
+    const [isOpen, setIsOpen] = useState(false)
+
+    const handleSearch = (query) => {
+        setFilter(query)
+    }
     return (
         <div className="component_page">
             ComponentPage
@@ -353,7 +344,6 @@ function ComponentPage() {
             </div>
             <div className="mb-10 flex flex-wrap gap-40">
                 <BadgeWrapper
-                   
                     className="mt-15"
                     badgeContent="Pending Payment"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -361,14 +351,12 @@ function ComponentPage() {
                     type="blue"
                 />
                 <BadgeWrapper
-                   
                     badgeContent="Approved"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="square"
                     type="green"
                 ></BadgeWrapper>
                 <BadgeWrapper
-                   
                     badgeContent="30% Off"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="square"
@@ -377,21 +365,18 @@ function ComponentPage() {
             </div>
             <div className="mb-10 flex flex-wrap gap-40">
                 <BadgeWrapper
-                   
                     badgeContent={4}
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="round"
                     type="blue"
                 ></BadgeWrapper>
                 <BadgeWrapper
-                   
                     badgeContent="Active"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="round"
                     type="green"
                 ></BadgeWrapper>
                 <BadgeWrapper
-                   
                     badgeContent="Blocked"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="round"
@@ -400,21 +385,18 @@ function ComponentPage() {
             </div>
             <div className="mb-10 flex flex-wrap gap-40">
                 <BadgeWrapper
-                   
                     badgeContent="325"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="round"
                     type="gray"
                 ></BadgeWrapper>
                 <BadgeWrapper
-                   
                     badgeContent="Out of Stock"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="square"
                     type="red_text"
                 ></BadgeWrapper>
                 <BadgeWrapper
-                   
                     badgeContent="Available"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="square"
@@ -440,22 +422,17 @@ function ComponentPage() {
             <Modal key={1} open={open} size="fat" appearance={optionModal} handleClose={handleClose}></Modal>
             <h1 className="mt-3 font-bold">Search</h1>
             <div className="container mx-auto">
-      <button onClick={() => setIsOpen(!isOpen)}>Open Search</button>
-      <SearchHead
-        placeholder="Search..."
-        onSearch={handleSearch}
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-      />
-</div>
+                <button onClick={() => setIsOpen(!isOpen)}>Open Search</button>
+                <SearchHead placeholder="Search..." onSearch={handleSearch} isOpen={isOpen} setIsOpen={setIsOpen} />
+            </div>
             <div className="container mx-auto p-4">
-      <h1 className="font-bold mt-3">Search Table Component</h1>
-      <SearchTable data={data} columns={columns} />
-    </div>
+                <h1 className="mt-3 font-bold">Search Table Component</h1>
+                <SearchTable data={data} columns={columns} />
+            </div>
             <div>
-            <Link to={APP_ROUTER.LOGIN}>
-                <button>Go to Login Page</button>
-            </Link>
+                <Link to={APP_ROUTER.LOGIN}>
+                    <button>Go to Login Page</button>
+                </Link>
             </div>
         </div>
     )
