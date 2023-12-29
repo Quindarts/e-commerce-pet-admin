@@ -14,6 +14,9 @@
 .box {
     max-width: 575px;
 }
+* {
+    font-size: 14px;
+}
 @media (max-width: 767px) {
     .grid {
         grid-template-areas:
@@ -22,7 +25,7 @@
         grid-template-rows: 1fr;
     }
 }
-@media (min-width: 768px) and (max-width: 900px) {
+@media (min-width: 767px) and (max-width: 900px) {
     .grid {
         grid-template-areas:
             'form'
@@ -30,7 +33,7 @@
         grid-template-rows: 1fr;
     }
 }
-@media (min-width: 901px) and (max-width: 1200px) {
+@media (min-width: 900px) and (max-width: 1200px) {
     .grid {
         grid-template-areas:
             'image form'
@@ -38,7 +41,7 @@
         grid-template-columns: 1fr 1fr;
     }
 }
-@media (min-width: 1201px) {
+@media (min-width: 1200px) {
     .grid {
         grid-template-areas:
             'image form'

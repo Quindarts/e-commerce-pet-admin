@@ -72,7 +72,7 @@ function Login() {
         <div className="grid-template-areas-2 md:grid-template-areas-4 grid min-h-screen bg-gray-100">
             <Formik
                 className="form"
-                initialValues={{ password: '', userName: '' }}
+                initialValues={{ userName: '', password: '' }}
                 validationSchema={schema}
                 onSubmit={handleSubmit}
             >
@@ -121,10 +121,7 @@ function Login() {
                             <label className="text-sm font-bold text-gray-700" htmlFor="rememberMe">
                                 Remember me
                             </label>
-                            <a
-                                className="ml-auto text-sm font-bold text-red-500 hover:text-red-800"
-                                href="./forgot-password.html"
-                            >
+                            <a className="ml-auto text-sm font-bold text-red-500" href="./forgot-password.html">
                                 Forget Password
                             </a>
                         </div>

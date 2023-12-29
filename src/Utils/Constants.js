@@ -123,7 +123,9 @@ export const COLOR = {
     gray_900: '#212529',
     black: '#000000',
     blue: '#3577f1',
+    blue_200:'#2499EF',
     light_blue: '#299cdb',
     dark_blue: '#2385ba',
+    blue_400:'#196BA7',
     light_sky: '#abb9e8',
 }
