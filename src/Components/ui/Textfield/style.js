@@ -5,7 +5,6 @@ import { TextField } from '@mui/material'
 export const TextFieldCustomMUI = styled(TextField)`
     &.textfield {
         width: 100%;
-
         .MuiInputLabel-root {
             color: #9cb0c4;
             font-size: 1.1rem;
