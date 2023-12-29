@@ -66,6 +66,7 @@ export const APP_ICON = {
     i_eye_open: 'mdi:eye',
     i_eye_off: 'mdi:eye-off',
     i_instagram: 'ri:instagram-fill',
+    i_bell: 'fa6-solid:bell',
 }
 
 export const TITLE_NAVBAR = {

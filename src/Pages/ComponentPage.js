@@ -160,8 +160,8 @@ function ComponentPage() {
             </div>
             <h1 className="mt-3 font-bold">PopupNoti</h1>
             <div>
-                <Button onClick={handlePopupNotiOpen} className="m-1" size="lg" color="grey" icon>
-                    <Icon icon={APP_ICON.i_pen} />
+                <Button onClick={handlePopupNotiOpen} className="m-1" size="lg" variant="outline" color="grey" icon>
+                    <Icon icon={APP_ICON.i_bell} />
                 </Button>
                 <PopupNoti
                     isOpenPopUp={popup.isOpen}

@@ -50,9 +50,16 @@ function useClickOutside(ref, handler) {
         }
     }, [ref, handler])
 }
-
+const positionClasses = {
+    'top-left': 'bottom-full right-full',
+    'top-right': 'bottom-full left-full',
+    'bottom-left': 'top-full right-full',
+    'bottom-right': 'top-full left-full',
+    'middle-left': 'top-1/2 right-full transform translate-y-[-50%]',
+    'middle-right': 'top-1/2 left-full transform translate-y-[-50%]',
+}
 const PopupUser = (props) => {
-    const { user, className } = props
+    const { user, className, position = 'bottom-right', children } = props
     const [isOpenPopUp, setPopupOpen] = useState(false)
     const navigate = useNavigate()
     const popupUser = useRef(null)
@@ -83,7 +90,9 @@ const PopupUser = (props) => {
                 <Avatar src={user.avt} size="sm" badge={true} className="border-none" />
             </button>
             {isOpenPopUp && (
-                <div className={`absolute z-10  w-64 rounded border border-gray-200 bg-white py-2 shadow-lg`}>
+                <div
+                    className={`absolute z-10 w-64 rounded border border-gray-200 bg-white py-2 shadow-lg ${positionClasses[position]}`}
+                >
                     <div className="flex items-center border-b border-gray-200 px-4 pb-4 pt-3">
                         <Avatar src={user.avt} size="md" />
                         <div className="ml-2">
