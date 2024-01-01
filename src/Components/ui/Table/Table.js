@@ -16,14 +16,11 @@ function Table(props) {
     return (
         <CustomTable
             {...rest}
+            className={className}
             checkboxSelection={hasCheckbox}
-            rows={[]}
             autoHeight
             slots={{ noRowsOverlay: CustomNoRowsOverlay }}
-            sx={{ '--DataGrid-overlayHeight': '300px' }}
-        >
-            Table
-        </CustomTable>
+        ></CustomTable>
     )
 }
 

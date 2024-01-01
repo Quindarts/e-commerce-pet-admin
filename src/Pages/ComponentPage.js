@@ -57,7 +57,15 @@ const listLanguage = [
     { title: 'Vietnamese', value: 'vi' },
     { title: 'English', value: 'en' },
 ]
-
+const dataTable = [
+    {
+        name: 'Nike Air Max 270',
+        category: 'Shoe',
+        stock: 'SKU',
+        Price: '2000',
+        Rate: '2000',
+    },
+]
 function ComponentPage() {
     const demo = 50
     const [status, setStatus] = useState(demo)
@@ -117,6 +125,77 @@ function ComponentPage() {
         i18n.changeLanguage(value)
     }
     const { t } = useTranslation()
+    // images: [
+    //     {
+    //         url: 'https://parkofideas.com/ricky/demo/wp-content/uploads/2022/11/ricky-145.jpg',
+    //         _id: '658409c8d5f697b71ea0c508',
+    //     },
+    // ],
+    const rows = [
+        {
+            code: 'HLNBCKHJ',
+            name: 'Beef Recipe Frozen Dog Food',
+
+            price: 60000,
+            avaiable: 30,
+            category: {
+                code: 'XBUE4Y',
+                name: 'dogs fresh & frozen food',
+            },
+            isActive: false,
+        },
+    ]
+    const columns = [
+        {
+            field: 'detail',
+            headerName: 'Product Details',
+            flex: 1.5,
+            headerAlign: 'center',
+            type: 'actions',
+        },
+        {
+            field: 'category',
+            headerName: 'Category',
+            flex: 0.75,
+            type: 'actions',
+            headerAlign: 'center',
+        },
+        {
+            field: 'avaiable',
+            headerName: 'Stock',
+            flex: 0.75,
+            headerAlign: 'center',
+            type: 'actions',
+        },
+        {
+            field: 'code',
+            headerName: 'SKU',
+            flex: 1,
+            headerAlign: 'center',
+            type: 'actions',
+        },
+        {
+            field: 'price',
+            headerName: 'Price',
+            flex: 1,
+            headerAlign: 'center',
+            type: 'actions',
+        },
+        {
+            field: 'status',
+            headerName: 'Status',
+            flex: 1,
+            headerAlign: 'center',
+            type: 'actions',
+        },
+        {
+            field: 'action',
+            headerName: 'Action',
+            flex: 1,
+            headerAlign: 'center',
+            type: 'actions',
+        },
+    ]
 
     return (
         <div className="component_page">
@@ -268,12 +347,8 @@ function ComponentPage() {
                 />
             </div>
             <h1 className="mt-3 font-bold">Table</h1>
-            <Box className="w-full">
-                <Table
-                    hasCheckbox
-                    columns={[{ field: 'ID' }, { field: 'First name' }, { field: 'Last name' }]}
-                    rows={[]}
-                />
+            <Box>
+                <Table hasCheckbox columns={columns} rows={rows} />
             </Box>
             <h1 className="mt-3 font-bold">Upload image</h1>
             <div>

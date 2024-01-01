@@ -61,4 +61,27 @@ export function CustomNoRowsOverlay() {
     )
 }
 
-export const CustomTable = styled(DataGrid)``
+export const CustomTable = styled(DataGrid)`
+    &.MuiDataGrid-root {
+        border: none;
+
+        .MuiDataGrid-main {
+            .MuiDataGrid-columnHeaders {
+                cursor: pointer;
+                font-size: 12px;
+
+                & .MuiDataGrid-columnHeaderTitle {
+                    font-weight: 600;
+                    color: #91a0b2;
+                }
+            }
+        }
+        & .MuiDataGrid-columnSeparator {
+            visibility: hidden;
+            display: none;
+        }
+        & .MuiDataGrid-columnHeader:focus-within {
+            outline: none;
+        }
+    }
+`
