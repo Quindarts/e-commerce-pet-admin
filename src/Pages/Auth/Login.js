@@ -9,7 +9,7 @@ import './style.js'
 import { Icon } from '@iconify/react'
 import Button from '../../Components/ui/Button/Button'
 import ukoLogo from '../../assets/img/ukoLogo.png'
-import sideImage from '../../assets/img/sideImage.avif'
+import sideImage from '../../assets/img/sideImage.png'
 import { Grid, Image, FormContainer, Box, Checkbox } from './style'
 
 const schema = yup.object().shape({
@@ -88,7 +88,7 @@ function Login() {
                         <div className="mb-4 flex justify-center text-sm font-semibold">
                             <span className="mb-5 text-gray-400">New Here?</span>
                             <Link to={APP_ROUTER.REGISTER}>
-                                <span className="ml-2 text-blue-500 hover:text-blue-700">Create an account!</span>
+                                <span className="ml-2 text-blue-400">Create an account!</span>
                             </Link>
                         </div>
                         <div className=" mb-4 grid md:flex md:justify-between">
@@ -136,7 +136,6 @@ function Login() {
                             >
                                 Sign Up
                             </Button>
-                            
                         </div>
                         <div className="relative mb-10">
                             <span className="transForm absolute -top-3 left-1/2 -translate-x-1/2 rounded bg-gray-100 px-2 py-1 text-sm font-bold text-gray-400">

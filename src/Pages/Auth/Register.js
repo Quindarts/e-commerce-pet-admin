@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { APP_ICON, COLOR, APP_ROUTER } from '../../Utils/Constants'
-import { Formik, Form, Field } from 'formik'
 import * as yup from 'yup'
 import Textfield from '../../Components/ui/Textfield/Textfield'
 import { useSnackbar } from 'notistack'
@@ -9,8 +8,8 @@ import './style.js'
 import { Icon } from '@iconify/react'
 import Button from '../../Components/ui/Button/Button'
 import ukoLogo from '../../assets/img/ukoLogo.png'
-import sideImage from '../../assets/img/sideImage.avif'
-import { Grid, Image, FormContainer, Box, Universal } from './style'
+import sideImage from '../../assets/img/sideImage.png'
+import { Grid, Image, FormContainer, Box } from './style'
 
 const schema = yup.object().shape({
     firstName: yup
@@ -86,18 +85,17 @@ function Register() {
                 initialValues={{ firstName: '', lastName: '', password: '', email: '', confirmPassword: '' }}
                 validationSchema={schema}
                 onSubmit={handleSubmit}
-            
             >
                 {({ isSubmitting, handleBlur, handleChange, values, errors, touched }) => (
                     <Box className=" w-full justify-self-center px-8 pb-16 pt-8">
                         <div className="mb-6 flex items-center justify-center">
-                        <img src={ukoLogo} width="40" alt="Logo"></img>
+                            <img src={ukoLogo} width="40" alt="Logo"></img>
                         </div>
                         <h2 className="mb-1 text-center text-2xl font-black text-gray-900">Signin Up to Uko</h2>
                         <div className="mb-4 flex justify-center text-sm font-semibold">
                             <span className="mb-5 text-gray-400">Have an account?</span>
                             <Link to={APP_ROUTER.LOGIN}>
-                                <span className=" ml-2 text-blue-500 hover:text-blue-700">Login</span>
+                                <span className=" ml-2 text-blue-400">Login</span>
                             </Link>
                         </div>
                         <div className="mb-4 grid px-3 py-1 md:flex md:justify-between">
@@ -184,7 +182,7 @@ function Register() {
                             />
                         </div>
                         <div className="mb-10 text-center">
-                        <Button
+                            <Button
                                 className="focus:shadow-outline w-full px-4 py-2 font-bold focus:outline-none"
                                 type="submit"
                                 color="primary"
@@ -194,9 +192,7 @@ function Register() {
                             </Button>
                             <p className="mt-1 text-xs font-bold text-gray-400">
                                 By signing up, I agree to UI Lib{' '}
-                                <span className="cursor-pointer text-blue-500 hover:text-blue-700">
-                                    Terms of Service & Privacy Policy
-                                </span>
+                                <span className="cursor-pointer text-blue-400">Terms of Service & Privacy Policy</span>
                             </p>
                         </div>
                         <div className="relative mb-10">
