@@ -123,9 +123,11 @@ export const COLOR = {
     gray_900: '#212529',
     black: '#000000',
     blue: '#3577f1',
-    blue_200:'#2499EF',
-    light_blue: '#299cdb',
-    dark_blue: '#2385ba',
-    blue_400:'#196BA7',
+    blue_200:'#299cdb',
+    light_blue: '#2499EF',
+    dark_blue: '#196BA7',
+    blue_400:'#2385ba',
     light_sky: '#abb9e8',
+    pink_900: '#ff316f',
 }
+

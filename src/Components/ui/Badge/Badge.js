@@ -1,45 +1,23 @@
-// Badge.js
-import React from 'react'
-import PropTypes from 'prop-types'
-import { BadgeWrapper } from './style.js'
+import { ThemeProvider } from '@mui/material/styles'
+import { createDynamicTheme, StyledBadge } from './style.js'
 
-const Badge = ({ size = 'sm', status = 'online', color, position = 'bottom-right' }) => {
-    let animation, badgeColor, badgeSize
+export function BadgeWrapper({ border, badgeContent, children, variant, anchorOrigin, type, shape }) {
+    const theme = createDynamicTheme(type)
 
-    switch (status) {
-        case 'online':
-            animation = 'blink 1s infinite'
-            badgeColor = color
-            break
-        case 'offline':
-            animation = 'none'
-            badgeColor = 'gray'
-            break
-        case 'private':
-            animation = 'none'
-            badgeColor = 'red'
-            break
-        default:
-            animation = 'blink 1s infinite'
-            badgeColor = color
-    }
-
-    switch (size) {
-        case 'sm':
-            badgeSize = '0.7rem'
-            break
-        case 'md':
-            badgeSize = '0.9rem'
-            break
-        case 'lg':
-            badgeSize = '1.1rem'
-            break
-        default:
-            badgeSize = '0.9rem'
-    }
-    console.log(animation)
-
-    return <BadgeWrapper size={badgeSize} color={badgeColor} animation={animation} position={position} />
+    return (
+        <ThemeProvider theme={theme}>
+            <StyledBadge
+                color={type}
+                max={999}
+                badgeContent={badgeContent}
+                overlap="circular"
+                anchorOrigin={anchorOrigin}
+                variant={variant}
+                border={border}
+                theme={theme}
+            >
+                {children}
+            </StyledBadge>
+        </ThemeProvider>
+    )
 }
-
-export default Badge

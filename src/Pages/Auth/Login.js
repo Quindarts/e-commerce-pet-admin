@@ -1,14 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { APP_ICON, APP_ROUTER } from '../../Utils/Constants'
-import { Formik, Form, Field } from 'formik'
+import { APP_ICON, COLOR, APP_ROUTER } from '../../Utils/Constants'
 import * as yup from 'yup'
 import Textfield from '../../Components/ui/Textfield/Textfield'
 import { useSnackbar } from 'notistack'
 import axiosConfig from './axios'
-import './style.css'
+import './style.js'
 import { Icon } from '@iconify/react'
 import Button from '../../Components/ui/Button/Button'
+import ukoLogo from '../../assets/img/ukoLogo.png'
+import sideImage from '../../assets/img/sideImage.avif'
+import { Grid, Image, FormContainer, Box, Checkbox } from './style'
 
 const schema = yup.object().shape({
     userName: yup
@@ -69,22 +71,22 @@ function Login() {
     }
 
     return (
-        <div className="grid-template-areas-2 md:grid-template-areas-4 grid min-h-screen bg-gray-100">
-            <Formik
+        <Grid className="grid-template-areas-2 md:grid-template-areas-4 grid min-h-screen bg-gray-100">
+            <FormContainer
                 className="form"
                 initialValues={{ userName: '', password: '' }}
                 validationSchema={schema}
                 onSubmit={handleSubmit}
             >
                 {({ isSubmitting, handleBlur, handleChange, values, errors, touched }) => (
-                    <Form className="box w-full justify-self-center px-8 pb-16 pt-8">
+                    <Box className=" w-full justify-self-center px-8 pb-16 pt-8">
                         <div className="mb-6 flex items-center justify-center">
-                            <img src="https://uko-react.vercel.app/static/logo/logo.svg" width="40" alt="Logo"></img>
+                            <img src={ukoLogo} width="40" alt="Logo"></img>
                         </div>
 
                         <h2 className="mb-1 text-center text-2xl font-bold text-gray-900">Sign in to Uko</h2>
-                        <div className="mb-4 flex justify-center">
-                            <span className="mb-5 text-gray-500">New Here?</span>
+                        <div className="mb-4 flex justify-center text-sm font-semibold">
+                            <span className="mb-5 text-gray-400">New Here?</span>
                             <Link to={APP_ROUTER.REGISTER}>
                                 <span className="ml-2 text-blue-500 hover:text-blue-700">Create an account!</span>
                             </Link>
@@ -116,32 +118,33 @@ function Login() {
                                 error={touched.password && errors.password ? true : false}
                             />
                         </div>
-                        <div className="mb-4 flex items-center">
-                            <input className="mr-2 leading-tight" type="checkbox" id="rememberMe" />
-                            <label className="text-sm font-bold text-gray-700" htmlFor="rememberMe">
+                        <div className="mb-6 mt-4 flex items-center">
+                            <Checkbox className="mr-2 leading-tight" type="checkbox" id="rememberMe" />
+                            <label className="text-xs font-bold text-gray-700" htmlFor="rememberMe">
                                 Remember me
                             </label>
-                            <a className="ml-auto text-sm font-bold text-red-500" href="./forgot-password.html">
+                            <a className="ml-auto text-xs font-bold text-red-500" href="./forgot-password.html">
                                 Forget Password
                             </a>
                         </div>
-                        <div className="mb-6 text-center">
+                        <div className="mb-10 text-center">
                             <Button
-                                className="focus:shadow-outline mb-5 w-full px-4 py-2 font-bold focus:outline-none"
+                                className="focus:shadow-outline w-full px-4 py-2 font-bold focus:outline-none"
                                 type="submit"
                                 color="primary"
                                 size="sm"
                             >
-                                Sign In
+                                Sign Up
                             </Button>
+                            
                         </div>
                         <div className="relative mb-10">
-                            <span className="transForm absolute -top-3 left-1/2 -translate-x-1/2 rounded bg-gray-100 px-2 py-1 text-sm text-gray-500">
+                            <span className="transForm absolute -top-3 left-1/2 -translate-x-1/2 rounded bg-gray-100 px-2 py-1 text-sm font-bold text-gray-400">
                                 OR
                             </span>
-                            <hr className="border-gray-400" />
+                            <hr className="border-gray-300" />
                         </div>
-                        <div className="flex flex-col gap-4">
+                        <div className=" flex flex-col gap-4">
                             <Button
                                 className="text-darkgray focus:shadow-outline w-full rounded-lg border  border-blue-200 bg-gray-100 px-4 py-2 font-bold focus:outline-none"
                                 type="button"
@@ -149,7 +152,8 @@ function Login() {
                                 size="sm"
                                 color="primary"
                             >
-                                <Icon icon={APP_ICON.i_google} /> Sign with Google
+                                <Icon className="mr-2 text-xl" icon={APP_ICON.i_google} />{' '}
+                                <span className="text-sm font-normal text-gray-800">Signin with Google</span>
                             </Button>
                             <Button
                                 className="text-darkgray focus:shadow-outline w-full rounded-lg border border-blue-200 bg-gray-100 px-4 py-2 font-bold focus:outline-none"
@@ -158,7 +162,8 @@ function Login() {
                                 size="sm"
                                 color="primary"
                             >
-                                <Icon icon={APP_ICON.i_facebook} /> Signin with Facebook
+                                <Icon className="mr-2 text-xl" icon={APP_ICON.i_facebook} />
+                                <span className="text-sm font-normal text-gray-800"> Signin with Facebook</span>
                             </Button>
                             <Button
                                 className="text-darkgray focus:shadow-outline w-full rounded-lg border border-blue-200 bg-gray-100 px-4 py-2 font-bold focus:outline-none"
@@ -167,19 +172,15 @@ function Login() {
                                 size="sm"
                                 color="primary"
                             >
-                                <Icon icon={APP_ICON.i_twitter} />
-                                Signin with Twitter
+                                <Icon className="mr-2 text-lg" icon={APP_ICON.i_twitter} />
+                                <span className="text-sm font-normal text-gray-800"> Signin with Twitter</span>
                             </Button>
                         </div>
-                    </Form>
+                    </Box>
                 )}
-            </Formik>
-            <img
-                className="image "
-                src="https://images.unsplash.com/photo-1515266591878-f93e32bc5937?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt="Unsplash Image"
-            />
-        </div>
+            </FormContainer>
+            <Image className="image " src={sideImage} alt="Unsplash Image" />
+        </Grid>
     )
 }
 
