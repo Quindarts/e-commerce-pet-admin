@@ -79,21 +79,20 @@ function Login() {
                 onSubmit={handleSubmit}
             >
                 {({ isSubmitting, handleBlur, handleChange, values, errors, touched }) => (
-                    <Box className=" w-full justify-self-center px-8 pb-16 pt-8">
+                    <Box className=" w-full justify-self-center px-11 pb-16 pt-8">
                         <div className="mb-6 flex items-center justify-center">
                             <img src={ukoLogo} width="40" alt="Logo"></img>
                         </div>
-
-                        <h2 className="mb-1 text-center text-2xl font-bold text-gray-900">Sign in to Uko</h2>
-                        <div className="mb-4 flex justify-center text-sm font-semibold">
+                        <h2 className="mb-[2px] text-center text-2xl font-bold text-gray-900">Sign in to Uko</h2>
+                        <div className="mb-[17px] flex justify-center text-sm font-semibold">
                             <span className="mb-5 text-gray-400">New Here?</span>
                             <Link to={APP_ROUTER.REGISTER}>
-                                <span className="ml-2 text-blue-400">Create an account!</span>
+                                <span className="ml-1 text-blue-400">Create an account</span>
                             </Link>
                         </div>
-                        <div className=" mb-4 grid md:flex md:justify-between">
+                        <div className=" mb-2 grid md:flex md:justify-between">
                             <Textfield
-                                className="focus:shadow-outline w-full appearance-none px-3 py-1 text-sm leading-tight text-gray-700 focus:outline-none"
+                                className="focus:shadow-outline w-full appearance-none  py-1 text-sm leading-tight text-gray-700 focus:outline-none"
                                 label="Username"
                                 id="userName"
                                 name="userName"
@@ -104,10 +103,10 @@ function Login() {
                                 error={touched.userName && errors.userName ? true : false}
                             />
                         </div>
-                        <div className="mb-4">
+                        <div>
                             <Textfield
                                 placeholder="Password"
-                                className="focus:shadow-outline mb-3 w-full appearance-none px-3 py-1 text-sm leading-tight text-gray-700 focus:outline-none"
+                                className=" focus:shadow-outline w-full appearance-none py-1 text-sm leading-tight text-gray-700 focus:outline-none"
                                 id="password"
                                 type="password"
                                 label="Password"
@@ -118,34 +117,39 @@ function Login() {
                                 error={touched.password && errors.password ? true : false}
                             />
                         </div>
-                        <div className="mb-6 mt-4 flex items-center">
-                            <Checkbox className="mr-2 leading-tight" type="checkbox" id="rememberMe" />
-                            <label className="text-xs font-bold text-gray-700" htmlFor="rememberMe">
-                                Remember me
-                            </label>
-                            <a className="ml-auto text-xs font-bold text-red-500" href="./forgot-password.html">
+                        <div className="mb-6 ml-1 mt-6 flex items-center justify-between">
+                            <div className="mt-[-3px] flex items-center">
+                                <Checkbox className=" mr-2 leading-tight" type="checkbox" id="rememberMe" />
+                                <label className="ml-1 mt-[-1px] text-xs font-bold text-gray-700" htmlFor="rememberMe">
+                                    Remember me
+                                </label>
+                            </div>
+                            <a
+                                className="relative top-[-10px] text-xs font-bold text-red-500"
+                                href="./forgot-password.html"
+                            >
                                 Forget Password
                             </a>
                         </div>
-                        <div className="mb-10 text-center">
-                            <Button
-                                className="focus:shadow-outline w-full px-4 py-2 font-bold focus:outline-none"
-                                type="submit"
-                                color="primary"
-                                size="sm"
-                            >
-                                Sign Up
-                            </Button>
-                        </div>
-                        <div className="relative mb-10">
-                            <span className="transForm absolute -top-3 left-1/2 -translate-x-1/2 rounded bg-gray-100 px-2 py-1 text-sm font-bold text-gray-400">
+
+                        <Button
+                            className="focus:shadow-outline mb-10 mt-[1px] w-full px-4 py-2 text-center font-bold focus:outline-none"
+                            type="submit"
+                            color="primary"
+                            size="sm"
+                        >
+                            Sign In
+                        </Button>
+
+                        <div className="relative top-[5px] mb-10">
+                            <span className="transForm absolute left-1/2 top-[-11px] -translate-x-1/2 rounded bg-gray-100 px-2 py-1 text-xs font-bold text-gray-400">
                                 OR
                             </span>
-                            <hr className="border-gray-300" />
+                            <hr className=" border-blue-200" />
                         </div>
                         <div className=" flex flex-col gap-4">
                             <Button
-                                className="text-darkgray focus:shadow-outline w-full rounded-lg border  border-blue-200 bg-gray-100 px-4 py-2 font-bold focus:outline-none"
+                                className=" text-darkgray focus:shadow-outline w-full rounded-lg border  border-blue-200 bg-gray-100 px-4 py-3 font-bold focus:outline-none"
                                 type="button"
                                 variant="outline"
                                 size="sm"
@@ -155,7 +159,7 @@ function Login() {
                                 <span className="text-sm font-normal text-gray-800">Signin with Google</span>
                             </Button>
                             <Button
-                                className="text-darkgray focus:shadow-outline w-full rounded-lg border border-blue-200 bg-gray-100 px-4 py-2 font-bold focus:outline-none"
+                                className="text-darkgray focus:shadow-outline w-full rounded-lg border border-blue-200 bg-gray-100 px-4 py-3 font-bold focus:outline-none"
                                 type="button"
                                 variant="outline"
                                 size="sm"
@@ -165,7 +169,7 @@ function Login() {
                                 <span className="text-sm font-normal text-gray-800"> Signin with Facebook</span>
                             </Button>
                             <Button
-                                className="text-darkgray focus:shadow-outline w-full rounded-lg border border-blue-200 bg-gray-100 px-4 py-2 font-bold focus:outline-none"
+                                className="text-darkgray focus:shadow-outline w-full rounded-lg border border-blue-200 bg-gray-100 px-4 py-3 font-bold focus:outline-none"
                                 type="button"
                                 variant="outline"
                                 size="sm"
@@ -178,7 +182,7 @@ function Login() {
                     </Box>
                 )}
             </FormContainer>
-            <Image className="image " src={sideImage} alt="Unsplash Image" />
+            <Image className="image h-full w-full object-cover " src={sideImage} alt="Unsplash Image" />
         </Grid>
     )
 }
