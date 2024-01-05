@@ -28,48 +28,90 @@ export const APP_ICON = {
     i_mail: 'material-symbols:mail',
     i_status: 'icon-park-solid:people',
     i_posts: 'mdi:post-it-notes',
+
     i_users: 'mdi:users',
     i_search: 'material-symbols:search',
+
     i_plus: 'ic:baseline-plus',
+
     i_contact_list: 'fluent-mdl2:contact-list',
+
     i_list: 'mi:list',
+
     i_grid: 'bxs:grid',
+
     i_dots: 'tabler:dots',
+
     i_right_arrow: 'oi:arrow-right',
+
     i_pen: 'la:pen',
+
     i_cake: 'mdi:cake',
+
     i_user: 'tdesign:user',
+
     i_company: 'mdi:company',
+
     i_phone: 'ic:round-phone',
+
     i_arrow_redo: 'ion:arrow-redo',
+
     i_flag: 'tabler:flag-filled',
+
     i_messenger: 'ri:messenger-fill',
-    i_facebook: 'logos:facebook',
+
+    i_facebook: 'ri:facebook-fill',
+
     i_carrie_page: 'fa6-solid:s',
+
     i_mess_phone: 'el-phone-alt',
+
     i_arrow_down_box_1: 'bxs-down-arrow',
+
     i_hand_bag: 'ph-handbag-fill',
+
     i_trash: 'mdi-trash',
+
     i_upload: 'ic-round-cloud-upload',
+
     i_mls: 'mdi-human-male-board',
+
     i_sales_1: 'bxs-badge-dollar',
+
     i_sales_2: 'fa6-solid-comments-dollar',
+
     i_hiring: 'mdi-human-greeting',
+
     i_project_1: 'material-symbols-add-ad',
+
     i_project_2: 'fa-solid-project-diagram',
+
     i_crm: 'fluent-chat-bubbles-question-32-filled',
+
     i_sass: 'subway-book',
+
     i_profiles: 'icon-park-solid-people',
+
     i_account: 'ic-twotone-manage-accounts',
+
     i_user_contact: 'mdi-accounts-group',
+
     i_invoice: 'iconamoon-invoice-fill',
+
     i_ecommerce: 'teenyicons-basket-solid',
+
     i_admin_ecommerce: 'iconamoon-shopping-card-remove-fill',
+
     i_projects: 'file-icons-ionic-project',
+
     i_data_table: 'material-symbols-data-table-outline-rounded',
+
     i_todo_list: 'icons8-todo-list',
+
     i_eye_open: 'mdi:eye',
+
     i_eye_off: 'mdi:eye-off',
+
     i_instagram: 'ri:instagram-fill',
 }
 

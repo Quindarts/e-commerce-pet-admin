@@ -36,6 +36,44 @@ module.exports = {
                     '0%, 100%': { opacity: 1 },
                     '50%': { opacity: 0 },
                 },
+                closeNav: {
+                    '0% ': {
+                        width: '5rem',
+                        opacity: ' 0',
+                    },
+                    '25%': {
+                        width: '5rem',
+                    },
+                    '50%': {
+                        width: '10rem',
+                    },
+                    '75% ': {
+                        width: '15rem',
+                    },
+                    '100%': {
+                        width: '20rem',
+                        opacity: '1',
+                    },
+                },
+                openNav: {
+                    '0% ': {
+                        width: '20rem',
+                        opacity: ' 0',
+                    },
+                    '25%': {
+                        width: '15rem',
+                    },
+                    '50%': {
+                        width: '10rem',
+                    },
+                    '75% ': {
+                        width: '7rem',
+                    },
+                    '100%': {
+                        width: '5rem',
+                        opacity: '1',
+                    },
+                },
             },
             animation: {
                 'waving-hand': 'wave 1s ease-in-out infinite',

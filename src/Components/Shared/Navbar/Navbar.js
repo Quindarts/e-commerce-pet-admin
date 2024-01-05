@@ -1,23 +1,27 @@
-import React, { useState } from 'react'
 import './styles.css'
 import { APP_ICON, COLOR, NavItem } from '../../../Utils/Constants'
 import { Icon } from '@iconify/react'
 import { Link, useLocation } from 'react-router-dom'
 import logo from '../../../assets/img/logo.svg'
+import { Typography } from '@mui/material'
 
-function Navbar() {
+function Navbar(props) {
+    const { openNav, handleOpenNav } = props
     let location = useLocation()
-    const [openNav, setOpenNav] = useState(true)
-    const handleOpenNav = () => {
-        setOpenNav(!openNav)
-    }
+
     return (
-        <div className={`bg-dark1 navbar font-bold text-[${COLOR.gray_dark}] ${openNav ? 'open_nav' : 'close_nav'}`}>
+        <div className={`navbar bg-white font-bold text-[${COLOR.gray_dark}] ${openNav ? 'open_nav' : 'close_nav'}`}>
             <div className={`my-[1rem] flex items-center justify-between  ${openNav && 'mx-[2rem]'}`}>
                 {openNav && (
                     <div className="flex w-[5rem] gap-2 text-[1.6rem] font-[800]">
                         <img src={logo} width={20} alt="" />
-                        UKO
+                        <Typography
+                            className="font-[700] leading-normal drop-shadow-md"
+                            sx={{ color: 'rgb(18, 31, 67)' }}
+                            variant="h6"
+                        >
+                            UKO{' '}
+                        </Typography>
                     </div>
                 )}
                 <button className={`flex justify-end ${!openNav && 'w-full  justify-center'}`} onClick={handleOpenNav}>

@@ -1,14 +1,15 @@
 .open_nav {
     width: 20rem;
-    animation: closeNav 0.2s ease-in;
+    animation: closeNav 0.1s ease-in;
 }
 .close_nav {
     width: 5rem;
-    animation: openNav 0.2s ease-in;
+    animation: openNav 0.1s ease-in;
 }
 @keyframes closeNav {
     0% {
         width: 5rem;
+        opacity: 0;
     }
     25% {
         width: 5rem;
@@ -21,11 +22,13 @@
     }
     100% {
         width: 20rem;
+        opacity: 1;
     }
 }
 @keyframes openNav {
     0% {
         width: 20rem;
+        opacity: 0;
     }
     25% {
         width: 15rem;
@@ -34,6 +37,7 @@
         width: 10rem;
     }
     100% {
+        opacity: 1;
         width: 5rem;
     }
 }
