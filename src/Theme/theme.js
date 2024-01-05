@@ -23,8 +23,11 @@ const color = {
     light_green: '#dbecf0',
     blue_basic: '#eef7fe',
     blue: '#3577f1',
-    light_blue: '#299cdb',
-    dark_blue: '#2385ba',
+
+    light_blue: '#2499EF',
+
+    dark_blue: '#196BA7',
+
     light_sky: '#abb9e8',
     jade: '#27ce88',
     badge_blue: '#2499ef',
@@ -48,4 +51,3 @@ export const theme = createTheme({
         fontFamily: 'Montserrat, sans-serif',
     },
 })
-
