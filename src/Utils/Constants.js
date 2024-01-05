@@ -1,6 +1,5 @@
 export const APP_ROUTER = {
     INDEX: '/',
-
     //
     HOME: '/home',
     COMPONENT: '/component',
@@ -116,13 +115,19 @@ export const APP_ICON = {
 }
 
 export const TITLE_NAVBAR = {
-    HOME: 'Component page',
+    HOME: 'Dashboard',
     PRODUCT: 'Product Manager',
     ORDER: 'Order Manager',
-    USER: 'User & Contact',
+    USER: 'User  Manager',
+    COMPONENT: 'Component page',
 }
 
 export const NavItem = [
+    {
+        link: APP_ROUTER.HOME,
+        icon: APP_ICON.i_company,
+        title: TITLE_NAVBAR.HOME,
+    },
     {
         link: APP_ROUTER.PRODUCT,
         icon: APP_ICON.product,
@@ -141,16 +146,14 @@ export const NavItem = [
     {
         link: APP_ROUTER.COMPONENT,
         icon: APP_ICON.product,
-        title: TITLE_NAVBAR.HOME,
+        title: TITLE_NAVBAR.COMPONENT,
     },
 ]
 
 export const COLOR = {
     indigo: '#405189',
     dark_indigo: '#364574',
-
     white: '#ffffff',
-
     gray: '#878a99',
     gray_light: '#f3f3f9',
     gray_dark: '#343a40',
@@ -165,11 +168,10 @@ export const COLOR = {
     gray_900: '#212529',
     black: '#000000',
     blue: '#3577f1',
-    blue_200:'#299cdb',
+    blue_200: '#299cdb',
     light_blue: '#2499EF',
     dark_blue: '#196BA7',
-    blue_400:'#2385ba',
+    blue_400: '#2385ba',
     light_sky: '#abb9e8',
     pink_900: '#ff316f',
 }
-

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import useUploadImage from '../../../hook/uploadImage'
+import useUploadImage from '../../../hook/ui/uploadImage'
 import { Box, Typography } from '@mui/material'
 import Button from '../Button/Button'
 import { styled } from '@mui/material/styles'

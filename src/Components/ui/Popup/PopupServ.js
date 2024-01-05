@@ -4,6 +4,7 @@ import { useState, useRef} from 'react'
 import Button from '../Button/Button'
 import { APP_ICON } from '../../../Utils/Constants'
 import clsx from 'clsx'
+import { Box } from '@mui/material'
 
 const PopupServ = (props) => {
     const { className } = props
@@ -18,7 +19,7 @@ const PopupServ = (props) => {
     }
 
     return (
-        <div className={` relative inline-block ${className}`} ref={popupRef}>
+        <Box className={` relative inline-block ${className}`} ref={popupRef}>
             <Button
                 color="grey"
                 icon
@@ -30,21 +31,21 @@ const PopupServ = (props) => {
                 <Icon icon={APP_ICON.i_menu} onClick={handleOpen} />
             </Button>
 
-            <div className={classes}>
+            <Box className={classes}>
                 <h2 className="border-b border-gray-200 px-5 pb-4 text-lg font-bold">Web apps & services</h2>
-                <div className="flex h-auto flex-col space-y-3">
+                <Box className="flex h-auto flex-col space-y-3">
                     {['Slack', 'Github', 'Stack Overflow'].map((service, index) => (
-                        <div key={index} className="flex cursor-pointer items-center p-2 hover:bg-blue-200">
-                            <div className="mr-5 h-8 w-8 rounded-full bg-gray-200"></div>
-                            <div>
+                        <Box key={index} className="flex cursor-pointer items-center p-2 hover:bg-blue-200">
+                            <Box className="mr-5 h-8 w-8 rounded-full bg-gray-200"></Box>
+                            <Box>
                                 <h3 className="font-semibold">{service}</h3>
                                 <p className="text-sm text-gray-500">Email collaboration software</p>
-                            </div>
-                        </div>
+                            </Box>
+                        </Box>
                     ))}
-                </div>
-            </div>
-        </div>
+                </Box>
+            </Box>
+        </Box>
     )
 }
 

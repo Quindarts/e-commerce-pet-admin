@@ -1,7 +1,8 @@
+import { Box } from '@mui/material'
 import React from 'react'
 
 function UserPage() {
-    return <div>UserPage</div>
+    return <Box>UserPage</Box>
 }
 
 export default UserPage

@@ -23,7 +23,6 @@ const color = {
     light_green: '#dbecf0',
     blue_basic: '#eef7fe',
     blue: '#3577f1',
-
     light_blue: '#2499EF',
 
     dark_blue: '#196BA7',

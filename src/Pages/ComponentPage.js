@@ -17,9 +17,7 @@ import Avatar from '../Components/ui/Avatar/Avatar.js'
 import { useSnackbar } from 'notistack'
 import { Box, Typography, Zoom } from '@mui/material'
 import Table from '../Components/ui/Table/Table.js'
-import { BadgeWrapper } from '../Components/ui/Badge/Badge.js'
 import { Link } from 'react-router-dom'
-import SearchTable from '../Components/ui/Search/SearchTable.js'
 import SearchHead from '../Components/ui/Search/SearchHead.js'
 
 const avatars = [
@@ -479,20 +477,6 @@ function ComponentPage() {
                     handleChangePanigation={handleChangePanigation}
                 />
             </Box>
-            <Typography className="mt-3 font-bold">Search</Typography>
-            <Box className="container mx-auto">
-                <button onClick={() => setIsOpen(!isOpen)}>Open Search</button>
-                <SearchHead placeholder="Search..." onSearch={handleSearch} isOpen={isOpen} setIsOpen={setIsOpen} />
-            </Box>
-            <Box className="container mx-auto p-4">
-                <Typography className="mt-3 font-bold">Search Table Component</Typography>
-                <SearchTable data={data} columns={columns} />
-            </Box>
-            <Box>
-                <Link to={APP_ROUTER.LOGIN}>
-                    <button>Go to Login Page</button>
-                </Link>
-            </Box>
             <Box>
                 <Link to={APP_ROUTER.LOGIN}>
                     <button>Go to Login Page</button>
@@ -502,17 +486,17 @@ function ComponentPage() {
             <Box>
                 <InputUpload listUpload={warehouseItem} />
             </Box>
-            <Typography className="mt-3 font-bold">Dropdown</Typography>
-            <Box>
-                <Dropdown list={listDrop} label="labelDropdown" onChange={(e) => setValueDrop(e.target.value)} />
-                <Typography>value:{valueDrop} </Typography>
-            </Box>
             <Typography className="mt-3 font-bold">Texfield</Typography>
             <Box>
                 <Box className="flex w-full gap-[2rem]">
                     <Textfield className="my-3 w-1/2" label="Username" type="text" />
                     <Textfield className="my-3 w-1/2" label="Password" type="password" />
                 </Box>
+            </Box>
+            <Typography className="mt-3 font-bold">Dropdown</Typography>
+            <Box>
+                <Dropdown list={listDrop} label="labelDropdown" onChange={(e) => setValueDrop(e.target.value)} />
+                <Typography>value:{valueDrop} </Typography>
             </Box>
             <Modal key={1} open={open} appearance="center" handleClose={handleClose}></Modal>
         </Box>

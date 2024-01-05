@@ -1,4 +1,4 @@
-import { IconButton } from '@mui/material'
+import { Box, IconButton } from '@mui/material'
 import { Icon } from '@iconify/react'
 import { APP_ICON } from '../../../Utils/Constants'
 import { useState } from 'react'
@@ -20,10 +20,10 @@ function Textfield(props) {
     const [showPassword, setShowPassword] = useState(false)
 
     const handleClickShowPassword = () => setShowPassword((show) => !show)
-    const helperTextValue = error ? helperText : "";
+    const helperTextValue = error ? helperText : ''
 
     return (
-        <div className={`${className} relative `}>
+        <Box className={`${className} relative `}>
             <TextFieldCustomMUI
                 label={label}
                 helperText={helperTextValue}
@@ -52,7 +52,7 @@ function Textfield(props) {
                     <Icon icon={icon} />
                 </IconButton>
             )}
-        </div>
+        </Box>
     )
 }
 

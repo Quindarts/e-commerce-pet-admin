@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios'
+import axios from 'axios'
 
 const axiosConfig = axios.create({
     baseURL: 'https://e-commerce-pet-server-quindarts.vercel.app',

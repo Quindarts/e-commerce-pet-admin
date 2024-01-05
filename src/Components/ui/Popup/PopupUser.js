@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from 'react'
 import Avatar from '../Avatar/Avatar'
-import 'tailwindcss/tailwind.css'
 import { useNavigate } from 'react-router-dom'
 import { APP_ROUTER } from '../../../Utils/Constants'
+import { Box } from '@mui/material'
 
 const menuItems = [
     {
@@ -69,7 +69,7 @@ const PopupUser = (props) => {
     useClickOutside(popupUser, handleClose)
 
     return (
-        <div className={`relative inline-block ${className}`} ref={popupUser}>
+        <Box className={`relative inline-block ${className}`} ref={popupUser}>
             <button
                 onClick={handleOpen}
                 className="flex items-center rounded-full bg-gray-200 py-2 pl-4 pr-2 text-gray-500 hover:bg-gray-300"
@@ -83,31 +83,31 @@ const PopupUser = (props) => {
                 <Avatar src={user.avt} size="sm" badge={true} className="border-none" />
             </button>
             {isOpenPopUp && (
-                <div className={`absolute z-10  w-64 rounded border border-gray-200 bg-white py-2 shadow-lg`}>
-                    <div className="flex items-center border-b border-gray-200 px-4 pb-4 pt-3">
+                <Box className={`absolute z-10  w-64 rounded border border-gray-200 bg-white py-2 shadow-lg`}>
+                    <Box className="flex items-center border-b border-gray-200 px-4 pb-4 pt-3">
                         <Avatar src={user.avt} size="md" />
-                        <div className="ml-2">
+                        <Box className="ml-2">
                             <p className="text-sm font-medium">
                                 {shortenName(user.firstName)} {user.lastName}
                             </p>
                             <p className="text-sm font-medium text-gray-500">{user.email}</p>
-                        </div>
-                    </div>
-                    <div className="pt-2">
+                        </Box>
+                    </Box>
+                    <Box className="pt-2">
                         {menuItems.map((item, index) => (
-                            <div key={index} className={`mb-2 border-b border-gray-200`}>
+                            <Box key={index} className={`mb-2 border-b border-gray-200`}>
                                 <button
                                     onClick={() => handleMenuItem(item.link)}
                                     className="hup:bg-gray-200 block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-300"
                                 >
                                     {item.title}
                                 </button>
-                            </div>
+                            </Box>
                         ))}
-                    </div>
-                </div>
+                    </Box>
+                </Box>
             )}
-        </div>
+        </Box>
     )
 }
 

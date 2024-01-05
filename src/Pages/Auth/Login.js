@@ -61,7 +61,10 @@ function Login() {
     }
 
     return (
-        <Grid className="grid-template-areas-2 md:grid-template-areas-4 grid min-h-screen bg-gray-100">
+        <Grid
+            className="grid-template-areas-2 md:grid-template-areas-4 bg-[ #f3f4f9] grid
+            min-h-screen "
+        >
             <FormContainer
                 className="form"
                 initialValues={{ userName: '', password: '' }}

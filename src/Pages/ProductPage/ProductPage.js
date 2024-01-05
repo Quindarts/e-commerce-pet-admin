@@ -1,14 +1,15 @@
 import React from 'react'
 import Button from '../../Components/ui/Button/Button'
+import { Box } from '@mui/material'
 
 function ProductPage() {
     return (
-        <div>
+        <Box>
             ProductPage
             <Button variant="primary" onClick={() => window.localStorage.removeItem('user')}>
                 Log out demo
             </Button>
-        </div>
+        </Box>
     )
 }
 

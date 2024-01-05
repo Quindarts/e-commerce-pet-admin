@@ -1,6 +1,5 @@
 import Button from '../Button/Button'
-import { APP_ICON } from '../../../Utils/Constants'
-import useClickOutside from '../../../hook/usePopup'
+import useClickOutside from '../../../hook/ui/usePopup'
 import { Icon } from '@iconify/react'
 import React, { useReducer } from 'react'
 import { Box } from '@mui/material'
@@ -23,7 +22,6 @@ const flagReducer = (state, action) => {
     }
 }
 const PopupLang = (props) => {
-    
     const { list, handleChangeLanguage } = props
     const { handleActive, menuRef, classes } = useClickOutside()
     const [state, dispatch] = useReducer(flagReducer, { flag: 'emojione:flag-for-vietnam' })

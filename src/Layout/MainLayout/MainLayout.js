@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import Navbar from '../../Components/Shared/Navbar/Navbar'
 import { Box } from '@mui/material'
+
 function MainLayout() {
+    
     const [openNav, setOpenNav] = useState(true)
     const handleOpenNav = () => {
         setOpenNav(!openNav)
