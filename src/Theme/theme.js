@@ -1,4 +1,6 @@
 import { createTheme } from '@mui/material/styles'
+import '@fontsource/montserrat'
+
 const color = {
     indigo: '#405189',
     dark_indigo: '#364574',
@@ -39,4 +41,7 @@ const color = {
 
 export const theme = createTheme({
     color: color,
+    typography: {
+        fontFamily: 'Montserrat, sans-serif',
+    },
 })

@@ -63,24 +63,60 @@ export function CustomNoRowsOverlay() {
 
 export const CustomTable = styled(DataGrid)`
     &.MuiDataGrid-root {
-        border: none;
-
         .MuiDataGrid-main {
+            box-sizing: border-box;
             .MuiDataGrid-columnHeaders {
                 cursor: pointer;
                 font-size: 12px;
-
+                padding: 0 5px;
                 & .MuiDataGrid-columnHeaderTitle {
                     font-weight: 600;
                     color: #91a0b2;
                 }
+                & .MuiDataGrid-iconButtonContainer,
+                & .MuiDataGrid-menuIcon {
+                    visibility: hidden;
+                    display: none;
+                }
+            }
+
+            .MuiDataGrid-virtualScrollerContent {
+                max-width: 100%;
+
+                .MuiDataGrid-row {
+                    margin-top: 1rem;
+                    background-color: white;
+                    border-radius: 8px;
+                }
+            }
+            .MuiDataGrid-root--densityCompact .MuiDataGrid-cell {
+                padding: 8px 0;
+            }
+
+            .MuiDataGrid-cell {
+                color: #788a9f;
+                background-color: white;
+                box-sizing: border-box;
+            }
+            .MuiDataGrid-cell:last-of-type {
+                border-top-right-radius: 8px;
+                border-bottom-right-radius: 8px;
+                padding-right: 1rem;
+            }
+            .MuiDataGrid-cell:first-of-type {
+                border-left: 0px;
+                border-top-left-radius: 8px;
+                border-bottom-left-radius: 8px;
+                padding-left: 1rem;
             }
         }
         & .MuiDataGrid-columnSeparator {
             visibility: hidden;
             display: none;
         }
-        & .MuiDataGrid-columnHeader:focus-within {
+
+        & .MuiDataGrid-columnHeader:focus-within,
+        .MuiDataGrid-cell:focus-within {
             outline: none;
         }
     }

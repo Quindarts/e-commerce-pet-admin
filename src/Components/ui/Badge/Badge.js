@@ -1,6 +1,4 @@
 // Badge.js
-import React from 'react'
-import PropTypes from 'prop-types'
 import { BadgeWrapper } from './style.js'
 
 const Badge = ({ size = 'sm', status = 'online', color, position = 'bottom-right' }) => {

@@ -6,6 +6,5 @@ export const StatusBarStyle = styled('div')`
         width: 100%;
         height: 7px;
         border-radius: 10px;
-        background-color: ${theme.color.blue_basic};
     }
 `

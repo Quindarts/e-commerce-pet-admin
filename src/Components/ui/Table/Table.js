@@ -1,5 +1,6 @@
 import React from 'react'
 import { CustomNoRowsOverlay, CustomTable } from './style'
+import { Box, Pagination, Typography } from '@mui/material'
 
 function Table(props) {
     const {
@@ -8,19 +9,39 @@ function Table(props) {
         onChangeCol,
         onChangeRow,
         pageSize,
-        currentPage,
+        currentPage = 1,
         totalPage,
         className,
+        height,
+        label,
+        handleChangePanigation,
         ...rest
     } = props
     return (
-        <CustomTable
-            {...rest}
-            className={className}
-            checkboxSelection={hasCheckbox}
-            autoHeight
-            slots={{ noRowsOverlay: CustomNoRowsOverlay }}
-        ></CustomTable>
+        <Box className="w-full">
+            {label && <Typography className="font-600 text-[1rem] text-[#464f6c]">{label}</Typography>}
+            <CustomTable
+                {...rest}
+                rowHeight={80}
+                className={`${className} border-none`}
+                checkboxSelection={hasCheckbox}
+                autoHeight
+                // sx={{ height: 80 * (pageSize + 2) }}
+                slots={{ noRowsOverlay: CustomNoRowsOverlay }}
+                hideFooter
+            />
+
+            <Box className="mt-4 flex w-full items-center justify-end">
+                {hasPanigation && (
+                    <Pagination
+                        count={totalPage}
+                        shape="rounded"
+                        page={currentPage}
+                        onChange={handleChangePanigation}
+                    />
+                )}
+            </Box>
+        </Box>
     )
 }
 
