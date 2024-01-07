@@ -3,6 +3,8 @@ import Avatar from '../Avatar/Avatar'
 import { useNavigate } from 'react-router-dom'
 import { APP_ROUTER } from '../../../Utils/Constants'
 import { Box } from '@mui/material'
+import { tokenService } from '../../../services/token.services'
+import { useSnackbar } from 'notistack'
 
 const menuItems = [
     {
@@ -23,7 +25,7 @@ const menuItems = [
     },
     {
         title: 'Sign Out',
-        link: APP_ROUTER.PRODUCT,
+        link: APP_ROUTER.LOGIN,
     },
 ]
 function shortenName(fullName, maxLength = 13) {
@@ -56,6 +58,8 @@ const PopupUser = (props) => {
     const [isOpenPopUp, setPopupOpen] = useState(false)
     const navigate = useNavigate()
     const popupUser = useRef(null)
+    const { enqueueSnackbar } = useSnackbar()
+
     const handleOpen = () => {
         setPopupOpen(true)
     }
@@ -63,6 +67,11 @@ const PopupUser = (props) => {
         setPopupOpen(false)
     }
     const handleMenuItem = (link) => {
+        let service = tokenService()
+        if (link === APP_ROUTER.LOGIN) {
+            service.removetokenList()
+            enqueueSnackbar('Logout account success', { variant: 'success' })
+        }
         navigate(link)
         handleClose()
     }
@@ -83,7 +92,9 @@ const PopupUser = (props) => {
                 <Avatar src={user.avt} size="sm" badge={true} className="border-none" />
             </button>
             {isOpenPopUp && (
-                <Box className={`absolute z-10  w-64 rounded border border-gray-200 bg-white py-2 shadow-lg`}>
+                <Box
+                    className={`top-10 absolute right-[-5] z-10  w-64 rounded border border-gray-200 bg-white py-2 shadow-lg`}
+                >
                     <Box className="flex items-center border-b border-gray-200 px-4 pb-4 pt-3">
                         <Avatar src={user.avt} size="md" />
                         <Box className="ml-2">

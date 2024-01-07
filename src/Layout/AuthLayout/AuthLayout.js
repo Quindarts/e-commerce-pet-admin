@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom'
 function AuthLayout() {
     return (
         <Box>
-            <main>
+            <main className=" w-full overflow-hidden">
                 <Outlet />
             </main>
         </Box>

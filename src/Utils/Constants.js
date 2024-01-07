@@ -12,8 +12,15 @@ export const APP_ROUTER = {
     LOGIN: '/auth/login',
     REGISTER: '/auth/register',
     CHANGE_PASSWORD: 'change-password',
+    REFRESH_TOKEN: '/auth/accessToken-generate',
 }
 
+export const ROLE = {
+    USER: 'user',
+    ADMIN: 'admin',
+    OWNER: 'owner',
+    WAREHOUSE: ' warehouse',
+}
 export const APP_ICON = {
     i_twitter: 'logos:twitter',
     i_google: 'flat-color-icons:google',

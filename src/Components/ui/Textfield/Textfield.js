@@ -1,6 +1,6 @@
-import { Box, IconButton } from '@mui/material'
+import { Box, IconButton, Typography } from '@mui/material'
 import { Icon } from '@iconify/react'
-import { APP_ICON } from '../../../Utils/Constants'
+import { APP_ICON, COLOR } from '../../../Utils/Constants'
 import { useState } from 'react'
 import { TextFieldCustomMUI } from './style'
 
@@ -23,34 +23,30 @@ function Textfield(props) {
     const helperTextValue = error ? helperText : ''
 
     return (
-        <Box className={`${className} relative `}>
-            <TextFieldCustomMUI
-                label={label}
-                helperText={helperTextValue}
-                type={showPassword ? 'text' : type}
-                className={`textfield w-full textfield-${variant} text-${type} textfield-${size}`}
-                error={error}
-                {...rest}
-            />
-            {type === 'password' && (
-                <IconButton
-                    className="absolute right-0 top-1/2 -translate-x-1/2 -translate-y-1/2 transform"
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    edge="end"
-                >
-                    {showPassword ? <Icon icon={APP_ICON.i_eye_open} /> : <Icon icon={APP_ICON.i_eye_off} />}
-                </IconButton>
-            )}
-            {icon && (
-                <IconButton
-                    className={`absolute left-6 top-1/2 -translate-x-1/2 -translate-y-1/2 transform text-gray-400`}
-                    aria-label="toggle password visibility"
-                    onClick={handleClickShowPassword}
-                    edge="end"
-                >
-                    <Icon icon={icon} />
-                </IconButton>
+        <Box className={`${className}  `}>
+            <Box className="relative">
+                <TextFieldCustomMUI
+                    label={label}
+                    type={showPassword ? 'text' : type}
+                    className={`textfield w-full textfield-${variant} text-${type} textfield-${size}`}
+                    error={error}
+                    {...rest}
+                />
+                {type === 'password' && (
+                    <IconButton
+                        className="absolute right-0 top-1/2 -translate-x-1/2 -translate-y-1/2 transform"
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        edge="end"
+                    >
+                        {showPassword ? <Icon icon={APP_ICON.i_eye_open} /> : <Icon icon={APP_ICON.i_eye_off} />}
+                    </IconButton>
+                )}
+            </Box>
+            {error && (
+                <Typography className="Mui-error text-[14px] mt-3" sx={{ color: COLOR.pink_900 }}>
+                    {helperTextValue}
+                </Typography>
             )}
         </Box>
     )

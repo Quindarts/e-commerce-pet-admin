@@ -19,7 +19,7 @@ root.render(
                     maxSnack={5}
                     TransitionComponent={Zoom}
                     Components={themeSnackbar}
-                    autoHideDuration={3000}
+                    autoHideDuration={1000}
                     anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                 >
                     <App />

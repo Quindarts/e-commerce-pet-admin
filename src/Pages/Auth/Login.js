@@ -1,15 +1,18 @@
-import { Link } from 'react-router-dom'
-import { APP_ICON, COLOR, APP_ROUTER } from '../../Utils/Constants'
+import { Link, useNavigate } from 'react-router-dom'
+import { APP_ICON, APP_ROUTER, ROLE } from '../../Utils/Constants'
 import * as yup from 'yup'
 import Textfield from '../../Components/ui/Textfield/Textfield'
 import { useSnackbar } from 'notistack'
-import axiosConfig from './axios'
 import './style.js'
 import { Icon } from '@iconify/react'
 import Button from '../../Components/ui/Button/Button'
 import ukoLogo from '../../assets/img/ukoLogo.png'
 import sideImage from '../../assets/img/sideImage.png'
 import { Grid, Image, FormContainer, Box, Checkbox } from './style'
+import { login } from '../../services/api-auth'
+import { tokenService } from '../../services/token.services'
+import Progress from '../../Components/ui/Progress/Progress'
+import { useState } from 'react'
 
 const schema = yup.object().shape({
     userName: yup
@@ -33,45 +36,49 @@ const schema = yup.object().shape({
 
 function Login() {
     const { enqueueSnackbar } = useSnackbar()
+    const [isloading, setIsLoading] = useState(false)
 
-    const handleSubmit = async (values, actions) => {
-        const response = await axiosConfig.post('/auth/login', values)
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`)
+    const navigate = useNavigate()
+
+    const handleLogin = async (values, actions) => {
+        setIsLoading(true)
+
+        try {
+            const service_token = tokenService()
+            const result = await login(values)
+
+            if (result.user.role === ROLE.USER) {
+                enqueueSnackbar('Role client not access this Page', {
+                    variant: 'error',
+                })
+            }
+            enqueueSnackbar(result.message, {
+                variant: 'success',
+            })
+            service_token.setTokenList(result.tokenList)
+            setIsLoading(false)
+            navigate(APP_ROUTER.HOME)
+        } catch (error) {
+            enqueueSnackbar(error.message, {
+                variant: 'error',
+            })
+            setIsLoading(false)
         }
-
-        const data = await response.json()
-
-        if (!data.user) {
-            enqueueSnackbar('This account has not been registered', { variant: 'error' })
-            return
-        }
-
-        if (!data.success) {
-            enqueueSnackbar('Invalid password', { variant: 'error' })
-            return
-        }
-
-        if (data.user.role !== 'admin') {
-            enqueueSnackbar('You are not an Admin', { variant: 'error' })
-            return
-        }
-
-        enqueueSnackbar(data.message, { variant: 'success' })
     }
 
     return (
         <Grid
             className="grid-template-areas-2 md:grid-template-areas-4 bg-[ #f3f4f9] grid
-            min-h-screen "
+           overflow-hidden "
         >
+            {isloading && <Progress />}
             <FormContainer
                 className="form"
                 initialValues={{ userName: '', password: '' }}
                 validationSchema={schema}
-                onSubmit={handleSubmit}
+                onSubmit={handleLogin}
             >
-                {({ isSubmitting, handleBlur, handleChange, values, errors, touched }) => (
+                {({ handleBlur, handleChange, values, errors, touched }) => (
                     <Box className=" w-full justify-self-center px-11 pb-16 pt-8">
                         <div className="mb-6 flex items-center justify-center">
                             <img src={ukoLogo} width="40" alt="Logo"></img>
@@ -175,7 +182,13 @@ function Login() {
                     </Box>
                 )}
             </FormContainer>
-            <Image className="image h-full w-full object-cover " src={sideImage} alt="Unsplash Image" />
+            <Image
+                className="image h-full w-full object-contain opacity-80"
+                width={100}
+                height={100}
+                src={sideImage}
+                alt="Unsplash Image"
+            />
         </Grid>
     )
 }
