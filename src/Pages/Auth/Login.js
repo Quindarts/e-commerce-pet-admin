@@ -44,7 +44,7 @@ function Login() {
         setIsLoading(true)
 
         try {
-            const service_token = tokenService()
+            const service = tokenService()
             const result = await login(values)
 
             if (result.user.role === ROLE.USER) {
@@ -52,12 +52,14 @@ function Login() {
                     variant: 'error',
                 })
             }
-            enqueueSnackbar(result.message, {
-                variant: 'success',
-            })
-            service_token.setTokenList(result.tokenList)
-            setIsLoading(false)
-            navigate(APP_ROUTER.HOME)
+            if (result.success === true) {
+                enqueueSnackbar(result.message, {
+                    variant: 'success',
+                })
+                service.setTokenList(result.tokenList)
+                setIsLoading(false)
+                navigate(APP_ROUTER.HOME)
+            }
         } catch (error) {
             enqueueSnackbar(error.message, {
                 variant: 'error',
@@ -69,7 +71,7 @@ function Login() {
     return (
         <Grid
             className="grid-template-areas-2 md:grid-template-areas-4 bg-[ #f3f4f9] grid
-           overflow-hidden "
+            overflow-hidden "
         >
             {isloading && <Progress />}
             <FormContainer

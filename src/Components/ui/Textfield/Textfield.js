@@ -16,12 +16,9 @@ function Textfield(props) {
         size = 'xl',
         ...rest
     } = props
-
     const [showPassword, setShowPassword] = useState(false)
-
     const handleClickShowPassword = () => setShowPassword((show) => !show)
     const helperTextValue = error ? helperText : ''
-
     return (
         <Box className={`${className}  `}>
             <Box className="relative">

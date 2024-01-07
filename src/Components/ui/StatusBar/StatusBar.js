@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from 'react'
 import { theme } from '../../../Theme/theme'
 import { StatusBarStyle } from './style.js'
+import { Box } from '@mui/material'
 
 const StatusBar = (props) => {
     const { status, className, variant = 'green', style = 'row', ...rest } = props
@@ -22,10 +23,10 @@ const StatusBar = (props) => {
 
     return (
         <StatusBarStyle {...rest} className={`status-bar ${className} status-bar-${variant} `}>
-            <div
+            <Box
                 ref={statusRef}
                 className={`status-bar-fill rounded-2 h-full rounded-[0.7rem] transition-[width] duration-500 ease-in-out  `}
-            ></div>
+            ></Box>
         </StatusBarStyle>
     )
 }

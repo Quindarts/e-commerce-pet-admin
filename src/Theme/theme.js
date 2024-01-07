@@ -24,9 +24,7 @@ const color = {
     blue_basic: '#eef7fe',
     blue: '#3577f1',
     light_blue: '#2499EF',
-
     dark_blue: '#196BA7',
-
     light_sky: '#abb9e8',
     jade: '#27ce88',
     badge_blue: '#2499ef',
