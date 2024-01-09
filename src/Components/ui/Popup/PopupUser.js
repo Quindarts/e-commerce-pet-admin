@@ -5,7 +5,6 @@ import { APP_ROUTER } from '../../../Utils/Constants'
 import { Box, useMediaQuery } from '@mui/material'
 import { tokenService } from '../../../services/token.services'
 import { useSnackbar } from 'notistack'
-
 const menuItems = [
     {
         title: 'Set Status',
@@ -82,7 +81,7 @@ const PopupUser = (props) => {
         <Box className={`relative inline-block ${className}`} ref={popupUser}>
             <button
                 onClick={handleOpen}
-                className="flex items-center rounded-full bg-gray-200 px-2 py-2 text-gray-500 hover:bg-gray-300"
+                className="flex items-center rounded-full border border-blue-200 bg-gray-100 px-2 py-2 text-gray-500 hover:bg-gray-200"
             >
                 {!matches && (
                     <span className="mx-2">

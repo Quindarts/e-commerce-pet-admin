@@ -24,7 +24,7 @@ const PopupServ = (props) => {
                 color="grey"
                 icon
                 size="lg"
-                variant="container"
+                variant="outline"
                 onClick={handleOpen}
                 className="flex items-center rounded-full"
             >

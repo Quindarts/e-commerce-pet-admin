@@ -75,7 +75,7 @@ export const APP_ICON = {
     i_arrow_down_box_1: 'bxs-down-arrow',
 
     i_hand_bag: 'ph-handbag-fill',
-
+    i_bell: 'fa6-solid:bell',
     i_trash: 'mdi-trash',
 
     i_upload: 'ic-round-cloud-upload',

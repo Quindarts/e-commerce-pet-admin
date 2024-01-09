@@ -4,11 +4,13 @@ import PopupUser from '../Popup/PopupUser'
 import Button from '../Button/Button'
 import { Icon } from '@iconify/react'
 import { APP_ICON } from '../../../Utils/Constants'
+import { StyledBox } from './styles'
+
 const BaseHeader = ({ className, children }) => {
     return <nav className={className}>{children}</nav>
 }
 
-const withPageSpecificProps = (Component) => {
+const withPageSpecificProps = () => {
     const avatars = [
         {
             src: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
@@ -28,18 +30,18 @@ const withPageSpecificProps = (Component) => {
         avt: 'https://img.freepik.com/premium-vector/avatar-icon-smiley-face-man_1692-130.jpg',
         email: 'tntt@gmail.com',
     }
-
-    return (props) => (
-        <Component {...props}>
-            <Button className="m-1" size="md" variant="outline" color="grey" icon>
-                <Icon icon={APP_ICON.i_bell} />
-            </Button>
+    return () => (
+        <StyledBox className="flex justify-end gap-1 pr-4 pt-8">
+            <div>
+                <Button className="m-1 bottom-[2px]" size="md" variant="outline" color="grey" icon>
+                    <Icon icon={APP_ICON.i_bell} />
+                </Button>
+            </div>
             <PopupServ avatars={avatars} names={names} />
             <PopupUser className="items-end" user={user} />
-        </Component>
+        </StyledBox>
     )
 }
-
 const AdiminHeader = withPageSpecificProps(BaseHeader)
 
 export default AdiminHeader

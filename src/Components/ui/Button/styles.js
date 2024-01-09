@@ -76,12 +76,15 @@ const CustomButton = styled(MuiButton)`
         }
         &-outline-grey-icon {
             color: ${theme.color.gray_600};
-            background-color: white;
+            background: none;
             min-width: 1em;
             min-height: 1em;
             display: inline-block;
-            padding: 0.5rem;
+            padding: 10px;
             border-radius: 50%;
+            &:hover {
+                background-color: ${theme.color.gray_300};
+            }
         }
         &-container-primary-icon {
             background-color: ${theme.color.light_blue};
