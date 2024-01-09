@@ -53,11 +53,12 @@ function useClickOutside(ref, handler) {
 }
 
 const PopupUser = (props) => {
-    const { user, className } = props
+    const { user, className, position } = props
     const matches = useMediaQuery('(max-width:600px)')
     const [isOpenPopUp, setPopupOpen] = useState(false)
     const navigate = useNavigate()
     const popupUser = useRef(null)
+
     const { enqueueSnackbar } = useSnackbar()
 
     const handleOpen = () => {
@@ -95,7 +96,7 @@ const PopupUser = (props) => {
             </button>
             {isOpenPopUp && (
                 <Box
-                    className={`absolute right-[-5] top-10 z-10  w-64 rounded border border-gray-200 bg-white py-2 shadow-lg`}
+                    className={`absolute right-[-15%] top-10  w-64 rounded border border-gray-200 bg-white py-2 shadow-lg`}
                 >
                     <Box className="flex items-center border-b border-gray-200 px-4 pb-4 pt-3">
                         <Avatar src={user.avt} size="md" />
