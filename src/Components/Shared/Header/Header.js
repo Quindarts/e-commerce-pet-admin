@@ -1,16 +1,15 @@
 import React from 'react'
-import PopupUser from '../../ui/Popup/PopupUser'
+
+import AdiminHeader from '../../ui/Header/Header'
+
 
 function Header() {
-    const user = {
-        firstName: 'Than Nguyen Thanh',
-        lastName: 'Thien',
-        avt: 'https://img.freepik.com/premium-vector/avatar-icon-smiley-face-man_1692-130.jpg',
-        email: 'tntt@gmail.com',
-    }
+    
     return (
         <header className="flex justify-end px-[3rem]">
-            <PopupUser className="items-end" user={user} />
+            <AdiminHeader>
+                
+            </AdiminHeader>
         </header>
     )
 }
