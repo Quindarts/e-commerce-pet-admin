@@ -27,6 +27,8 @@ function HomePage() {
             },
             price: 60000,
             brand: 'Jolly Pet',
+            category: 'Food',
+            status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
         },
         {
             id: '2',
@@ -39,6 +41,8 @@ function HomePage() {
             },
             price: 60000,
             brand: 'Jolly Pet',
+            category: 'Food',
+            status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
         },
         {
             id: '3',
@@ -51,6 +55,8 @@ function HomePage() {
             },
             price: 60000,
             brand: 'Jolly Pet',
+            category: 'Food',
+            status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
         },
         {
             id: '4',
@@ -63,6 +69,8 @@ function HomePage() {
             },
             price: 60000,
             brand: 'Jolly Pet',
+            category: 'Food',
+            status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
         },
         {
             id: '5',
@@ -75,6 +83,8 @@ function HomePage() {
             },
             price: 60000,
             brand: 'Jolly Pet',
+            category: 'Food',
+            status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
         },
         {
             id: '6',
@@ -87,6 +97,8 @@ function HomePage() {
             },
             price: 60000,
             brand: 'Jolly Pet',
+            category: 'Food',
+            status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
         },
     ]
     const columns = [
@@ -136,7 +148,9 @@ function HomePage() {
         {
             field: 'status',
             headerName: 'Status',
+
             flex: 1,
+            renderCell: (params) => <Box className="font-500 px-5 py-1">{params.row.status}</Box>,
         },
     ]
 
