@@ -10,13 +10,13 @@ function MainLayout() {
         setOpenNav(!openNav)
     }
     return (
-        <Box className="main_layout flex bg-[#f3f4f9] pt-[5rem]" sx={{ maxWidth: '100vw', width: '100%' }}>
+        <Box className=" main_layout flex bg-[#f3f4f9] " sx={{ maxWidth: '100vw', width: '100%' }}>
             <Navbar className="bg-[white]" openNav={openNav} handleOpenNav={handleOpenNav} />
             <Box
                 className={`main_outlet px-[3rem] py-[1rem]`}
                 sx={{ minWidth: `${openNav ? 'calc(100% - 16rem)' : 'calc(100% - 5rem)'}` }}
             >
-                <Header />
+                <Header className="sticky top-0" />
                 <main>
                     <Outlet />
                 </main>

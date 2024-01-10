@@ -70,7 +70,7 @@ function HomePage() {
             price: 60000,
             brand: 'Jolly Pet',
             category: 'Food',
-            status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
+            status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
         },
         {
             id: '5',
@@ -84,7 +84,7 @@ function HomePage() {
             price: 60000,
             brand: 'Jolly Pet',
             category: 'Food',
-            status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
+            status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
         },
         {
             id: '6',
@@ -98,7 +98,21 @@ function HomePage() {
             price: 60000,
             brand: 'Jolly Pet',
             category: 'Food',
-            status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
+            status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
+        },
+        {
+            id: '7',
+            date: 'Jan 10, 2024',
+            code: 'HLNBCKHJ',
+            detail: {
+                name: 'Beef Dog Food',
+                img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
+                desc: 'Amazon lins',
+            },
+            price: 60000,
+            brand: 'Jolly Pet',
+            category: 'Food',
+            status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
         },
     ]
     const columns = [
@@ -150,7 +164,7 @@ function HomePage() {
             headerName: 'Status',
 
             flex: 1,
-            renderCell: (params) => <Box className="font-500 px-5 py-1">{params.row.status}</Box>,
+            renderCell: (params) => <Box className="font-500 px-7 py-1">{params.row.status}</Box>,
         },
     ]
 
