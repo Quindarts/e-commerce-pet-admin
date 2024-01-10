@@ -290,7 +290,6 @@ function ComponentPage() {
             </div>
             <div className="mb-10 flex flex-wrap gap-40">
                 <BadgeWrapper
-                   
                     className="mt-15"
                     badgeContent="Pending Payment"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -298,14 +297,12 @@ function ComponentPage() {
                     type="blue"
                 />
                 <BadgeWrapper
-                   
                     badgeContent="Approved"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="square"
                     type="green"
                 ></BadgeWrapper>
                 <BadgeWrapper
-                   
                     badgeContent="30% Off"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="square"
@@ -314,21 +311,18 @@ function ComponentPage() {
             </div>
             <div className="mb-10 flex flex-wrap gap-40">
                 <BadgeWrapper
-                   
                     badgeContent={4}
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="round"
                     type="blue"
                 ></BadgeWrapper>
                 <BadgeWrapper
-                   
                     badgeContent="Active"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="round"
                     type="green"
                 ></BadgeWrapper>
                 <BadgeWrapper
-                   
                     badgeContent="Blocked"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="round"
@@ -337,21 +331,19 @@ function ComponentPage() {
             </div>
             <div className="mb-10 flex flex-wrap gap-40">
                 <BadgeWrapper
-                   
                     badgeContent="325"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="round"
                     type="gray"
                 ></BadgeWrapper>
                 <BadgeWrapper
-                   
                     badgeContent="Out of Stock"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="square"
                     type="red_text"
                 ></BadgeWrapper>
                 <BadgeWrapper
-                   
+                    className="bg-white text-red-600"
                     badgeContent="Available"
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     shape="square"
