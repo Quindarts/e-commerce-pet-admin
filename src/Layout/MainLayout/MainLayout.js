@@ -16,7 +16,7 @@ function MainLayout() {
                 className={`main_outlet px-[3rem] py-[1rem]`}
                 sx={{ minWidth: `${openNav ? 'calc(100% - 16rem)' : 'calc(100% - 5rem)'}` }}
             >
-                <Header className="sticky top-0" />
+                <Header className="top-0" />
                 <main>
                     <Outlet />
                 </main>

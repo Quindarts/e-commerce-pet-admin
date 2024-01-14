@@ -4,7 +4,7 @@ import PopupUser from '../Popup/PopupUser'
 import Button from '../Button/Button'
 import { Icon } from '@iconify/react'
 import { APP_ICON } from '../../../Utils/Constants'
-import { StyledBox } from './styles'
+import { StyledBox } from '../../Shared/Header/styles'
 
 const BaseHeader = ({ className, children }) => {
     return <nav className={className}>{children}</nav>
