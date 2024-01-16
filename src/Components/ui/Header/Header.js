@@ -31,7 +31,7 @@ const withPageSpecificProps = () => {
         email: 'tntt@gmail.com',
     }
     return () => (
-        <StyledBox className="pr-15 flex justify-end gap-1 pt-4">
+        <StyledBox className="pr-15 flex justify-end gap-1">
             <div>
                 <Button className="bottom-[2px] m-1" size="md" variant="outline" color="grey" icon>
                     <Icon icon={APP_ICON.i_bell} />

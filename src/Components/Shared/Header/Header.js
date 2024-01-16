@@ -9,6 +9,5 @@ function Header() {
         </header>
     )
 }
-const Header = withPageSpecificProps(BaseHeader)
 
 export default Header

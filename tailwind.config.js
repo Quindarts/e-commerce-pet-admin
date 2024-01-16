@@ -4,9 +4,10 @@ module.exports = {
     theme: {
         screens: {
             xs: '0px',
-            sm: '600px',
-            md: '900px',
-            lg: '1200px',
+            sm: '450px',
+            md: '600px',
+            lg: '900px',
+            xl: '1200px',
         },
         extend: {
             opacity: {
