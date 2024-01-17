@@ -19,7 +19,12 @@ import { Box, Typography, Zoom } from '@mui/material'
 import Table from '../Components/ui/Table/Table.js'
 import { Link } from 'react-router-dom'
 import SearchHead from '../Components/ui/Search/SearchHead.js'
+<<<<<<< HEAD
 import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart'
+=======
+import AdiminHeader from '../Components/ui/Header/Header.js'
+
+>>>>>>> e08e9bd44e53779460866a0d5094871e3dc0efe3
 const avatars = [
     {
         src: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
@@ -329,6 +334,13 @@ function ComponentPage() {
         <Box className="component_page">
             ComponentPage
             <Typography>Viết các Components chung tại đây</Typography>
+            <Typography className="my-3 font-[800]">Header</Typography>
+            <Box>
+                <AdiminHeader className="flex justify-end space-x-4 bg-transparent">
+                    <PopupServ avatars={avatars} names={names} />
+                    <PopupUser user={user} />
+                </AdiminHeader>
+            </Box>
             <Typography className="my-3 font-[800]">Avatar</Typography>
             <Box className="flex gap-5">
                 <Box>

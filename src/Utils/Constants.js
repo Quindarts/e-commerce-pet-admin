@@ -22,6 +22,8 @@ export const ROLE = {
     WAREHOUSE: ' warehouse',
 }
 export const APP_ICON = {
+    i_arrow_down: 'ph:arrow-down-light',
+    i_arrow_up: 'ph:arrow-up-light',
     i_twitter: 'logos:twitter',
     i_google: 'flat-color-icons:google',
     i_menu: 'fe:app-menu',
@@ -75,7 +77,7 @@ export const APP_ICON = {
     i_arrow_down_box_1: 'bxs-down-arrow',
 
     i_hand_bag: 'ph-handbag-fill',
-
+    i_bell: 'fa6-solid:bell',
     i_trash: 'mdi-trash',
 
     i_upload: 'ic-round-cloud-upload',
