@@ -19,7 +19,6 @@ import { Box, Typography, Zoom } from '@mui/material'
 import Table from '../Components/ui/Table/Table.js'
 import { Link } from 'react-router-dom'
 import SearchHead from '../Components/ui/Search/SearchHead.js'
-import AdiminHeader from '../Components/ui/Header/Header.js'
 
 const avatars = [
     {
@@ -319,13 +318,6 @@ function ComponentPage() {
         <Box className="component_page">
             ComponentPage
             <Typography>Viết các Components chung tại đây</Typography>
-            <Typography className="my-3 font-[800]">Header</Typography>
-            <Box>
-                <AdiminHeader className="flex justify-end space-x-4 bg-transparent">
-                    <PopupServ avatars={avatars} names={names} />
-                    <PopupUser user={user} />
-                </AdiminHeader>
-            </Box>
             <Typography className="my-3 font-[800]">Avatar</Typography>
             <Box className="flex gap-5">
                 <Box>
