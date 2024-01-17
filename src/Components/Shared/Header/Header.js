@@ -1,7 +1,8 @@
 import React from 'react'
 import PopupUser from '../../ui/Popup/PopupUser'
 
-function Header() {
+function Header(props) {
+    const { className } = props
     const user = {
         firstName: 'Than Nguyen Thanh',
         lastName: 'Thien',
@@ -9,7 +10,7 @@ function Header() {
         email: 'tntt@gmail.com',
     }
     return (
-        <header className="flex justify-end px-[3rem]">
+        <header className={`flex justify-end px-[3rem] ${className}`}>
             <PopupUser className="items-end" user={user} />
         </header>
     )
