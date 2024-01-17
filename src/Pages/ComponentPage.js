@@ -20,9 +20,12 @@ import Table from '../Components/ui/Table/Table.js'
 import { Link } from 'react-router-dom'
 import SearchHead from '../Components/ui/Search/SearchHead.js'
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart'
 =======
 import AdiminHeader from '../Components/ui/Header/Header.js'
+=======
+>>>>>>> 0115aaf51ce796e786ce1ea514883f2fc2b8f8f9
 
 >>>>>>> e08e9bd44e53779460866a0d5094871e3dc0efe3
 const avatars = [
@@ -334,13 +337,6 @@ function ComponentPage() {
         <Box className="component_page">
             ComponentPage
             <Typography>Viết các Components chung tại đây</Typography>
-            <Typography className="my-3 font-[800]">Header</Typography>
-            <Box>
-                <AdiminHeader className="flex justify-end space-x-4 bg-transparent">
-                    <PopupServ avatars={avatars} names={names} />
-                    <PopupUser user={user} />
-                </AdiminHeader>
-            </Box>
             <Typography className="my-3 font-[800]">Avatar</Typography>
             <Box className="flex gap-5">
                 <Box>
