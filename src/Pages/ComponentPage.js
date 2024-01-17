@@ -19,15 +19,7 @@ import { Box, Typography, Zoom } from '@mui/material'
 import Table from '../Components/ui/Table/Table.js'
 import { Link } from 'react-router-dom'
 import SearchHead from '../Components/ui/Search/SearchHead.js'
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart'
-=======
-import AdiminHeader from '../Components/ui/Header/Header.js'
-=======
->>>>>>> 0115aaf51ce796e786ce1ea514883f2fc2b8f8f9
 
->>>>>>> e08e9bd44e53779460866a0d5094871e3dc0efe3
 const avatars = [
     {
         src: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',

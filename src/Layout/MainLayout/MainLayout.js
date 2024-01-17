@@ -15,7 +15,7 @@ function MainLayout() {
                 <Navbar className="bg-[white]" openNav={openNav} handleOpenNav={handleOpenNav} />
                 <Box
                     className={`main_outlet px-[3rem] py-[1rem]`}
-                    sx={{ minWidth: `${openNav ? 'calc(100% - 16rem)' : 'calc(100% - 5rem)'}` }}
+                    sx={{ maxWidth: `${openNav ? 'calc(100% - 20rem)' : 'calc(100% - 5rem)'}` }}
                 >
                     <main>
                         <Header />

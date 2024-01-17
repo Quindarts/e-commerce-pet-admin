@@ -6,19 +6,9 @@ import { Icon } from '@iconify/react'
 import { APP_ICON } from '../../../Utils/Constants'
 import { StyledBox } from '../../Shared/Header/styles'
 
-<<<<<<< HEAD
-function Header(props) {
-    const { className } = props
-    const user = {
-        firstName: 'Than Nguyen Thanh',
-        lastName: 'Thien',
-        avt: 'https://img.freepik.com/premium-vector/avatar-icon-smiley-face-man_1692-130.jpg',
-        email: 'tntt@gmail.com',
-=======
 function Header() {
     const BaseHeader = ({ className, children }) => {
         return <nav className={className}>{children}</nav>
->>>>>>> e08e9bd44e53779460866a0d5094871e3dc0efe3
     }
 
     const withPageSpecificProps = () => {
@@ -55,13 +45,8 @@ function Header() {
     }
     const AdminHeader = withPageSpecificProps(BaseHeader)
     return (
-<<<<<<< HEAD
-        <header className={`flex justify-end px-[3rem] ${className}`}>
-            <PopupUser className="items-end" user={user} />
-=======
         <header className="sticky right-0 top-0 z-50 w-full">
             <AdminHeader></AdminHeader>
->>>>>>> e08e9bd44e53779460866a0d5094871e3dc0efe3
         </header>
     )
 }

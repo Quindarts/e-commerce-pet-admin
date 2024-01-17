@@ -386,6 +386,14 @@ function HomePage() {
                     className="max-h-[288px] p-7 xs:col-span-4 xs:row-span-2 md:col-span-4 lg:col-span-4 lg:row-span-4 xl:col-span-2 xl:row-span-1"
                 >
                     <BarChart
+                        sx={{
+                            '& .MuiChartsAxis-root > .MuiChartsAxis-line': {
+                                stroke: 'none',
+                            },
+                            ' & .MuiChartsAxis-tickContainer > .MuiChartsAxis-tick': {
+                                stroke: 'none',
+                            },
+                        }}
                         xAxis={[
                             {
                                 id: 'barCategories',
@@ -413,6 +421,7 @@ function HomePage() {
                             {
                                 data: [15000, 4500, 12000, 5000, 7500, 13000, 3000, 12000, 7500, 10000, 5500, 15000],
                                 color: '#2499EF',
+                                show: false,
                             },
                         ]}
                         options={{
@@ -423,7 +432,7 @@ function HomePage() {
                                 },
                             },
                             xaxis: {
-                                show: false,
+                                stroke: 'blue',
                             },
                             yaxis: {
                                 show: false,
