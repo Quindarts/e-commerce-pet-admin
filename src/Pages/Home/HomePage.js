@@ -11,6 +11,7 @@ import Button from '../../Components/ui/Button/Button'
 import { Icon } from '@iconify/react'
 import { BadgeWrapper } from '../../Components/ui/Badge/Badge'
 import Chart from 'react-apexcharts'
+
 function HomePage() {
     const handleOpen = (option) => {
         setOpen(true)
@@ -212,7 +213,69 @@ function HomePage() {
             img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
         },
     ]
+    const chartSetting = {
+        sx: {
+            pb: 2,
+            '& .MuiChartsAxis-root > .MuiChartsAxis-line': {
+                stroke: 'none',
+            },
+            ' & .MuiChartsAxis-tickContainer > .MuiChartsAxis-tick': {
+                stroke: 'none',
+            },
+        },
+    }
+    const dataset = [
+        {
+            data: 15000,
+            month: 'Jan',
+        },
+        {
+            data: 4500,
+            month: 'Feb',
+        },
+        {
+            data: 12000,
+            month: 'Mar',
+        },
+        {
+            data: 5000,
+            month: 'Apr',
+        },
+        {
+            data: 7500,
+            month: 'May',
+        },
+        {
+            data: 13000,
+            month: 'Jun',
+        },
+        {
+            data: 3000,
+            month: 'Jul',
+        },
+        {
+            data: 12000,
+            month: 'Aug',
+        },
+        {
+            data: 7500,
+            month: 'Sep',
+        },
+        {
+            data: 10000,
+            month: 'Oct',
+        },
+        {
+            data: 5500,
+            month: 'Nov',
+        },
+        {
+            data: 15000,
+            month: 'Dec',
+        },
+    ]
 
+    const isSmallScreen = useMediaQuery('(max-width:600px)')
     const data = [50, 30, 20, 40]
     const labels = ['Transactions', 'Payouts', 'Sales', 'Reports']
     const colors = ['#2499EF', '#8C8DFF', '#FFC675', '#8CA3BA']
@@ -330,6 +393,9 @@ function HomePage() {
         legend: {
             position: 'bottom',
             horizontalAlign: 'center',
+            onItemHover: {
+                highlightDataSeries: false,
+            },
         },
         dataLabels: {
             enabled: false,
@@ -338,16 +404,18 @@ function HomePage() {
 
     const DonutChart = () => {
         return (
-            <div className="relative flex h-full w-full flex-col items-center justify-center">
-                <div className="font-semibold">Project Status</div>
-                <div className="mt-4">
+            <Box className="relative flex h-full w-full flex-col items-center justify-center">
+                <Typography className="font-semibold">Project Status</Typography>
+                <Box className="mt-4">
                     <Chart options={options} series={data} type="donut" className="mx-auto" />
-                </div>
-                <div className=" absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
-                    <div className="xs:text-md mb-2 font-semibold text-gray-400 md:text-sm">Avg Range</div>
-                    <div className="ml-3 font-semibold xs:text-3xl md:text-3xl">140</div>
-                </div>
-            </div>
+                </Box>
+                <Box className=" absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
+                    <Typography className="xs:text-md mb-2 font-semibold text-gray-400 md:text-sm">
+                        Avg Range
+                    </Typography>
+                    <Typography className="ml-3 font-semibold xs:text-3xl md:text-3xl">140</Typography>
+                </Box>
+            </Box>
         )
     }
 
@@ -387,44 +455,21 @@ function HomePage() {
                 >
                     <Box className="text-sm font-bold text-gray-700"> Earnings Report</Box>
                     <BarChart
-                        sx={{
-                            pb: 2,
-                            '& .MuiChartsAxis-root > .MuiChartsAxis-line': {
-                                stroke: 'none',
-                            },
-                            ' & .MuiChartsAxis-tickContainer > .MuiChartsAxis-tick': {
-                                stroke: 'none',
-                            },
-                        }}
-                        xAxis={[
-                            {
-                                id: 'barCategories',
-                                data: [
-                                    'Jan',
-                                    'Feb',
-                                    'Mar',
-                                    'Apr',
-                                    'May',
-                                    'Jun',
-                                    'Jul',
-                                    'Aug',
-                                    'Sep',
-                                    'Oct',
-                                    'Nov',
-                                    'Dec',
-                                ],
-                                scaleType: 'band',
-                                categoryGapRatio: 0.7,
-                                barGapRatio: 7,
-                            },
-                        ]}
-                        series={[
-                            {
-                                data: [15000, 4500, 12000, 5000, 7500, 13000, 3000, 12000, 7500, 10000, 5500, 15000],
-                                color: '#2499EF',
-                                show: false,
-                            },
-                        ]}
+                        dataset={dataset}
+                        {...(isSmallScreen
+                            ? {
+                                  yAxis: [
+                                      { scaleType: 'band', dataKey: 'month', categoryGapRatio: 0.7, barGapRatio: 7 },
+                                  ],
+                              }
+                            : {
+                                  xAxis: [
+                                      { scaleType: 'band', dataKey: 'month', categoryGapRatio: 0.7, barGapRatio: 7 },
+                                  ],
+                              })}
+                        series={[{ dataKey: 'data', color: '#2499EF' }]}
+                        layout={isSmallScreen ? 'horizontal' : 'vertical'}
+                        {...chartSetting}
                     />
                 </Box>
             </Box>
@@ -443,7 +488,7 @@ function HomePage() {
                 <Box sx={Card} className=" relative p-7 xs:col-span-5 md:col-span-5 lg:col-span-2 xl:col-span-1">
                     <Typography className="text-sm font-bold text-gray-700">Recent Orders</Typography>
                     <Box className="absolute right-0 top-6">
-                        <Link to="/orders" style={{ textDecoration: 'none' }}>
+                        <Link to="/orders" className="no-underline">
                             <Button>View all</Button>
                         </Link>
                     </Box>
