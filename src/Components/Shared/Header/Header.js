@@ -5,6 +5,9 @@ import Button from '../../ui/Button/Button'
 import { Icon } from '@iconify/react'
 import { APP_ICON } from '../../../Utils/Constants'
 import { StyledBox } from '../../Shared/Header/styles'
+import PopupLang from '../../ui/Popup/PopupLang'
+import { useTranslation } from 'react-i18next'
+import i18n from '../../../translation/i18n'
 
 function Header() {
     const BaseHeader = ({ className, children }) => {
@@ -24,6 +27,13 @@ function Header() {
             },
             { src: '' },
         ]
+        const listLanguage = [
+            { title: 'Vietnamese', value: 'vi' },
+            { title: 'English', value: 'en' },
+        ]
+        const handleChangeLanguage = (value) => {
+            i18n.changeLanguage(value)
+        }
         const names = [{ name: 'Bob' }, { name: 'Bill' }, { name: 'Ben' }, { name: '' }]
         const user = {
             firstName: 'Than Nguyen Thanh',
@@ -32,7 +42,8 @@ function Header() {
             email: 'tntt@gmail.com',
         }
         return () => (
-            <StyledBox className="pr-15 flex justify-end gap-1">
+            <StyledBox className="pr-15 flex justify-end gap-1 py-3">
+                <PopupLang list={listLanguage} handleChangeLanguage={handleChangeLanguage} />
                 <div>
                     <Button className="bottom-[2px] m-1" size="md" variant="outline" color="grey" icon>
                         <Icon icon={APP_ICON.i_bell} />

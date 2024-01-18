@@ -339,13 +339,13 @@ function HomePage() {
     const DonutChart = () => {
         return (
             <div className="relative flex h-full w-full flex-col items-center justify-center">
-                <div>Project Status</div>
+                <div className="font-semibold">Project Status</div>
                 <div className="mt-4">
                     <Chart options={options} series={data} type="donut" className="mx-auto" />
                 </div>
                 <div className=" absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
-                    <div className="xs:text-md mb-2 font-bold md:text-lg">Avg Range</div>
-                    <div className="ml-3 font-bold xs:text-3xl md:text-4xl">140</div>
+                    <div className="xs:text-md mb-2 font-semibold text-gray-400 md:text-sm">Avg Range</div>
+                    <div className="ml-3 font-semibold xs:text-3xl md:text-3xl">140</div>
                 </div>
             </div>
         )
@@ -361,16 +361,16 @@ function HomePage() {
                             className="max-h-[134px] min-w-[178px] p-7 xs:col-span-4 xs:row-span-1 md:col-span-1 lg:col-span-1 lg:row-span-1 xl:col-span-1 xl:row-span-1"
                             sx={{ ...Card, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
                         >
-                            <Box className="mb-2 text-xs text-gray-600">{revenue.title}</Box>
-                            <Box className="my-1 text-2xl font-bold">{revenue.amount}</Box>
+                            <Box className="mb-2 text-sm  text-gray-500">{revenue.title}</Box>
+                            <Box className="my-1 text-2xl font-bold text-gray-700">{revenue.amount}</Box>
                             <Box className="mt-3 flex items-center text-sm font-bold">
                                 {revenue.type === 'positive' && (
-                                    <Box className="rounded-full bg-green-100 p-1">
+                                    <Box className="mr-1 rounded-full bg-green-100 p-1">
                                         <Icon icon={APP_ICON.i_arrow_up} color="green" />
                                     </Box>
                                 )}
                                 {revenue.type === 'negative' && (
-                                    <Box className="rounded-full bg-red-100 p-1">
+                                    <Box className="mr-1 rounded-full bg-red-100 p-1">
                                         <Icon icon={APP_ICON.i_arrow_down} color="red" />
                                     </Box>
                                 )}
@@ -383,10 +383,12 @@ function HomePage() {
                 </Box>
                 <Box
                     sx={Card}
-                    className="max-h-[288px] p-7 xs:col-span-4 xs:row-span-2 md:col-span-4 lg:col-span-4 lg:row-span-4 xl:col-span-2 xl:row-span-1"
+                    className="max-h-[296px] xs:col-span-4 xs:row-span-2 md:col-span-4 lg:col-span-4 lg:row-span-4 xl:col-span-2 xl:row-span-1"
                 >
+                    <Box className="text-sm font-bold text-gray-700"> Earnings Report</Box>
                     <BarChart
                         sx={{
+                            pb: 2,
                             '& .MuiChartsAxis-root > .MuiChartsAxis-line': {
                                 stroke: 'none',
                             },
@@ -416,7 +418,6 @@ function HomePage() {
                                 barGapRatio: 7,
                             },
                         ]}
-                        height={288}
                         series={[
                             {
                                 data: [15000, 4500, 12000, 5000, 7500, 13000, 3000, 12000, 7500, 10000, 5500, 15000],
@@ -424,20 +425,6 @@ function HomePage() {
                                 show: false,
                             },
                         ]}
-                        options={{
-                            plotOptions: {
-                                bar: {
-                                    borderRadiusTopLeft: 10,
-                                    borderRadiusTopRight: 10,
-                                },
-                            },
-                            xaxis: {
-                                stroke: 'blue',
-                            },
-                            yaxis: {
-                                show: false,
-                            },
-                        }}
                     />
                 </Box>
             </Box>
@@ -454,8 +441,8 @@ function HomePage() {
                     <Table label="Popular Products" className="h-80 w-auto" columns={columns} rows={rows} />
                 </Box>
                 <Box sx={Card} className=" relative p-7 xs:col-span-5 md:col-span-5 lg:col-span-2 xl:col-span-1">
-                    <Typography variant="h6">Recent Orders</Typography>
-                    <Box className="absolute right-0 top-8">
+                    <Typography className="text-sm font-bold text-gray-700">Recent Orders</Typography>
+                    <Box className="absolute right-0 top-6">
                         <Link to="/orders" style={{ textDecoration: 'none' }}>
                             <Button>View all</Button>
                         </Link>
@@ -472,11 +459,17 @@ function HomePage() {
                                         />
                                     </Box>
                                     <Box className="xs:col-span-2 sm:col-span-2 sm:text-xs md:col-span-8 lg:col-span-3 xl:col-span-3">
-                                        <Typography variant="body1">{order.product}</Typography>
-                                        <Typography variant="caption">{order.time}</Typography>
+                                        <Typography className=" text-sm font-semibold text-gray-600" variant="body1">
+                                            {order.product}
+                                        </Typography>
+                                        <Typography className=" text-xs  text-gray-400" variant="caption">
+                                            {order.time}
+                                        </Typography>
                                     </Box>
                                     <Box className="col-span-1">
-                                        <Typography variant="body1">{order.price}</Typography>
+                                        <Typography className="text-sm font-semibold text-gray-600" variant="body1">
+                                            {order.price}
+                                        </Typography>
                                     </Box>
                                 </Box>
                             </Grid>
