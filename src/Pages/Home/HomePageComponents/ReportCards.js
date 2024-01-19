@@ -36,7 +36,7 @@ const ReportCards = ({ revenue }) => {
             {revenues.map((revenue, index) => (
                 <Box
                     key={index}
-                    className="max-h-[134px] min-w-[178px] p-7 xs:col-span-4 xs:row-span-1 md:col-span-1 lg:col-span-1 lg:row-span-1 xl:col-span-1 xl:row-span-1"
+                    className="max-h-[134px] xs:col-span-4 xs:row-span-1 md:col-span-1 lg:col-span-1 lg:row-span-1 xl:col-span-1 xl:row-span-1"
                     sx={{ ...Card, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
                 >
                     <Box className="mb-2 text-sm  font-[500] text-[#5c6c87]">{revenue.title}</Box>
