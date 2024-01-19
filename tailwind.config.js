@@ -2,13 +2,6 @@ module.exports = {
     content: ['./src/**/*.{html,js}'],
     important: '#root',
     theme: {
-        screens: {
-            xs: '0px',
-            sm: '490px',
-            md: '640px',
-            lg: '940px',
-            xl: '1240px',
-        },
         extend: {
             opacity: {
                 0: '0',
