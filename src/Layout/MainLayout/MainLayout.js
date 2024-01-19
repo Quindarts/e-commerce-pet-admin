@@ -16,7 +16,7 @@ function MainLayout() {
                 {/*              <Navbar className="bg-[white]" openNav={openNav} handleOpenNav={handleOpenNav}   /> */}
                 <TemporaryDrawer className="hello" openNav={openNav} handleOpenNav={handleOpenNav} />
                 <Box
-                    className={`main_outlet px-[3rem] `}
+                    className={`main_outlet px-[2rem] `}
                     sx={{
                         maxWidth: `${openNav ? 'calc(100% - 20rem)' : 'calc(100% - 5rem)'}`,
                         // marginLeft: `${openNav ? ' 20rem' : '5rem'}`,
