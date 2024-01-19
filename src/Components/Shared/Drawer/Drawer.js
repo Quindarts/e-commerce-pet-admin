@@ -8,13 +8,25 @@ import logo from '../../../assets/img/logo.svg'
 import Button from '../../ui/Button/Button'
 import { Icon } from '@iconify/react'
 import { APP_ICON } from '../../../Utils/Constants'
+import ListMenu from './ListMenu/ListMenu'
 
 export default function TemporaryDrawer(props) {
     const { className, handleOpenNav, openNav } = props
+    const hoverRef = React.useRef(null)
+    const [isHovered, setIsHovered] = React.useState(false)
+    const handleMouseEnter = () => {
+        setIsHovered(true)
+    }
 
+    const handleMouseLeave = () => {
+        setIsHovered(false)
+    }
     return (
         <CustomDrawer className={`${className}`}>
             <Box
+                ref={hoverRef}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
                 className={`drawer__menu h-full text-center ${openNav ? 'drawer__menu--open' : 'drawer__menu--hover'}`}
             >
                 <Box className="flex h-[70px] items-center justify-between gap-2 pb-[8px] pl-[32px] pr-[16px] pt-[31px] text-[1.6rem] font-[800]">
@@ -38,7 +50,8 @@ export default function TemporaryDrawer(props) {
                         <Icon icon="mingcute:exit-fill" rotate={2} width={24} />
                     </Button>
                 </Box>
-                <Box>
+                <Box className="p-[12px]">
+                    <ListMenu handleOpenNav={handleOpenNav} openNav={openNav} isHovered={isHovered} />
                 </Box>
             </Box>
         </CustomDrawer>

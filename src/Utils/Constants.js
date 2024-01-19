@@ -8,6 +8,8 @@ export const APP_ROUTER = {
     PRODUCT: '/product',
     ADD_PRODUCT: '/product/add-product',
 
+    CATEGORY: '/categorys',
+
     AUTH: 'auth',
     LOGIN: '/auth/login',
     REGISTER: '/auth/register',
