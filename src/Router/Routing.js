@@ -10,6 +10,7 @@ import AuthLayout from '../Layout/AuthLayout/AuthLayout'
 import Login from '../Pages/Auth/Login'
 import Register from '../Pages/Auth/Register'
 import { loaderUser } from './loader/loaderAuth'
+import CategoryPage from '../Pages/CategoryPage/CategoryPage'
 
 const router = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
             {
                 path: APP_ROUTER.PRODUCT,
                 element: <ProductPage />,
+            },
+            {
+                path: APP_ROUTER.CATEGORY,
+                element: <CategoryPage />,
             },
             {
                 path: APP_ROUTER.ORDER,

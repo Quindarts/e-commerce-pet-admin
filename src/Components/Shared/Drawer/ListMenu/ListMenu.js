@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom'
 function ListMenu(props) {
     const { openNav, isHovered } = props
     const [openProduct, setOpenProduct] = useState(false)
+    const [openCategory, setOpenCategory] = useState(false)
     const [openOrder, setOpenOrder] = useState(false)
     const [openUser, setOpenUser] = useState(false)
     const navigate = useNavigate()
@@ -52,6 +53,40 @@ function ListMenu(props) {
                                 <Icon width={20} icon="quill:inbox-list" />
                             </ListItemIcon>
                             <ListItemText primary="List product" />
+                        </ListItemButton>
+                    </List>
+                </Collapse>
+            )}
+            {/** Category */}
+            <ListItemButton
+                onClick={() => {
+                    navigate(APP_ROUTER.CATEGORY)
+                    setOpenCategory(!openCategory)
+                }}
+            >
+                <ListItemIcon>
+                    <Icon width={20} icon="maki:warehouse" />
+                </ListItemIcon>
+                {checkDetailTitle && <ListItemText primary="Manager Category" />}
+                {checkDetailTitle && (
+                    <div>{openCategory ? <ExpandMore /> : <Icon icon="mingcute:left-line" width={23} />}</div>
+                )}
+            </ListItemButton>
+
+            {checkDetailTitle && (
+                <Collapse in={openCategory} timeout="auto" unmountOnExit>
+                    <List component="div" disablePadding>
+                        <ListItemButton sx={{ pl: 4 }}>
+                            <ListItemIcon>
+                                <Icon width={20} icon="system-uicons:box-add" />
+                            </ListItemIcon>
+                            {checkDetailTitle && <ListItemText primary="Add category" />}
+                        </ListItemButton>
+                        <ListItemButton sx={{ pl: 4 }}>
+                            <ListItemIcon>
+                                <Icon width={20} icon="quill:inbox-list" />
+                            </ListItemIcon>
+                            <ListItemText primary="List category" />
                         </ListItemButton>
                     </List>
                 </Collapse>
