@@ -2,6 +2,13 @@ module.exports = {
     content: ['./src/**/*.{html,js}'],
     important: '#root',
     theme: {
+        screens: {
+            'db-xs': '0px',
+            'db-sm': '510px',
+            'db-md': '660px',
+            'db-lg': '960px',
+            'db-xl': '1260px',
+        },
         extend: {
             opacity: {
                 0: '0',
@@ -83,5 +90,4 @@ module.exports = {
             },
         },
     },
-    plugins: [],
 }

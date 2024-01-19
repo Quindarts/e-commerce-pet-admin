@@ -37,7 +37,7 @@ const RecentOrders = () => {
         <Grid className="mt-5" container direction="column" spacing={2}>
             {orders.map((order, index) => (
                 <Grid item key={index}>
-                    <Box className="grid gap-2 xs:grid-cols-4 sm:grid-cols-4 sm:text-xs md:grid-cols-10 lg:grid-cols-5 xl:grid-cols-5">
+                    <Box className="grid gap-2 db-xs:grid-cols-4 db-sm:grid-cols-4 db-sm:text-xs db-md:grid-cols-10 db-lg:grid-cols-5 db-xl:grid-cols-5">
                         <Box className="col-span-1 row-span-2">
                             <img
                                 src={order.img}
@@ -45,7 +45,7 @@ const RecentOrders = () => {
                                 className="h-full w-full rounded-full object-cover"
                             />
                         </Box>
-                        <Box className="xs:col-span-2 sm:col-span-2 sm:text-xs md:col-span-8 lg:col-span-3 xl:col-span-3">
+                        <Box className="db-xs:col-span-2 db-sm:col-span-2 db-sm:text-xs db-md:col-span-8 db-lg:col-span-3 db-xl:col-span-3">
                             <Typography className=" text-sm font-semibold text-gray-600" variant="body1">
                                 {order.product}
                             </Typography>

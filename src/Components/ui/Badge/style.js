@@ -9,7 +9,7 @@ const colorMap = {
     red: { main: theme.color.pink_900, text: theme.color.white },
     red_text: { main: 'transparent', text: theme.color.pink_900 },
     gray: { main: theme.color.gray_light, text: theme.color.gray_dark },
-    green_text: {main: 'transparent', text: theme.color.jade },
+    green_text: { main: 'transparent', text: theme.color.jade },
     pink: { main: theme.color.light_pink, text: theme.color.pink_900 },
 }
 
