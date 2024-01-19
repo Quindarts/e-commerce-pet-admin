@@ -39,20 +39,20 @@ const ReportCards = ({ revenue }) => {
                     className="max-h-[134px] min-w-[178px] p-7 xs:col-span-4 xs:row-span-1 md:col-span-1 lg:col-span-1 lg:row-span-1 xl:col-span-1 xl:row-span-1"
                     sx={{ ...Card, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
                 >
-                    <Box className="mb-2 text-sm  text-gray-500">{revenue.title}</Box>
-                    <Box className="my-1 text-2xl font-bold text-gray-700">{revenue.amount}</Box>
+                    <Box className="mb-2 text-sm  font-[500] text-[#5c6c87]">{revenue.title}</Box>
+                    <Box className="my-1 text-2xl font-bold text-[#2f4365]">{revenue.amount}</Box>
                     <Box className="mt-3 flex items-center text-sm font-bold">
                         {revenue.type === 'positive' && (
-                            <Box className="mr-1 rounded-full bg-green-100 p-1">
-                                <Icon icon={APP_ICON.i_arrow_up} color="green" />
+                            <Box className="mr-1 rounded-full bg-[#e9faf3] p-1">
+                                <Icon icon={APP_ICON.i_arrow_up} className="text-[#2acf8a]" />
                             </Box>
                         )}
                         {revenue.type === 'negative' && (
-                            <Box className="mr-1 rounded-full bg-red-100 p-1">
-                                <Icon icon={APP_ICON.i_arrow_down} color="red" />
+                            <Box className="mr-1 rounded-full bg-[#fff0f4] p-1">
+                                <Icon icon={APP_ICON.i_arrow_down} className="text-[#ff7198]" />
                             </Box>
                         )}
-                        <span className={revenue.type === 'positive' ? 'text-green-400' : 'text-red-400'}>
+                        <span className={revenue.type === 'positive' ? 'text-[#2acf8a]' : 'text-[#ff7198]'}>
                             {revenue.growth}
                         </span>
                     </Box>

@@ -19,7 +19,7 @@ function Table(props) {
     } = props
     return (
         <Box className="w-full">
-            {label && <Typography className="font-600 text-[1rem] text-[#464f6c]">{label}</Typography>}
+            {label && <Typography className="font-bold text-[1rem] text-[#464f6c]">{label}</Typography>}
             <CustomTable
                 {...rest}
                 rowHeight={80}
