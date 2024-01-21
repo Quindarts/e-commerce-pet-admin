@@ -18,7 +18,7 @@ import { useSnackbar } from 'notistack'
 import { Box, Typography, Zoom } from '@mui/material'
 import Table from '../Components/ui/Table/Table.js'
 import { Link } from 'react-router-dom'
-import SearchHead from '../Components/ui/Search/SearchHead.js'
+import { BadgeWrapper } from '../Components/ui/Badge/Badge.js'
 
 const avatars = [
     {
@@ -143,81 +143,93 @@ function ComponentPage() {
     const rows = [
         {
             id: '1',
+            date: 'Jan 10, 2024',
             code: 'HLNBCKHJ',
             detail: {
-                name: 'Beef Recipe Frozen Dog Food',
+                name: 'Beef',
                 img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
                 desc: 'Amazon lins',
             },
             price: 60000,
-            avaiable: 30,
-            category: 'XBUE4Y',
+            brand: 'Jolly Pet',
+            category: 'Food',
+            status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
         },
         {
             id: '2',
+            date: 'Jan 10, 2024',
             code: 'HLNBCKHJ',
             detail: {
-                name: 'Beef Recipe Frozen Dog Food',
+                name: ' Dog Food',
                 img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
                 desc: 'Amazon lins',
             },
             price: 60000,
-            avaiable: 30,
-            category: 'XBUE4Y',
+            brand: 'Jolly Pet',
+            category: 'Food',
+            status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
         },
         {
             id: '3',
+            date: 'Jan 10, 2024',
             code: 'HLNBCKHJ',
             detail: {
-                name: 'Beef Recipe Frozen Dog Food',
+                name: 'Beef Dog',
                 img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
                 desc: 'Amazon lins',
             },
             price: 60000,
-            avaiable: 30,
-            category: 'XBUE4Y',
+            brand: 'Jolly Pet',
+            category: 'Food',
+            status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
         },
         {
             id: '4',
+            date: 'Jan 10, 2024',
             code: 'HLNBCKHJ',
             detail: {
-                name: 'Beef Recipe Frozen Dog Food',
+                name: ' Dog ',
                 img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
                 desc: 'Amazon lins',
             },
-            price: 60000,
-            avaiable: 30,
-            category: 'XBUE4Y',
+            price: 70000,
+            brand: 'Jolly',
+            category: 'Food',
+            status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
         },
         {
             id: '5',
+            date: 'Jan 10, 2024',
             code: 'HLNBCKHJ',
             detail: {
-                name: 'Beef Recipe Frozen Dog Food',
+                name: ' Food',
                 img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
                 desc: 'Amazon lins',
             },
             price: 60000,
-            avaiable: 30,
-            category: 'XBUE4Y',
+            brand: 'Jolly Pet',
+            category: 'Food',
+            status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
         },
         {
             id: '6',
+            date: 'Jan 10, 2024',
             code: 'HLNBCKHJ',
             detail: {
-                name: 'Beef Recipe Frozen Dog Food',
+                name: 'Beef Dog Food',
                 img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
                 desc: 'Amazon lins',
             },
-            price: 60000,
-            avaiable: 30,
-            category: 'XBUE4Y',
+            price: 50000,
+            brand: ' Pet',
+            category: 'Food',
+            status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
         },
     ]
     const columns = [
         {
             field: 'detail',
-            headerName: 'Product Details',
+            headerName: 'Product',
             flex: 2,
             renderCell: (params) => (
                 <Box className="flex gap-3">
@@ -234,6 +246,11 @@ function ComponentPage() {
             ),
         },
         {
+            field: 'date',
+            headerName: 'Date',
+            flex: 1,
+        },
+        {
             field: 'category',
             headerName: 'Category',
             flex: 1,
@@ -243,15 +260,11 @@ function ComponentPage() {
             ),
         },
         {
-            field: 'avaiable',
-            headerName: 'Stock',
+            field: 'brand',
+            headerName: 'Brand',
             flex: 1,
         },
-        {
-            field: 'code',
-            headerName: 'SKU',
-            flex: 1,
-        },
+
         {
             field: 'price',
             headerName: 'Price',
@@ -260,19 +273,9 @@ function ComponentPage() {
         {
             field: 'status',
             headerName: 'Status',
+
             flex: 1,
-        },
-        {
-            field: 'action',
-            headerName: 'Action',
-            flex: 1,
-            renderCell: (params) => (
-                <Box>
-                    <Button onClick={handleOpen} size="lg" color="grey" variant="outline" icon>
-                        <Icon icon={APP_ICON.i_pen} />
-                    </Button>
-                </Box>
-            ),
+            renderCell: (params) => <Box className="font-500 px-7 py-1">{params.row.status}</Box>,
         },
     ]
 
@@ -318,13 +321,7 @@ function ComponentPage() {
             Edit: 'Edit',
         },
     ]
-
-    const [filter, setFilter] = useState('')
-    const [isOpen, setIsOpen] = useState(false)
-
-    const handleSearch = (query) => {
-        setFilter(query)
-    }
+    const [filteredRows, setFilteredRows] = useState(rows)
     return (
         <Box className="component_page">
             ComponentPage
@@ -481,7 +478,7 @@ function ComponentPage() {
                     label="Popular Products"
                     className=" w-full"
                     columns={columns}
-                    rows={rows}
+                    rows={filteredRows}
                     totalPage={3}
                     pageSize={3}
                     currentPage={page}

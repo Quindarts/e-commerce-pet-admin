@@ -54,7 +54,7 @@ function Header() {
     }
     const AdminHeader = withPageSpecificProps(BaseHeader)
     return (
-        <header className="sticky right-0 top-0 z-50 w-full">
+        <header className="sticky right-0 top-0 z-50 w-full ">
             <AdminHeader></AdminHeader>
         </header>
     )
