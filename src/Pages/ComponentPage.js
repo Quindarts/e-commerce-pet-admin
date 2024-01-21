@@ -91,7 +91,6 @@ function ComponentPage() {
         setStatus(0)
     }
     const [valueDrop, setValueDrop] = useState('')
-    const [optionModal, setOpTionModal] = useState('center')
     const listDrop = [
         { title: 'quang', value: 10 },
         { title: 'long', value: 20 },
@@ -507,7 +506,7 @@ function ComponentPage() {
                 <Dropdown list={listDrop} label="labelDropdown" onChange={(e) => setValueDrop(e.target.value)} />
                 <Typography>value:{valueDrop} </Typography>
             </Box>
-            <Modal key={1} open={open} appearance={optionModal} handleClose={handleClose}></Modal>
+            <Modal key={1} open={open} appearance="center" handleClose={handleClose}></Modal>
         </Box>
     )
 }
