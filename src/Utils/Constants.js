@@ -40,7 +40,7 @@ export const APP_ICON = {
     i_posts: 'mdi:post-it-notes',
 
     i_users: 'mdi:users',
-    i_search: 'material-symbols:search',
+    i_search: 'clarity:search-line',
 
     i_plus: 'ic:baseline-plus',
 

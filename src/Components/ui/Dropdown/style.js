@@ -8,7 +8,7 @@ export default makeStyles()(() => ({
     label: {
         fontSize: '1.2rem',
         fontWeight: '600',
-        marginTop: theme.spacing(2),
+        // marginTop: theme.spacing(2),
     },
     dropdown: {
         fontSize: '1rem',
@@ -20,5 +20,16 @@ export default makeStyles()(() => ({
             borderColor: theme.color.light_blue,
             label: { color: 'black' },
         },
+    },
+    sm: {
+        '.MuiSelect-select': { height: '1rem', padding: '9px' },
+    },
+    md: {
+        height: '3.5em',
+        padding: '5px',
+    },
+    lg: {
+        height: '4.5em',
+        padding: '15px',
     },
 }))
