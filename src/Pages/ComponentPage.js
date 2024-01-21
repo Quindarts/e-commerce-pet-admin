@@ -177,7 +177,6 @@ function ComponentPage() {
             </div>
             <h1 className="mt-3 font-bold">Accordin</h1>
             <h1 className="mt-3 font-bold">Snackbar</h1>
-  
             <h1 className="mt-3 font-bold">Modal</h1>
             <div className="flex flex-wrap gap-3">
                 <Button variant="contained" onClick={() => handleOpen('bottom_left')}>
@@ -230,7 +229,7 @@ function ComponentPage() {
                     <Textfield className="my-3 w-1/2" label="Password" type="password" />
                 </div>
             </div>
-            <Modal key={1} open={open} size="fat" appearance={optionModal} handleClose={handleClose}></Modal>
+            <Modal key={1} open={open} appearance={optionModal} handleClose={handleClose}></Modal>
         </div>
     )
 }
