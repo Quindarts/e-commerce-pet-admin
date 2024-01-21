@@ -1,6 +1,5 @@
 import Button from '../Button/Button'
-import { APP_ICON } from '../../../Utils/Constants'
-import useClickOutside from '../../../hook/usePopup'
+import useClickOutside from '../../../hook/ui/usePopup'
 import { Icon } from '@iconify/react'
 import React, { useReducer } from 'react'
 import { Box } from '@mui/material'
@@ -24,11 +23,11 @@ const flagReducer = (state, action) => {
 }
 const PopupLang = (props) => {
     const { list, handleChangeLanguage } = props
-    const { handleActive, menuRef, classes } = useClickOutside()
-    const [state, dispatch] = useReducer(flagReducer, { flag: 'emojione:flag-for-vietnam' })
+    const { handleActive, menuRef, classes, handleClose } = useClickOutside()
 
+    const [state, dispatch] = useReducer(flagReducer, { flag: 'emojione:flag-for-vietnam' })
     return (
-        <React.Fragment>
+        <Box ref={menuRef}>
             <Button
                 color="grey"
                 icon
@@ -39,7 +38,7 @@ const PopupLang = (props) => {
             >
                 <Icon icon={state.flag} onClick={handleActive} width={30} />
             </Button>
-            <Box className={classes} ref={menuRef}>
+            <Box className={classes}>
                 <Box className="flex h-auto flex-col space-y-3">
                     {list.map((lang, index) => (
                         <Box key={index} className="flex cursor-pointer items-center p-2 hover:bg-blue-200">
@@ -47,6 +46,7 @@ const PopupLang = (props) => {
                                 onClick={() => {
                                     handleChangeLanguage(lang.value)
                                     dispatch({ type: lang.value.toUpperCase() })
+                                    handleClose()
                                 }}
                             >
                                 {lang.title}
@@ -55,7 +55,7 @@ const PopupLang = (props) => {
                     ))}
                 </Box>
             </Box>
-        </React.Fragment>
+        </Box>
     )
 }
 

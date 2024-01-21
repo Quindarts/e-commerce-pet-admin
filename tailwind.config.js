@@ -2,6 +2,13 @@ module.exports = {
     content: ['./src/**/*.{html,js}'],
     important: '#root',
     theme: {
+        screens: {
+            'db-xs': '0px',
+            'db-sm': '510px',
+            'db-md': '660px',
+            'db-lg': '960px',
+            'db-xl': '1260px',
+        },
         extend: {
             opacity: {
                 0: '0',
@@ -32,13 +39,55 @@ module.exports = {
                     '75%': { opacity: 0.3, transform: ' translateY(-75px), translateZ(-6px)' },
                     '100%': { opacity: 0, transform: ' translateY(-100px) , translateZ(-20px)', display: 'none' },
                 },
+                blink: {
+                    '0%, 100%': { opacity: 1 },
+                    '50%': { opacity: 0 },
+                },
+                closeNav: {
+                    '0% ': {
+                        width: '5rem',
+                        opacity: ' 0',
+                    },
+                    '25%': {
+                        width: '5rem',
+                    },
+                    '50%': {
+                        width: '10rem',
+                    },
+                    '75% ': {
+                        width: '15rem',
+                    },
+                    '100%': {
+                        width: '20rem',
+                        opacity: '1',
+                    },
+                },
+                openNav: {
+                    '0% ': {
+                        width: '20rem',
+                        opacity: ' 0',
+                    },
+                    '25%': {
+                        width: '15rem',
+                    },
+                    '50%': {
+                        width: '10rem',
+                    },
+                    '75% ': {
+                        width: '7rem',
+                    },
+                    '100%': {
+                        width: '5rem',
+                        opacity: '1',
+                    },
+                },
             },
             animation: {
                 'waving-hand': 'wave 1s ease-in-out infinite',
                 'showDown-popup': 'showDown 0.2s ease-in-out ',
                 'showOn-popup': 'showOn 0.2s ease-in-out forwards',
+                'blink-badge': 'blink 1s infinite',
             },
         },
     },
-    plugins: [],
 }

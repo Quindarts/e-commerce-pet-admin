@@ -1,5 +1,5 @@
 import React from 'react'
-import CustomButton from './style.js'
+import CustomButton from './styles.js'
 
 function Button(props) {
     const { children, size = 'sm', className, icon, color = '', variant = 'container', ...rest } = props

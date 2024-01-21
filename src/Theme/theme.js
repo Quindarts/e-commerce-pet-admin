@@ -1,4 +1,6 @@
 import { createTheme } from '@mui/material/styles'
+import '@fontsource/montserrat'
+
 const color = {
     indigo: '#405189',
     dark_indigo: '#364574',
@@ -21,10 +23,13 @@ const color = {
     light_green: '#dbecf0',
     blue_basic: '#eef7fe',
     blue: '#3577f1',
-    light_blue: '#299cdb',
-    dark_blue: '#2385ba',
+    light_blue: '#2499EF',
+    dark_blue: '#196BA7',
     light_sky: '#abb9e8',
-    
+    jade: '#27ce88',
+    badge_blue: '#2499ef',
+    // red: '#ff316f',
+    light_pink: '#ffe8ef',
     purple: '#6559cc',
     pink: '#f672a7',
     pink_900: '#ff316f',
@@ -39,4 +44,7 @@ const color = {
 
 export const theme = createTheme({
     color: color,
+    typography: {
+        fontFamily: 'Montserrat, sans-serif',
+    },
 })
