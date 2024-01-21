@@ -7,6 +7,7 @@ import { TextFieldCustomMUI } from './style'
 function Textfield(props) {
     const {
         className,
+        inputcss,
         type = 'text',
         label,
         variant = 'container',
@@ -20,12 +21,12 @@ function Textfield(props) {
     const handleClickShowPassword = () => setShowPassword((show) => !show)
     const helperTextValue = error ? helperText : ''
     return (
-        <Box className={`${className}  `}>
+        <Box className={`${className}`}>
             <Box className="relative">
                 <TextFieldCustomMUI
                     label={label}
                     type={showPassword ? 'text' : type}
-                    className={`textfield w-full textfield-${variant} text-${type} textfield-${size}`}
+                    className={`textfield w-full textfield-${variant} text-${type} textfield-${size} `}
                     error={error}
                     {...rest}
                 />
@@ -41,7 +42,7 @@ function Textfield(props) {
                 )}
             </Box>
             {error && (
-                <Typography className="Mui-error text-[14px] mt-3" sx={{ color: COLOR.pink_900 }}>
+                <Typography className="Mui-error mt-3 text-[14px]" sx={{ color: COLOR.pink_900 }}>
                     {helperTextValue}
                 </Typography>
             )}

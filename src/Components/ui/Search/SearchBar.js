@@ -1,37 +1,29 @@
 import React, { useState, useEffect, useRef } from 'react'
 import 'tailwindcss/tailwind.css'
 import { APP_ICON } from '../../../Utils/Constants'
+import { Box } from '@mui/material'
+import { Icon } from '@iconify/react'
+import Button from '../Button/Button'
 
-function SearchBar({ placeholder, onSearch }) {
-    const [query, setQuery] = useState('')
-    const inputRef = useRef(null)
-
-    useEffect(() => {
-        onSearch(query) // Call onSearch every time query changes
-    }, [query, onSearch])
-
-    const handleClear = () => {
-        setQuery('')
-        inputRef.current.focus()
-    }
-
+function SearchBar(props) {
+    const { placeholder, className, onSearch, handleQuery, query, ...rest } = props
     return (
-        <div className="flex h-12 w-96 items-center rounded-lg border-2 border-gray-400 bg-white shadow-lg">
-            <div className="flex items-center pl-2 pr-1">
-                <span className="iconify h-6 w-6 text-gray-800" icon={APP_ICON.i_search} />
-            </div>
+        <Box {...rest} className={`flex h-[2.5rem] w-96 items-center rounded-lg border-2 bg-white ${className}`}>
+            <Box className="flex items-center pl-2 pr-1">
+                <Button size="lg" color="grey" variant="outline" icon>
+                    <Icon icon={APP_ICON.i_search} />
+                </Button>
+            </Box>
             <input
                 type="text"
-                value={query}
                 placeholder={placeholder}
-                onChange={(event) => setQuery(event.target.value)}
-                className="h-full flex-1 px-2 outline-none"
-                ref={inputRef}
+                onBlur={(event) => handleQuery(event)}
+                className={`h-full  w-full flex-1 px-2 outline-none`}
             />
-            <div className="flex cursor-pointer items-center pl-1 pr-2" onClick={handleClear}>
+            <Box className="flex cursor-pointer items-center pl-1 pr-2">
                 <span className="iconify h-6 w-6 text-gray-800" icon={APP_ICON.i_close} />
-            </div>
-        </div>
+            </Box>
+        </Box>
     )
 }
 

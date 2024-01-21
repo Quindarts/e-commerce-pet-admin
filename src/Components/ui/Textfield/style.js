@@ -80,5 +80,17 @@ export const TextFieldCustomMUI = styled(TextField)`
                 }
             }
         }
+        &-sm .MuiInputBase-root {
+            height: 2.5em;
+            padding: 5px;
+        }
+        &-md .MuiInputBase-root {
+            height: 3.5em;
+            padding: 5px;
+        }
+        &-lg .MuiInputBase-root {
+            height: 4.5em;
+            padding: 15px;
+        }
     }
 `

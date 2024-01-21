@@ -18,7 +18,6 @@ import { useSnackbar } from 'notistack'
 import { Box, Typography, Zoom } from '@mui/material'
 import Table from '../Components/ui/Table/Table.js'
 import { Link } from 'react-router-dom'
-import SearchHead from '../Components/ui/Search/SearchHead.js'
 
 const avatars = [
     {
