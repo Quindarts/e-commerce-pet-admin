@@ -506,7 +506,7 @@ function ComponentPage() {
                 <Dropdown list={listDrop} label="labelDropdown" onChange={(e) => setValueDrop(e.target.value)} />
                 <Typography>value:{valueDrop} </Typography>
             </Box>
-            <Modal key={1} open={open} appearance="center" handleClose={handleClose}></Modal>
+            <Modal key={1} open={open} appearance={optionModal} handleClose={handleClose}></Modal>
         </Box>
     )
 }
