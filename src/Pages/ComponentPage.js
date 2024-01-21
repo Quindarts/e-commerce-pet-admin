@@ -91,6 +91,7 @@ function ComponentPage() {
         setStatus(0)
     }
     const [valueDrop, setValueDrop] = useState('')
+    const [optionModal, setOpTionModal] = useState('center')
     const listDrop = [
         { title: 'quang', value: 10 },
         { title: 'long', value: 20 },
