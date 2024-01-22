@@ -8,7 +8,7 @@ import Button from '../Button/Button'
 function SearchBar(props) {
     const { placeholder, className, onSearch, handleQuery, query, ...rest } = props
     return (
-        <Box {...rest} className={`flex h-[2.5rem] w-96 items-center rounded-lg border-2 bg-white ${className}`}>
+        <Box {...rest} className={`flex h-auto w-96 items-center rounded-lg border-2 bg-white ${className}`}>
             <Box className="flex items-center pl-2 pr-1">
                 <Button size="lg" color="grey" variant="outline" icon>
                     <Icon icon={APP_ICON.i_search} />

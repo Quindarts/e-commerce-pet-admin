@@ -4,7 +4,7 @@ import { Box } from '@mui/material'
 
 function CategoryPage() {
     return (
-        <Box className="w-full">
+        <Box className="w-full ">
             <ListCategoryPage />
         </Box>
     )

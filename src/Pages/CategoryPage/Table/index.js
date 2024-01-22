@@ -1,33 +1,27 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import Table from '../../../Components/ui/Table/Table'
-import { Box, Icon, Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { APP_ICON } from '../../../Utils/Constants'
 import Button from '../../../Components/ui/Button/Button'
+import { Icon } from '@iconify/react'
+import Modal from '../../../Components/ui/Modal/Modal'
 
 function TableCategory(props) {
     const { handleChangePanigation, page, rows } = props
     const [open, setOpen] = useState(false)
-    const handleOpen = (option) => {
+
+    const handleOpen = () => {
         setOpen(true)
     }
+    const handleClose = () => {
+        setOpen(false)
+    }
+
     const columns = [
         {
-            field: 'detail',
+            field: 'name',
             headerName: 'Category name',
             flex: 2,
-            renderCell: (params) => (
-                <Box className="flex gap-3">
-                    <img className="h-[50px] w-[50px]" src={params.formattedValue.img} alt="" />
-                    <Box>
-                        <Typography className="text-[14px] font-bold text-gray-600">
-                            {params.formattedValue.name}
-                        </Typography>
-                        <Typography variant="h10" className="font-500 text-gray-[#5f748d]">
-                            {params.formattedValue.desc}
-                        </Typography>
-                    </Box>
-                </Box>
-            ),
         },
         {
             field: 'code',
@@ -61,28 +55,33 @@ function TableCategory(props) {
             renderCell: (params) => (
                 <Box>
                     <Button onClick={handleOpen} size="lg" color="grey" variant="outline" icon>
-                        <Icon icon={APP_ICON.i_pen} />
+                        <Icon icon={APP_ICON.i_pen} className="text-sky-500" />
+                    </Button>
+                    <Button onClick={handleOpen} size="lg" color="grey" variant="outline" icon>
+                        <Icon icon="mdi:bin-outline" className="text-red-400" />
                     </Button>
                 </Box>
             ),
         },
     ]
     return (
-        <div>
-            {' '}
-            <Table
-                hasCheckbox
-                hasPanigation
-                label="Category table"
-                className=" w-full"
-                columns={columns}
-                rows={rows}
-                totalPage={3}
-                pageSize={3}
-                currentPage={page}
-                handleChangePanigation={handleChangePanigation}
-            />
-        </div>
+        <Fragment>
+            <Box>
+                <Table
+                    hasCheckbox
+                    hasPanigation
+                    label="Category table"
+                    className=" w-full"
+                    columns={columns}
+                    rows={rows}
+                    totalPage={3}
+                    pageSize={3}
+                    currentPage={page}
+                    handleChangePanigation={handleChangePanigation}
+                />
+            </Box>
+            <Modal open={open} appearance="center" handleClose={handleClose} />
+        </Fragment>
     )
 }
 
