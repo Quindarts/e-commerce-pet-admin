@@ -16,17 +16,6 @@ function Modal({ size, appearance, open, handleClose, children, ...rest }) {
     )
 }
 
-function useModal() {
-  const [isOpen, setIsOpen] = useState(false);
 
-  function toggle() {
-    setIsOpen(!isOpen);
-  }
-
-  return {
-    isOpen,
-    toggle,
-  }
-}
 
 export default Modal
