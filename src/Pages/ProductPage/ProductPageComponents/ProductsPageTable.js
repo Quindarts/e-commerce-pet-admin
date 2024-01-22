@@ -2,91 +2,149 @@ import React from 'react'
 import Table from '../../../Components/ui/Table/Table'
 import { BadgeWrapper } from '../../../Components/ui/Badge/Badge'
 import { Box, Typography } from '@mui/material'
+import Button from '../../../Components/ui/Button/Button'
+import { APP_ICON } from '../../../Utils/Constants'
+import { Icon } from '@iconify/react'
+import { Stack } from '@mui/material'
 
 const rows = [
     {
         id: '1',
-        date: 'Jan 10, 2024',
+
+        stock: '48',
         code: 'HLNBCKHJ',
         detail: {
-            name: 'Beef Dog Food',
+            name: 'Nike Air Max 270',
             img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
-            desc: 'Amazon lins',
+            desc: 'Nike Official',
         },
-        price: 60000,
-        brand: 'Jolly Pet',
-        category: 'Food',
-        status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
+        price: 450,
+        category: 'Shoe',
+        edit: (
+            <Stack direction="row">
+                <Button className="" size="md" variant="outline" color="grey" icon>
+                    <Icon icon={APP_ICON.i_pen} />
+                </Button>
+                <Button className="" size="md" variant="outline" color="grey" icon>
+                    <Icon icon={APP_ICON.i_trash} />
+                </Button>
+            </Stack>
+        ),
     },
     {
         id: '2',
-        date: 'Jan 10, 2024',
+
+        stock: '48',
         code: 'HLNBCKHJ',
         detail: {
-            name: 'Beef Dog Food',
+            name: 'Nike Air Max 270',
             img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
-            desc: 'Amazon lins',
+            desc: 'Nike Official',
         },
-        price: 60000,
-        brand: 'Jolly Pet',
-        category: 'Food',
-        status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
+        price: 450,
+        category: 'Shoe',
+        edit: (
+            <Stack className="" direction="row">
+                <Button className="" size="md" variant="outline" color="grey" icon>
+                    <Icon icon={APP_ICON.i_pen} />
+                </Button>
+                <Button className="" size="md" variant="outline" color="grey" icon>
+                    <Icon icon={APP_ICON.i_trash} />
+                </Button>
+            </Stack>
+        ),
     },
     {
         id: '3',
-        date: 'Jan 10, 2024',
+
+        stock: '48',
         code: 'HLNBCKHJ',
         detail: {
-            name: 'Beef Dog Food',
+            name: 'Nike Air Max 270',
             img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
-            desc: 'Amazon lins',
+            desc: 'Nike Official',
         },
-        price: 60000,
-        brand: 'Jolly Pet',
-        category: 'Food',
-        status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
+        price: 450,
+        category: 'Shoe',
+        edit: (
+            <Stack direction="row">
+                <Button className="" size="md" variant="outline" color="grey" icon>
+                    <Icon icon={APP_ICON.i_pen} />
+                </Button>
+                <Button className="" size="md" variant="outline" color="grey" icon>
+                    <Icon icon={APP_ICON.i_trash} />
+                </Button>
+            </Stack>
+        ),
     },
     {
         id: '4',
-        date: 'Jan 10, 2024',
+
+        stock: '48',
         code: 'HLNBCKHJ',
         detail: {
-            name: 'Beef Dog Food',
+            name: 'Nike Air Max 270',
             img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
-            desc: 'Amazon lins',
+            desc: 'Nike Official',
         },
-        price: 60000,
-        brand: 'Jolly Pet',
-        category: 'Food',
-        status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
+        price: 450,
+        category: 'Shoe',
+        edit: (
+            <Stack direction="row">
+                <Button className="" size="md" variant="outline" color="grey" icon>
+                    <Icon icon={APP_ICON.i_pen} />
+                </Button>
+                <Button className="" size="md" variant="outline" color="grey" icon>
+                    <Icon icon={APP_ICON.i_trash} />
+                </Button>
+            </Stack>
+        ),
     },
     {
         id: '5',
-        date: 'Jan 10, 2024',
+
+        stock: '48',
         code: 'HLNBCKHJ',
         detail: {
-            name: 'Beef Dog Food',
+            name: 'Nike Air Max 270',
             img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
-            desc: 'Amazon lins',
+            desc: 'Nike Official',
         },
-        price: 60000,
-        brand: 'Jolly Pet',
-        category: 'Food',
-        status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
+        price: 450,
+        category: 'Shoe',
+        edit: (
+            <Stack direction="row">
+                <Button className="" size="md" variant="outline" color="grey" icon>
+                    <Icon icon={APP_ICON.i_pen} />
+                </Button>
+                <Button className="" size="md" variant="outline" color="grey" icon>
+                    <Icon icon={APP_ICON.i_trash} />
+                </Button>
+            </Stack>
+        ),
     },
     {
         id: '6',
-        date: 'Jan 10, 2024',
+
+        stock: '48',
         code: 'HLNBCKHJ',
         detail: {
-            name: 'Beef Dog Food',
+            name: 'Nike Air Max 270',
             img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
-            desc: 'Amazon lins',
+            desc: 'Nike Official',
         },
-        price: 60000,
-        brand: 'Jolly Pet',
-        category: 'Food',
-        status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
+        price: 450,
+        category: 'Shoe',
+        edit: (
+            <Stack direction="row">
+                <Button className="" size="md" variant="outline" color="grey" icon>
+                    <Icon icon={APP_ICON.i_pen} />
+                </Button>
+                <Button className="" size="md" variant="outline" color="grey" icon>
+                    <Icon icon={APP_ICON.i_trash} />
+                </Button>
+            </Stack>
+        ),
     },
 ]
 const columns = [
@@ -109,11 +167,6 @@ const columns = [
         ),
     },
     {
-        field: 'date',
-        headerName: 'Date',
-        flex: 1,
-    },
-    {
         field: 'category',
         headerName: 'Category',
         flex: 1,
@@ -123,8 +176,14 @@ const columns = [
         ),
     },
     {
-        field: 'brand',
-        headerName: 'Brand',
+        field: 'stock',
+        headerName: 'Stock',
+        flex: 1,
+    },
+
+    {
+        field: 'code',
+        headerName: 'SKU',
         flex: 1,
     },
 
@@ -134,14 +193,12 @@ const columns = [
         flex: 1,
     },
     {
-        field: 'status',
-        headerName: 'Status',
-
+        field: 'edit',
+        headerName: 'Edit',
         flex: 1,
-        renderCell: (params) => <Box className="font-500 px-7 py-1">{params.row.status}</Box>,
+        renderCell: (params) => <Box className="font-500 py-1">{params.row.edit}</Box>,
     },
 ]
-
 export const ProductPageTable = () => {
-    return <Table className="h-80 w-full" columns={columns} rows={rows} />
+    return <Table className="h-auto w-full" pageSize={6} hasCheckbox hasPanigation columns={columns} rows={rows} />
 }

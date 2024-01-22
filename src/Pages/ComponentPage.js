@@ -321,7 +321,7 @@ function ComponentPage() {
             Edit: 'Edit',
         },
     ]
-    const [filteredRows, setFilteredRows] = useState(rows)
+ 
     return (
         <Box className="component_page">
             ComponentPage
@@ -478,7 +478,7 @@ function ComponentPage() {
                     label="Popular Products"
                     className=" w-full"
                     columns={columns}
-                    rows={filteredRows}
+                    rows={rows}
                     totalPage={3}
                     pageSize={3}
                     currentPage={page}
