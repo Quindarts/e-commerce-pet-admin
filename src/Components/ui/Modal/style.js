@@ -43,10 +43,10 @@ const animations = {
     `,
 }
 
-const MainModal = styled.div(({ size, appearance }) => ({
+const MainModal = styled.div(({ size, appearance, height }) => ({
     position: 'absolute',
     width: 500,
-    height: 500,
+    height: sizes[height].height,
     backgroundColor: '#ffffff',
     boxShadow: '0 0 0 50vmax rgba(0,0,0,.5)',
     padding: '1rem',
@@ -79,10 +79,12 @@ const CustomModal = styled(Modal)`
     }
 `
 const sizes = {
-    mobile: { width: '100%', height: '98vh' },
-    tablet: { width: '100%', height: '98vh' },
-    laptop: { width: '75%', height: '80vh' },
-    desktop: { width: '50%', height: '55vh' },
+    mobile: { height: '80%', width: '80%' },
+    tablet: { height: '80%', width: '80%' },
+    laptop: { height: '80%', width: '80%' },
+    sm: { height: '500px', width: '500px' },
+    md: { height: '600px', width: '600px' },
+    lg: { height: '700px', width: '700px' },
 }
 
 export { MainModal, CustomModal }

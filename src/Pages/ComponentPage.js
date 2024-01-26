@@ -229,7 +229,7 @@ function ComponentPage() {
                     <Textfield className="my-3 w-1/2" label="Password" type="password" />
                 </div>
             </div>
-            <Modal key={1} open={open} appearance={optionModal} handleClose={handleClose}></Modal>
+            <Modal key={1} height="sm" open={open} appearance={optionModal} handleClose={handleClose}></Modal>
         </div>
     )
 }
