@@ -3,7 +3,6 @@ import ComponentPage from '../Pages/ComponentPage'
 import MainLayout from '../Layout/MainLayout/MainLayout'
 import { APP_ROUTER } from '../Utils/Constants'
 import HomePage from '../Pages/Home/HomePage'
-import ProductManager from '../Pages/ProductPage/ProductManagement'
 import OrderPage from '../Pages/OrderPage/OrderPage'
 import UserPage from '../Pages/UserPage/UserPage'
 import AuthLayout from '../Layout/AuthLayout/AuthLayout'
@@ -11,7 +10,6 @@ import Login from '../Pages/Auth/Login'
 import Register from '../Pages/Auth/Register'
 import { loaderUser } from './loader/loaderAuth'
 import CategoryPage from '../Pages/CategoryPage/CategoryPage'
-import AddProduct from '../Pages/ProductPage/AddProduct'
 
 const router = createBrowserRouter([
     {
@@ -24,14 +22,7 @@ const router = createBrowserRouter([
                 element: <HomePage />,
                 index: true,
             },
-            {
-                path: APP_ROUTER.PRODUCT,
-                element: <ProductManager />,
-            },
-            {
-                path: APP_ROUTER.ADD_PRODUCT,
-                element: <AddProduct />,
-            },
+
             {
                 path: APP_ROUTER.CATEGORY,
                 element: <CategoryPage />,
