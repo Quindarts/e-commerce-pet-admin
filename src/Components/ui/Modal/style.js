@@ -4,6 +4,36 @@ import styled from '@emotion/styled'
 import { Modal } from '@mui/material'
 import { theme } from '../../../Theme/theme'
 
+export const types = {
+    edit: {
+        height: '500px',
+        width: '500px',
+        responsive: {
+            '@media (max-width: 767px)': {
+                height: '80%',
+                width: '80%',
+            },
+            '@media (min-width: 768px) and (max-width: 900px)': {
+                height: '70%',
+                width: '70%',
+            },
+        },
+    },
+    home: {
+        height: '600px',
+        width: '600px',
+        responsive: {
+            '@media (max-width: 767px)': {
+                height: '90%',
+                width: '90%',
+            },
+            '@media (min-width: 768px) and (max-width: 900px)': {
+                height: '80%',
+                width: '80%',
+            },
+        },
+    },
+}
 const animations = {
     bottom_left: keyframes`
       0% { top: 100%; left: 0; transform: translate(0, 0); }
@@ -43,46 +73,27 @@ const animations = {
     `,
 }
 
-const MainModal = styled.div(({ size, appearance }) => ({
-    position: 'absolute',
-    width: 500,
-    height: 500,
-    backgroundColor: '#ffffff',
-    boxShadow: '0 0 0 50vmax rgba(0,0,0,.5)',
-    padding: '1rem',
-    animation: `${animations[appearance]} 0.4s`,
-    animationFillMode: 'forwards',
-    borderRadius: '10px',
-    color: theme.color.gray_600,
-    button: {
+const MainModal = styled.div(({ size, appearance }) => {
+    const { height, width, responsive } = types[size]
+    return {
         position: 'absolute',
-        top: 10,
-        right: 10,
-    },
-    '@media (max-width: 767px)': {
-        ...sizes['mobile'],
-    },
-    '@media (min-width: 768px) and (max-width: 900px)': {
-        ...sizes['tablet'],
-    },
-    '@media (min-width: 901px) and (max-width: 1200px)': {
-        ...sizes['laptop'],
-    },
-    '@media (min-width: 1201px)': {
-        ...sizes['desktop'],
-    },
-}))
-
-const CustomModal = styled(Modal)`
-    & {
-        color: white;
+        backgroundColor: '#ffffff',
+        boxShadow: '0 0 0 50vmax rgba(0,0,0,.5)',
+        padding: '1rem',
+        animation: `${animations[appearance]} 0.4s`,
+        animationFillMode: 'forwards',
+        borderRadius: '10px',
+        color: theme.color.gray_600,
+        button: {
+            position: 'absolute',
+            top: 10,
+            right: 10,
+        },
+        height,
+        width,
+        ...responsive,
     }
-`
-const sizes = {
-    mobile: { width: '100%', height: '98vh' },
-    tablet: { width: '100%', height: '98vh' },
-    laptop: { width: '75%', height: '80vh' },
-    desktop: { width: '50%', height: '55vh' },
-}
+})
+const CustomModal = styled(Modal)``
 
 export { MainModal, CustomModal }

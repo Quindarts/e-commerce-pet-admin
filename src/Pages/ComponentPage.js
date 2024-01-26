@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react'
 import AvatarGroup from '../Components/ui/Avatar/AvatarGroup.js'
 import Button from '../Components/ui/Button/Button.js'
-import { APP_ICON, APP_ROUTER } from '../Utils/Constants.js'
+import { APP_ICON } from '../Utils/Constants.js'
 import Textfield from '../Components/ui/Textfield/Textfield.js'
 import PopupUser from '../Components/ui/Popup/PopupUser.js'
 import StatusBar from '../Components/ui/StatusBar/StatusBar.js'
@@ -13,12 +13,6 @@ import PopupServ from '../Components/ui/Popup/PopupServ.js'
 import { useTranslation } from 'react-i18next'
 import i18n from '../translation/i18n.js'
 import PopupLang from '../Components/ui/Popup/PopupLang.js'
-import Avatar from '../Components/ui/Avatar/Avatar.js'
-import { useSnackbar } from 'notistack'
-import { Box, Typography, Zoom } from '@mui/material'
-import Table from '../Components/ui/Table/Table.js'
-import { Link } from 'react-router-dom'
-import { BadgeWrapper } from '../Components/ui/Badge/Badge.js'
 
 const avatars = [
     {
@@ -59,26 +53,7 @@ const listLanguage = [
     { title: 'Vietnamese', value: 'vi' },
     { title: 'English', value: 'en' },
 ]
-const dataTable = [
-    {
-        name: 'Nike Air Max 270',
-        category: 'Shoe',
-        stock: 'SKU',
-        Price: '2000',
-        Rate: '2000',
-    },
-]
-const dataPie = [
-    { value: 5, label: 'A' },
-    { value: 10, label: 'B' },
-    { value: 15, label: 'C' },
-    { value: 20, label: 'D' },
-]
 
-const size = {
-    width: 400,
-    height: 200,
-}
 function ComponentPage() {
     const demo = 50
     const [status, setStatus] = useState(demo)
@@ -96,41 +71,18 @@ function ComponentPage() {
         { title: 'long', value: 20 },
         { title: 'phuc', value: 30 },
     ]
-    const { enqueueSnackbar } = useSnackbar()
 
     const [open, setOpen] = useState(false)
+    const [optionModal, setOpTionModal] = useState('center')
+
     const handleOpen = (option) => {
         setOpen(true)
+        setOpTionModal(option)
     }
 
     const handleClose = () => {
         setOpen(false)
     }
-
-    function showTopRightSuccessSnackbar() {
-        enqueueSnackbar('Success!', { variant: 'success', anchorOrigin: { vertical: 'top', horizontal: 'right' } })
-    }
-
-    function showBottomRightErrorSnackbar() {
-        enqueueSnackbar('An error occurred', {
-            variant: 'error',
-            TransitionComponent: Zoom,
-            anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
-        })
-    }
-    function showBottomLeftWarningSnackbar() {
-        enqueueSnackbar('Warning', { variant: 'warning', anchorOrigin: { vertical: 'bottom', horizontal: 'left' } })
-    }
-    function showTopLeftInfoSnackbar() {
-        enqueueSnackbar('Information', { variant: 'info', anchorOrigin: { vertical: 'top', horizontal: 'left' } })
-    }
-    function showBottomRightCustomSnackbar() {
-        enqueueSnackbar('Custom Variant', {
-            variant: 'customVariant',
-            anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
-        })
-    }
-
     const handleChangeLanguage = (value) => {
         i18n.changeLanguage(value)
     }
@@ -323,26 +275,26 @@ function ComponentPage() {
     ]
  
     return (
-        <Box className="component_page">
+        <div className="component_page">
             ComponentPage
-            <Typography>Viết các Components chung tại đây</Typography>
-            <Typography className="my-3 font-[800]">Avatar</Typography>
-            <Box className="flex gap-5">
-                <Box>
-                    <Typography className="mt-3 font-bold">Avatar sm</Typography>
+            <p>Viết các Components chung tại đây</p>
+            <h1 className="my-3 font-[800]">Avatar</h1>
+            <div className="flex gap-5">
+                <div>
+                    <h1 className="mt-3 font-bold">Avatar sm</h1>
                     <AvatarGroup avatars={avatars} maxVisible={2} className="mt-3" size="sm" />
-                </Box>
-                <Box>
-                    <Typography className="mt-3 font-bold">Avatar md</Typography>
+                </div>
+                <div>
+                    <h1 className="mt-3 font-bold">Avatar md</h1>
                     <AvatarGroup avatars={avatars} maxVisible={3} className="mt-3" size="md" upload badge={true} />
-                </Box>
-                <Box>
-                    <Typography className="mt-3 font-bold">Avatar lg</Typography>
+                </div>
+                <div>
+                    <h1 className="mt-3 font-bold">Avatar lg</h1>
                     <AvatarGroup avatars={avatars} maxVisible={4} className="mt-3" size="lg" upload />
-                </Box>
-            </Box>
-            <Typography className="my-3 font-[800]">Button</Typography>
-            <Box>
+                </div>
+            </div>
+            <h1 className="my-3 font-[800]">Button</h1>
+            <div>
                 <Button className="m-1" size="lg" color="primary">
                     btn-primary-lg
                 </Button>
@@ -371,7 +323,7 @@ function ComponentPage() {
                     btn-none
                     <Icon className="ml-1 " icon={APP_ICON.i_pen} />
                 </Button>
-                <Typography className="my-3 font-[800]">Button icon</Typography>
+                <h1 className="my-3 font-[800]">Button icon</h1>
                 <Button className="m-1" size="lg" color="grey" icon>
                     <Icon icon={APP_ICON.i_pen} />
                 </Button>
@@ -387,38 +339,32 @@ function ComponentPage() {
                 <Button className="m-1" color="grey" icon variant="outline">
                     <Icon icon={APP_ICON.i_invoice} />
                 </Button>
-            </Box>
-            <Typography className="my-3 font-[800]">Status Bar</Typography>
-            <Box>
+            </div>
+            <h1 className="my-3 font-[800]">Status Bar</h1>
+            <div>
                 <StatusBar
+                    className="bg-orange-100"
                     variant="blue"
                     handleCompleteClick={handleCompleteClick}
                     handleResetClick={handleResetClick}
                     status={status}
                 ></StatusBar>
-                <Box> {status} %</Box>
-            </Box>
+                <div> {status} %</div>
+            </div>
             <Button onClick={handleCompleteClick}>Complete</Button>
             <Button onClick={handleResetClick}>Rest</Button>
-            <Typography className="mt-3 font-bold">PopupUser</Typography>
-            <Box>
+            <h1 className="mt-3 font-bold">PopupUser</h1>
+            <div>
                 <PopupUser user={user} />
-            </Box>
-            <Typography className="mt-3 font-bold">PopupServ</Typography>
-            <Box>
+            </div>
+            <h1 className="mt-3 font-bold">PopupServ</h1>
+            <div>
                 <PopupServ avatars={avatars} names={names} />
-            </Box>
-            <Typography className="mt-3 font-bold">Accordin</Typography>
-            <Typography className="mt-3 font-bold">Toast</Typography>
-            <Box className="flex flex-wrap gap-3">
-                <Button onClick={showTopRightSuccessSnackbar}>Default Top Right </Button>
-                <Button onClick={showBottomRightErrorSnackbar}>Custom Icon Bottom Right </Button>
-                <Button onClick={showBottomLeftWarningSnackbar}>Override Bottom Left </Button>
-                <Button onClick={showTopLeftInfoSnackbar}>Overdrive Top Left </Button>
-                <Button onClick={showBottomRightCustomSnackbar}>Custom Appear</Button>
-            </Box>
-            <Typography className="mt-3 font-bold">Modal</Typography>
-            <Box className="flex flex-wrap gap-3">
+            </div>
+            <h1 className="mt-3 font-bold">Accordin</h1>
+            <h1 className="mt-3 font-bold">Snackbar</h1>
+            <h1 className="mt-3 font-bold">Modal</h1>
+            <div className="flex flex-wrap gap-3">
                 <Button variant="contained" onClick={() => handleOpen('bottom_left')}>
                     Modal bottom left
                 </Button>
@@ -446,10 +392,10 @@ function ComponentPage() {
                 <Button variant="contained" onClick={() => handleOpen('center')}>
                     Modal center
                 </Button>
-            </Box>
-            <Typography className="mt-3 font-bold">Select language</Typography>
-            <Typography>{t('content.text')}</Typography>
-            <Box>
+            </div>
+            <h1 className="mt-3 font-bold">Select language</h1>
+            <h1>{t('content.text')}</h1>
+            <div>
                 <PopupLang list={listLanguage} handleChangeLanguage={handleChangeLanguage} />
             </Box>
             <Typography className="mt-3 font-bold">Badge</Typography>
@@ -493,21 +439,21 @@ function ComponentPage() {
             <Typography className="mt-3 font-bold">U pload image</Typography>
             <Box>
                 <InputUpload listUpload={warehouseItem} />
-            </Box>
-            <Typography className="mt-3 font-bold">Texfield</Typography>
-            <Box>
-                <Box className="flex w-full gap-[2rem]">
+            </div>
+            <h1 className="mt-3 font-bold">Dropdown</h1>
+            <div>
+                <Dropdown list={listDrop} label="labelDropdown" onChange={(e) => setValueDrop(e.target.value)} />
+                <h1>value:{valueDrop} </h1>
+            </div>
+            <h1 className="mt-3 font-bold">Texfield</h1>
+            <div>
+                <div className="flex w-full gap-[2rem]">
                     <Textfield className="my-3 w-1/2" label="Username" type="text" />
                     <Textfield className="my-3 w-1/2" label="Password" type="password" />
-                </Box>
-            </Box>
-            <Typography className="mt-3 font-bold">Dropdown</Typography>
-            <Box>
-                <Dropdown list={listDrop} label="labelDropdown" onChange={(e) => setValueDrop(e.target.value)} />
-                <Typography>value:{valueDrop} </Typography>
-            </Box>
-            <Modal key={1} open={open} appearance="center" handleClose={handleClose}></Modal>
-        </Box>
+                </div>
+            </div>
+            <Modal size="edit" appearance="center" open={open} handleClose={handleClose}></Modal>
+        </div>
     )
 }
 
