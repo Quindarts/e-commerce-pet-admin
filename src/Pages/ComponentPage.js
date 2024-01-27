@@ -13,6 +13,8 @@ import PopupServ from '../Components/ui/Popup/PopupServ.js'
 import { useTranslation } from 'react-i18next'
 import i18n from '../translation/i18n.js'
 import PopupLang from '../Components/ui/Popup/PopupLang.js'
+import { Box, Typography } from '@mui/material'
+import { BadgeWrapper } from '../Components/ui/Badge/Badge.js'
 
 const avatars = [
     {
@@ -273,7 +275,7 @@ function ComponentPage() {
             Edit: 'Edit',
         },
     ]
- 
+
     return (
         <div className="component_page">
             ComponentPage
@@ -395,7 +397,7 @@ function ComponentPage() {
             </div>
             <h1 className="mt-3 font-bold">Select language</h1>
             <h1>{t('content.text')}</h1>
-            <div>
+            <Box>
                 <PopupLang list={listLanguage} handleChangeLanguage={handleChangeLanguage} />
             </Box>
             <Typography className="mt-3 font-bold">Badge</Typography>
@@ -439,7 +441,7 @@ function ComponentPage() {
             <Typography className="mt-3 font-bold">U pload image</Typography>
             <Box>
                 <InputUpload listUpload={warehouseItem} />
-            </div>
+            </Box>
             <h1 className="mt-3 font-bold">Dropdown</h1>
             <div>
                 <Dropdown list={listDrop} label="labelDropdown" onChange={(e) => setValueDrop(e.target.value)} />
