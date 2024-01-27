@@ -6,11 +6,11 @@ import { tokenService } from './token.services'
 const isDebug = process.env.NODE_ENV !== 'production'
 
 const client = Axios.create({
-    baseURL: `https://e-commerce-pet-server-quindarts.vercel.app`,
+    baseURL: `${process.env.REACT_APP_API_URL}`,
     headers: {
         'Content-Type': 'application/json',
     },
-    timeout: 10000,
+    timeout: 3000,
 })
 
 client.interceptors.request.use(
@@ -29,17 +29,16 @@ client.interceptors.request.use(
 )
 
 client.interceptors.response.use(
-    (response) => {
-        if (isDebug) {
+    function (response) {
+        if (response && response.data) {
+            return response.data
         }
-        return response.data
     },
     async (error) => {
         const originalConfig = error.config
         if (originalConfig.url !== APP_ROUTER.LOGIN && error.response) {
             if (error.response.status === 401 && !originalConfig._retry) {
                 originalConfig._retry = true
-
                 try {
                     const serviceToken = tokenService()
                     const rs = await client.post(APP_ROUTER.REFRESH_TOKEN, {

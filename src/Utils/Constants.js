@@ -9,7 +9,9 @@ export const APP_ROUTER = {
     ADD_PRODUCT: '/product/add-product',
 
     CATEGORY: '/categorys',
-
+    CATEGORY_LIST: '/categorys/list',
+    CATEGORY_ADD: '/categorys/add',
+    
     AUTH: 'auth',
     LOGIN: '/auth/login',
     REGISTER: '/auth/register',

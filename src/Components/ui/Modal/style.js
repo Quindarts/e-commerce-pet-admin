@@ -48,13 +48,13 @@ const MainModal = styled.div(({ size, appearance }) => ({
     width: 500,
     height: 500,
     backgroundColor: '#ffffff',
-    boxShadow: '0 0 0 50vmax rgba(0,0,0,.5)',
+    boxShadow: '0 0 0 50vmax rgba(0,0,0,.1)',
     padding: '1rem',
-    animation: `${animations[appearance]} 0.4s`,
+    animation: `${animations[appearance]} 0.05s`,
     animationFillMode: 'forwards',
     borderRadius: '10px',
     color: theme.color.gray_600,
-    button: {
+    '.exit_model': {
         position: 'absolute',
         top: 10,
         right: 10,
