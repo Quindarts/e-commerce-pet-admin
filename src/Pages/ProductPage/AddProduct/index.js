@@ -1,72 +1,77 @@
 import React, { useState } from 'react'
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import Button from '../../../Components/ui/Button/Button.js'
 import { Card } from '../styles.js'
 import Textfield from '../../../Components/ui/Textfield/Textfield.js'
 import InputUpload from '../../../Components/ui/InputUpload/InputUpload.js'
-import { APP_ROUTER } from '../../../Utils/Constants.js'
+import { APP_ICON, APP_ROUTER } from '../../../Utils/Constants.js'
 import { useNavigate } from 'react-router-dom'
 import Dropdown from '../../../Components/ui/Dropdown/Dropdown.js'
 import Modal from '../../../Components/ui/Modal/Modal.js'
+import { Icon } from '@iconify/react'
 
 const AddProduct = () => {
     const navigate = useNavigate()
-    const [list1, setList1] = useState([
-        { title: 'Option 1', value: '1' },
-        { title: 'Option 2', value: '2' },
+    const [brand, setBrand] = useState([
+        { title: 'Brand 1', value: '1' },
+        { title: 'Brand 2', value: '2' },
     ])
-    const [list2, setList2] = useState([
-        { title: 'Choice 1', value: '1' },
-        { title: 'Choice 2', value: '2' },
+    const size = [
+        { title: 'sm', value: '1' },
+        { title: 'lg', value: '2' },
+        { title: 'lg', value: '3' },
+    ]
+    const [category, setCategory] = useState([
+        { title: 'Category 1', value: '1' },
+        { title: 'Category 2', value: '2' },
     ])
-    const [open1, setOpen1] = useState(false)
-    const [open2, setOpen2] = useState(false)
 
-    const handleOpen1 = () => {
-        setOpen1(true)
+    const [openBrand, setOpenBrand] = useState(false)
+    const [openCategory, setOpenCategory] = useState(false)
+
+    const handleOpenBrand = () => {
+        setOpenBrand(true)
     }
 
-    const handleOpen2 = () => {
-        setOpen2(true)
+    const handleOpenCategory = () => {
+        setOpenCategory(true)
     }
 
-    const handleClose1 = () => {
-        setOpen1(false)
+    const handleCloseBrand = () => {
+        setOpenBrand(false)
     }
 
-    const handleClose2 = () => {
-        setOpen2(false)
+    const handleCloseCategory = () => {
+        setOpenCategory(false)
     }
 
-    const handleAddOption1 = (title, value) => {
-        setList1([...list1, { title, value }])
-        handleClose1()
+    const handleAddBrand = (title, value) => {
+        setBrand([...brand, { title, value }])
+        handleCloseBrand()
     }
 
-    const handleAddOption2 = (title, value) => {
-        setList2([...list2, { title, value }])
-        handleClose2()
+    const handleAddCategory = (title, value) => {
+        setCategory([...category, { title, value }])
+        handleCloseCategory()
     }
     return (
-        <Box className="grid db-md:grid-rows-1 ">
-            <Box sx={Card} className="grid ">
-                <Box className="db-md:col-span-2">Product</Box>
-                <Textfield
-                    placeholder="Name"
-                    id="name"
-                    type="text"
-                    label="Name"
-                    className="db-md:col-span-1"
-                ></Textfield>
-                <Dropdown className="your-custom-class" list={list1} size="xl" label="Select an option" />
-                <Button onClick={handleOpen1}>Add Option</Button>
-                <Modal key={1} open={open1} appearance="center" handleClose={handleClose1}>
+        <Box className=" grid w-full grid-cols-8 ">
+            <Box sx={Card} className=" col-span-4 grid grid-cols-4">
+                <Textfield placeholder="Name" id="name" type="text" label="Name" className=" col-span-4"></Textfield>
+                <Dropdown className=" col-span-3" list={brand} size="xl" />
+                <Box className="flex justify-center">
+                    <Button className="mx-auto mt-1 " size="lg" variant="outline" color="grey" icon>
+                        <Icon className="mx-auto" icon={APP_ICON.i_plus} />
+                    </Button>
+                </Box>
+
+                <Modal key={1} open={openBrand} appearance="center" handleClose={handleCloseBrand}>
                     <form
                         onSubmit={(event) => {
                             event.preventDefault()
                             const title = event.target.elements.title.value
                             const value = event.target.elements.value.value
-                            handleAddOption1(title, value)
+                            handleAddBrand(title, value)
                         }}
                     >
                         <label>
@@ -77,18 +82,23 @@ const AddProduct = () => {
                             Value:
                             <input type="text" name="value" required />
                         </label>
-                        <button type="submit">Add</button>
+                        <Button type="submit">Add</Button>
                     </form>
                 </Modal>
-                <Dropdown className="your-custom-class" list={list2} size="xl" label="Select a choice" />
-                <Button onClick={handleOpen2}>Add Choice</Button>
-                <Modal key={2} open={open2} appearance="center" handleClose={handleClose2}>
+
+                <Dropdown className="col-span-3" list={category} size="xl" />
+                <Box className="flex justify-center">
+                    <Button className="mx-auto mt-1 " size="lg" variant="outline" color="grey" icon>
+                        <Icon className="mx-auto" icon={APP_ICON.i_plus} />
+                    </Button>
+                </Box>
+                <Modal key={2} open={openCategory} appearance="center" handleClose={handleCloseCategory}>
                     <form
                         onSubmit={(event) => {
                             event.preventDefault()
                             const title = event.target.elements.title.value
                             const value = event.target.elements.value.value
-                            handleAddOption2(title, value)
+                            handleAddCategory(title, value)
                         }}
                     >
                         <label>
@@ -99,61 +109,79 @@ const AddProduct = () => {
                             Value:
                             <input type="text" name="value" required />
                         </label>
-                        <button type="submit">Add</button>
+                        <Button type="submit">Add</Button>
                     </form>
                 </Modal>
-                <Textfield
-                    placeholder="Stock"
-                    id="stock"
-                    type="number"
-                    label="Stock"
-                    className="db-md:col-span-1"
-                ></Textfield>
                 <Textfield
                     placeholder="SKU Code"
                     id="code"
                     type="text"
                     label="SKU Code"
-                    className="db-md:col-span-1"
+                    className=" col-span-2"
+                ></Textfield>
+                <Textfield
+                    placeholder="Active"
+                    id="active"
+                    type="boolean"
+                    label="Active"
+                    className=" col-span-2"
+                ></Textfield>
+            </Box>
+            <Box sx={Card} className="col-span-4 grid grid-cols-4">
+                <Textfield
+                    placeholder="Total Reviews"
+                    id="reviews"
+                    type="number"
+                    label="Reviews"
+                    className=" col-span-2"
+                ></Textfield>
+                <Textfield
+                    placeholder="Rating"
+                    id="rating"
+                    type="number"
+                    label="Rating"
+                    className=" col-span-2"
+                ></Textfield>{' '}
+                <Textfield
+                    placeholder="Stock"
+                    id="stock"
+                    type="number"
+                    label="Stock"
+                    className=" col-span-2"
                 ></Textfield>
                 <Textfield
                     placeholder="Price"
                     id="price"
                     type="number"
                     label="Price"
-                    className="db-md:col-span-1"
+                    className=" col-span-2"
                 ></Textfield>
+                <Dropdown className="col-span-2" list={size} size="xl" />
+                <Box className=" col-span-2">
+                    <Textfield
+                        placeholder="... gram"
+                        id="Weight"
+                        type="number"
+                        label="Weight"
+                        className=" col-span-2"
+                    ></Textfield>
+                </Box>
                 <Textfield
-                    placeholder="Meta Title"
-                    id="meta-title"
+                    placeholder="Description"
+                    id="description"
                     type="text"
-                    label="Meta Title"
-                    className="db-md:col-span-2"
-                ></Textfield>
-                <Textfield
-                    placeholder="Meta Tags"
-                    id="meta-tags"
-                    type="text"
-                    label="Meta Tags"
-                    className="db-md:col-span-2"
-                ></Textfield>
-                <Textfield
-                    placeholder="Meta Description"
-                    id="meta-description"
-                    type="text"
-                    label="Meta Description"
-                    className="db-md:col-span-2"
+                    label="Description"
+                    className=" col-span-4 "
                 ></Textfield>
             </Box>
-
-            <Box className="db-md:col-span-2">
-                <InputUpload className="h-1 "></InputUpload>
+            <Box className="col-span-8">
+                <InputUpload className=" h-1 "></InputUpload>
             </Box>
             <Box>
-                <Button onClick={() => navigate(APP_ROUTER.PRODUCT)} size="sm" color="primary" className="">
+                <Button onClick={() => navigate(APP_ROUTER.PRODUCT)} size="sm" color="primary" className=" ">
                     Create New Product
                 </Button>
-                <Button size="sm" color="grey" variant="outline" className="">
+                <Button size="sm" color="grey" variant="outline" className=" ">
                     Cancel
                 </Button>
             </Box>
