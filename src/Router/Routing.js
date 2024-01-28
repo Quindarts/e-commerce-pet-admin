@@ -1,9 +1,8 @@
-import { redirect, createBrowserRouter, useNavigate, Route } from 'react-router-dom'
+import { createBrowserRouter } from 'react-router-dom'
 import ComponentPage from '../Pages/ComponentPage'
 import MainLayout from '../Layout/MainLayout/MainLayout'
 import { APP_ROUTER } from '../Utils/Constants'
 import HomePage from '../Pages/Home/HomePage'
-import ProductPage from '../Pages/ProductPage/ProductPage'
 import OrderPage from '../Pages/OrderPage/OrderPage'
 import UserPage from '../Pages/UserPage/UserPage'
 import AuthLayout from '../Layout/AuthLayout/AuthLayout'
@@ -28,10 +27,7 @@ const router = createBrowserRouter([
                 element: <HomePage />,
                 index: true,
             },
-            {
-                path: APP_ROUTER.PRODUCT,
-                element: <ProductPage />,
-            },
+
             {
                 path: APP_ROUTER.CATEGORY,
                 element: <CategoryPage />,
