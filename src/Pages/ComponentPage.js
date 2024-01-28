@@ -15,6 +15,7 @@ import i18n from '../translation/i18n.js'
 import PopupLang from '../Components/ui/Popup/PopupLang.js'
 import { Avatar, Box, Table, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
+import { BadgeWrapper } from '../Components/ui/Badge/Badge.js'
 
 const avatars = [
     {
@@ -105,7 +106,7 @@ function ComponentPage() {
             price: 60000,
             brand: 'Jolly Pet',
             category: 'Food',
-            // status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
+            status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
         },
         {
             id: '2',
@@ -119,7 +120,7 @@ function ComponentPage() {
             price: 60000,
             brand: 'Jolly Pet',
             category: 'Food',
-            // // status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
+            status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
         },
         {
             id: '3',
@@ -133,7 +134,7 @@ function ComponentPage() {
             price: 60000,
             brand: 'Jolly Pet',
             category: 'Food',
-            // // status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
+            status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
         },
         {
             id: '4',
@@ -147,7 +148,7 @@ function ComponentPage() {
             price: 70000,
             brand: 'Jolly',
             category: 'Food',
-            // // status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
+            status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
         },
         {
             id: '5',
@@ -161,7 +162,7 @@ function ComponentPage() {
             price: 60000,
             brand: 'Jolly Pet',
             category: 'Food',
-            // // status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
+            status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
         },
         {
             id: '6',
@@ -175,7 +176,7 @@ function ComponentPage() {
             price: 50000,
             brand: ' Pet',
             category: 'Food',
-            // // status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
+            status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
         },
     ]
     const columns = [

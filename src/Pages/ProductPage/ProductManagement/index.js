@@ -25,7 +25,7 @@ const ProductManager = () => {
                     onClick={() => navigate(APP_ROUTER.ADD_PRODUCT)}
                     size="sm"
                     color="primary"
-                    className="px-7 py-1 font-semibold db-xs:mb-0 db-xs:w-full db-md:mb-4 db-md:w-auto"
+                    className="mt-1 px-7 py-2 font-semibold db-xs:mb-0 db-xs:w-full db-md:mb-4 db-md:w-auto"
                 >
                     Add Products +
                 </Button>

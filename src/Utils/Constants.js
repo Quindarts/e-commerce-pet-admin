@@ -24,7 +24,7 @@ export const ROLE = {
     WAREHOUSE: ' warehouse',
 }
 export const APP_ICON = {
-    i_close : 'iconamoon:close',
+    i_close: 'iconamoon:close',
     i_arrow_down: 'ph:arrow-down-light',
     i_arrow_up: 'ph:arrow-up-light',
     i_twitter: 'logos:twitter',
@@ -124,6 +124,8 @@ export const APP_ICON = {
     i_eye_off: 'mdi:eye-off',
 
     i_instagram: 'ri:instagram-fill',
+
+    i_warning: 'noto:warning',
 }
 
 export const TITLE_NAVBAR = {

@@ -4,7 +4,7 @@ import { createTheme } from '@mui/material/styles'
 import { theme } from '../../../Theme/theme'
 
 const colorMap = {
-    green: { main: theme.color.jade, text: theme.color.white },
+    green: { main: theme.color.green_200, text: theme.color.green_600 },
     blue: { main: theme.color.badge_blue, text: theme.color.white },
     red: { main: theme.color.pink_900, text: theme.color.white },
     red_text: { main: 'transparent', text: theme.color.pink_900 },

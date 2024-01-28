@@ -58,12 +58,8 @@ const AddProduct = () => {
         <Box className=" grid w-full grid-cols-8 ">
             <Box sx={Card} className=" col-span-4 grid grid-cols-4">
                 <Textfield placeholder="Name" id="name" type="text" label="Name" className=" col-span-4"></Textfield>
-                <Dropdown className=" col-span-3" list={brand} size="xl" />
-                <Box className="flex justify-center">
-                    <Button className="mx-auto mt-1 " size="lg" variant="outline" color="grey" icon>
-                        <Icon className="mx-auto" icon={APP_ICON.i_plus} />
-                    </Button>
-                </Box>
+                <Dropdown className=" col-span-4" list={brand} size="xl" />
+                
 
                 <Modal key={1} open={openBrand} appearance="center" handleClose={handleCloseBrand}>
                     <form
@@ -86,12 +82,8 @@ const AddProduct = () => {
                     </form>
                 </Modal>
 
-                <Dropdown className="col-span-3" list={category} size="xl" />
-                <Box className="flex justify-center">
-                    <Button className="mx-auto mt-1 " size="lg" variant="outline" color="grey" icon>
-                        <Icon className="mx-auto" icon={APP_ICON.i_plus} />
-                    </Button>
-                </Box>
+                <Dropdown className="col-span-4" list={category} size="xl" />
+              
                 <Modal key={2} open={openCategory} appearance="center" handleClose={handleCloseCategory}>
                     <form
                         onSubmit={(event) => {
@@ -112,36 +104,8 @@ const AddProduct = () => {
                         <Button type="submit">Add</Button>
                     </form>
                 </Modal>
-                <Textfield
-                    placeholder="SKU Code"
-                    id="code"
-                    type="text"
-                    label="SKU Code"
-                    className=" col-span-2"
-                ></Textfield>
-                <Textfield
-                    placeholder="Active"
-                    id="active"
-                    type="boolean"
-                    label="Active"
-                    className=" col-span-2"
-                ></Textfield>
             </Box>
             <Box sx={Card} className="col-span-4 grid grid-cols-4">
-                <Textfield
-                    placeholder="Total Reviews"
-                    id="reviews"
-                    type="number"
-                    label="Reviews"
-                    className=" col-span-2"
-                ></Textfield>
-                <Textfield
-                    placeholder="Rating"
-                    id="rating"
-                    type="number"
-                    label="Rating"
-                    className=" col-span-2"
-                ></Textfield>{' '}
                 <Textfield
                     placeholder="Stock"
                     id="stock"
@@ -149,13 +113,21 @@ const AddProduct = () => {
                     label="Stock"
                     className=" col-span-2"
                 ></Textfield>
-                <Textfield
-                    placeholder="Price"
-                    id="price"
+                 <Textfield
+                    placeholder="Bought Price"
+                    id="bought"
                     type="number"
-                    label="Price"
+                    label="Bought Price"
                     className=" col-span-2"
                 ></Textfield>
+                <Textfield
+                    placeholder="Sell Price"
+                    id="sell"
+                    type="number"
+                    label="Sell Price"
+                    className=" col-span-2"
+                ></Textfield>
+               
                 <Dropdown className="col-span-2" list={size} size="xl" />
                 <Box className=" col-span-2">
                     <Textfield
