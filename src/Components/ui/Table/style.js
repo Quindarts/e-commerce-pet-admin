@@ -29,7 +29,7 @@ const StyledGridOverlay = styled('div')(({ theme }) => ({
 export function CustomNoRowsOverlay() {
     return (
         <StyledGridOverlay>
-            <svg style={{ flexShrink: 0 }} width="240" height="200" viewBox="0 0 184 152" aria-hidden focusable="false">
+            <svg style={{ flexShrink: 0 }} width="150" height="100" viewBox="0 0 184 152" aria-hidden focusable="false">
                 <g fill="none" fillRule="evenodd">
                     <g transform="translate(24 31.67)">
                         <ellipse className="ant-empty-img-5" cx="67.797" cy="106.89" rx="67.797" ry="12.668" />
@@ -56,7 +56,7 @@ export function CustomNoRowsOverlay() {
                     </g>
                 </g>
             </svg>
-            <Box sx={{ mt: 1 }}>No Data found</Box>
+            <Box className='text-slate-500 font-bold text-xl' sx={{ mt: 1 }}>No Data found</Box>
         </StyledGridOverlay>
     )
 }
@@ -65,6 +65,7 @@ export const CustomTable = styled(DataGrid)`
     &.MuiDataGrid-root {
         .MuiDataGrid-main {
             box-sizing: border-box;
+
             .MuiDataGrid-columnHeaders {
                 cursor: pointer;
                 font-size: 12px;

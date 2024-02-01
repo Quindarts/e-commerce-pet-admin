@@ -95,6 +95,15 @@ const CustomButton = styled(MuiButton)`
             padding: 0.5rem;
             border-radius: 50%;
         }
+        &-container-red-icon {
+            background-color: ${theme.color.pink_900};
+            color: ${theme.color.white};
+            min-width: 1em;
+            min-height: 1em;
+            display: inline-block;
+            padding: 0.5rem;
+            border-radius: 50%;
+        }
     }
 `
 

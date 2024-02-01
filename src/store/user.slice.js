@@ -10,9 +10,6 @@ const userSlice = createSlice({
             state.user_detail = action.payload
             state.errMessage = ''
         })
-        // builder.addCase(fetchUserById.rejected, (state, action) => {
-        //     state.errMessage = action.payload
-        // })
     },
 })
 export const selectUserById = userSlice.getSelectors((state) => state.users)

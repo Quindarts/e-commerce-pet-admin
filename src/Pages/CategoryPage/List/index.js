@@ -1,44 +1,45 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import TableCategory from '../Table'
-import { Box, Typography } from '@mui/material'
+import { Box, CircularProgress, Typography } from '@mui/material'
 import Button from '../../../Components/ui/Button/Button'
 import Dropdown from '../../../Components/ui/Dropdown/Dropdown'
 import SearchBar from '../../../Components/ui/Search/SearchBar'
 import { CustomListCategory } from './style'
-import { apiGetCategoryByParams } from '../../../services/api-category'
 import { formatTableCategory } from '../../../Utils/helper'
-import Progress from '../../../Components/ui/Progress/Progress'
 import { useNavigate } from 'react-router-dom'
 import { APP_ROUTER } from '../../../Utils/Constants'
-import { Icon } from '@iconify/react'
 import Title from '../../../Components/ui/Title/Title'
+import useCategory from '../../../hook/api/category'
+
+
+const SEARCH_ENUM = {
+    NAME: 'NAME',
+    CODE: 'CODE',
+}
 const list = [
-    { title: 'Name', value: 'name' },
-    { title: 'Code', value: 'code' },
+    { title: 'Name', value: SEARCH_ENUM.NAME },
+    { title: 'Code', value: SEARCH_ENUM.CODE },
 ]
-function ListCategoryPage() {
+function ListCategoryPage(props) {
     const [page, setPage] = useState(1)
+    const [query, setQuery] = useState('')
+    const [valueSearchType, setValueSearchType] = useState(SEARCH_ENUM.NAME)
+    const { category, isFetch, handleGetAllCategoryByParams } = useCategory()
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        handleGetAllCategoryByParams(6, page)
+    }, [page])
+
     const handleChangePanigation = (event, value) => {
         setPage(value)
     }
-    const [query, setQuery] = useState('')
     const handleQuery = (event) => {
         setQuery(event.target.value)
     }
-    const [valueSearchType, setValueSearchType] = useState('name')
-    const [data, setData] = useState([])
-    useEffect(() => {
-        apiGetCategoryByParams()
-            .then((data) => {
-                setData([...data.listCategory])
-            })
-            .catch((err) => console.log(err))
-    }, [])
-    const rows = formatTableCategory(data)
-    const navigate = useNavigate()
     return (
         <Fragment>
-            {rows < 1 && <Progress />}
             <CustomListCategory className="flew w-[100%] text-gray-700">
                 <Title icon="maki:warehouse">Category Table Manager</Title>
                 <Box className="contain my-3 flex flex-wrap">
@@ -66,12 +67,18 @@ function ListCategoryPage() {
                     </Box>
                 </Box>
                 <Box className="my-5 w-full">
-                    <TableCategory
-                        className="w-97"
-                        page={page}
-                        rows={rows}
-                        handleChangePanigation={handleChangePanigation}
-                    />
+                    {isFetch ? (
+                        <Box display="flex" alignItems="center" justifyContent="center" height={500}>
+                            <CircularProgress />
+                        </Box>
+                    ) : (
+                        <TableCategory
+                            className="w-97"
+                            page={page}
+                            rows={formatTableCategory(category.listByParams)}
+                            handleChangePanigation={handleChangePanigation}
+                        />
+                    )}
                 </Box>
             </CustomListCategory>
         </Fragment>
