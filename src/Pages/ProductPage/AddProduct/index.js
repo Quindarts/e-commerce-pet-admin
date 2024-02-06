@@ -25,21 +25,27 @@ const AddProduct = () => {
         { title: 'Category 2', value: '2' },
     ])
     const [attributeList, setAttributeList] = useState([
-        { title: 'Select Attribute', value: '' },
+        { title: 'Select Attribute', value: 'placeholder' },
         { title: 'Create new Attribute', value: 'create_new_attribute' },
     ])
     const [providerList, setProviderList] = useState([
-        { title: 'Select Provider', value: '' },
+        { title: 'Select Provider', value: 'placeholder' },
         { title: 'Create new Provider', value: 'create_new_provider' },
     ])
-    const [providers, setProviders] = useState([])
+    const [providers, setProviders] = useState([{ name: '', address: '', phoneNumber: '', email: '' }])
+
     const addProvider = () => {
         setProviders([...providers, { name: '', value: '' }])
     }
     const [newProviderName, setNewProviderName] = useState('')
     const handleProviderChange = (event, index) => {
         const selectedValue = event.target.value
-        if (selectedValue === 'create_new_provider') {
+        if (selectedValue === 'placeholder') {
+            const newProviders = [...providers]
+            newProviders[index].name = ''
+            newProviders[index].value = ''
+            setProviders(newProviders)
+        } else if (selectedValue === 'create_new_provider') {
             setProviderModalOpen(true)
         } else {
             const selectedProvider = providerList.find((attr) => attr.value === selectedValue)
@@ -51,9 +57,9 @@ const AddProduct = () => {
             }
         }
     }
-    const handleProviderValueChange = (event, index) => {
+    const handleProviderValueChange = (event, index, field) => {
         const newProviders = [...providers]
-        newProviders[index].value = event.target.value
+        newProviders[index][field] = event.target.value
         setProviders(newProviders)
     }
 
@@ -83,7 +89,12 @@ const AddProduct = () => {
     const [newAttributeName, setNewAttributeName] = useState('')
     const handleAttributeChange = (event, index) => {
         const selectedValue = event.target.value
-        if (selectedValue === 'create_new_attribute') {
+        if (selectedValue === 'placeholder') {
+            const newAttributes = [...attributes]
+            newAttributes[index].name = ''
+            newAttributes[index].value = ''
+            setAttributes(newAttributes)
+        } else if (selectedValue === 'create_new_attribute') {
             setAttributeModalOpen(true)
         } else {
             const selectedAttribute = attributeList.find((attr) => attr.value === selectedValue)
@@ -231,19 +242,31 @@ const AddProduct = () => {
                     </AccordionSummary>
                     <AccordionDetails>
                         {providers.map((provider, index) => (
-                            <div key={index}>
+                            <Box key={index}>
                                 <Dropdown
                                     list={[...providerList]}
                                     onChange={(event) => handleProviderChange(event, index)}
                                 />
-
                                 <Textfield
-                                    label="Enter value here"
-                                    value={provider.value}
+                                    label="Address"
+                                    type="text"
+                                    value={provider.address}
+                                    onChange={(event) => handleProviderValueChange(event, index)}
+                                />
+                                <Textfield
+                                    label="Phone number"
+                                    type="number"
+                                    value={provider.phoneNumber}
+                                    onChange={(event) => handleProviderValueChange(event, index)}
+                                />
+                                <Textfield
+                                    label="Provider email"
+                                    type="text"
+                                    value={provider.email}
                                     onChange={(event) => handleProviderValueChange(event, index)}
                                 />
                                 <Button onClick={() => removeProvider(index)}>Delete</Button>
-                            </div>
+                            </Box>
                         ))}
                         <Button onClick={addProvider}>Add Provider</Button>
                         <Modal open={providerModalOpen} onClose={() => setProviderModalOpen(false)}>
