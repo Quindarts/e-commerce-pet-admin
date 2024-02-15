@@ -35,7 +35,7 @@ function ListMenu(props) {
                 </ListItemIcon>
                 {checkDetailTitle && <ListItemText primary="Manager Product" />}
                 {checkDetailTitle && (
-                    <div>{openProduct ? <ExpandMore /> : <Icon icon="mingcute:left-line" width={23} />}</div>
+                    <div>{openProduct ? <ExpandMore /> : <Icon icon="mingcute:right-line" width={23} />}</div>
                 )}
             </ListItemButton>
 
@@ -69,7 +69,7 @@ function ListMenu(props) {
                 </ListItemIcon>
                 {checkDetailTitle && <ListItemText primary="Manager Category" />}
                 {checkDetailTitle && (
-                    <div>{openCategory ? <ExpandMore /> : <Icon icon="mingcute:left-line" width={23} />}</div>
+                    <div>{openCategory ? <ExpandMore /> : <Icon icon="mingcute:right-line" width={23} />}</div>
                 )}
             </ListItemButton>
 
@@ -105,7 +105,7 @@ function ListMenu(props) {
                 </ListItemIcon>
                 {checkDetailTitle && <ListItemText primary="Manager Order" />}
                 {checkDetailTitle && (
-                    <div>{openOrder ? <ExpandMore /> : <Icon icon="mingcute:left-line" width={23} />}</div>
+                    <div>{openOrder ? <ExpandMore /> : <Icon icon="mingcute:right-line" width={23} />}</div>
                 )}
             </ListItemButton>
 
@@ -142,7 +142,7 @@ function ListMenu(props) {
                 </ListItemIcon>
                 {checkDetailTitle && <ListItemText primary="Manager User" />}
                 {checkDetailTitle && (
-                    <div> {openUser ? <ExpandMore /> : <Icon icon="mingcute:left-line" width={23} />}</div>
+                    <div> {openUser ? <ExpandMore /> : <Icon icon="mingcute:right-line" width={23} />}</div>
                 )}
             </ListItemButton>
 
