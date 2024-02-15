@@ -5,7 +5,8 @@ import { Box, Typography } from '@mui/material'
 import Button from '../../../Components/ui/Button/Button'
 
 function ModalAdd(props) {
-    const { handleCloseModalAdd } = props
+    const { handleCloseModalAdd, path } = props
+    console.log('🚀 ~ ModalAdd ~ path:', path)
     const handleSubmitAddForm = async (values, actions) => {}
 
     return (
@@ -21,6 +22,7 @@ function ModalAdd(props) {
                     name: '',
                     total: '',
                     description: '',
+                    path: `${path}`,
                 }}
                 onSubmit={handleSubmitAddForm}
             >
@@ -43,7 +45,7 @@ function ModalAdd(props) {
                                         label="Code"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        defaultValue={'Auto generate code category'}
+                                        defaultValue={'Auto code'}
                                         disabled
                                     />
                                 </Box>
@@ -76,7 +78,8 @@ function ModalAdd(props) {
                                     id="path"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.total}
+                                    defaultValue={path}
+                                    disabled
                                 />
                             </Box>
                             <Box sx={{ display: 'flex', gap: 3 }}>
@@ -85,6 +88,7 @@ function ModalAdd(props) {
                                     sx={{ width: '50%' }}
                                     color="primary"
                                     variant="outline"
+                                    disabled
                                 >
                                     Cancel
                                 </Button>
