@@ -24,6 +24,7 @@ const AddProduct = () => {
         { title: 'Category 1', value: '1' },
         { title: 'Category 2', value: '2' },
     ])
+
     const [attributeList, setAttributeList] = useState([
         { title: 'Select Attribute', value: 'placeholder' },
         { title: 'Create new Attribute', value: 'create_new_attribute' },
@@ -138,6 +139,12 @@ const AddProduct = () => {
                 <Textfield placeholder="Name" id="name" type="text" label="Name" className=" col-span-4"></Textfield>
                 <Dropdown className=" col-span-4" list={brand} size="xl" />
                 <Dropdown className="col-span-4" list={category} size="xl" />
+              
+                <Dropdown
+                    className="col-span-4"
+                    list={attributeList}
+                    
+                />
                 <Textfield
                     placeholder="Bought Price"
                     id="bought"
@@ -202,73 +209,70 @@ const AddProduct = () => {
             </Box>
             <Box className="col-span-8">
                 <Accordion>
-                    <AccordionSummary aria-controls="panel1-content" id="panel1-header">
-                        Attribute
+                    <AccordionSummary
+                        className="text-md mx-4 py-2 font-semibold"
+                        aria-controls="panel1-content"
+                        id="panel1-header"
+                    >
+                        Search engine optimize
                     </AccordionSummary>
                     <AccordionDetails>
-                        {attributes.map((attribute, index) => (
-                            <div key={index}>
-                                <Dropdown
-                                    list={[...attributeList]}
-                                    onChange={(event) => handleAttributeChange(event, index)}
-                                />
-
-                                <Textfield
-                                    label="Enter value here"
-                                    value={attribute.value}
-                                    onChange={(event) => handleAttributeValueChange(event, index)}
-                                />
-                                <Button onClick={() => removeAttribute(index)}>Delete</Button>
-                            </div>
-                        ))}
-                        <Button onClick={addAttribute}>Add Attribute</Button>
-                        <Modal open={attributeModalOpen} onClose={() => setAttributeModalOpen(false)}>
-                            <h2>Add Attribute</h2>
-                            <Textfield
-                                label="Attribute name"
-                                value={newAttributeName}
-                                onChange={handleNewAttributeNameChange}
-                            />
-                            <Button onClick={saveNewAttribute}>Save</Button>
-                            <Button onClick={cancelNewAttribute}>Cancel</Button>
-                        </Modal>
+                        <h3>Url key</h3>
+                        <Textfield className="mb-4" label="Enter value here" />
+                        <h3>Meta title</h3>
+                        <Textfield className="mb-4" label="Enter value here" /> <h3>Meta keywords</h3>
+                        <Textfield className="mb-4" label="Enter value here"></Textfield>
+                        <h3>Meta description</h3>
+                        <Textfield className="mb-4" label="Enter value here" />
                     </AccordionDetails>
                 </Accordion>{' '}
             </Box>
             <Box className="col-span-8">
                 <Accordion>
-                    <AccordionSummary aria-controls="panel1-content" id="panel1-header">
+                    <AccordionSummary
+                        className="text-md mx-4 py-2 font-semibold"
+                        aria-controls="panel1-content"
+                        id="panel1-header"
+                    >
                         Provider
                     </AccordionSummary>
                     <AccordionDetails>
                         {providers.map((provider, index) => (
                             <Box key={index}>
                                 <Dropdown
+                                    className="mb-2"
                                     list={[...providerList]}
                                     onChange={(event) => handleProviderChange(event, index)}
                                 />
                                 <Textfield
+                                    className="mb-4"
                                     label="Address"
                                     type="text"
                                     value={provider.address}
                                     onChange={(event) => handleProviderValueChange(event, index)}
                                 />
                                 <Textfield
+                                    className="mb-4"
                                     label="Phone number"
                                     type="number"
                                     value={provider.phoneNumber}
                                     onChange={(event) => handleProviderValueChange(event, index)}
                                 />
                                 <Textfield
+                                    className="mb-4"
                                     label="Provider email"
                                     type="text"
                                     value={provider.email}
                                     onChange={(event) => handleProviderValueChange(event, index)}
                                 />
-                                <Button onClick={() => removeProvider(index)}>Delete</Button>
+                                <Button className="mb-10" color="red" onClick={() => removeProvider(index)}>
+                                    Delete
+                                </Button>
                             </Box>
                         ))}
-                        <Button onClick={addProvider}>Add Provider</Button>
+                        <Button color="primary" onClick={addProvider}>
+                            Add Provider
+                        </Button>
                         <Modal open={providerModalOpen} onClose={() => setProviderModalOpen(false)}>
                             <h2>Add Provider</h2>
                             <Textfield
@@ -282,11 +286,11 @@ const AddProduct = () => {
                     </AccordionDetails>
                 </Accordion>
             </Box>
-            <Box>
-                <Button onClick={() => navigate(APP_ROUTER.PRODUCT)} size="sm" color="primary" className=" ">
+            <Box className="cols-span-8 flex" gap="2rem">
+                <Button onClick={() => navigate(APP_ROUTER.PRODUCT)} className="px-0" size="lg" color="primary">
                     Create New Product
                 </Button>
-                <Button size="sm" color="grey" variant="outline" className=" ">
+                <Button className=" px-0" size="md" color="red">
                     Cancel
                 </Button>
             </Box>

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Box } from '@mui/material'
-import Button from '../../../Components/ui/Button/Button.js'
-import { ProductManagerTable } from '../Table/index.js'
-import SearchBar from '../../../Components/ui/Search/SearchBar.js'
-import { APP_ROUTER } from '../../../Utils/Constants.js'
+import Button from '../../../../Components/ui/Button/Button.js'
+import { ProductManagerTable } from '../../Table/index.js'
+import SearchBar from '../../../../Components/ui/Search/SearchBar.js'
+import { APP_ROUTER } from '../../../../Utils/Constants.js'
 import { useNavigate } from 'react-router-dom'
-
+import { useEffect } from 'react'
 const ProductManager = () => {
     const [query, setQuery] = useState('')
     const navigate = useNavigate()

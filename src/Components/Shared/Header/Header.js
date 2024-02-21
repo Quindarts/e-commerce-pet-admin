@@ -6,7 +6,6 @@ import { Icon } from '@iconify/react'
 import { APP_ICON } from '../../../Utils/Constants'
 import { StyledBox } from '../../Shared/Header/styles'
 import PopupLang from '../../ui/Popup/PopupLang'
-import { useTranslation } from 'react-i18next'
 import i18n from '../../../translation/i18n'
 
 function Header() {
@@ -54,8 +53,8 @@ function Header() {
     }
     const AdminHeader = withPageSpecificProps(BaseHeader)
     return (
-        <header className="sticky right-0 top-0 z-50 w-full ">
-            <AdminHeader></AdminHeader>
+        <header className="sticky right-0 top-0 z-30 w-full">
+            <AdminHeader />
         </header>
     )
 }

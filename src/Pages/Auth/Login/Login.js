@@ -1,17 +1,17 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { APP_ICON, APP_ROUTER, ROLE } from '../../Utils/Constants'
+import { APP_ICON, APP_ROUTER, ROLE } from '../../../Utils/Constants.js'
 import * as yup from 'yup'
-import Textfield from '../../Components/ui/Textfield/Textfield'
+import Textfield from '../../../Components/ui/Textfield/Textfield.js'
 import { useSnackbar } from 'notistack'
-import './style.js'
+import '../style.js'
 import { Icon } from '@iconify/react'
-import Button from '../../Components/ui/Button/Button'
-import ukoLogo from '../../assets/img/ukoLogo.png'
-import sideImage from '../../assets/img/sideImage.png'
-import { Grid, Image, FormContainer, Box, Checkbox } from './style'
-import { login } from '../../services/api-auth'
-import { tokenService } from '../../services/token.services'
-import Progress from '../../Components/ui/Progress/Progress'
+import Button from '../../../Components/ui/Button/Button.js'
+import ukoLogo from '../../../assets/img/ukoLogo.png'
+import sideImage from '../../../assets/img/sideImage.png'
+import { Grid, Image, FormContainer, Box, Checkbox } from '../style.js'
+import { login } from '../../../services/api-auth.js'
+import { tokenService } from '../../../services/token.services.js'
+import Progress from '../../../Components/ui/Progress/Progress.js'
 import { useState } from 'react'
 
 const schema = yup.object().shape({
@@ -59,6 +59,10 @@ function Login() {
                 service.setTokenList(result.tokenList)
                 setIsLoading(false)
                 navigate(APP_ROUTER.HOME)
+            } else {
+                enqueueSnackbar(result.message, {
+                    variant: 'error',
+                })
             }
         } catch (error) {
             enqueueSnackbar(error.message, {
@@ -92,7 +96,7 @@ function Login() {
                                 <span className="ml-1 text-blue-400">Create an account</span>
                             </Link>
                         </div>
-                        <div className=" mb-2 grid md:flex md:justify-between">
+                        <div className=" md:flex md:justify-between mb-2 grid">
                             <Textfield
                                 className="focus:shadow-outline w-full appearance-none  py-1 text-sm leading-tight text-gray-700 focus:outline-none"
                                 label="Username"

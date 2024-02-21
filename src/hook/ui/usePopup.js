@@ -9,7 +9,7 @@ export default function useClickOutside() {
     const handleClose = () => {
         setActive(false)
     }
-    const menuRef = useRef()
+    const menuRef = useRef(null)
 
     useEffect(() => {
         const handleUnActive = (e) => {

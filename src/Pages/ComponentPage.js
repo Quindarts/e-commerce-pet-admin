@@ -14,8 +14,9 @@ import { useTranslation } from 'react-i18next'
 import i18n from '../translation/i18n.js'
 import PopupLang from '../Components/ui/Popup/PopupLang.js'
 import { Avatar, Box, Table, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { BadgeWrapper } from '../Components/ui/Badge/Badge.js'
+import { useEffect } from 'react'
 
 const avatars = [
     {
@@ -42,9 +43,9 @@ const names = [
     { name: '' },
 ]
 const warehouseItem = [
-    'https://product.hstatic.net/200000312481/product/olc31003_b15f9f049c014a9d9c709cf0aa6ab353_master.jpg',
-    'https://product.hstatic.net/200000312481/product/olc31002_1_c01afc3a5c614cb2880b3740179ed447_master.jpg',
-    'https://product.hstatic.net/200000312481/product/aho2002_1_4c1c4e1db1ed4450b31da91840bf92d7_master.jpg',
+    'https://attribute.hstatic.net/200000312481/attribute/olc31003_b15f9f049c014a9d9c709cf0aa6ab353_master.jpg',
+    'https://attribute.hstatic.net/200000312481/attribute/olc31002_1_c01afc3a5c614cb2880b3740179ed447_master.jpg',
+    'https://attribute.hstatic.net/200000312481/attribute/aho2002_1_4c1c4e1db1ed4450b31da91840bf92d7_master.jpg',
 ]
 const user = {
     firstName: 'Than Nguyen Thanh',
@@ -58,6 +59,8 @@ const listLanguage = [
 ]
 
 function ComponentPage() {
+    const navigate = useNavigate()
+
     const demo = 50
     const [status, setStatus] = useState(demo)
     const handleCompleteClick = () => {
@@ -100,10 +103,10 @@ function ComponentPage() {
             code: 'HLNBCKHJ',
             detail: {
                 name: 'Beef',
-                img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
+                img: 'https://uko-react.vercel.app/static/attributes/shoe-3.png',
                 desc: 'Amazon lins',
             },
-            price: 60000,
+            value: 60000,
             brand: 'Jolly Pet',
             category: 'Food',
             status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
@@ -114,10 +117,10 @@ function ComponentPage() {
             code: 'HLNBCKHJ',
             detail: {
                 name: ' Dog Food',
-                img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
+                img: 'https://uko-react.vercel.app/static/attributes/shoe-3.png',
                 desc: 'Amazon lins',
             },
-            price: 60000,
+            value: 60000,
             brand: 'Jolly Pet',
             category: 'Food',
             status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
@@ -128,10 +131,10 @@ function ComponentPage() {
             code: 'HLNBCKHJ',
             detail: {
                 name: 'Beef Dog',
-                img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
+                img: 'https://uko-react.vercel.app/static/attributes/shoe-3.png',
                 desc: 'Amazon lins',
             },
-            price: 60000,
+            value: 60000,
             brand: 'Jolly Pet',
             category: 'Food',
             status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
@@ -142,10 +145,10 @@ function ComponentPage() {
             code: 'HLNBCKHJ',
             detail: {
                 name: ' Dog ',
-                img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
+                img: 'https://uko-react.vercel.app/static/attributes/shoe-3.png',
                 desc: 'Amazon lins',
             },
-            price: 70000,
+            value: 70000,
             brand: 'Jolly',
             category: 'Food',
             status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
@@ -156,10 +159,10 @@ function ComponentPage() {
             code: 'HLNBCKHJ',
             detail: {
                 name: ' Food',
-                img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
+                img: 'https://uko-react.vercel.app/static/attributes/shoe-3.png',
                 desc: 'Amazon lins',
             },
-            price: 60000,
+            value: 60000,
             brand: 'Jolly Pet',
             category: 'Food',
             status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
@@ -170,10 +173,10 @@ function ComponentPage() {
             code: 'HLNBCKHJ',
             detail: {
                 name: 'Beef Dog Food',
-                img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
+                img: 'https://uko-react.vercel.app/static/attributes/shoe-3.png',
                 desc: 'Amazon lins',
             },
-            price: 50000,
+            value: 50000,
             brand: ' Pet',
             category: 'Food',
             status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
@@ -182,7 +185,7 @@ function ComponentPage() {
     const columns = [
         {
             field: 'detail',
-            headerName: 'Product',
+            headerName: 'attribute',
             flex: 2,
             renderCell: (params) => (
                 <Box className="flex gap-3">
@@ -219,8 +222,8 @@ function ComponentPage() {
         },
 
         {
-            field: 'price',
-            headerName: 'Price',
+            field: 'value',
+            headerName: 'value',
             flex: 1,
         },
         {
@@ -234,7 +237,7 @@ function ComponentPage() {
 
     const data = [
         {
-            Product: 'Light Airpod',
+            attribute: 'Light Airpod',
             Producer: 'Apple',
             ID: 'PD0001',
             Category: 'Air Pod',
@@ -244,7 +247,7 @@ function ComponentPage() {
             Edit: 'Edit',
         },
         {
-            Product: 'Air Pod 2',
+            attribute: 'Air Pod 2',
             Producer: 'Apple',
             ID: 'PD0002',
             Category: 'Air Pod',
@@ -254,7 +257,7 @@ function ComponentPage() {
             Edit: 'Edit',
         },
         {
-            Product: 'Nike Shoe',
+            attribute: 'Nike Shoe',
             Producer: 'Nike',
             ID: 'PD0003',
             Category: 'Shoe',
@@ -264,7 +267,7 @@ function ComponentPage() {
             Edit: 'Edit',
         },
         {
-            Product: 'Light Airpod',
+            attribute: 'Light Airpod',
             Producer: 'Apple',
             ID: 'PD0004',
             Category: 'Air Pod',
@@ -274,11 +277,37 @@ function ComponentPage() {
             Edit: 'Edit',
         },
     ]
+    const [firstattributeName, setFirstattributeName] = useState('')
+    const [attributes, setAttributes] = useState([])
+
+    useEffect(() => {
+        const fetchattribute = async () => {
+            try {
+                const response = await fetch(
+                    'https://e-commerce-pet-server-quindarts.vercel.app/attributes?offset=1&limit=10',
+                )
+                const data = await response.json()
+                console.log(data)
+
+                if (data.success && data.list && data.list.length > 0) {
+                    setFirstattributeName(data.list[0].name)
+                }
+                setAttributes(data.list)
+            } catch (error) {
+                console.error('Có lỗi:', error)
+            }
+        }
+
+        fetchattribute()
+    }, [])
 
     return (
         <Box className="component_page">
             ComponentPage
             <p>Viết các Components chung tại đây</p>
+            <div>
+                <Button onClick={() => navigate(APP_ROUTER.ATTRIBUTE)}>To Attribute Page</Button>
+            </div>
             <h1 className="my-3 font-[800]">Avatar</h1>
             <Box className="flex gap-5">
                 <Box>
@@ -410,7 +439,7 @@ function ComponentPage() {
                 <Table
                     hasCheckbox
                     hasPanigation
-                    label="Popular Products"
+                    label="Popular attributes"
                     className=" w-full"
                     columns={columns}
                     rows={rows}
@@ -570,6 +599,7 @@ function ComponentPage() {
                     Praesent commodo cursus magna, vel scelerisque nisl consectetur et.{' '}
                 </Box>
             </Modal>
+            <Typography>Accordion</Typography>
         </Box>
     )
 }

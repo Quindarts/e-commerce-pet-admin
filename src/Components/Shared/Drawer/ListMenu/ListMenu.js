@@ -60,7 +60,7 @@ function ListMenu(props) {
             {/** Category */}
             <ListItemButton
                 onClick={() => {
-                    navigate(APP_ROUTER.CATEGORY)
+                    navigate(APP_ROUTER.CATEGORY_LIST)
                     setOpenCategory(!openCategory)
                 }}
             >
@@ -76,13 +76,25 @@ function ListMenu(props) {
             {checkDetailTitle && (
                 <Collapse in={openCategory} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
-                        <ListItemButton sx={{ pl: 4 }}>
+                        <ListItemButton
+                            onClick={() => {
+                                navigate(APP_ROUTER.CATEGORY_ADD)
+                                setOpenCategory(!openCategory)
+                            }}
+                            sx={{ pl: 4 }}
+                        >
                             <ListItemIcon>
                                 <Icon width={20} icon="system-uicons:box-add" />
                             </ListItemIcon>
                             {checkDetailTitle && <ListItemText primary="Add category" />}
                         </ListItemButton>
-                        <ListItemButton sx={{ pl: 4 }}>
+                        <ListItemButton
+                            onClick={() => {
+                                navigate(APP_ROUTER.CATEGORY_LIST)
+                                setOpenCategory(!openCategory)
+                            }}
+                            sx={{ pl: 4 }}
+                        >
                             <ListItemIcon>
                                 <Icon width={20} icon="quill:inbox-list" />
                             </ListItemIcon>

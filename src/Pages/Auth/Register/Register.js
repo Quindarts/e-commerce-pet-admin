@@ -1,16 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { APP_ICON, COLOR, APP_ROUTER } from '../../Utils/Constants'
+import { APP_ICON, COLOR, APP_ROUTER } from '../../../Utils/Constants.js'
 import * as yup from 'yup'
-import Textfield from '../../Components/ui/Textfield/Textfield'
+import Textfield from '../../../Components/ui/Textfield/Textfield.js'
 import { useSnackbar } from 'notistack'
-import './style.js'
+import '../style.js'
 import { Icon } from '@iconify/react'
-import Button from '../../Components/ui/Button/Button'
-import ukoLogo from '../../assets/img/ukoLogo.png'
-import sideImage from '../../assets/img/sideImage.png'
-import { Grid, Image, FormContainer, Box } from './style'
+import Button from '../../../Components/ui/Button/Button.js'
+import ukoLogo from '../../../assets/img/ukoLogo.png'
+import sideImage from '../../../assets/img/sideImage.png'
+import { Grid, Image, FormContainer, Box } from '../style.js'
 
 const schema = yup.object().shape({
     firstName: yup
@@ -99,10 +99,10 @@ function Register() {
                                 <span className=" ml-1 text-blue-400">Login</span>
                             </Link>
                         </div>
-                        <div className="mb-4 grid py-1 md:flex md:justify-between">
+                        <div className="md:flex md:justify-between mb-4 grid py-1">
                             <Textfield
                                 placeholder="First Name"
-                                className="focus:shadow-outline mb-6 w-full appearance-none text-sm leading-tight text-gray-700 focus:outline-none md:mb-0 md:mr-2"
+                                className="focus:shadow-outline md:mb-0 md:mr-2 mb-6 w-full appearance-none text-sm leading-tight text-gray-700 focus:outline-none"
                                 id="firstName"
                                 type="text"
                                 label="First Name"
@@ -114,7 +114,7 @@ function Register() {
                             />
                             <Textfield
                                 placeholder="Last Name"
-                                className="focus:shadow-outline w-full appearance-none text-sm leading-tight text-gray-700 focus:outline-none md:ml-2 md:mt-0"
+                                className="focus:shadow-outline md:ml-2 md:mt-0 w-full appearance-none text-sm leading-tight text-gray-700 focus:outline-none"
                                 id="lastName"
                                 type="text"
                                 label="Last Name"
@@ -125,7 +125,7 @@ function Register() {
                                 error={touched.lastName && errors.lastName ? true : false}
                             />
                         </div>
-                        <div className=" mb-4 grid md:flex md:justify-between">
+                        <div className=" md:flex md:justify-between mb-4 grid">
                             <Textfield
                                 className="focus:shadow-outline w-full appearance-none py-1 text-sm leading-tight text-gray-700 focus:outline-none"
                                 label="Username"

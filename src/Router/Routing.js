@@ -6,18 +6,25 @@ import HomePage from '../Pages/Home/HomePage'
 import OrderPage from '../Pages/OrderPage/OrderPage'
 import UserPage from '../Pages/UserPage/UserPage'
 import AuthLayout from '../Layout/AuthLayout/AuthLayout'
-import Login from '../Pages/Auth/Login'
-import Register from '../Pages/Auth/Register'
 import { loaderUser } from './loader/loaderAuth'
 import CategoryPage from '../Pages/CategoryPage/CategoryPage'
+import Login from '../Pages/Auth/Login/Login'
+import Register from '../Pages/Auth/Register/Register'
+import ListCategoryPage from '../Pages/CategoryPage/List'
+import CategoryAddPage from '../Pages/CategoryPage/Add'
 import AddProduct from '../Pages/ProductPage/AddProduct'
-import ProductManager from '../Pages/ProductPage/ProductManagement'
+import ProductManager from '../Pages/ProductPage/ProductApi/ProductManagement'
+import AttributeAddPage from '../Pages/AttributePage/Add'
+import AttributePage from '../Pages/AttributePage/AttributePage'
 
 const router = createBrowserRouter([
     {
         path: APP_ROUTER.INDEX,
-        element: <MainLayout />,
         loader: (request) => loaderUser(request),
+    },
+    {
+        path: APP_ROUTER.INDEX,
+        element: <MainLayout />,
         children: [
             {
                 path: APP_ROUTER.HOME,
@@ -28,6 +35,18 @@ const router = createBrowserRouter([
             {
                 path: APP_ROUTER.CATEGORY,
                 element: <CategoryPage />,
+                children: [
+                    { path: APP_ROUTER.CATEGORY_LIST, element: <ListCategoryPage />, index: true },
+                    { path: APP_ROUTER.CATEGORY_ADD, element: <CategoryAddPage />, index: true },
+                ],
+            },
+            {
+                path: APP_ROUTER.ATTRIBUTE,
+                element: <AttributePage />,
+            },
+            {
+                path: APP_ROUTER.ATTRIBUTE_ADD,
+                element: <AttributeAddPage />,
             },
             {
                 path: APP_ROUTER.ORDER,

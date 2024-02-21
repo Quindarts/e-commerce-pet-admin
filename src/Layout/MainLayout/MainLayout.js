@@ -1,14 +1,19 @@
-import { Fragment, useLayoutEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Box } from '@mui/material'
 import Header from '../../Components/Shared/Header/Header'
 import TemporaryDrawer from '../../Components/Shared/Drawer/Drawer'
+import useUser from '../../hook/api/user'
 
 function MainLayout() {
     const [openNav, setOpenNav] = useState(false)
     const handleOpenNav = () => {
         setOpenNav(!openNav)
     }
+    const { handleGetUserById } = useUser()
+    useEffect(() => {
+        handleGetUserById('657fee4a8f8ba7c4e2ffebf4')
+    }, [])
     return (
         <Fragment>
             <Box className="main_layout flex bg-[#f3f4f9] " sx={{ maxWidth: '100vw', width: '100%' }}>
@@ -16,11 +21,9 @@ function MainLayout() {
                 <Box
                     className={`main_outlet px-[2rem] `}
                     sx={{
-                        overflowX: 'hidden',
                         width: '100%',
                         minHeight: '100vh',
-                        maxWidth: `${openNav ? 'calc(100% - 20rem)' : 'calc(100% - 5rem)'}`,
-                        // marginLeft: `${openNav ? ' 20rem' : '5rem'}`,
+                        maxWidth: `${openNav ? 'calc(100% - 280px)' : 'calc(100% - 86px)'}`,
                     }}
                 >
                     <main>

@@ -19,14 +19,14 @@ function Table(props) {
     } = props
     return (
         <Box className="w-full">
-            {label && <Typography className="font-bold text-[1rem] text-[#464f6c]">{label}</Typography>}
+            {label && <Typography className="text-[1rem] font-bold text-[#464f6c]">{label}</Typography>}
             <CustomTable
                 {...rest}
                 rowHeight={80}
                 className={`${className} border-none`}
                 checkboxSelection={hasCheckbox}
-                autoHeight
-                // sx={{ height: 80 * (pageSize + 2) }}
+                autoHeight={true}
+                sx={{ maxHeight: 80 * (pageSize + 2) }}
                 slots={{ noRowsOverlay: CustomNoRowsOverlay }}
                 hideFooter
             />
