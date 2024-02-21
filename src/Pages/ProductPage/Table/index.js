@@ -162,6 +162,7 @@ export const ProductManagerTable = () => {
                     stock: product.avaiable,
                     category: product.tags[0],
                     active: product.isActive,
+                    description:product.description,
                     status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
                     rating: (
                         <Rating

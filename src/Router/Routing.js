@@ -13,7 +13,7 @@ import Register from '../Pages/Auth/Register/Register'
 import ListCategoryPage from '../Pages/CategoryPage/List'
 import CategoryAddPage from '../Pages/CategoryPage/Add'
 import AddProduct from '../Pages/ProductPage/AddProduct'
-import ProductManager from '../Pages/ProductPage/ProductApi/ProductManagement'
+import ProductManager from '../Pages/ProductPage/ProductManagement'
 import AttributeAddPage from '../Pages/AttributePage/Add'
 import AttributePage from '../Pages/AttributePage/AttributePage'
 

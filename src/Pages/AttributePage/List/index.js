@@ -63,16 +63,12 @@ export const AttributeList = () => {
             field: 'detail',
             headerName: 'Product',
             flex: 1.3,
-            renderHeader: (params) => (
-                <Box className="flex flex-col">
-                <Typography className="text-[14px] font-bold text-gray-600">Product</Typography>
-                
-            </Box>
-            ),
+           
+          
             renderCell: (params) => (
                 <Box className="flex">
                     <Box>
-                        <Typography className="text-[14px] font-bold text-gray-600">{params.row.name}</Typography>
+                        <Typography>{params.row.name}</Typography>
                     </Box>
                 </Box>
             ),
@@ -84,12 +80,7 @@ export const AttributeList = () => {
             flex: 1,
             headerAlign: 'center',
             align: 'center',
-            renderHeader: (params) => (
-                <Box className="flex flex-col">
-                    <Typography className="text-[14px] font-bold text-gray-600">Stock</Typography>
-                  
-                </Box>
-            ),
+           
         },
     
         {
@@ -98,12 +89,7 @@ export const AttributeList = () => {
             flex: 1.2,
             headerAlign: 'center',
             align: 'center',
-            renderHeader: (params) => (
-                <Box className="flex flex-col">
-                    <Typography className="text-[14px] font-bold text-gray-600">SKU</Typography>
-                 
-                </Box>
-            ),
+          
         },
     
         {
@@ -112,12 +98,7 @@ export const AttributeList = () => {
             headerAlign: 'center',
             align: 'center',
             flex: 1.2,
-            renderHeader: (params) => (
-                <Box className="flex flex-col">
-                    <Typography className="text-[14px] font-bold text-gray-600">Status</Typography>
-                   
-                </Box>
-            ),
+           
             renderCell: (params) => <Box className="font-500">{params.row.status}</Box>,
         },
     
@@ -127,12 +108,7 @@ export const AttributeList = () => {
             flex: 1.2,
             headerAlign: 'center',
             align: 'center',
-            renderHeader: (params) => (
-                <Box className="flex flex-col">
-                    <Typography className="text-[14px] font-bold text-gray-600">Value</Typography>
-                   
-                </Box>
-            ),
+           
         },
     
         {
@@ -141,12 +117,7 @@ export const AttributeList = () => {
             headerAlign: 'center',
             align: 'center',
             flex: 1,
-            renderHeader: (params) => (
-                <Box className="flex flex-col">
-                    <Typography className="text-[14px] font-bold text-gray-600">Active</Typography>
-                   
-                </Box>
-            ),
+          
             renderCell: (params) => (
                 <Box className="font-500">
                     {params.row.active ? (
