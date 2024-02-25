@@ -13,6 +13,7 @@ import Login from '../Pages/Auth/Login/Login'
 import Register from '../Pages/Auth/Register/Register'
 import ListCategoryPage from '../Pages/CategoryPage/List'
 import CategoryAddPage from '../Pages/CategoryPage/Add'
+
 const router = createBrowserRouter([
     {
         path: APP_ROUTER.INDEX,
