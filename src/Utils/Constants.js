@@ -3,7 +3,11 @@ export const APP_ROUTER = {
     //
     HOME: '/home',
     COMPONENT: '/component',
+
     USER: '/user',
+    USER_LIST: '/user/list',
+    USER_ADD: '/user/add',
+
     ORDER: '/order',
     PRODUCT: '/product',
     ADD_PRODUCT: '/product/add-product',
@@ -11,7 +15,7 @@ export const APP_ROUTER = {
     CATEGORY: '/categorys',
     CATEGORY_LIST: '/categorys/list',
     CATEGORY_ADD: '/categorys/add',
-    
+
     AUTH: 'auth',
     LOGIN: '/auth/login',
     REGISTER: '/auth/register',
@@ -26,7 +30,7 @@ export const ROLE = {
     WAREHOUSE: ' warehouse',
 }
 export const APP_ICON = {
-    i_close : 'iconamoon:close',
+    i_close: 'iconamoon:close',
     i_arrow_down: 'ph:arrow-down-light',
     i_arrow_up: 'ph:arrow-up-light',
     i_twitter: 'logos:twitter',

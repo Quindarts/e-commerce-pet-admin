@@ -4,7 +4,6 @@ import MainLayout from '../Layout/MainLayout/MainLayout'
 import { APP_ROUTER } from '../Utils/Constants'
 import HomePage from '../Pages/Home/HomePage'
 import OrderPage from '../Pages/OrderPage/OrderPage'
-import UserPage from '../Pages/UserPage/UserPage'
 import AuthLayout from '../Layout/AuthLayout/AuthLayout'
 
 import { loaderUser } from './loader/loaderAuth'
@@ -13,6 +12,9 @@ import Login from '../Pages/Auth/Login/Login'
 import Register from '../Pages/Auth/Register/Register'
 import ListCategoryPage from '../Pages/CategoryPage/List'
 import CategoryAddPage from '../Pages/CategoryPage/Add'
+import ListUserPage from '../Pages/UserPage/List'
+import UserAddPage from '../Pages/UserPage/Add'
+import UserPage from '../Pages/UserPage'
 
 const router = createBrowserRouter([
     {
@@ -33,7 +35,7 @@ const router = createBrowserRouter([
                 path: APP_ROUTER.CATEGORY,
                 element: <CategoryPage />,
                 children: [
-                    { path: APP_ROUTER.CATEGORY_LIST, element: <ListCategoryPage /> },
+                    { path: APP_ROUTER.CATEGORY_LIST, element: <ListCategoryPage />, index: true },
                     { path: APP_ROUTER.CATEGORY_ADD, element: <CategoryAddPage /> },
                 ],
             },
@@ -44,6 +46,10 @@ const router = createBrowserRouter([
             {
                 path: APP_ROUTER.USER,
                 element: <UserPage />,
+                children: [
+                    { path: APP_ROUTER.USER_LIST, element: <ListUserPage />, index: true },
+                    { path: APP_ROUTER.USER_ADD, element: <UserAddPage /> },
+                ],
             },
             {
                 path: APP_ROUTER.COMPONENT,
