@@ -1,49 +1,28 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useLayoutEffect, useEffect } from 'react'
 import Title from '../../../Components/ui/Title/Title'
-import { Box } from '@mui/material'
+import { Box, CircularProgress } from '@mui/material'
 import Button from '../../../Components/ui/Button/Button'
 import Modal from '../../../Components/ui/Modal/Modal'
 import ModalAdd from '../Modal/Add'
 import AccordionList from '../../../Components/ui/AccordionList/AccordionList'
-
-const list = [
-    {
-        name: 'dog',
-        path: ',dog,',
-        details:
-            'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès quil est prêt ou que la mise en page est achevée.',
-        child: [
-            {
-                name: 'toys',
-                details:
-                    'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès quil est prêt ou que la mise en page est achevée.',
-            },
-            {
-                name: 'baby',
-                details:
-                    'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès quil est prêt ou que la mise en page est achevée.',
-            },
-        ],
-    },
-    {
-        name: 'cat',
-        path: ',cat,',
-        details:
-            'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès quil est prêt ou que la mise en page est achevée.',
-        child: [
-            {
-                name: 'toys',
-                details:
-                    'Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès quil est prêt ou que la mise en page est achevée.',
-                path: ',cat,',
-            },
-        ],
-    },
-]
+import { apiGetTreeCategory } from '../../../services/api-category'
 
 function CategoryAddPage() {
     const [isOpenModalAdd, setIsOpenModalAdd] = useState(false)
     const [pathCurrent, setPathCurrent] = useState('')
+    const [loading, setLoading] = useState(false)
+    const [tree, setTree] = useState([])
+
+    useLayoutEffect(() => {
+        setLoading(true)
+        apiGetTreeCategory().then((res) => {
+            if (res.status === 200) {
+                setTree(res.tree)
+                setLoading(false)
+            }
+        })
+    }, [])
+    
     const handleOpenModalAdd = (path) => {
         setIsOpenModalAdd(true)
         setPathCurrent(path)
@@ -58,14 +37,22 @@ function CategoryAddPage() {
             <Box>
                 <Box className="flex justify-between">
                     <Title icon="system-uicons:box-add">Add new category</Title>
-                    <Button>New root category</Button>
+                    <Button onClick={() => handleOpenModalAdd(',index,')} color="red">
+                        New root category
+                    </Button>
                 </Box>
                 <Box>
-                    <AccordionList
-                        list={list}
-                        handleOpenModalAdd={handleOpenModalAdd}
-                        handleCloseModalAdd={handleCloseModalAdd}
-                    />
+                    {loading ? (
+                        <Box display="flex" alignItems="center" justifyContent="center" height={500}>
+                            <CircularProgress />
+                        </Box>
+                    ) : (
+                        <AccordionList
+                            list={tree}
+                            handleOpenModalAdd={handleOpenModalAdd}
+                            handleCloseModalAdd={handleCloseModalAdd}
+                        />
+                    )}
                 </Box>
             </Box>
             <Modal size="sm" open={isOpenModalAdd} onClose={handleCloseModalAdd}>

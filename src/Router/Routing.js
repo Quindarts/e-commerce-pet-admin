@@ -8,7 +8,7 @@ import UserPage from '../Pages/UserPage/UserPage'
 import AuthLayout from '../Layout/AuthLayout/AuthLayout'
 
 import { loaderUser } from './loader/loaderAuth'
-import CategoryPage from '../Pages/CategoryPage/CategoryPage'
+import CategoryPage from '../Pages/CategoryPage/index'
 import Login from '../Pages/Auth/Login/Login'
 import Register from '../Pages/Auth/Register/Register'
 import ListCategoryPage from '../Pages/CategoryPage/List'
@@ -33,8 +33,8 @@ const router = createBrowserRouter([
                 path: APP_ROUTER.CATEGORY,
                 element: <CategoryPage />,
                 children: [
-                    { path: APP_ROUTER.CATEGORY_LIST, element: <ListCategoryPage />, index: true },
-                    { path: APP_ROUTER.CATEGORY_ADD, element: <CategoryAddPage />, index: true },
+                    { path: APP_ROUTER.CATEGORY_LIST, element: <ListCategoryPage /> },
+                    { path: APP_ROUTER.CATEGORY_ADD, element: <CategoryAddPage /> },
                 ],
             },
             {

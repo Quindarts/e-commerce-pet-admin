@@ -16,51 +16,36 @@ function AccordionList(props) {
                 <Accordion
                     key={key}
                     onChange={(e) => {
-                        console.log(e)
                         setActive(!isActive)
                     }}
+                    className="my-3 text-slate-600"
                     disableSpacing
                 >
                     <AccordionSummary
                         expandIcon={
                             <Box>
                                 <Button
-                                    onClick={() => handleOpenModalAdd(item.path)}
-                                    className="m-1"
-                                    size="sm"
-                                    color="primary"
-                                    icon
+                                    onClick={() => handleOpenModalAdd(`,${item.name},`)}
+                                    className="m-1 w-5 p-0"
+                                    variant="container"
+                                    color="green"
                                 >
-                                    <Icon icon={APP_ICON.i_plus} />
+                                    <Icon icon={APP_ICON.i_plus} width={18} />
                                 </Button>
                             </Box>
                         }
+                        className={`font-bold uppercase text-sky-600`}
                     >
+                        <Icon className="mx-3" icon="flat-color-icons:folder" width={20} />
                         {item.name}
                     </AccordionSummary>
                     <AccordionDetails>
                         {item.child.map((mini, key) => (
-                            <Accordion className="my-2">
-                                <AccordionSummary
-                                    // expandIcon={
-                                    //     <Box>
-                                    //         <Button
-                                    //             onClick={handleOpenModalAdd}
-                                    //             className="m-1"
-                                    //             size="sm"
-                                    //             color="primary"
-                                    //             icon
-                                    //         >
-                                    //             <Icon icon={APP_ICON.i_plus} />
-                                    //         </Button>
-                                    //     </Box>
-                                    // }
-                                    aria-controls="panel1-content"
-                                    id="panel1-header"
-                                >
+                            <Accordion key={key} className="my-2">
+                                <AccordionSummary aria-controls="panel1-content" id="panel1-header">
+                                    <Icon className="mx-3" icon="flat-color-icons:file" width={20} />
                                     {mini.name}
                                 </AccordionSummary>
-                                <AccordionDetails>{mini.details}</AccordionDetails>
                             </Accordion>
                         ))}
                     </AccordionDetails>
