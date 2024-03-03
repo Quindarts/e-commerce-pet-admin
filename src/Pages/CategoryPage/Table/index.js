@@ -7,11 +7,13 @@ import { Icon } from '@iconify/react'
 import Modal from '../../../Components/ui/Modal/Modal'
 import Edit from '../Modal/Edit'
 import Delete from '../Modal/Delete'
+import Active from '../Modal/Active'
 
 function TableCategory(props) {
-    const { handleChangePanigation, page, rows } = props
+    const { handleChangePanigation, page, rows, totalPage } = props
     const [openCategory, setOpenCategory] = useState({ isOpen: false, category_id: '' })
-    const [openDelete, setOpenDelete] = useState({ isOpen: false, delete_id: '' })
+    const [openDelete, setOpenDelete] = useState({ isOpen: false, category_id: '' })
+    const [openActive, setOpenActive] = useState({ isOpen: false, category_id: '' })
 
     const handleOpenEditModal = (id) => {
         setOpenCategory({ isOpen: true, category_id: id })
@@ -20,16 +22,23 @@ function TableCategory(props) {
         setOpenCategory({ ...openCategory, isOpen: false })
     }
     const handleOpenDeleteModal = (id) => {
-        setOpenDelete({ isOpen: true, delete_id: id })
+        setOpenDelete({ isOpen: true, category_id: id })
     }
     const handleCloseDeleteModal = () => {
         setOpenDelete({ ...openDelete, isOpen: false })
+    }
+    const handleOpenActiveModal = (id) => {
+        setOpenActive({ isOpen: true, category_id: id })
+    }
+    const handleCloseActiveModal = () => {
+        setOpenActive({ ...openActive, isOpen: false })
     }
     const columns = [
         {
             field: 'name',
             headerName: 'Category name',
             flex: 2,
+            renderCell: (params) => <Box className="text-[15px] font-[800] text-slate-600">{params.row.name}</Box>,
         },
         {
             field: 'code',
@@ -38,7 +47,9 @@ function TableCategory(props) {
             headerAlign: 'center',
             align: 'center',
             renderCell: (params) => (
-                <Box className="font-500 rounded-3xl bg-[#f6f6f8] px-5 py-1">{params.formattedValue}</Box>
+                <Box className="rounded-3xl bg-slate-200 px-5 py-1 font-[600] text-slate-500">
+                    {params.formattedValue}
+                </Box>
             ),
         },
         {
@@ -62,19 +73,31 @@ function TableCategory(props) {
             flex: 1,
             headerAlign: 'center',
             align: 'center',
-            renderCell: () => (
-                <Box className="cursor-pointer rounded-[20px] bg-emerald-100 px-3 py-1 text-green-600">active</Box>
+            renderCell: (params) => (
+                <Button
+                    onClick={() => {
+                        handleOpenActiveModal(params.id)
+                    }}
+                    className={`cursor-pointer rounded-[20px] ${
+                        params.row.isActive
+                            ? 'bg-emerald-100 px-3 py-1 text-green-600'
+                            : 'bg-red-100 px-3 py-1 text-red-600'
+                    }`}
+                >
+                    {params.row.isActive ? 'active' : 'unactive'}
+                </Button>
             ),
         },
         {
             field: 'action',
             headerName: 'Action',
+            headerAlign: 'center',
+            align: 'center',
             flex: 1,
             renderCell: (params) => (
                 <Box>
                     <Button
                         onClick={() => {
-                            console.log(params.id)
                             handleOpenEditModal(params.id)
                         }}
                         size="lg"
@@ -101,12 +124,11 @@ function TableCategory(props) {
         <Fragment>
             <Box>
                 <Table
-                    hasCheckbox
                     hasPanigation
                     className="w-full"
                     columns={columns}
                     rows={rows}
-                    totalPage={7}
+                    totalPage={totalPage}
                     pageSize={6}
                     currentPage={page}
                     handleChangePanigation={handleChangePanigation}
@@ -120,7 +142,10 @@ function TableCategory(props) {
                 />
             </Modal>
             <Modal open={openDelete.isOpen} onClose={handleCloseDeleteModal}>
-                <Delete handleCloseDeleteModal={handleCloseDeleteModal} />
+                <Delete category_id={openDelete.category_id} handleCloseDeleteModal={handleCloseDeleteModal} />
+            </Modal>
+            <Modal open={openActive.isOpen} onClose={handleCloseActiveModal}>
+                <Active category_id={openActive.category_id} handleCloseActiveModal={handleCloseActiveModal} />
             </Modal>
         </Fragment>
     )

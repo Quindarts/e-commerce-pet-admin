@@ -3,9 +3,25 @@ import { Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
 import Button from '../../../Components/ui/Button/Button'
+import { useSnackbar } from 'notistack'
+import useCategory from '../../../hook/api/category'
+import { apiDeleteCategory } from '../../../services/api-category'
 
 function ModalDelete(props) {
-    const { handleCloseDeleteModal } = props
+    const { handleCloseDeleteModal, category_id } = props
+    const { enqueueSnackbar } = useSnackbar()
+    const { handleGetAllCategoryByParams, currentPage, limit } = useCategory()
+
+    const handleSubmitDelete = async () => {
+        const data = await apiDeleteCategory(category_id)
+
+        if (data.success && data.status === 200) {
+            enqueueSnackbar(data.message, { variant: 'success' })
+            handleGetAllCategoryByParams(limit, currentPage)
+        } else {
+            enqueueSnackbar(data.message, { variant: 'error' })
+        }
+    }
     return (
         <Box
             height={300}
@@ -14,7 +30,7 @@ function ModalDelete(props) {
             flexDirection="column"
             alignItems="center"
             justifyContent="center"
-            padding='0 15px'
+            padding="0 15px"
         >
             <Box borderRadius="50%" padding={3} sx={{ background: 'rgba(255,49,111,0.2)' }}>
                 <Icon width={70} height={70} color="#ff316f" icon="icon-park-outline:delete-five" />
@@ -24,7 +40,7 @@ function ModalDelete(props) {
                 <Button onClick={handleCloseDeleteModal} sx={{ width: '50%' }} color="primary" variant="outline">
                     Cancel
                 </Button>
-                <Button type="submit" sx={{ width: '50%' }} color="red">
+                <Button onClick={handleSubmitDelete} type="submit" sx={{ width: '50%' }} color="red">
                     Delete
                 </Button>
             </Box>

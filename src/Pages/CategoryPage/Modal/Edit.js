@@ -6,6 +6,7 @@ import Button from '../../../Components/ui/Button/Button'
 import { apiGetCategoryById, apiUpdateCategoryById } from '../../../services/api-category'
 import { useSnackbar } from 'notistack'
 import useCategory from '../../../hook/api/category'
+import { CategorySchema } from './Add'
 
 function ModalEdit(props) {
     const { category_id, handleCloseEditModal } = props
@@ -27,13 +28,17 @@ function ModalEdit(props) {
     }, [])
 
     const handleSubmitEditForm = async (values, actions) => {
-        apiUpdateCategoryById(category_id, values).then((res) => {
-            if (res.success && res.status === 201) {
-                handleCloseEditModal()
-                enqueueSnackbar(res.message, { variant: 'success' })
-                handleGetAllCategoryByParams(limit, currentPage)
-            }
-        })
+        apiUpdateCategoryById(category_id, values)
+            .then((res) => {
+                if (res.success && res.status === 201) {
+                    handleCloseEditModal()
+                    enqueueSnackbar(res.message, { variant: 'success' })
+                    handleGetAllCategoryByParams(limit, currentPage)
+                }
+            })
+            .catch((err) => {
+                enqueueSnackbar(err, { variant: 'error' })
+            })
     }
     const handleChangeActive = (event) => {
         setChecked(event.target.checked)
@@ -49,9 +54,10 @@ function ModalEdit(props) {
                             total: `${categoryFetch.total}`,
                             description: `${categoryFetch.description}`,
                         }}
+                        validationSchema={CategorySchema}
                         onSubmit={handleSubmitEditForm}
                     >
-                        {({ handleBlur, handleChange, values }) => (
+                        {({ handleBlur, handleChange, values, errors, touched }) => (
                             <Form style={{ display: 'flex', gap: 3, flexDirection: 'column', margin: '15px' }}>
                                 <Typography
                                     style={{ fontWeight: 'bold', fontSize: '20px', color: '#374151 ' }}
@@ -70,6 +76,8 @@ function ModalEdit(props) {
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
                                                 value={values.name}
+                                                error={touched.name && errors.name}
+                                                helperText={errors.name}
                                             />
                                         </Box>
                                         <Box flex={1}>
@@ -90,6 +98,8 @@ function ModalEdit(props) {
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             value={values.total}
+                                            error={touched.total && errors.total}
+                                            helperText={errors.total}
                                         />
                                     </Box>
                                     <Box>
@@ -100,6 +110,8 @@ function ModalEdit(props) {
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             value={values.description}
+                                            error={touched.description && errors.description}
+                                            helperText={errors.description}
                                         />
                                     </Box>
                                     <Box display="flex" alignItems="center">

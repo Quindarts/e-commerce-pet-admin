@@ -25,8 +25,8 @@ function Table(props) {
                 rowHeight={80}
                 className={`${className} border-none`}
                 checkboxSelection={hasCheckbox}
-                autoHeight={true}
-                sx={{ maxHeight: 80 * (pageSize + 2) }}
+                // autoHeight={true}
+                sx={{ height: 80 * (pageSize + 2) }}
                 slots={{ noRowsOverlay: CustomNoRowsOverlay }}
                 hideFooter
             />
@@ -36,6 +36,7 @@ function Table(props) {
                     <Pagination
                         count={totalPage}
                         shape="rounded"
+                        color="primary"
                         page={currentPage}
                         onChange={handleChangePanigation}
                     />

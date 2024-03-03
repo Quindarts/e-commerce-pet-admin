@@ -17,7 +17,9 @@ function SearchBar(props) {
             <input
                 type="text"
                 placeholder={placeholder}
+                value={query}
                 onBlur={(event) => handleQuery(event)}
+                onChange={(event) => handleQuery(event)}
                 className={`h-full  w-full flex-1 px-2 outline-none`}
             />
             <Box className="flex cursor-pointer items-center pl-1 pr-2">
