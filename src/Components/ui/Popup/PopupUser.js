@@ -12,7 +12,7 @@ const menuItems = [
     },
     {
         title: 'Profile & Account',
-        link: APP_ROUTER.PRODUCT,
+        link: APP_ROUTER.USER,
     },
     {
         title: 'Settings',
