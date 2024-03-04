@@ -13,6 +13,10 @@ export const CustomAvatar = styled('div')`
         width: 4rem;
         height: 4rem;
     }
+    &.avt-xl {
+        width: 10rem;
+        height: 10rem;
+    }
 `
 export const CustomAvatarGroup = styled('div')`
     & .avt-sm {
@@ -32,5 +36,11 @@ export const CustomAvatarGroup = styled('div')`
         height: 4rem;
         font-size: 1.875rem;
         line-height: 2.25rem;
+    }
+    & .avt-xl {
+        width: 10rem;
+        height: 10rem;
+        font-size: 4rem;
+        line-height: 5rem;
     }
 `
