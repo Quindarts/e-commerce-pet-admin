@@ -3,6 +3,9 @@ import { Box, Typography, Grid } from '@mui/material'
 import useUser from '../../hook/api/user'
 import { useSelector } from 'react-redux'
 import Avatar from '../../Components/ui/Avatar/Avatar'
+import { BadgeWrapper } from '../../Components/ui/Badge/Badge'
+import { Card } from './styles'
+import userBackground from './../../assets/img/user-info-background.png'
 
 function UserPage() {
     const { handleGetUserById } = useUser()
@@ -18,25 +21,30 @@ function UserPage() {
     }
 
     return (
-        <Box display="flex" flexDirection="column" alignItems="center">
+        <Box className="relative flex flex-col items-center" sx={Card}>
+            <Box className="-z-1 absolute left-0 top-0 h-[125px]  w-full">
+                <img src={userBackground} alt="Background" className="h-full w-full object-cover" />
+            </Box>
             {user?.user_detail && (
-                <Box mt={3}>
-                    <Avatar
-                        src={user.user_detail.avatar?.url}
-                        size="lg"
-                        alt="User Avatar" 
-                        badge={{ status: 'private', position: 'bottom-right' }}
-                    />
-                    <Typography variant="h4">{`${user.user_detail.first_name} ${user.user_detail.last_name}`}</Typography>
-                    <Grid container justifyContent="center" mt={2}>
-                        <Grid item xs={6}>
-                            <Typography>Email: {user.user_detail.email}</Typography>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography>Role: {user.user_detail.role}</Typography>
-                        </Grid>
-                    </Grid>
-                    {/* <Typography mt={2}>Active: {user.user_detail.isActive ? 'Yes' : 'No'}</Typography> */}
+                <Box className="mt-[55px] flex flex-col items-center p-[24px]">
+                    <BadgeWrapper
+                        variant="dot"
+                        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                        shape="round"
+                        type="dark_green"
+                        border={false}
+                    >
+                        <Avatar src={user.user_detail.avatar?.url} size="lg" alt="User Avatar" border="false" />
+                    </BadgeWrapper>
+                    <Typography className="text-[16px] font-semibold">{`${user.user_detail.first_name} ${user.user_detail.last_name}`}</Typography>
+                    <Box className="mx-auto  flex max-w-[340px] flex-row flex-wrap items-center justify-between space-x-4 pt-[8px]">
+                        <Typography className="text-xs font-[500] text-[#5f748d]">
+                            Email: {user.user_detail.email}
+                        </Typography>
+                        <Typography className="text-xs font-[500] text-[#5f748d]">
+                            Role: {user.user_detail.role}
+                        </Typography>
+                    </Box>
                 </Box>
             )}
         </Box>
