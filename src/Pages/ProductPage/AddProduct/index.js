@@ -39,6 +39,7 @@ const AddProduct = () => {
         setProviders([...providers, { name: '', value: '' }])
     }
     const [newProviderName, setNewProviderName] = useState('')
+    
     const handleProviderChange = (event, index) => {
         const selectedValue = event.target.value
         if (selectedValue === 'placeholder') {
