@@ -569,6 +569,7 @@ function ComponentPage() {
                     Praesent commodo cursus magna, vel scelerisque nisl consectetur et.{' '}
                 </Box>
             </Modal>
+            <Typography>Accordion</Typography>
         </Box>
     )
 }

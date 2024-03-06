@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Box, Typography } from '@mui/material'
 import { Card } from './styles.js'
@@ -34,7 +34,10 @@ function HomePage() {
                 <Box sx={Card} className="p-7 db-xs:col-span-5 db-md:col-span-5 db-lg:col-span-3 db-xl:col-span-2">
                     <PopularProduct />
                 </Box>
-                <Box sx={Card} className=" relative p-7 db-xs:col-span-5 db-md:col-span-5 db-lg:col-span-2 db-xl:col-span-1">
+                <Box
+                    sx={Card}
+                    className=" relative p-7 db-xs:col-span-5 db-md:col-span-5 db-lg:col-span-2 db-xl:col-span-1"
+                >
                     <Typography className="text-sm font-bold text-gray-700">Recent Orders</Typography>
                     <Box className="absolute right-0 top-6">
                         <Link to="/orders" className="no-underline">

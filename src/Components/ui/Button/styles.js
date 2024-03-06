@@ -27,6 +27,15 @@ const CustomButton = styled(MuiButton)`
                 border: 2px solid ${theme.color.dark_blue};
             }
         }
+        &-container-yellow {
+            color: ${theme.color.white};
+            background-color: ${theme.color.orange};
+            border: 2px solid ${theme.color.yellow};
+            &:hover {
+                background-color: ${theme.color.yellow};
+                border: 2px solid ${theme.color.yellow};
+            }
+        }
         &-outline-primary {
             color: ${theme.color.gray_600};
             background-color: ${theme.color.white};
@@ -34,6 +43,24 @@ const CustomButton = styled(MuiButton)`
             &:hover {
                 border: 2px solid ${theme.color.light_blue};
                 background-color: ${theme.color.gray_100};
+            }
+        }
+        &-container-green {
+            color: ${theme.color.white};
+            background-color: ${theme.color.green};
+            border: 2px solid ${theme.color.green};
+            &:hover {
+                background-color: ${theme.color.dark_green};
+                border: 2px solid ${theme.color.dark_green};
+            }
+        }
+        &-outline-green {
+            color: ${theme.color.green};
+            background-color: ${theme.color.white};
+            border: 2px solid ${theme.color.green};
+            &:hover {
+                border: 2px solid ${theme.color.white};
+                background-color: ${theme.color.green};
             }
         }
         &-container-grey {
@@ -89,6 +116,15 @@ const CustomButton = styled(MuiButton)`
         &-container-primary-icon {
             background-color: ${theme.color.light_blue};
             color: white;
+            min-width: 1em;
+            min-height: 1em;
+            display: inline-block;
+            padding: 0.5rem;
+            border-radius: 50%;
+        }
+        &-container-red-icon {
+            background-color: ${theme.color.pink_900};
+            color: ${theme.color.white};
             min-width: 1em;
             min-height: 1em;
             display: inline-block;

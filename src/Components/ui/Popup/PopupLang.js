@@ -23,7 +23,7 @@ const flagReducer = (state, action) => {
 }
 const PopupLang = (props) => {
     const { list, handleChangeLanguage } = props
-    const { handleActive, menuRef, classes, handleClose } = useClickOutside()
+    const { handleActive, menuRef, classes, active, handleClose } = useClickOutside()
 
     const [state, dispatch] = useReducer(flagReducer, { flag: 'emojione:flag-for-vietnam' })
     return (
@@ -38,23 +38,25 @@ const PopupLang = (props) => {
             >
                 <Icon icon={state.flag} onClick={handleActive} width={30} />
             </Button>
-            <Box className={classes}>
-                <Box className="flex h-auto flex-col space-y-3">
-                    {list.map((lang, index) => (
-                        <Box key={index} className="flex cursor-pointer items-center p-2 hover:bg-blue-200">
-                            <button
-                                onClick={() => {
-                                    handleChangeLanguage(lang.value)
-                                    dispatch({ type: lang.value.toUpperCase() })
-                                    handleClose()
-                                }}
-                            >
-                                {lang.title}
-                            </button>
-                        </Box>
-                    ))}
+            {active && (
+                <Box className={classes}>
+                    <Box className="flex h-auto flex-col space-y-3">
+                        {list.map((lang, index) => (
+                            <Box key={index} className="flex cursor-pointer items-center p-2 hover:bg-blue-200">
+                                <button
+                                    onClick={() => {
+                                        handleChangeLanguage(lang.value)
+                                        dispatch({ type: lang.value.toUpperCase() })
+                                        handleClose()
+                                    }}
+                                >
+                                    {lang.title}
+                                </button>
+                            </Box>
+                        ))}
+                    </Box>
                 </Box>
-            </Box>
+            )}
         </Box>
     )
 }

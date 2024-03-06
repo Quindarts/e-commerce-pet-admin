@@ -8,23 +8,25 @@ import i18n from './translation/i18n'
 import { SnackbarProvider } from 'notistack'
 import { Zoom } from '@mui/material'
 import { themeSnackbar } from './Theme/themeSnackbar'
+import { Provider } from 'react-redux'
+import store from './store/store'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
 root.render(
     <ThemeProvider theme={theme}>
         <I18nextProvider i18n={i18n}>
-            <ThemeProvider theme={theme}>
-                <SnackbarProvider
-                    maxSnack={5}
-                    TransitionComponent={Zoom}
-                    Components={themeSnackbar}
-                    autoHideDuration={1000}
-                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                >
+            <SnackbarProvider
+                maxSnack={5}
+                TransitionComponent={Zoom}
+                Components={themeSnackbar}
+                autoHideDuration={2000}
+                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            >
+                <Provider store={store}>
                     <App />
-                </SnackbarProvider>
-            </ThemeProvider>
+                </Provider>
+            </SnackbarProvider>
         </I18nextProvider>
     </ThemeProvider>,
 )

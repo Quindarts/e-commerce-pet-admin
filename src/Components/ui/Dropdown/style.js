@@ -22,7 +22,7 @@ export default makeStyles()(() => ({
         },
     },
     sm: {
-        '.MuiSelect-select': { height: '1rem', padding: '9px' },
+        '.MuiSelect-select': { height: '1.2rem', padding: '12px' },
     },
     md: {
         height: '3.5em',

@@ -13,6 +13,8 @@ function Textfield(props) {
         variant = 'container',
         helperText,
         error,
+        value,
+        defaultValue,
         icon,
         size = 'xl',
         ...rest
@@ -29,6 +31,8 @@ function Textfield(props) {
                     className={`textfield w-full textfield-${variant} text-${type} textfield-${size} `}
                     error={error}
                     {...rest}
+                    value={value}
+                    defaultValue={defaultValue}
                 />
                 {type === 'password' && (
                     <IconButton
