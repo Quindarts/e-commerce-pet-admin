@@ -287,7 +287,21 @@ function ComponentPage() {
             Edit: 'Edit',
         },
     ]
-
+    const menuItems = [
+        { label: 'Basic Information', icon: APP_ICON.i_avatar_outline, details: <BasicInfo /> },
+        { label: 'Password', icon: APP_ICON.i_lock, details: <Password /> },
+        { label: 'Preferences', icon: APP_ICON.i_gear, details: <Preferences /> },
+        { label: 'Recent Devices', icon: APP_ICON.i_device, details: <Device /> },
+        { label: 'Notifications', icon: APP_ICON.i_bell, details: <Notification /> },
+        { label: 'Two-step verification', icon: APP_ICON.i_finger_print, details: <Verification /> },
+        { label: 'Connected accounts', icon: APP_ICON.i_chain, details: <ConnectedAcc /> },
+        { label: 'Social Account', icon: APP_ICON.i_instagram_outline, details: <SocialAcc /> },
+        { label: 'Billing', icon: APP_ICON.i_dollar, details: <Billing /> },
+        { label: 'Statement', icon: APP_ICON.i_paper, details: <Statement /> },
+        { label: 'Referrals', icon: APP_ICON.i_diamond, details: <Referrals /> },
+        { label: 'API Keys', icon: APP_ICON.i_key, details: <APIKeys /> },
+        { label: 'Delete account', icon: APP_ICON.i_trash_outline, details: <DeleteAcc /> },
+    ]
     return (
         <Box className="component_page">
             ComponentPage
@@ -400,6 +414,7 @@ function ComponentPage() {
             <Box>
                 <PopupLang list={listLanguage} handleChangeLanguage={handleChangeLanguage} />
             </Box>
+            
             <Typography className="mt-3 font-bold">Badge</Typography>
             <Box>
                 <Avatar
