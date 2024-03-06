@@ -21,9 +21,9 @@ function UserPage() {
     }
 
     return (
-        <Box className="relative flex flex-col items-center" sx={Card}>
-            <Box className="-z-1 absolute left-0 top-0 h-[125px]  w-full">
-                <img src={userBackground} alt="Background" className="h-full w-full object-cover" />
+        <Box className="relative flex flex-col items-center " sx={Card}>
+            <Box className="-z-1 absolute left-0 top-0 h-[125px] w-full rounded">
+                <img src={userBackground} alt="Background" className=" h-full w-full rounded-t-[10px] object-cover" />
             </Box>
             {user?.user_detail && (
                 <Box className="mt-[55px] flex flex-col items-center p-[24px]">
@@ -32,7 +32,7 @@ function UserPage() {
                         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                         shape="round"
                         type="dark_green"
-                        border={false}
+                        border={true}
                         size="lg"
                     >
                         <Avatar src={user.user_detail.avatar?.url} size="lg" alt="User Avatar" border="false" />
