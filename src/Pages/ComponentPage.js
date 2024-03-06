@@ -409,12 +409,13 @@ function ComponentPage() {
                     Modal xl
                 </Button>
             </Box>
+            <h1 className="my-3 font-[800]">Menu</h1>
+            <Menu className="ml-5" menuItems={menuItems} />
             <h1 className="mt-3 font-bold">Select language</h1>
             <h1>{t('content.text')}</h1>
             <Box>
                 <PopupLang list={listLanguage} handleChangeLanguage={handleChangeLanguage} />
             </Box>
-            
             <Typography className="mt-3 font-bold">Badge</Typography>
             <Box>
                 <Avatar
