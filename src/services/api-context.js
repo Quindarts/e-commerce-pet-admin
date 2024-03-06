@@ -37,7 +37,7 @@ client.interceptors.response.use(
     async (error) => {
         const originalConfig = error.config
         if (originalConfig.url !== APP_ROUTER.LOGIN && error.response) {
-            if (error.response.status === 401 && !originalConfig._retry) {
+            if (error.response.status === 403 && !originalConfig._retry) {
                 originalConfig._retry = true
                 try {
                     const serviceToken = tokenService()

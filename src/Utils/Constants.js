@@ -11,7 +11,7 @@ export const APP_ROUTER = {
     CATEGORY: '/categorys',
     CATEGORY_LIST: '/categorys/list',
     CATEGORY_ADD: '/categorys/add',
-    
+
     AUTH: 'auth',
     LOGIN: '/auth/login',
     REGISTER: '/auth/register',
@@ -26,7 +26,9 @@ export const ROLE = {
     WAREHOUSE: ' warehouse',
 }
 export const APP_ICON = {
-    i_close : 'iconamoon:close',
+    i_trash_outline: 'octicon:trash-16',
+    i_avatar_outline: 'clarity:avatar-line',
+    i_close: 'iconamoon:close',
     i_arrow_down: 'ph:arrow-down-light',
     i_arrow_up: 'ph:arrow-up-light',
     i_twitter: 'logos:twitter',
@@ -41,6 +43,17 @@ export const APP_ICON = {
     i_mail: 'material-symbols:mail',
     i_status: 'icon-park-solid:people',
     i_posts: 'mdi:post-it-notes',
+
+    i_lock: 'octicon:lock-24',
+    i_gear: 'mdi:gear',
+    i_device: 'tdesign:device',
+    i_finger_print: 'teenyicons:fingerprint-outline',
+    i_chain: 'akar-icons:link-chain',
+    i_instagram_outline: 'lucide:instagram',
+    i_dollar: 'mage:dollar',
+    i_paper: 'mdi:paper-outline',
+    i_diamond: 'ri:vip-diamond-line',
+    i_key: 'ion:key-sharp',
 
     i_users: 'mdi:users',
     i_search: 'clarity:search-line',
