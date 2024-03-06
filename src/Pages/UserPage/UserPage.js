@@ -33,6 +33,7 @@ function UserPage() {
                         shape="round"
                         type="dark_green"
                         border={false}
+                        size="lg"
                     >
                         <Avatar src={user.user_detail.avatar?.url} size="lg" alt="User Avatar" border="false" />
                     </BadgeWrapper>
