@@ -3,6 +3,7 @@ export const APP_ROUTER = {
     //
     HOME: '/home',
     COMPONENT: '/component',
+    USER_NOW_PROFILE: '/user/profile',
 
     USER: '/user',
     USER_LIST: '/user/list',
