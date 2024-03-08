@@ -14,23 +14,7 @@ import { useTranslation } from 'react-i18next'
 import i18n from '../translation/i18n.js'
 import PopupLang from '../Components/ui/Popup/PopupLang.js'
 import { Avatar, Box, Table, Typography } from '@mui/material'
-import { Link, useNavigate } from 'react-router-dom'
-import { BadgeWrapper } from '../Components/ui/Badge/Badge.js'
-import { useEffect } from 'react'
-import Menu from '../Components/ui/Menu/Menu.js'
-import APIKeys from '../Components/ui/Menu/Details/APIKeys.js'
-import DeleteAcc from '../Components/ui/Menu/Details/DeleteAcc.js'
-import Referrals from '../Components/ui/Menu/Details/Referrals.js'
-import Statement from '../Components/ui/Menu/Details/Statements.js'
-import Billing from '../Components/ui/Menu/Details/Billing.js'
-import SocialAcc from '../Components/ui/Menu/Details/SocialAcc.js'
-import ConnectedAcc from '../Components/ui/Menu/Details/ConnectedAcc.js'
-import Verification from '../Components/ui/Menu/Details/Verification.js'
-import Preferences from '../Components/ui/Menu/Details/Preferences.js'
-import Password from '../Components/ui/Menu/Details/Password.js'
-import BasicInfo from '../Components/ui/Menu/Details/BasicInfo.js'
-import Device from '../Components/ui/Menu/Details/Devices.js'
-import Notification from '../Components/ui/Menu/Details/Notifications.js'
+import { Link } from 'react-router-dom'
 
 const avatars = [
     {
@@ -291,45 +275,6 @@ function ComponentPage() {
             Edit: 'Edit',
         },
     ]
-    const menuItems = [
-        { label: 'Basic Information', icon: APP_ICON.i_avatar_outline, details: <BasicInfo /> },
-        { label: 'Password', icon: APP_ICON.i_lock, details: <Password /> },
-        { label: 'Preferences', icon: APP_ICON.i_gear, details: <Preferences /> },
-        { label: 'Recent Devices', icon: APP_ICON.i_device, details: <Device /> },
-        { label: 'Notifications', icon: APP_ICON.i_bell, details: <Notification /> },
-        { label: 'Two-step verification', icon: APP_ICON.i_finger_print, details: <Verification /> },
-        { label: 'Connected accounts', icon: APP_ICON.i_chain, details: <ConnectedAcc /> },
-        { label: 'Social Account', icon: APP_ICON.i_instagram_outline, details: <SocialAcc /> },
-        { label: 'Billing', icon: APP_ICON.i_dollar, details: <Billing /> },
-        { label: 'Statement', icon: APP_ICON.i_paper, details: <Statement /> },
-        { label: 'Referrals', icon: APP_ICON.i_diamond, details: <Referrals /> },
-        { label: 'API Keys', icon: APP_ICON.i_key, details: <APIKeys /> },
-        { label: 'Delete account', icon: APP_ICON.i_trash_outline, details: <DeleteAcc /> },
-    ]
-
-    const [firstattributeName, setFirstattributeName] = useState('')
-    const [attributes, setAttributes] = useState([])
-
-    useEffect(() => {
-        const fetchattribute = async () => {
-            try {
-                const response = await fetch(
-                    'https://e-commerce-pet-server-quindarts.vercel.app/attributes?offset=1&limit=10',
-                )
-                const data = await response.json()
-                console.log(data)
-
-                if (data.success && data.list && data.list.length > 0) {
-                    setFirstattributeName(data.list[0].name)
-                }
-                setAttributes(data.list)
-            } catch (error) {
-                console.error('Có lỗi:', error)
-            }
-        }
-
-        fetchattribute()
-    }, [])
 
     return (
         <Box className="component_page">
@@ -443,6 +388,8 @@ function ComponentPage() {
                     Modal xl
                 </Button>
             </Box>
+            <h1 className="my-3 font-[800]">Menu</h1>
+            <Menu className="ml-5" menuItems={menuItems} />
             <h1 className="mt-3 font-bold">Select language</h1>
             <h1>{t('content.text')}</h1>
             <Box>
