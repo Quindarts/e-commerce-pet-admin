@@ -54,7 +54,7 @@ function InputUpload(props) {
                     }}
                 />
             </Button>
-            <Box className="flex h-[20rem] w-full border-spacing-1 flex-wrap gap-5 rounded-md px-[2rem]">
+            <Box className="flex h-[11rem] w-full border-spacing-1 flex-wrap gap-5 rounded-md px-[2rem]">
                 {listImg.length > 0 &&
                     listImg.map((item, key) => (
                         <ImageCard src={item} key={key} handleRemoveUploadImage={handleRemoveUploadImage} />

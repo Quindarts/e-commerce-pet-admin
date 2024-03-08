@@ -3,6 +3,7 @@ export const APP_ROUTER = {
     //
     HOME: '/home',
     COMPONENT: '/component',
+    USER_NOW_PROFILE: '/user/profile',
 
     USER: '/user',
     USER_LIST: '/user/list',
@@ -41,6 +42,7 @@ export const APP_ICON = {
     order: 'carbon:order-details',
     list_user: 'ph:user-list',
     i_avatar: 'ooui:user-avatar',
+    i_avatar_outline: 'ooui:user-avatar-outline',
     i_camera: 'mdi:camera',
     i_mail: 'material-symbols:mail',
     i_status: 'icon-park-solid:people',
@@ -48,11 +50,8 @@ export const APP_ICON = {
 
     i_users: 'mdi:users',
     i_search: 'clarity:search-line',
-
     i_plus: 'ic:baseline-plus',
-
     i_contact_list: 'fluent-mdl2:contact-list',
-
     i_list: 'mi:list',
 
     i_grid: 'bxs:grid',
@@ -82,15 +81,19 @@ export const APP_ICON = {
     i_carrie_page: 'fa6-solid:s',
 
     i_mess_phone: 'el-phone-alt',
+    i_device: 'tdesign:device',
 
     i_arrow_down_box_1: 'bxs-down-arrow',
-
+    i_finger_print: 'teenyicons:fingerprint-outline',
     i_hand_bag: 'ph-handbag-fill',
     i_bell: 'fa6-solid:bell',
     i_trash: 'mdi-trash',
+    i_trash_outline: 'mdi:trash-outline',
 
+    i_lock: 'codicon:lock',
+    i_gear: 'mdi:gear',
     i_upload: 'ic-round-cloud-upload',
-
+    i_dollar: 'streamline:dollar-coin',
     i_mls: 'mdi-human-male-board',
 
     i_sales_1: 'bxs-badge-dollar',
@@ -98,15 +101,16 @@ export const APP_ICON = {
     i_sales_2: 'fa6-solid-comments-dollar',
 
     i_hiring: 'mdi-human-greeting',
-
+    i_paper: 'mdi:paper-outline',
     i_project_1: 'material-symbols-add-ad',
 
     i_project_2: 'fa-solid-project-diagram',
 
     i_crm: 'fluent-chat-bubbles-question-32-filled',
-
+    i_diamond: 'ri:vip-diamond-line',
     i_sass: 'subway-book',
-
+    i_chain: 'streamline:link-chain-solid',
+    i_key: 'fontisto:key',
     i_profiles: 'icon-park-solid-people',
 
     i_account: 'ic-twotone-manage-accounts',
@@ -130,6 +134,9 @@ export const APP_ICON = {
     i_eye_off: 'mdi:eye-off',
 
     i_instagram: 'ri:instagram-fill',
+    i_instagram_outline: 'akar-icons:instagram-fill',
+
+    i_warning: 'noto:warning',
 }
 
 export const TITLE_NAVBAR = {

@@ -14,8 +14,22 @@ import { useTranslation } from 'react-i18next'
 import i18n from '../translation/i18n.js'
 import PopupLang from '../Components/ui/Popup/PopupLang.js'
 import { Avatar, Box, Table, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
-
+import { Link, useNavigate } from 'react-router-dom'
+import { BadgeWrapper } from '../Components/ui/Badge/Badge.js'
+import Menu from '../Components/ui/Menu/Menu.js'
+import APIKeys from '../Components/ui/Menu/Details/APIKeys.js'
+import DeleteAcc from '../Components/ui/Menu/Details/DeleteAcc.js'
+import Referrals from '../Components/ui/Menu/Details/Referrals.js'
+import Statement from '../Components/ui/Menu/Details/Statements.js'
+import Billing from '../Components/ui/Menu/Details/Billing.js'
+import SocialAcc from '../Components/ui/Menu/Details/SocialAcc.js'
+import ConnectedAcc from '../Components/ui/Menu/Details/ConnectedAcc.js'
+import Verification from '../Components/ui/Menu/Details/Verification.js'
+import Preferences from '../Components/ui/Menu/Details/Preferences.js'
+import Password from '../Components/ui/Menu/Details/Password.js'
+import BasicInfo from '../Components/ui/Menu/Details/BasicInfo.js'
+import Device from '../Components/ui/Menu/Details/Devices.js'
+import Notification from '../Components/ui/Menu/Details/Notifications.js'
 const avatars = [
     {
         src: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
@@ -41,9 +55,9 @@ const names = [
     { name: '' },
 ]
 const warehouseItem = [
-    'https://product.hstatic.net/200000312481/product/olc31003_b15f9f049c014a9d9c709cf0aa6ab353_master.jpg',
-    'https://product.hstatic.net/200000312481/product/olc31002_1_c01afc3a5c614cb2880b3740179ed447_master.jpg',
-    'https://product.hstatic.net/200000312481/product/aho2002_1_4c1c4e1db1ed4450b31da91840bf92d7_master.jpg',
+    'https://attribute.hstatic.net/200000312481/attribute/olc31003_b15f9f049c014a9d9c709cf0aa6ab353_master.jpg',
+    'https://attribute.hstatic.net/200000312481/attribute/olc31002_1_c01afc3a5c614cb2880b3740179ed447_master.jpg',
+    'https://attribute.hstatic.net/200000312481/attribute/aho2002_1_4c1c4e1db1ed4450b31da91840bf92d7_master.jpg',
 ]
 const user = {
     firstName: 'Than Nguyen Thanh',
@@ -57,6 +71,8 @@ const listLanguage = [
 ]
 
 function ComponentPage() {
+    const navigate = useNavigate()
+
     const demo = 50
     const [status, setStatus] = useState(demo)
     const handleCompleteClick = () => {
@@ -99,13 +115,13 @@ function ComponentPage() {
             code: 'HLNBCKHJ',
             detail: {
                 name: 'Beef',
-                img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
+                img: 'https://uko-react.vercel.app/static/attributes/shoe-3.png',
                 desc: 'Amazon lins',
             },
-            price: 60000,
+            value: 60000,
             brand: 'Jolly Pet',
             category: 'Food',
-            // status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
+            status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
         },
         {
             id: '2',
@@ -113,13 +129,13 @@ function ComponentPage() {
             code: 'HLNBCKHJ',
             detail: {
                 name: ' Dog Food',
-                img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
+                img: 'https://uko-react.vercel.app/static/attributes/shoe-3.png',
                 desc: 'Amazon lins',
             },
-            price: 60000,
+            value: 60000,
             brand: 'Jolly Pet',
             category: 'Food',
-            // // status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
+            status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
         },
         {
             id: '3',
@@ -127,13 +143,13 @@ function ComponentPage() {
             code: 'HLNBCKHJ',
             detail: {
                 name: 'Beef Dog',
-                img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
+                img: 'https://uko-react.vercel.app/static/attributes/shoe-3.png',
                 desc: 'Amazon lins',
             },
-            price: 60000,
+            value: 60000,
             brand: 'Jolly Pet',
             category: 'Food',
-            // // status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
+            status: <BadgeWrapper badgeContent={'Available'} shape="square" type="green_text"></BadgeWrapper>,
         },
         {
             id: '4',
@@ -141,13 +157,13 @@ function ComponentPage() {
             code: 'HLNBCKHJ',
             detail: {
                 name: ' Dog ',
-                img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
+                img: 'https://uko-react.vercel.app/static/attributes/shoe-3.png',
                 desc: 'Amazon lins',
             },
-            price: 70000,
+            value: 70000,
             brand: 'Jolly',
             category: 'Food',
-            // // status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
+            status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
         },
         {
             id: '5',
@@ -155,13 +171,13 @@ function ComponentPage() {
             code: 'HLNBCKHJ',
             detail: {
                 name: ' Food',
-                img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
+                img: 'https://uko-react.vercel.app/static/attributes/shoe-3.png',
                 desc: 'Amazon lins',
             },
-            price: 60000,
+            value: 60000,
             brand: 'Jolly Pet',
             category: 'Food',
-            // // status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
+            status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
         },
         {
             id: '6',
@@ -169,19 +185,19 @@ function ComponentPage() {
             code: 'HLNBCKHJ',
             detail: {
                 name: 'Beef Dog Food',
-                img: 'https://uko-react.vercel.app/static/products/shoe-3.png',
+                img: 'https://uko-react.vercel.app/static/attributes/shoe-3.png',
                 desc: 'Amazon lins',
             },
-            price: 50000,
+            value: 50000,
             brand: ' Pet',
             category: 'Food',
-            // // status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
+            status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
         },
     ]
     const columns = [
         {
             field: 'detail',
-            headerName: 'Product',
+            headerName: 'attribute',
             flex: 2,
             renderCell: (params) => (
                 <Box className="flex gap-3">
@@ -218,8 +234,8 @@ function ComponentPage() {
         },
 
         {
-            field: 'price',
-            headerName: 'Price',
+            field: 'value',
+            headerName: 'value',
             flex: 1,
         },
         {
@@ -233,7 +249,7 @@ function ComponentPage() {
 
     const data = [
         {
-            Product: 'Light Airpod',
+            attribute: 'Light Airpod',
             Producer: 'Apple',
             ID: 'PD0001',
             Category: 'Air Pod',
@@ -243,7 +259,7 @@ function ComponentPage() {
             Edit: 'Edit',
         },
         {
-            Product: 'Air Pod 2',
+            attribute: 'Air Pod 2',
             Producer: 'Apple',
             ID: 'PD0002',
             Category: 'Air Pod',
@@ -253,7 +269,7 @@ function ComponentPage() {
             Edit: 'Edit',
         },
         {
-            Product: 'Nike Shoe',
+            attribute: 'Nike Shoe',
             Producer: 'Nike',
             ID: 'PD0003',
             Category: 'Shoe',
@@ -263,7 +279,7 @@ function ComponentPage() {
             Edit: 'Edit',
         },
         {
-            Product: 'Light Airpod',
+            attribute: 'Light Airpod',
             Producer: 'Apple',
             ID: 'PD0004',
             Category: 'Air Pod',
@@ -273,11 +289,28 @@ function ComponentPage() {
             Edit: 'Edit',
         },
     ]
-
+    const menuItems = [
+        { label: 'Basic Information', icon: APP_ICON.i_avatar_outline, details: <BasicInfo /> },
+        { label: 'Password', icon: APP_ICON.i_lock, details: <Password /> },
+        { label: 'Preferences', icon: APP_ICON.i_gear, details: <Preferences /> },
+        { label: 'Recent Devices', icon: APP_ICON.i_device, details: <Device /> },
+        { label: 'Notifications', icon: APP_ICON.i_bell, details: <Notification /> },
+        { label: 'Two-step verification', icon: APP_ICON.i_finger_print, details: <Verification /> },
+        { label: 'Connected accounts', icon: APP_ICON.i_chain, details: <ConnectedAcc /> },
+        { label: 'Social Account', icon: APP_ICON.i_instagram_outline, details: <SocialAcc /> },
+        { label: 'Billing', icon: APP_ICON.i_dollar, details: <Billing /> },
+        { label: 'Statement', icon: APP_ICON.i_paper, details: <Statement /> },
+        { label: 'Referrals', icon: APP_ICON.i_diamond, details: <Referrals /> },
+        { label: 'API Keys', icon: APP_ICON.i_key, details: <APIKeys /> },
+        { label: 'Delete account', icon: APP_ICON.i_trash_outline, details: <DeleteAcc /> },
+    ]
     return (
         <Box className="component_page">
             ComponentPage
             <p>Viết các Components chung tại đây</p>
+            <div>
+                <Button onClick={() => navigate(APP_ROUTER.ATTRIBUTE)}>To Attribute Page</Button>
+            </div>
             <h1 className="my-3 font-[800]">Avatar</h1>
             <Box className="flex gap-5">
                 <Box>
@@ -340,6 +373,8 @@ function ComponentPage() {
                     <Icon icon={APP_ICON.i_invoice} />
                 </Button>
             </Box>
+            <h1 className="my-3 font-[800]">Menu</h1>
+            <Menu className="ml-5" menuItems={menuItems} />
             <h1 className="my-3 font-[800]">Status Bar</h1>
             <Box>
                 <StatusBar
@@ -381,6 +416,8 @@ function ComponentPage() {
                     Modal xl
                 </Button>
             </Box>
+            <h1 className="my-3 font-[800]">Menu</h1>
+            <Menu className="ml-5" menuItems={menuItems} />
             <h1 className="mt-3 font-bold">Select language</h1>
             <h1>{t('content.text')}</h1>
             <Box>
@@ -409,7 +446,7 @@ function ComponentPage() {
                 <Table
                     hasCheckbox
                     hasPanigation
-                    label="Popular Products"
+                    label="Popular attributes"
                     className=" w-full"
                     columns={columns}
                     rows={rows}

@@ -47,7 +47,7 @@ export default function TemporaryDrawer(props) {
                         color="grey"
                         icon
                     >
-                        <Icon icon="mingcute:exit-fill" rotate={2} width={24} />
+                        <Icon icon="mingcute:arow-to-left-line" width={24} />
                     </Button>
                 </Box>
                 <Box className="p-[12px]">

@@ -5,7 +5,6 @@ import { APP_ROUTER } from '../Utils/Constants'
 import HomePage from '../Pages/Home/HomePage'
 import OrderPage from '../Pages/OrderPage/OrderPage'
 import AuthLayout from '../Layout/AuthLayout/AuthLayout'
-
 import { loaderUser } from './loader/loaderAuth'
 import CategoryPage from '../Pages/CategoryPage/index'
 import Login from '../Pages/Auth/Login/Login'
@@ -15,6 +14,7 @@ import CategoryAddPage from '../Pages/CategoryPage/Add'
 import ListUserPage from '../Pages/UserPage/List'
 import UserAddPage from '../Pages/UserPage/Add'
 import UserPage from '../Pages/UserPage'
+import Profile from '../Components/Shared/Header/Profile'
 
 const router = createBrowserRouter([
     {
@@ -39,6 +39,7 @@ const router = createBrowserRouter([
                     { path: APP_ROUTER.CATEGORY_ADD, element: <CategoryAddPage /> },
                 ],
             },
+
             {
                 path: APP_ROUTER.ORDER,
                 element: <OrderPage />,
@@ -49,6 +50,11 @@ const router = createBrowserRouter([
                 children: [
                     { path: APP_ROUTER.USER_LIST, element: <ListUserPage />, index: true },
                     { path: APP_ROUTER.USER_ADD, element: <UserAddPage /> },
+                    {
+                        path: APP_ROUTER.USER_NOW_PROFILE,
+                        index: true,
+                        element: <Profile />,
+                    },
                 ],
             },
             {
