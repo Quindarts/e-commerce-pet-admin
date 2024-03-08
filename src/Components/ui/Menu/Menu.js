@@ -12,6 +12,7 @@ export default function Menu({ menuItems, className }) {
             <List sx={Card}>
                 {menuItems.map((item) => (
                     <ListItemButton
+                        className="font-bold"
                         key={item.label}
                         selected={selected === item.label}
                         onClick={() => setSelected(item.label)}
@@ -22,14 +23,18 @@ export default function Menu({ menuItems, className }) {
                             <Icon width={16} icon={item.icon} />
                         </ListItemIcon>
 
-                        <ListItemText className="font-[500]">{item.label}</ListItemText>
+                        <ListItemText>{item.label}</ListItemText>
                     </ListItemButton>
                 ))}
             </List>
             <Box sx={{ marginLeft: '24px' }}>
                 {menuItems.map((item) => {
                     if (selected === item.label) {
-                        return <div key={item.label}>{item.details}</div>
+                        return (
+                            <Box fontSize={12} key={item.label}>
+                                {item.details}
+                            </Box>
+                        )
                     }
                     return null
                 })}

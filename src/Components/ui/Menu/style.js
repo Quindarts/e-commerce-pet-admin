@@ -1,6 +1,7 @@
 import { COLOR } from '../../../Utils/Constants'
 export const listItemButtonStyles = {
-    padding: '0.6rem 1.5rem', // Adjust padding as needed
+    padding: '0.6rem 1.5rem',
+    fontSize: '12px',
     '&.Mui-selected, &:hover': {
         color: COLOR.light_blue,
         backgroundColor: '#eef7fe',

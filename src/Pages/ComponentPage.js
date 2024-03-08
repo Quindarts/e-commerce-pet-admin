@@ -14,8 +14,22 @@ import { useTranslation } from 'react-i18next'
 import i18n from '../translation/i18n.js'
 import PopupLang from '../Components/ui/Popup/PopupLang.js'
 import { Avatar, Box, Table, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
-
+import { Link, useNavigate } from 'react-router-dom'
+import { BadgeWrapper } from '../Components/ui/Badge/Badge.js'
+import Menu from '../Components/ui/Menu/Menu.js'
+import APIKeys from '../Components/ui/Menu/Details/APIKeys.js'
+import DeleteAcc from '../Components/ui/Menu/Details/DeleteAcc.js'
+import Referrals from '../Components/ui/Menu/Details/Referrals.js'
+import Statement from '../Components/ui/Menu/Details/Statements.js'
+import Billing from '../Components/ui/Menu/Details/Billing.js'
+import SocialAcc from '../Components/ui/Menu/Details/SocialAcc.js'
+import ConnectedAcc from '../Components/ui/Menu/Details/ConnectedAcc.js'
+import Verification from '../Components/ui/Menu/Details/Verification.js'
+import Preferences from '../Components/ui/Menu/Details/Preferences.js'
+import Password from '../Components/ui/Menu/Details/Password.js'
+import BasicInfo from '../Components/ui/Menu/Details/BasicInfo.js'
+import Device from '../Components/ui/Menu/Details/Devices.js'
+import Notification from '../Components/ui/Menu/Details/Notifications.js'
 const avatars = [
     {
         src: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
@@ -275,7 +289,21 @@ function ComponentPage() {
             Edit: 'Edit',
         },
     ]
-
+    const menuItems = [
+        { label: 'Basic Information', icon: APP_ICON.i_avatar_outline, details: <BasicInfo /> },
+        { label: 'Password', icon: APP_ICON.i_lock, details: <Password /> },
+        { label: 'Preferences', icon: APP_ICON.i_gear, details: <Preferences /> },
+        { label: 'Recent Devices', icon: APP_ICON.i_device, details: <Device /> },
+        { label: 'Notifications', icon: APP_ICON.i_bell, details: <Notification /> },
+        { label: 'Two-step verification', icon: APP_ICON.i_finger_print, details: <Verification /> },
+        { label: 'Connected accounts', icon: APP_ICON.i_chain, details: <ConnectedAcc /> },
+        { label: 'Social Account', icon: APP_ICON.i_instagram_outline, details: <SocialAcc /> },
+        { label: 'Billing', icon: APP_ICON.i_dollar, details: <Billing /> },
+        { label: 'Statement', icon: APP_ICON.i_paper, details: <Statement /> },
+        { label: 'Referrals', icon: APP_ICON.i_diamond, details: <Referrals /> },
+        { label: 'API Keys', icon: APP_ICON.i_key, details: <APIKeys /> },
+        { label: 'Delete account', icon: APP_ICON.i_trash_outline, details: <DeleteAcc /> },
+    ]
     return (
         <Box className="component_page">
             ComponentPage
