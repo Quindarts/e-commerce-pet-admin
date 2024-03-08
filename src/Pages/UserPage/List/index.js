@@ -55,7 +55,7 @@ function ListUserPage() {
     return (
         <CustomListUser className="flew w-full flex-wrap">
             <Title icon="simple-line-icons:user">User Table Manager</Title>
-            <Box className="contain my-3 flex flex-wrap">
+            <Box className="contain my-3 flex w-full flex-wrap">
                 <Box className="contain__left flex h-[2.5rem] justify-between">
                     <SearchBar
                         handleQuery={handleQuery}
@@ -66,26 +66,26 @@ function ListUserPage() {
                 </Box>
                 <Box className="contain__right flex h-[2.5rem] flex-wrap justify-end gap-2">
                     <Dropdown
-                        className="w-[8rem]"
+                        className="w-[7rem]"
                         size="sm"
                         list={list}
                         onChange={(e) => setTypeSearch(e.target.value)}
                     />
                     <Button color="primary">
                         Filter
-                        <Icon className="mx-1" width={20} icon="fluent-mdl2:filter-descending" />
+                        <Icon className="mx-1" width={19} icon="fluent-mdl2:filter-descending" />
                     </Button>
                     <Button color="yellow">
                         Clear
-                        <Icon className="mx-1" width={20} icon="ant-design:clear-outlined" />
+                        <Icon className="mx-1" width={19} icon="ant-design:clear-outlined" />
                     </Button>
                     <Button onClick={() => navigate(APP_ROUTER.USER_ADD)} color="red">
                         Add
-                        <Icon className="mx-[2px]" width={20} icon={APP_ICON.i_plus} />
+                        <Icon className="mx-[2px]" width={19} icon={APP_ICON.i_plus} />
                     </Button>
                     <Button color="green" disabled>
                         Export
-                        <Icon className="mx-1" width={20} icon="ph:export" />
+                        <Icon className="mx-1" width={19} icon="ph:export" />
                     </Button>
                 </Box>
             </Box>

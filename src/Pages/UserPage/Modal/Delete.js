@@ -21,9 +21,11 @@ function Delete(props) {
             <Typography marginTop={2}>Are you delete this user ?</Typography>
             <Box width="100%" display="flex" gap={3} marginTop={5}>
                 <Button onClick={handleCloseDeleteModal} sx={{ width: '50%' }} color="primary" variant="outline">
+                    <Icon width={20} style={{ marginRight: 4 }} icon="mdi:cancel-outline" />
                     Cancel
                 </Button>
                 <Button type="submit" sx={{ width: '50%' }} color="red">
+                    <Icon width={20} style={{ marginRight: 4 }} icon="material-symbols:auto-delete-outline" />
                     Delete
                 </Button>
             </Box>

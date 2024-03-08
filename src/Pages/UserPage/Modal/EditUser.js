@@ -24,7 +24,7 @@ function EditUser(props) {
     }
     const handleSubmitUser = () => {}
     return (
-        <Box>
+        <Box mx={2} mb={3} mt={1}>
             <Typography
                 style={{ fontWeight: 'bold', fontSize: '20px', color: '#374151 ' }}
                 marginBottom="15px"
@@ -71,7 +71,7 @@ function EditUser(props) {
                 <Formik initialValues={{ name: 'quang' }} onSubmit={handleSubmitUser}>
                     {() => (
                         <Form>
-                            <Box width="100%" display={'flex'} gap={3}>
+                            <Box width="100%" display={'flex'} gap={2}>
                                 <Box my={1} flex={1}>
                                     <Textfield label="First Name" />
                                 </Box>
@@ -79,7 +79,7 @@ function EditUser(props) {
                                     <Textfield label="Last Name" />
                                 </Box>
                             </Box>
-                            <Box width="100%" display={'flex'} gap={3}>
+                            <Box width="100%" display={'flex'} gap={2}>
                                 <Box my={1} flex={1}>
                                     <Textfield label="Email" />
                                 </Box>
@@ -87,7 +87,7 @@ function EditUser(props) {
                                     <Textfield label="Location" />
                                 </Box>
                             </Box>
-                            <Box width="100%" display={'flex'} gap={3}>
+                            <Box width="100%" display={'flex'} gap={2}>
                                 <Box my={1} flex={1}>
                                     <Textfield label="Phone" />
                                 </Box>
@@ -95,7 +95,7 @@ function EditUser(props) {
                                     <Textfield label="City" />
                                 </Box>
                             </Box>
-                            <Box width="100%" display={'flex'} gap={3}>
+                            <Box width="100%" display={'flex'} gap={2}>
                                 <Box my={1} flex={1}>
                                     <Textfield label="Birthday" />
                                 </Box>
@@ -103,17 +103,19 @@ function EditUser(props) {
                                     <Textfield label="Role" />
                                 </Box>
                             </Box>
-                            <Box mt={2} sx={{ display: 'flex', gap: 3 }}>
+                            <Box mt={2} sx={{ display: 'flex', gap: 2 }}>
                                 <Button
                                     onClick={handleCloseEditUserModal}
                                     sx={{ width: '50%' }}
                                     color="primary"
                                     variant="outline"
                                 >
+                                    <Icon width={20} style={{ marginRight: 4 }} icon="mdi:cancel-outline" />
                                     Cancel
                                 </Button>
                                 <Button type="submit" sx={{ width: '50%' }} color="primary">
-                                    Save
+                                    <Icon width={20} style={{ marginRight: 4 }} icon="iconamoon:edit" />
+                                    Edit
                                 </Button>
                             </Box>
                         </Form>

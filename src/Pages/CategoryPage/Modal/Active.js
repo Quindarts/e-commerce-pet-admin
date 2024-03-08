@@ -17,7 +17,6 @@ function Active(props) {
         if (data.success && data.category) {
             enqueueSnackbar(data.message, { variant: 'success' })
             handleGetAllCategoryByParams(limit, currentPage)
-            
         } else {
             enqueueSnackbar(data.message, { variant: 'error' })
         }
@@ -45,9 +44,11 @@ function Active(props) {
             </Typography>
             <Box width="100%" display="flex" gap={3} marginTop={5}>
                 <Button onClick={handleCloseActiveModal} sx={{ width: '50%' }} color="primary" variant="outline">
+                    <Icon width={20} style={{ marginRight: 4 }} icon="mdi:cancel-outline" />
                     Cancel
                 </Button>
                 <Button onClick={handleSubmitActive} type="submit" sx={{ width: '50%' }} color="yellow">
+                    <Icon width={20} style={{ marginRight: 4 }} icon="bx:save" />
                     Change this active
                 </Button>
             </Box>
