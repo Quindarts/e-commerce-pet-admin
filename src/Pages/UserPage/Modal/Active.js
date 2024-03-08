@@ -1,26 +1,11 @@
-import { Box, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React from 'react'
 import Button from '../../../Components/ui/Button/Button'
+import { Typography } from '@mui/material'
 import { Icon } from '@iconify/react'
-import { apiChangeActiveCategory } from '../../../services/api-category'
-import { useSnackbar } from 'notistack'
-import useCategory from '../../../hook/api/category'
+import { Box } from '@mui/system'
 
 function Active(props) {
-    const { handleCloseActiveModal, category_id } = props
-    const { enqueueSnackbar } = useSnackbar()
-    const { handleGetAllCategoryByParams, currentPage, limit } = useCategory()
-
-    const handleSubmitActive = async () => {
-        const data = await apiChangeActiveCategory(category_id)
-
-        if (data.success && data.category) {
-            enqueueSnackbar(data.message, { variant: 'success' })
-            handleGetAllCategoryByParams(limit, currentPage)
-        } else {
-            enqueueSnackbar(data.message, { variant: 'error' })
-        }
-    }
+    const { handleCloseActiveModal, id } = props
     return (
         <Box
             height={300}
@@ -40,14 +25,14 @@ function Active(props) {
                 />
             </Box>
             <Typography fontWeight="bold" marginTop={2}>
-                Are you surce to change active this category ?
+                Are you surce to change active this user ?
             </Typography>
             <Box width="100%" display="flex" gap={3} marginTop={5}>
                 <Button onClick={handleCloseActiveModal} sx={{ width: '50%' }} color="primary" variant="outline">
                     <Icon width={20} style={{ marginRight: 4 }} icon="mdi:cancel-outline" />
                     Cancel
                 </Button>
-                <Button onClick={handleSubmitActive} type="submit" sx={{ width: '50%' }} color="yellow">
+                <Button type="submit" sx={{ width: '50%' }} color="yellow">
                     <Icon width={20} style={{ marginRight: 4 }} icon="bx:save" />
                     Change this active
                 </Button>

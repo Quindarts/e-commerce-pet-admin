@@ -145,7 +145,6 @@ function ListMenu(props) {
             {/** User */}
             <ListItemButton
                 onClick={() => {
-                    navigate(APP_ROUTER.USER)
                     setOpenUser(!openUser)
                 }}
             >
@@ -161,7 +160,13 @@ function ListMenu(props) {
             {checkDetailTitle && (
                 <Collapse in={openUser} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
-                        <ListItemButton sx={{ pl: 4 }}>
+                        <ListItemButton
+                            onClick={() => {
+                                navigate(APP_ROUTER.USER_ADD)
+                                setOpenCategory(!openUser)
+                            }}
+                            sx={{ pl: 4 }}
+                        >
                             <ListItemIcon>
                                 <Icon width={20} icon="streamline:user-add-plus" />
                             </ListItemIcon>
@@ -170,7 +175,13 @@ function ListMenu(props) {
                     </List>
 
                     <List component="div" disablePadding>
-                        <ListItemButton sx={{ pl: 4 }}>
+                        <ListItemButton
+                            onClick={() => {
+                                navigate(APP_ROUTER.USER_LIST)
+                                setOpenCategory(!openUser)
+                            }}
+                            sx={{ pl: 4 }}
+                        >
                             <ListItemIcon>
                                 <Icon width={20} icon="ph:user-list" />
                             </ListItemIcon>

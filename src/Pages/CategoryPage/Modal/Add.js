@@ -6,6 +6,7 @@ import Button from '../../../Components/ui/Button/Button'
 import * as Yup from 'yup'
 import { apiCreateCategory } from '../../../services/api-category'
 import { useSnackbar } from 'notistack'
+import { Icon } from '@iconify/react'
 
 export const CategorySchema = Yup.object().shape({
     name: Yup.string().min(2, 'Name not found').required('Name is required'),
@@ -120,9 +121,11 @@ function ModalAdd(props) {
                                             color="primary"
                                             variant="outline"
                                         >
+                                            <Icon width={20} style={{ marginRight: 4 }} icon="mdi:cancel-outline" />
                                             Cancel
                                         </Button>
                                         <Button type="submit" sx={{ width: '50%' }} color="primary">
+                                            <Icon width={20} style={{ marginRight: 4 }} icon="bx:save" />
                                             Save
                                         </Button>
                                     </Box>

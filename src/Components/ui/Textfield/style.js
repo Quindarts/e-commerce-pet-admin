@@ -39,8 +39,8 @@ export const TextFieldCustomMUI = styled(TextField)`
                 border-color: #9cb0c4;
             }
             &.Mui-disabled {
-                background-color: ${theme.color.gray_400};
-                -webkit-text-fill-color: ${theme.color.gray_600};
+                background-color: ${theme.color.gray_300};
+                -webkit-text-fill-color: ${theme.color.light_blue};
             }
             &.Mui-error {
                 color: ${theme.color.pink_900};

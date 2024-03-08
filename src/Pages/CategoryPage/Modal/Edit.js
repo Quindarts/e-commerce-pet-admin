@@ -7,6 +7,7 @@ import { apiGetCategoryById, apiUpdateCategoryById } from '../../../services/api
 import { useSnackbar } from 'notistack'
 import useCategory from '../../../hook/api/category'
 import { CategorySchema } from './Add'
+import { Icon } from '@iconify/react'
 
 function ModalEdit(props) {
     const { category_id, handleCloseEditModal } = props
@@ -46,7 +47,7 @@ function ModalEdit(props) {
     return (
         <Fragment>
             {categoryFetch ? (
-                <Fragment>
+                <Box>
                     <Formik
                         className="form"
                         initialValues={{
@@ -58,7 +59,7 @@ function ModalEdit(props) {
                         onSubmit={handleSubmitEditForm}
                     >
                         {({ handleBlur, handleChange, values, errors, touched }) => (
-                            <Form style={{ display: 'flex', gap: 3, flexDirection: 'column', margin: '15px' }}>
+                            <Form style={{ display: 'flex', gap: 2, flexDirection: 'column', margin: '15px' }}>
                                 <Typography
                                     style={{ fontWeight: 'bold', fontSize: '20px', color: '#374151 ' }}
                                     marginBottom="15px"
@@ -66,8 +67,8 @@ function ModalEdit(props) {
                                 >
                                     Category details
                                 </Typography>
-                                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-                                    <Box sx={{ display: 'flex', gap: 3, width: '100%' }}>
+                                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                                    <Box sx={{ display: 'flex', gap: 2, width: '100%' }}>
                                         <Box flex={1}>
                                             <Textfield
                                                 label="Name"
@@ -114,33 +115,26 @@ function ModalEdit(props) {
                                             helperText={errors.description}
                                         />
                                     </Box>
-                                    <Box display="flex" alignItems="center">
-                                        <Typography className="t">Active Category:</Typography>
-                                        <Checkbox
-                                            checked={checked}
-                                            onChange={handleChangeActive}
-                                            onBlur={handleBlur}
-                                            inputProps={{ 'aria-label': 'controlled' }}
-                                        />
-                                    </Box>
                                 </Box>
-                                <Box sx={{ display: 'flex', gap: 3 }}>
+                                <Box mt={3} sx={{ display: 'flex', gap: 2 }}>
                                     <Button
                                         onClick={handleCloseEditModal}
                                         sx={{ width: '50%' }}
                                         color="primary"
                                         variant="outline"
                                     >
+                                        <Icon width={20} style={{ marginRight: 4 }} icon="mdi:cancel-outline" />
                                         Cancel
                                     </Button>
                                     <Button type="submit" sx={{ width: '50%' }} color="primary">
-                                        Save
+                                        <Icon width={20} style={{ marginRight: 4 }} icon="iconamoon:edit" />
+                                        Edit
                                     </Button>
                                 </Box>
                             </Form>
                         )}
                     </Formik>
-                </Fragment>
+                </Box>
             ) : (
                 <Box display="flex" alignItems="center" justifyContent="center" height={300}>
                     <CircularProgress />
