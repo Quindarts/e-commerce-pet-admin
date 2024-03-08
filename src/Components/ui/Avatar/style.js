@@ -10,8 +10,8 @@ export const CustomAvatar = styled('div')`
         height: 2.5rem;
     }
     &.avt-lg {
-        width: 4rem;
-        height: 4rem;
+        width: 100px;
+        height: 100px;
     }
     &.avt-xl {
         width: 10rem;

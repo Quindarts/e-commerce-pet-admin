@@ -5,7 +5,6 @@ import { APP_ROUTER } from '../Utils/Constants'
 import HomePage from '../Pages/Home/HomePage'
 import OrderPage from '../Pages/OrderPage/OrderPage'
 import AuthLayout from '../Layout/AuthLayout/AuthLayout'
-
 import { loaderUser } from './loader/loaderAuth'
 import CategoryPage from '../Pages/CategoryPage/index'
 import Login from '../Pages/Auth/Login/Login'
@@ -39,6 +38,7 @@ const router = createBrowserRouter([
                     { path: APP_ROUTER.CATEGORY_ADD, element: <CategoryAddPage /> },
                 ],
             },
+
             {
                 path: APP_ROUTER.ORDER,
                 element: <OrderPage />,
