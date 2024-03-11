@@ -6,6 +6,7 @@ import { BadgeWrapper } from '../../../ui/Badge/Badge'
 import Avatar from '../../../ui/Avatar/Avatar'
 import Background from '../../../../assets/img/user-info-background.png'
 import { CircularProgress, Typography } from '@mui/material'
+
 function Profile() {
     const { user, handleGetUserById } = useUser()
     const [loading, setLoading] = useState(true)
