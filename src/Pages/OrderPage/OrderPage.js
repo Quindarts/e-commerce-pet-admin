@@ -7,6 +7,19 @@ import ActiveModal from './Modal/ActiveModal.js'
 import SearchBar from '../../Components/ui/Search/SearchBar.js'
 import { APP_ROUTER } from '../../Utils/Constants.js'
 import { useNavigate } from 'react-router-dom'
+import Dropdown from '../../Components/ui/Dropdown/Dropdown.js'
+import { APP_ICON } from '../../Utils/Constants.js'
+import { Icon } from '@iconify/react'
+import Title from '../../Components/ui/Title/Title.js'
+export const SEARCH_ENUM = {
+    NAME: 'name',
+    CODE: 'code',
+}
+const RENDER_LIST_CATEGORY_ENUM = {
+    ALL: 'all',
+    FILTER: 'filter',
+    SEARCH: 'search',
+}
 
 const OrderPage = () => {
     const [query, setQuery] = useState('')
@@ -14,7 +27,10 @@ const OrderPage = () => {
     const handleQuery = (event) => {
         setQuery(event.target.value)
     }
+    const [typeRender, setTypeRender] = useState(RENDER_LIST_CATEGORY_ENUM.ALL)
     const [page, setPage] = useState(1)
+    const [keywords, setKeywords] = useState('')
+    const [typeSearch, setTypeSearch] = useState(SEARCH_ENUM.NAME)
 
     const [isEditModalOpen, setIsEditModalOpen] = useState(false)
     const [isActiveModalOpen, setIsActiveModalOpen] = useState(false)
@@ -25,7 +41,16 @@ const OrderPage = () => {
     const handleChangePanigation = (event, value) => {
         setPage(value)
     }
-   
+    const list = [
+        { title: 'Name', value: SEARCH_ENUM.NAME },
+        { title: 'Code', value: SEARCH_ENUM.CODE },
+    ]
+    const hanldeClearChoiceSearchQuery = () => {
+        setKeywords('')
+        setTypeRender(RENDER_LIST_CATEGORY_ENUM.ALL)
+        setTypeSearch(SEARCH_ENUM.NAME)
+        setPage(1)
+    }
     const handleOpenEditModal = async (id) => {
         const product = products.find((product) => product._id === id)
         if (!product) {
@@ -118,57 +143,47 @@ const OrderPage = () => {
 
     return (
         <Box className="border-box max-h-maxo mx-auto h-full w-full max-w-7xl justify-center">
-           
-                <Title icon="maki:warehouse">Order Table Manager</Title>
-                <Box className="contain my-3 flex flex-wrap">
-                    <Box className="contain__left h-[2.5rem] ">
-                        <SearchBar
-                            handleQuery={handleQuery}
-                            query={keywords}
-                            className=" p-[2px] lowercase"
-                            placeholder={`Search by ${typeSearch} `}
-                        />
-                    </Box>
-                    <Box className="contain__right flex h-[2.5rem] flex-wrap justify-end gap-2">
-                        <Dropdown
-                            className="w-[6rem]"
-                            size="sm"
-                            list={list}
-                            onChange={(e) => setTypeSearch(e.target.value)}
-                        />
-                        <Button color="primary">
-                            Filter
-                            <Icon className="mx-1" width={20} icon="fluent-mdl2:filter-descending" />
-                        </Button>
-                        <Button color="yellow" onClick={hanldeClearChoiceSearchQuery}>
-                            Clear
-                            <Icon className="mx-1" width={20} icon="ant-design:clear-outlined" />
-                        </Button>
-                        <Button onClick={() => navigate(APP_ROUTER.CATEGORY_ADD)} color="red">
-                            Add
-                            <Icon className="mx-[2px]" width={20} icon={APP_ICON.i_plus} />
-                        </Button>
-                        <Button color="green" disabled>
-                            Export
-                            <Icon className="mx-1" width={20} icon="ph:export" />
-                        </Button>
-                    </Box>
+            <Title icon="material-symbols-light:order-approve-outline">Order Table Manager</Title>
+            <Box className="contain my-3 flex flex-wrap justify-between gap-4">
+                <Box className="contain__left h-[2.5rem] ">
+                    <SearchBar
+                        handleQuery={handleQuery}
+                        query={keywords}
+                        className=" p-[2px] lowercase"
+                        placeholder={`Find ${typeSearch} `}
+                    />
                 </Box>
-            <Box className="mb-5 flex w-full flex-wrap justify-between ">
-                <SearchBar placeholder="Find Orders" className="" handleQuery={handleQuery} query={query} />
-                <Button
-                    onClick={() => navigate(APP_ROUTER.ADD_PRODUCT)}
-                    size="sm"
-                    color="primary"
-                    className="mt-1 px-7 py-2 font-semibold db-xs:mb-0 db-xs:w-full db-md:mb-4 db-md:w-auto"
-                >
-                    Add Products
-                </Button>
+                <Box className="contain__right  flex h-[2.5rem] flex-wrap justify-end gap-2">
+                    <Dropdown
+                        className="w-[6rem]"
+                        size="sm"
+                        list={list}
+                        onChange={(e) => setTypeSearch(e.target.value)}
+                    />
+                    <Button color="primary">
+                        Filter
+                        <Icon className="mx-1" width={20} icon="fluent-mdl2:filter-descending" />
+                    </Button>
+                    <Button color="yellow" onClick={hanldeClearChoiceSearchQuery}>
+                        Clear
+                        <Icon className="mx-1" width={20} icon="ant-design:clear-outlined" />
+                    </Button>
+                    <Button onClick={() => navigate(APP_ROUTER.CATEGORY_ADD)} color="red">
+                        Add
+                        <Icon className="mx-[2px]" width={20} icon={APP_ICON.i_plus} />
+                    </Button>
+                    <Button color="green" disabled>
+                        Export
+                        <Icon className="mx-1" width={20} icon="ph:export" />
+                    </Button>
+                </Box>
             </Box>
+            {/* <Box className="mb-5 flex w-full flex-wrap justify-between "> */}
+
+            {/* </Box> */}
             <OrderPageTable
                 page={page}
                 products={products}
-                
                 handleOpenEditModal={handleOpenEditModal}
                 handleChangePanigation={handleChangePanigation}
             />
