@@ -56,7 +56,9 @@ export function CustomNoRowsOverlay() {
                     </g>
                 </g>
             </svg>
-            <Box className='text-slate-500 font-bold text-xl' sx={{ mt: 1 }}>No Data found</Box>
+            <Box className="text-xl font-bold text-slate-500" sx={{ mt: 1 }}>
+                No Data found
+            </Box>
         </StyledGridOverlay>
     )
 }

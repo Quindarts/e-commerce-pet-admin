@@ -15,7 +15,6 @@ function MainLayout() {
         handleGetUserById('657fee4a8f8ba7c4e2ffebf4')
     }, [])
     return (
-        
         <Fragment>
             <Box className="main_layout flex bg-[#f3f4f9] " sx={{ maxWidth: '100vw', width: '100%' }}>
                 <TemporaryDrawer className="hello" openNav={openNav} handleOpenNav={handleOpenNav} />

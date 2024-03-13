@@ -9,7 +9,7 @@ const useUser = () => {
     const dispatch = useDispatch()
 
     const handleGetUserById = async (user_id) => {
-        const resultAction = await dispatch(fetchUserById(user_id));
+        const resultAction = await dispatch(fetchUserById(user_id))
 
         if (fetchUserById.pending.match(resultAction)) {
             dispatch(setLoading(true))

@@ -8,7 +8,7 @@ function CustomVariantSnackbar(props, ref) {
     const { id, message, allowDownload, image, ...other } = props
     return (
         <SnackbarContent ref={ref} role="alert" {...other}>
-            <Box className="bg-orange-400 text-black p-2 rounded-lg border-black flex justify-between items-center w-full" >
+            <Box className="flex w-full items-center justify-between rounded-lg border-black bg-orange-400 p-2 text-black">
                 {message}
                 <button className="cursor-pointer text-xl text-white" onClick={handleCloseSnackbar}>
                     Close

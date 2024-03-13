@@ -22,7 +22,7 @@ function CategoryAddPage() {
             }
         })
     }, [])
-    
+
     const handleOpenModalAdd = (path) => {
         setIsOpenModalAdd(true)
         setPathCurrent(path)

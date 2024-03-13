@@ -27,12 +27,7 @@ export const AttributePage = () => {
         <>
             <Box className="border-box max-h-maxo mx-auto h-full w-full max-w-7xl justify-center">
                 <Box className="mb-5 flex w-full flex-wrap justify-between ">
-                    <SearchBar
-                        handleQuery={handleQuery}
-                        query={query}
-                        className=""
-                        placeholder={`Search...`}
-                    />
+                    <SearchBar handleQuery={handleQuery} query={query} className="" placeholder={`Search...`} />
                     <Button
                         onClick={() => navigate(APP_ROUTER.ATTRIBUTE_ADD)}
                         size="sm"

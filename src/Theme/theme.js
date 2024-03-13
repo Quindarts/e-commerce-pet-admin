@@ -2,8 +2,8 @@ import { createTheme } from '@mui/material/styles'
 import '@fontsource/montserrat'
 
 const color = {
-    green_600:'#38a169',
-    green_200:'#c6f6d5',
+    green_600: '#38a169',
+    green_200: '#c6f6d5',
 
     indigo: '#405189',
     dark_indigo: '#364574',

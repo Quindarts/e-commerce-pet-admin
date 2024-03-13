@@ -9,14 +9,12 @@ import { APP_ROUTER } from '../../../Utils/Constants.js'
 import { useNavigate } from 'react-router-dom'
 
 const ProductManager = () => {
-    
     const [query, setQuery] = useState('')
     const navigate = useNavigate()
     const handleQuery = (event) => {
         setQuery(event.target.value)
     }
 
-    
     const [isEditModalOpen, setIsEditModalOpen] = useState(false)
     const [isActiveModalOpen, setIsActiveModalOpen] = useState(false)
     const [currentProduct, setCurrentProduct] = useState(null)
@@ -24,28 +22,29 @@ const ProductManager = () => {
     const [loading, setLoading] = useState(false)
     const [currentCategory, setCurrentCategory] = useState(null)
 
-   
     const handleOpenEditModal = async (id) => {
-        const product = products.find((product) => product._id === id);
+        const product = products.find((product) => product._id === id)
         if (!product) {
-            console.error('Failed to find product with id:', id);
-            return;
+            console.error('Failed to find product with id:', id)
+            return
         }
 
         try {
-            const response = await fetch(`https://e-commerce-pet-server-quindarts.vercel.app/categorys/${product.categoryId}`);
-            const categoryData = await response.json();
-            product.category = categoryData;
+            const response = await fetch(
+                `https://e-commerce-pet-server-quindarts.vercel.app/categorys/${product.categoryId}`,
+            )
+            const categoryData = await response.json()
+            product.category = categoryData
             console.log(product.category)
         } catch (error) {
-            console.error('Failed to fetch category:', error);
+            console.error('Failed to fetch category:', error)
         }
-    
-        setCurrentProduct(product);
-        setProductsUpdated(product);
-        setIsEditModalOpen(true);
-    };
-    
+
+        setCurrentProduct(product)
+        setProductsUpdated(product)
+        setIsEditModalOpen(true)
+    }
+
     const handleCloseEditModal = () => {
         setIsEditModalOpen(false)
     }
@@ -57,10 +56,8 @@ const ProductManager = () => {
         setIsActiveModalOpen(false)
     }
 
-   
     const [products, setProducts] = useState([])
 
-  
     const fetchProducts = async () => {
         setLoading(true)
         try {
@@ -68,9 +65,8 @@ const ProductManager = () => {
                 'https://e-commerce-pet-server-quindarts.vercel.app/products?offset=1&limit=10',
             )
             const json = await response.json()
-          
+
             setProducts(json.list.map((product) => ({ ...product, id: product._id })))
-            
         } catch (error) {
             console.error('Failed to fetch products:', error)
         } finally {
@@ -81,7 +77,6 @@ const ProductManager = () => {
         fetchProducts()
     }, [productsUpdated])
 
-    
     const updateProduct = async (id, updatedProduct) => {
         try {
             const response = await fetch(`https://e-commerce-pet-server-quindarts.vercel.app/products/${id}`, {
@@ -115,7 +110,6 @@ const ProductManager = () => {
         }
     }
 
-   
     useEffect(() => {
         fetchProducts()
     }, [])
@@ -140,13 +134,13 @@ const ProductManager = () => {
             </Box>
             <ProductManagerTable products={products} handleOpenEditModal={handleOpenEditModal} />
             <EditModal
-            isEditModalOpen={isEditModalOpen}
-            handleCloseEditModal={handleCloseEditModal}
-            currentProduct={currentProduct}
-            setCurrentProduct={setCurrentProduct}
-            currentCategory={currentCategory}
-            updateProduct={updateProduct}
-        />
+                isEditModalOpen={isEditModalOpen}
+                handleCloseEditModal={handleCloseEditModal}
+                currentProduct={currentProduct}
+                setCurrentProduct={setCurrentProduct}
+                currentCategory={currentCategory}
+                updateProduct={updateProduct}
+            />
             <ActiveModal isActiveModalOpen={isActiveModalOpen} handleCloseActiveModal={handleCloseActiveModal} />
         </Box>
     )

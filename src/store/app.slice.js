@@ -8,7 +8,6 @@ const appSlice = createSlice({
             state.isLoading = action.payload
         },
     },
-    
 })
 const { actions, reducer } = appSlice
 export const { setLoading } = actions

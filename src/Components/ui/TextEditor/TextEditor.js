@@ -12,7 +12,7 @@ const TextEditor = (props) => {
                     htmlFor={id}
                     className="mb-2 text-sm font-semibold"
                     sx={{
-                        '& span': {},   
+                        '& span': {},
                     }}
                 >
                     {label}

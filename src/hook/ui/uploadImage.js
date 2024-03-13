@@ -1,6 +1,4 @@
-
 function useUploadImage() {
-
     const handleImageUpload = async (event, setimageSrc) => {
         let file = event.target.files[0]
         let reader = new FileReader()

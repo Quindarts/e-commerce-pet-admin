@@ -55,16 +55,12 @@ export const AttributeList = () => {
         fetchAttributes()
     }, [])
 
-   
- 
-
     const columns = [
         {
             field: 'detail',
             headerName: 'Product',
             flex: 1.3,
-           
-          
+
             renderCell: (params) => (
                 <Box className="flex">
                     <Box>
@@ -80,44 +76,41 @@ export const AttributeList = () => {
             flex: 1,
             headerAlign: 'center',
             align: 'center',
-           
         },
-    
+
         {
             field: 'code',
             headerName: 'SKU',
             flex: 1.2,
             headerAlign: 'center',
             align: 'center',
-          
         },
-    
+
         {
             field: 'status',
             headerName: 'Status',
             headerAlign: 'center',
             align: 'center',
             flex: 1.2,
-           
+
             renderCell: (params) => <Box className="font-500">{params.row.status}</Box>,
         },
-    
+
         {
             field: 'value',
             headerName: 'Value',
             flex: 1.2,
             headerAlign: 'center',
             align: 'center',
-           
         },
-    
+
         {
             field: 'active',
             headerName: 'Active',
             headerAlign: 'center',
             align: 'center',
             flex: 1,
-          
+
             renderCell: (params) => (
                 <Box className="font-500">
                     {params.row.active ? (
@@ -155,7 +148,7 @@ export const AttributeList = () => {
 
                     active: attribute.isActive,
                     status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
-                
+
                     edit: (
                         <Stack direction="row">
                             <Button
