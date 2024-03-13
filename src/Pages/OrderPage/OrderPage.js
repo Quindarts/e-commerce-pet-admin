@@ -118,6 +118,42 @@ const OrderPage = () => {
 
     return (
         <Box className="border-box max-h-maxo mx-auto h-full w-full max-w-7xl justify-center">
+           
+                <Title icon="maki:warehouse">Order Table Manager</Title>
+                <Box className="contain my-3 flex flex-wrap">
+                    <Box className="contain__left h-[2.5rem] ">
+                        <SearchBar
+                            handleQuery={handleQuery}
+                            query={keywords}
+                            className=" p-[2px] lowercase"
+                            placeholder={`Search by ${typeSearch} `}
+                        />
+                    </Box>
+                    <Box className="contain__right flex h-[2.5rem] flex-wrap justify-end gap-2">
+                        <Dropdown
+                            className="w-[6rem]"
+                            size="sm"
+                            list={list}
+                            onChange={(e) => setTypeSearch(e.target.value)}
+                        />
+                        <Button color="primary">
+                            Filter
+                            <Icon className="mx-1" width={20} icon="fluent-mdl2:filter-descending" />
+                        </Button>
+                        <Button color="yellow" onClick={hanldeClearChoiceSearchQuery}>
+                            Clear
+                            <Icon className="mx-1" width={20} icon="ant-design:clear-outlined" />
+                        </Button>
+                        <Button onClick={() => navigate(APP_ROUTER.CATEGORY_ADD)} color="red">
+                            Add
+                            <Icon className="mx-[2px]" width={20} icon={APP_ICON.i_plus} />
+                        </Button>
+                        <Button color="green" disabled>
+                            Export
+                            <Icon className="mx-1" width={20} icon="ph:export" />
+                        </Button>
+                    </Box>
+                </Box>
             <Box className="mb-5 flex w-full flex-wrap justify-between ">
                 <SearchBar placeholder="Find Orders" className="" handleQuery={handleQuery} query={query} />
                 <Button
