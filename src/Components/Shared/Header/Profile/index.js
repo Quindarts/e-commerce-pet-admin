@@ -4,7 +4,7 @@ import { Box } from '@mui/system'
 import { Card } from './style'
 import { BadgeWrapper } from '../../../ui/Badge/Badge'
 import Avatar from '../../../ui/Avatar/Avatar'
-
+import Background from '../../../../assets/img/user-info-background.png'
 import { CircularProgress, Typography } from '@mui/material'
 function Profile() {
     const { user, handleGetUserById } = useUser()
@@ -18,7 +18,9 @@ function Profile() {
 
     return (
         <Box className="relative flex flex-col items-center " sx={Card}>
-            <Box className="-z-1 absolute left-0 top-0 h-[125px] w-full rounded"></Box>
+            <Box className="-z-1 absolute left-0 top-0 h-[158px] w-full rounded">
+                <img src={Background} alt="Background" className=" h-full w-full rounded-t-[10px] object-cover" />
+            </Box>
             {!loading && user.user_detail ? (
                 <Box className="mt-[55px] flex flex-col items-center p-[24px]">
                     <BadgeWrapper

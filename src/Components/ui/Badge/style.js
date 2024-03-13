@@ -16,10 +16,10 @@ const colorMap = {
 
 export const StyledBadge = styled(({ shape, border, className, ...other }) => (
     <Badge className={className} {...other} />
-))(({ shape, border, theme }) => {
+))(({ shape, border, theme, size }) => {
     const borderStyle = border ? `2px solid #fff` : 'none'
     const borderRadius = shape === 'square' ? '4px' : ''
-
+    const badgeSize = size === 'lg' ? 15 : size === 'md' ? 12 : 10
     return {
         '& .MuiBadge-badge': {
             border: borderStyle,
@@ -27,6 +27,9 @@ export const StyledBadge = styled(({ shape, border, className, ...other }) => (
             maxWidth: '150px',
             whiteSpace: 'nowrap',
             color: theme.palette.text.primary,
+            width: badgeSize,
+            height: badgeSize,
+            borderRadius: '50%',
         },
     }
 })
