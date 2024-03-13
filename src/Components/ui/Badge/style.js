@@ -19,7 +19,7 @@ export const StyledBadge = styled(({ shape, border, className, ...other }) => (
 ))(({ shape, border, theme }) => {
     const borderStyle = border ? `2px solid #fff` : 'none'
     const borderRadius = shape === 'square' ? '4px' : ''
-
+    const badgeSize = size === 'lg' ? 15 : size === 'md' ? 12 : 10
     return {
         '& .MuiBadge-badge': {
             border: borderStyle,
