@@ -62,7 +62,7 @@ const ListProductPage = () => {
         setLoading(true)
         try {
             const response = await fetch(
-                'https://e-commerce-pet-server-quindarts.vercel.app/products?offset=1&limit=10',
+                'https://e-commerce-pet-server-quindarts.vercel.app/products?offset=1&limit=6',
             )
             const json = await response.json()
 

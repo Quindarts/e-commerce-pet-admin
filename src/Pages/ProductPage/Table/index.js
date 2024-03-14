@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import Table from '../../../Components/ui/Table/Table'
 import { Box, Typography } from '@mui/material'
 import Button from '../../../Components/ui/Button/Button'
@@ -62,30 +62,21 @@ const TableProductList = ({ products, handleOpenEditModal }) => {
             headerName: 'Product',
             flex: 2,
             renderCell: (params) => (
-                <Box className="flex gap-3">
+                <Box className="flex gap-2 cursor-pointer group transition-colors" >
                     <img className="h-[50px] w-[50px]" src={params.row.imageUrl} alt="" />
                     <Box>
-                        <Typography className="text-[14px] font-bold text-gray-600">{params.row.name}</Typography>
-                        <Typography variant="h10" className="font-500 text-gray-[#5f748d]">
-                            {params.row.description}
-                        </Typography>
+                        <Typography className="text-[13px] font-[600] text-gray-600  group-hover:text-sky-600">{params.row.name}</Typography>
+                         <Typography className="text-[11px] font-[500] text-gray-500 group-hover:text-sky-600">
+                        {params.row.category}
+                         </Typography>
                     </Box>
                 </Box>
             ),
         },
         {
-            field: 'category',
-            headerName: 'Category',
-            headerAlign: 'center',
-            align: 'center',
-            flex: 1,
-
-            renderCell: (params) => <Box className="font-500 rounded-3xl bg-[#f6f6f8] ">{params.formattedValue}</Box>,
-        },
-        {
             field: 'stock',
             headerName: 'Stock',
-            flex: 1,
+            flex: 0.5,
             headerAlign: 'center',
             align: 'center',
         },
@@ -93,7 +84,7 @@ const TableProductList = ({ products, handleOpenEditModal }) => {
         {
             field: 'code',
             headerName: 'SKU',
-            flex: 1.2,
+            flex: 1,
             headerAlign: 'center',
             align: 'center',
         },
@@ -102,14 +93,14 @@ const TableProductList = ({ products, handleOpenEditModal }) => {
             headerName: 'Status',
             headerAlign: 'center',
             align: 'center',
-            flex: 1.2,
-            renderCell: (params) => <Box className="font-500">{params.row.status}</Box>,
+            flex: 1,
+            renderCell: (params) => <Button className="font-500">{params.row.status}</Button>,
         },
 
         {
             field: 'price',
             headerName: 'Price',
-            flex: 1.2,
+            flex: 1,
             headerAlign: 'center',
             align: 'center',
         },
@@ -118,7 +109,7 @@ const TableProductList = ({ products, handleOpenEditModal }) => {
             headerName: 'Rating',
             headerAlign: 'center',
             align: 'center',
-            flex: 1.2,
+            flex: 1,
             renderCell: (params) => <Box className="font-500 ">{params.row.rating}</Box>,
         },
         {
@@ -126,15 +117,17 @@ const TableProductList = ({ products, handleOpenEditModal }) => {
             headerName: 'Active',
             headerAlign: 'center',
             align: 'center',
-            flex: 1,
+            flex: 0.7,
             renderCell: (params) => (
-                <Box className="font-500">
-                    {params.row.active ? (
-                        <BadgeWrapper badgeContent={'Active'} shape="square" type="green"></BadgeWrapper>
-                    ) : (
-                        <BadgeWrapper badgeContent={'Inactive'} shape="square" type="red"></BadgeWrapper>
-                    )}
-                </Box>
+                <Button
+                className={`cursor-pointer rounded-[20px] ${
+                    params.row.active
+                        ? 'bg-emerald-100 px-3 py-1 text-green-600'
+                        : 'bg-red-100 px-3 py-1 text-red-600'
+                }`}
+            >
+                {params.row.active ? 'active' : 'unactive'}
+            </Button>
             ),
         },
         {
@@ -142,22 +135,37 @@ const TableProductList = ({ products, handleOpenEditModal }) => {
             headerName: 'Edit',
             headerAlign: 'center',
             align: 'center',
-            flex: 1,
-            renderCell: (params) => <Box className="font-500">{params.row.edit}</Box>,
+            flex: 1.2,
+            renderCell: (params) =>  <Box>
+            <Button
+                size="lg"
+                color="grey"
+                variant="outline"
+                icon
+            >
+                <Icon icon={APP_ICON.i_eye_open} className="text-sky-500" />
+            </Button>
+            <Button
+                size="lg"
+                color="grey"
+                variant="outline"
+                icon
+            >
+                <Icon icon="mdi:bin-outline" className="text-red-400" />
+            </Button>
+        </Box>
         },
     ]
     const defaultImageUrl = ''
     return (
-        <>
+        <Fragment>
             <Table
-                className="h-auto w-full"
                 pageSize={6}
-                hasCheckbox
                 hasPanigation
                 columns={columns}
                 rows={products.map(createProductObject)}
             />
-        </>
+        </Fragment>
     )
 }
 
