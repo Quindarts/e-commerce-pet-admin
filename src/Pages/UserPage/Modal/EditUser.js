@@ -5,10 +5,25 @@ import Textfield from '../../../Components/ui/Textfield/Textfield'
 import Button from '../../../Components/ui/Button/Button'
 import { APP_ICON } from '../../../Utils/Constants'
 import { Icon } from '@iconify/react'
+import * as yup from 'yup'
+import Dropdown from '../../../Components/ui/Dropdown/Dropdown'
 
+export const SEARCH_ENUM = {
+    ADMIN: 'admin',
+    USER: 'user',
+    WAREHOUSE: 'warehouse',
+}
+
+const list = [
+    { title: 'Admin', value: SEARCH_ENUM.ADMIN },
+    { title: 'User', value: SEARCH_ENUM.USER },
+    { title: 'Warehouse', value: SEARCH_ENUM.WAREHOUSE },
+]
 function EditUser(props) {
     const { handleCloseEditUserModal, id } = props
-
+    const [page, setPage] = useState(1)
+    const [keywords, setKeywords] = useState('')
+    const [typeSearch, setTypeSearch] = useState(SEARCH_ENUM.NAME)
     const [avatarSrc, setAvatarSrc] = useState('https://uko-react.vercel.app/static/avatar/001-man.svg')
 
     const handleImageUpload = (event) => {
@@ -22,6 +37,33 @@ function EditUser(props) {
             reader.readAsDataURL(file)
         }
     }
+    const validationSchema = yup.object({
+        firstName: yup
+            .string()
+            .required('First name is required')
+            .matches(/^[a-zA-Z]+$/, 'First name should only contain alphabets'),
+
+        lastName: yup
+            .string()
+            .required('Last name is required')
+            .matches(/^[a-zA-Z]+$/, 'Last name should only contain alphabets'),
+
+        email: yup.string().required('Email is required').email('Email is invalid'),
+        location: yup.string().required('Required'),
+        phone: yup
+            .string()
+            .matches(/^[0-9]+$/, 'Must be only digits')
+            .required('Required'),
+        city: yup
+            .string()
+            .required('Required')
+            .matches(/^[a-zA-Z]+$/, 'City should only contain alphabets'),
+        birthday: yup
+            .date()
+            .min(new Date(new Date().setFullYear(new Date().getFullYear() - 60)), 'You must be under 60 years old')
+            .max(new Date(new Date().setFullYear(new Date().getFullYear() - 18)), 'You must be at least 18 years old')
+            .required('Required'),
+    })
     const handleSubmitUser = () => {}
     return (
         <Box mx={2} mb={3} mt={1}>
@@ -68,39 +110,121 @@ function EditUser(props) {
                 </Box>
             </Box>
             <Box>
-                <Formik initialValues={{ name: 'quang' }} onSubmit={handleSubmitUser}>
-                    {() => (
+                <Formik
+                    initialValues={{
+                        firstName: '',
+                        lastName: '',
+                        email: '',
+                        location: '',
+                        phone: '',
+                        city: '',
+                        birthday: '',
+                    }}
+                    validationSchema={validationSchema}
+                    onSubmit={handleSubmitUser}
+                >
+                    {({ handleBlur, handleChange, values, errors, touched }) => (
                         <Form>
                             <Box width="100%" display={'flex'} gap={2}>
                                 <Box my={1} flex={1}>
-                                    <Textfield label="First Name" />
+                                    <Textfield
+                                        placeholder="First Name"
+                                        id="firstName"
+                                        type="text"
+                                        label="First Name"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.firstName}
+                                        helperText={touched.firstName && errors.firstName ? errors.firstName : ''}
+                                        error={touched.firstName && errors.firstName ? true : false}
+                                    />
                                 </Box>
                                 <Box my={1} flex={1}>
-                                    <Textfield label="Last Name" />
+                                    <Textfield
+                                        placeholder="Last Name"
+                                        id="lastName"
+                                        type="text"
+                                        label="Last Name"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.lastName}
+                                        helperText={touched.lastName && errors.lastName ? errors.lastName : ''}
+                                        error={touched.lastName && errors.lastName ? true : false}
+                                    />
                                 </Box>
                             </Box>
                             <Box width="100%" display={'flex'} gap={2}>
                                 <Box my={1} flex={1}>
-                                    <Textfield label="Email" />
+                                    <Textfield
+                                        placeholder="example@gmail.com"
+                                        id="email"
+                                        type="email"
+                                        label="Email"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.email}
+                                        helperText={touched.email && errors.email ? errors.email : ''}
+                                        error={touched.email && errors.email ? true : false}
+                                    />
                                 </Box>
                                 <Box my={1} flex={1}>
-                                    <Textfield label="Location" />
+                                    <Textfield
+                                        placeholder="location"
+                                        id="location"
+                                        type="location"
+                                        label="Location"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.location}
+                                        helperText={touched.location && errors.location ? errors.location : ''}
+                                        error={touched.location && errors.location ? true : false}
+                                    />
                                 </Box>
                             </Box>
                             <Box width="100%" display={'flex'} gap={2}>
                                 <Box my={1} flex={1}>
-                                    <Textfield label="Phone" />
+                                    <Textfield
+                                        placeholder="0123456789"
+                                        id="phone"
+                                        type="phone"
+                                        label="Phone"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.phone}
+                                        helperText={touched.phone && errors.phone ? errors.phone : ''}
+                                        error={touched.phone && errors.phone ? true : false}
+                                    />
                                 </Box>
                                 <Box my={1} flex={1}>
-                                    <Textfield label="City" />
+                                    <Textfield
+                                        placeholder="City"
+                                        id="city"
+                                        type="city"
+                                        label="City"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.city}
+                                        helperText={touched.city && errors.city ? errors.city : ''}
+                                        error={touched.city && errors.city ? true : false}
+                                    />
                                 </Box>
                             </Box>
                             <Box width="100%" display={'flex'} gap={2}>
                                 <Box my={1} flex={1}>
-                                    <Textfield label="Birthday" />
+                                    <Textfield
+                                        placeholder="MM/DD/YYYY"
+                                        id="birthday"
+                                        type="birthday"
+                                        label="Birthday"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.birthday}
+                                        helperText={touched.birthday && errors.birthday ? errors.birthday : ''}
+                                        error={touched.birthday && errors.birthday ? true : false}
+                                    />
                                 </Box>
                                 <Box my={1} flex={1}>
-                                    <Textfield label="Role" />
+                                    <Dropdown list={list} onChange={(e) => setTypeSearch(e.target.value)} />
                                 </Box>
                             </Box>
                             <Box mt={2} sx={{ display: 'flex', gap: 2 }}>
@@ -115,7 +239,7 @@ function EditUser(props) {
                                 </Button>
                                 <Button type="submit" sx={{ width: '50%' }} color="primary">
                                     <Icon width={20} style={{ marginRight: 4 }} icon="iconamoon:edit" />
-                                    Edit
+                                    Create User
                                 </Button>
                             </Box>
                         </Form>
