@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Box } from '@mui/material'
 import Button from '../../../Components/ui/Button/Button.js'
-import ProductManagerTable from '../Table/index.js'
 import EditModal from '../Modal/EditModal.js'
 import ActiveModal from '../Modal/ActiveModal.js'
 import SearchBar from '../../../Components/ui/Search/SearchBar.js'
 import { APP_ROUTER } from '../../../Utils/Constants.js'
 import { useNavigate } from 'react-router-dom'
+import TableProductList from '../Table/index.js'
 
-const ProductManager = () => {
+const ListProductPage = () => {
     const [query, setQuery] = useState('')
     const navigate = useNavigate()
     const handleQuery = (event) => {
@@ -132,7 +132,7 @@ const ProductManager = () => {
                     Add Products
                 </Button>
             </Box>
-            <ProductManagerTable products={products} handleOpenEditModal={handleOpenEditModal} />
+            <TableProductList products={products} handleOpenEditModal={handleOpenEditModal} />
             <EditModal
                 isEditModalOpen={isEditModalOpen}
                 handleCloseEditModal={handleCloseEditModal}
@@ -146,4 +146,4 @@ const ProductManager = () => {
     )
 }
 
-export default ProductManager
+export default ListProductPage

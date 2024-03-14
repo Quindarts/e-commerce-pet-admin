@@ -8,7 +8,7 @@ import { Stack } from '@mui/material'
 import { BadgeWrapper } from '../../../Components/ui/Badge/Badge'
 import Rating from '@mui/material/Rating'
 
-const ProductManagerTable = ({ products, handleOpenEditModal }) => {
+const TableProductList = ({ products, handleOpenEditModal }) => {
     const [value, setValue] = React.useState(2)
     const createProductObject = (product) => {
         if (!product || !product.id) {
@@ -161,4 +161,4 @@ const ProductManagerTable = ({ products, handleOpenEditModal }) => {
     )
 }
 
-export default ProductManagerTable
+export default TableProductList

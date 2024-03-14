@@ -15,6 +15,9 @@ import ListUserPage from '../Pages/UserPage/List'
 import UserAddPage from '../Pages/UserPage/Add'
 import UserPage from '../Pages/UserPage'
 import Profile from '../Components/Shared/Header/Profile'
+import ProductPage from '../Pages/ProductPage'
+import ListProductPage from '../Pages/ProductPage/List'
+import AddProductPage from '../Pages/ProductPage/Add'
 
 const router = createBrowserRouter([
     {
@@ -23,7 +26,9 @@ const router = createBrowserRouter([
     },
     {
         path: APP_ROUTER.INDEX,
+        
         element: <MainLayout />,
+
         children: [
             {
                 path: APP_ROUTER.HOME,
@@ -39,7 +44,14 @@ const router = createBrowserRouter([
                     { path: APP_ROUTER.CATEGORY_ADD, element: <CategoryAddPage /> },
                 ],
             },
-
+            {
+                path: APP_ROUTER.PRODUCT,
+                element: <ProductPage />,
+                children: [
+                    { path: APP_ROUTER.PRODUCT_LIST, element: <ListProductPage />, index: true },
+                    { path: APP_ROUTER.ADD_PRODUCT, element: <AddProductPage /> },
+                ],
+            },
             {
                 path: APP_ROUTER.ORDER,
                 element: <OrderPage />,

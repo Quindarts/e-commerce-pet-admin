@@ -13,7 +13,7 @@ import Dropdown from '../../../Components/ui/Dropdown/Dropdown.js'
 import Modal from '../../../Components/ui/Modal/Modal.js'
 import { Icon } from '@iconify/react'
 
-const AddProduct = () => {
+const AddProductPage = () => {
     const navigate = useNavigate()
     const [brand, setBrand] = useState([
         { title: 'Brand 1', value: '1' },
@@ -295,4 +295,4 @@ const AddProduct = () => {
     )
 }
 
-export default AddProduct
+export default AddProductPage
