@@ -45,7 +45,7 @@ function InputUpload(props) {
                 startIcon={<Icon icon="ic:round-cloud-upload" width={40} height={40} />}
             >
                 <Typography className="font-[700] text-gray-600" variant="h6" component="h6">
-                    Upload file here
+                    Upload Image here
                 </Typography>
                 <VisuallyHiddenInput
                     type="file"

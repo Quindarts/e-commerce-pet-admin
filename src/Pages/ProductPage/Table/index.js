@@ -8,7 +8,7 @@ import { Stack } from '@mui/material'
 import { BadgeWrapper } from '../../../Components/ui/Badge/Badge'
 import Rating from '@mui/material/Rating'
 
-const TableProductList = ({ products, handleOpenEditModal }) => {
+const TableProductList = ({ products }) => {
     const [value, setValue] = React.useState(2)
     const createProductObject = (product) => {
         if (!product || !product.id) {
@@ -42,7 +42,6 @@ const TableProductList = ({ products, handleOpenEditModal }) => {
             edit: (
                 <Stack direction="row">
                     <Button
-                        onClick={() => handleOpenEditModal(product.id)}
                         className=""
                         size="md"
                         variant="outline"
