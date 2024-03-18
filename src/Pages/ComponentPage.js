@@ -30,6 +30,7 @@ import Password from '../Components/ui/Menu/Details/Password.js'
 import BasicInfo from '../Components/ui/Menu/Details/BasicInfo.js'
 import Device from '../Components/ui/Menu/Details/Devices.js'
 import Notification from '../Components/ui/Menu/Details/Notifications.js'
+import Tabs from '../Components/ui/Tabs/Tabs.js'
 const avatars = [
     {
         src: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
@@ -72,7 +73,30 @@ const listLanguage = [
 
 function ComponentPage() {
     const navigate = useNavigate()
-
+    const tabs = [
+        {
+            label: 'Overview',
+            component: <div>Content for Tab 1</div>,
+        },
+        {
+            label: 'Projects',
+            component: <div>Content for Tab 2</div>,
+        },
+        {
+            label: 'Campaigns',
+            component: <div>Content for Tab 3</div>,
+        },
+        {
+            label: 'Documents',
+            component: <div>Content for Tab 3</div>,
+        }, {
+            label: 'Connections',
+            component: <div>Content for Tab 3</div>,
+        }, {
+            label: 'Activity',
+            component: <div>Content for Tab 3</div>,
+        },
+    ]
     const demo = 50
     const [status, setStatus] = useState(demo)
     const handleCompleteClick = () => {
@@ -607,6 +631,8 @@ function ComponentPage() {
                 </Box>
             </Modal>
             <Typography>Accordion</Typography>
+            <Typography>Tabs</Typography>
+            <Tabs tabs={tabs} className="ml-5" />
         </Box>
     )
 }
