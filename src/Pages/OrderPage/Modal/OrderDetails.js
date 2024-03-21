@@ -78,25 +78,24 @@ const OrderDetails = ({ handleCloseOrderDetails, openOrder }) => {
         {
             field: 'name',
             headerName: 'Product',
-            flex: 1,
+            flex: 0.7,
         },
 
         {
             field: 'price',
             headerName: 'Price',
-            flex: 1,
+            flex: 0.5,
         },
 
         {
             field: 'quantity',
             headerName: 'Quantity',
-            flex: 1,
+            flex: 0.5,
         },
         {
             field: 'total',
             headerName: 'Total',
-
-            flex: 1,
+            flex: 0.5,
         },
     ]
     const [page, setPage] = useState(1)
@@ -171,61 +170,70 @@ const OrderDetails = ({ handleCloseOrderDetails, openOrder }) => {
             component: (
                 <Box>
                     <hr sx={modalDivider} />
+                    <Box sx={orderInfoContainer}>
+                        <Typography sx={orderInfoTitle}>Invoice</Typography>
 
-                    <Typography sx={orderInfoTitle}>Invoice</Typography>
+                        <Box sx={{ ...flexCenter, justifyContent: 'space-between' }}>
+                            <Box sx={{ display: 'flex' }}>
+                                {' '}
+                                <Box sx={imageBox}>
+                                    <img
+                                        src="https://uko-react.vercel.app/static/products/nike.png"
+                                        // width="142px"
+                                        // height="142px"
+                                        alt=""
+                                        sx={{
+                                            objectFit: 'cover',
+                                            width: '100%',
+                                            height: '100%',
+                                        }}
+                                        // id="style-MYKUg"
+                                    />
+                                </Box>
+                                <Box sx={{ marginLeft: '1rem', marginTop: '2.8rem' }}>
+                                    <Typography sx={itemName}>Nike airmax 270</Typography>
+                                    <Typography sx={itemDetails}>Rave BD</Typography>
+                                    <Typography sx={itemDetails}>UY7234</Typography>
+                                    <Typography sx={itemDetails}>Arizona USA</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={marginLeft}>
+                                <Typography sx={total}>Date: 02.05.2021</Typography>
+                            </Box>
+                        </Box>
 
-                    <Box sx={flexCenter}>
-                        <Box sx={imageBox}>
-                            <img
-                                src="https://uko-react.vercel.app/static/products/nike.png"
-                                width="100%"
-                                height="100%"
-                                alt=""
-                                id="style-MYKUg"
+                        <Box sx={Row}>
+                            <Table
+                                hasCheckbox
+                                hasPanigation
+                                sx={{ width: '100%' }}
+                                columns={columns}
+                                rows={rows}
+                                totalPage={3}
+                                pageSize={3}
+                                currentPage={page}
+                                handleChangePanigation={handleChangePanigation}
                             />
-                        </Box>{' '}
-                        <Box>
-                            <Typography sx={itemName}>Nike airmax 270</Typography>
-                            <Typography sx={itemDetails}>Rave BD</Typography>
-                            <Typography sx={itemDetails}>UY7234</Typography>
-                            <Typography sx={itemDetails}>Arizona USA</Typography>
                         </Box>
-                        <Box sx={marginLeft}>
-                            <Typography sx={total}>Date: 02.05.2021</Typography>
-                        </Box>
-                    </Box>
-
-                    <Box sx={Row}>
-                        <Table
-                            hasCheckbox
-                            hasPanigation
-                            sx={{ width: '100%' }}
-                            columns={columns}
-                            rows={rows}
-                            totalPage={3}
-                            pageSize={3}
-                            currentPage={page}
-                            handleChangePanigation={handleChangePanigation}
-                        />
-                    </Box>
-                    <Box sx={Row}>
-                        <Box sx={sb77p4}>
-                            <Box sx={flexCenter}>
-                                <Typography sx={qdmdb7}>Subtotal</Typography>
-                                <Typography sx={qdmdb7}>$428.00</Typography>
-                            </Box>
-                            <Box sx={flexCenter}>
-                                <Typography sx={qdmdb7}>Discount</Typography>
-                                <Typography sx={qdmdb7}>$428.00</Typography>
-                            </Box>
-                            <Box sx={flexCenter}>
-                                <Typography sx={qdmdb7}>VAT</Typography>
-                                <Typography sx={qdmdb7}>$428.00</Typography>
-                            </Box>
-                            <hr sx={divider} />
-                            <Box sx={flexAlign}>
-                                <Typography sx={us4jxz}>Total</Typography>
-                                <Typography sx={us4jxz}>$428.00</Typography>
+                        <Box sx={Row}>
+                            <Box sx={sb77p4}>
+                                <Box sx={flexCenter}>
+                                    <Typography sx={qdmdb7}>Subtotal</Typography>
+                                    <Typography sx={qdmdb7}>$428.00</Typography>
+                                </Box>
+                                <Box sx={flexCenter}>
+                                    <Typography sx={qdmdb7}>Discount</Typography>
+                                    <Typography sx={qdmdb7}>$428.00</Typography>
+                                </Box>
+                                <Box sx={flexCenter}>
+                                    <Typography sx={qdmdb7}>VAT</Typography>
+                                    <Typography sx={qdmdb7}>$428.00</Typography>
+                                </Box>
+                                <hr />
+                                <Box sx={flexAlign}>
+                                    <Typography sx={us4jxz}>Total</Typography>
+                                    <Typography sx={us4jxz}>$428.00</Typography>
+                                </Box>
                             </Box>
                         </Box>
                     </Box>

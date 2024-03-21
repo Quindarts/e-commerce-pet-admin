@@ -46,6 +46,7 @@ export const Rows = {
 export const us4jxz = {
     fontSize: '13px',
     fontWeight: 600,
+    marginTop: '15px',
 }
 export const divider = {
     gridRow: 'span 1',
@@ -63,6 +64,7 @@ export const flexCenter = {
     alignItems: 'center',
     justifyContent: 'space-between',
     marginTop: '8px',
+    marginBottom: '18px',
 }
 export const sb77p4 = {
     width: '230px',
@@ -85,17 +87,18 @@ export const itemDetails = {
 export const total = {
     fontSize: '14px',
     fontWeight: 600,
+    marginBottom: '28px',
 }
 
 export const imageBox = {
-    backgroundColor: 'rgb(255, 255, 255)',
     color: 'rgb(18, 31, 67)',
-    boxShadow:
-        'rgba(95, 116, 141, 0.03) 0px 2px 1px -1px, rgba(95, 116, 141, 0.04) 0px 1px 1px 0px, rgba(95, 116, 141, 0.08) 0px 1px 3px 0px',
+    // boxShadow:
+    //     'rgba(95, 116, 141, 0.03) 0px 2px 1px -1px, rgba(95, 116, 141, 0.04) 0px 1px 1px 0px, rgba(95, 116, 141, 0.08) 0px 1px 3px 0px',
     borderRadius: '8px',
     width: '142px',
     height: '142px',
     overflow: 'hidden',
+    // objectFit: 'cover',
 }
 
 export const marginLeft = {
@@ -108,8 +111,6 @@ export const itemName = {
     fontWeight: 600,
 }
 export const orderInfoContainer = {
-    padding: '24px',
-    minWidth: '700px',
     overflow: 'auto',
 }
 
