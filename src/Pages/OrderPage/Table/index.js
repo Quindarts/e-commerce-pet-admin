@@ -7,7 +7,7 @@ import { Icon } from '@iconify/react'
 import { Stack } from '@mui/material'
 import { BadgeWrapper } from '../../../Components/ui/Badge/Badge'
 import Rating from '@mui/material/Rating'
-
+import OrderDetails from '../Modal/OrderDetails'
 const OrderPageTable = (props) => {
     const { handleChangePanigation, page, rows, totalPage, products } = props
     const [value, setValue] = React.useState(2)
@@ -131,6 +131,7 @@ const OrderPageTable = (props) => {
                 rows={products.map(createProductObject)}
                 handleChangePanigation={handleChangePanigation}
             />
+            <OrderDetails openOrder={openOrder} handleCloseEditModal={handleCloseEditModal} />
         </>
     )
 }

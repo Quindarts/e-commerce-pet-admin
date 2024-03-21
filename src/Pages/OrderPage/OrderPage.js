@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Box } from '@mui/material'
 import Button from '../../Components/ui/Button/Button.js'
 import OrderPageTable from './Table/index.js'
-import EditModal from './Modal/EditModal.js'
-import ActiveModal from './Modal/ActiveModal.js'
+import EditModal from './Modal/OrderDetails.js'
 import SearchBar from '../../Components/ui/Search/SearchBar.js'
 import { APP_ROUTER } from '../../Utils/Constants.js'
 import { useNavigate } from 'react-router-dom'
@@ -27,6 +26,8 @@ const OrderPage = () => {
     const handleQuery = (event) => {
         setQuery(event.target.value)
     }
+    const [openOrder, setOpenOrder] = useState({ isOpen: false, order_id_id: '' })
+
     const [typeRender, setTypeRender] = useState(RENDER_LIST_CATEGORY_ENUM.ALL)
     const [page, setPage] = useState(1)
     const [keywords, setKeywords] = useState('')
@@ -194,8 +195,8 @@ const OrderPage = () => {
                 setCurrentProduct={setCurrentProduct}
                 currentCategory={currentCategory}
                 updateProduct={updateProduct}
+                openOrder={openOrder}
             />
-            <ActiveModal isActiveModalOpen={isActiveModalOpen} handleCloseActiveModal={handleCloseActiveModal} />
         </Box>
     )
 }

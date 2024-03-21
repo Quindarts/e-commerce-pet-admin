@@ -33,7 +33,7 @@ export default function Tabs({ tabs, className }) {
     return (
         <Box sx={{ width: '100%' }} className={className}>
             <Box>
-                <MuiTabs  variant="scrollable" value={value} onChange={handleChange} aria-label="tabs">
+                <MuiTabs variant="scrollable" value={value} onChange={handleChange} aria-label="tabs">
                     {tabs.map((tab, index) => (
                         <Tab sx={{ textTransform: 'none' }} disableRipple label={tab.label} key={index} />
                     ))}
