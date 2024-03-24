@@ -179,15 +179,14 @@ const OrderDetails = ({ handleCloseOrderDetails, openOrder }) => {
                                 <Box sx={imageBox}>
                                     <img
                                         src="https://uko-react.vercel.app/static/products/nike.png"
-                                        // width="142px"
-                                        // height="142px"
+                                        
                                         alt=""
                                         sx={{
                                             objectFit: 'cover',
                                             width: '100%',
                                             height: '100%',
                                         }}
-                                        // id="style-MYKUg"
+                                       
                                     />
                                 </Box>
                                 <Box sx={{ marginLeft: '1rem', marginTop: '2.8rem' }}>

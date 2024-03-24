@@ -32,7 +32,7 @@ export const AttributePage = () => {
                         onClick={() => navigate(APP_ROUTER.ATTRIBUTE_ADD)}
                         size="sm"
                         color="primary"
-                        className="mt-1 px-7 py-2 font-semibold db-xs:mb-0 db-xs:w-full db-md:mb-4 db-md:w-auto"
+                        className="mt-1 px-7 py-2 font-semibold xs:mb-0 xs:w-full md:mb-4 md:w-auto"
                     >
                         New Attribute
                     </Button>

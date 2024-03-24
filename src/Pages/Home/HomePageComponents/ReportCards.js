@@ -32,11 +32,11 @@ const revenues = [
 
 const ReportCards = ({ revenue }) => {
     return (
-        <Box className="grid gap-7 db-xs:col-span-4 db-xs:row-span-4 db-md:col-span-4 db-md:grid-cols-2 db-md:grid-rows-2 db-lg:col-span-4 db-lg:row-span-2 db-lg:grid-cols-4 db-lg:grid-rows-1 db-xl:col-span-2 db-xl:grid-cols-2 db-xl:grid-rows-2">
+        <Box className="grid gap-7 sm:col-span-4 sm:row-span-4 lg:col-span-4 lg:grid-cols-2 lg:grid-rows-2 xl:col-span-4 xl:row-span-2 xl:grid-cols-4 xl:grid-rows-1 2xl:col-span-2 2xl:grid-cols-2 2xl:grid-rows-2">
             {revenues.map((revenue, index) => (
                 <Box
                     key={index}
-                    className="max-h-[134px] db-xs:col-span-4 db-xs:row-span-1 db-md:col-span-1 db-lg:col-span-1 db-lg:row-span-1 db-xl:col-span-1 db-xl:row-span-1"
+                    className="max-h-[134px] sm:col-span-4 sm:row-span-1 lg:col-span-1 xl:col-span-1 xl:row-span-1 2xl:col-span-1 2xl:row-span-1"
                     sx={{ ...Card, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
                 >
                     <Box className="mb-2 text-sm  font-[500] text-[#5c6c87]">{revenue.title}</Box>
