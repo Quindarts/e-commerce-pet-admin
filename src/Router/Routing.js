@@ -18,7 +18,7 @@ import Profile from '../Components/Shared/Header/Profile'
 import ProductPage from '../Pages/ProductPage'
 import ListProductPage from '../Pages/ProductPage/List'
 import AddProductPage from '../Pages/ProductPage/Add'
-
+import CreateInvoice from '../Pages/CreateInvoicePage/CreateInvoice'
 const router = createBrowserRouter([
     {
         path: APP_ROUTER.INDEX,
@@ -35,7 +35,11 @@ const router = createBrowserRouter([
                 element: <HomePage />,
                 index: true,
             },
-
+            {
+                path: APP_ROUTER.INVOICE,
+                element: <CreateInvoice />,
+                index: true,
+            },
             {
                 path: APP_ROUTER.CATEGORY,
                 element: <CategoryPage />,
