@@ -2,6 +2,7 @@ export const APP_ROUTER = {
     INDEX: '/',
     //
     HOME: '/home',
+    INVOICE: '/createinvoice',
     COMPONENT: '/component',
     USER_NOW_PROFILE: '/user/profile',
 
@@ -32,6 +33,7 @@ export const ROLE = {
     WAREHOUSE: ' warehouse',
 }
 export const APP_ICON = {
+    i_send: 'material-symbols:send',
     i_close: 'iconamoon:close',
     i_arrow_down: 'ph:arrow-down-light',
     i_arrow_up: 'ph:arrow-up-light',
