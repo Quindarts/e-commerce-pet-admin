@@ -62,7 +62,7 @@ const TableProductList = ({ products }) => {
             flex: 2,
             renderCell: (params) => (
                 <Box className="flex gap-2 cursor-pointer group transition-colors" >
-                    <img className="h-[50px] w-[50px]" src={params.row.imageUrl} alt="" />
+                    <img className="h-[50px] w-[50px] object-cover" src={params.row.imageUrl} alt="" />
                     <Box>
                         <Typography className="text-[13px] font-[600] text-gray-600  group-hover:text-sky-600">{params.row.name}</Typography>
                          <Typography className="text-[11px] font-[500] text-gray-500 group-hover:text-sky-600">

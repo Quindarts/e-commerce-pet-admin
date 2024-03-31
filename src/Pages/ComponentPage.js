@@ -89,10 +89,12 @@ function ComponentPage() {
         {
             label: 'Documents',
             component: <div>Content for Tab 3</div>,
-        }, {
+        },
+        {
             label: 'Connections',
             component: <div>Content for Tab 3</div>,
-        }, {
+        },
+        {
             label: 'Activity',
             component: <div>Content for Tab 3</div>,
         },

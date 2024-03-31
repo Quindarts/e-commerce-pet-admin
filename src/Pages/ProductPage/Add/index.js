@@ -15,17 +15,17 @@ import { Icon } from '@iconify/react'
 import Title from '../../../Components/ui/Title/Title.js'
 
 const ICON_PRODVIDER_RANDOM = [
-    "fluent-emoji-flat--man-pouting-light",
-    "noto--man-superhero",
-    "fluent-emoji--man-standing",
-    "fluent-emoji--man-mechanic-light",
-    "fluent-emoji--man-elf-dark",
-    "fluent-emoji-flat--man-merpeople-light",
-    "fluent-emoji--man-juggling",
-    "fluent-emoji--old-man-medium-light",
-    "openmoji--man-technologist",
-    "fluent-emoji-flat--man-bald-medium",
-    "streamline-emojis--man-dancing-1"
+    'fluent-emoji-flat--man-pouting-light',
+    'noto--man-superhero',
+    'fluent-emoji--man-standing',
+    'fluent-emoji--man-mechanic-light',
+    'fluent-emoji--man-elf-dark',
+    'fluent-emoji-flat--man-merpeople-light',
+    'fluent-emoji--man-juggling',
+    'fluent-emoji--old-man-medium-light',
+    'openmoji--man-technologist',
+    'fluent-emoji-flat--man-bald-medium',
+    'streamline-emojis--man-dancing-1',
 ]
 const AddProductPage = () => {
     const navigate = useNavigate()
@@ -150,113 +150,102 @@ const AddProductPage = () => {
 
     return (
         <Box className="mb-7">
-        <Typography className='text-xl font-bold text-sky-700 flex items-center gap-4'>
-        <Box className="flex h-[60px] w-[60px] items-center justify-center rounded-md bg-[#fdebe5]">
-                <Icon className="text-[#2499ef]" width={30} icon={"emojione-v1:card-file-box"} />
-            </Box>
-        Adding New product</Typography>
+            <Typography className="flex items-center gap-4 text-xl font-bold text-sky-700">
+                <Box className="flex h-[60px] w-[60px] items-center justify-center rounded-md bg-[#fdebe5]">
+                    <Icon className="text-[#2499ef]" width={30} icon={'emojione-v1:card-file-box'} />
+                </Box>
+                Adding New product
+            </Typography>
 
-            <Box className='flex items-start gap-7 my-7 '>
-            <Box sx={Card}>
-        <Title icon={"noto-v1:information"} className='mb-5'>Basic infomation</Title>
+            <Box className="my-7 flex items-start gap-7 ">
+                <Box sx={Card}>
+                    <Title icon={'noto-v1:information'} className="mb-5">
+                        Basic infomation
+                    </Title>
 
-            <Box  className="flex flex-wrap gap-5 items-center">
-            <Textfield placeholder="Name" id="name" type="text" label="Name" className="w-1/2-gap-5"/>
-             <Box className='flex w-1/2-gap-5 gap-5'> 
-                <Dropdown  list={brand} size="xl" />
-                <Dropdown  list={category} size="xl" />
-             </Box>
-        
-         <Box className='flex w-full gap-5'> 
-            <Textfield
-                placeholder="Bought Price"
-                id="bought"
-                label="Bought Price"
-                className="w-1/2-gap-5"
-            />
-            <Textfield
-                placeholder="Sell Price"
-                id="sell"
-                label="Sell Price"
-                className=" w-1/2-gap-5"
-            />
-            </Box>
-            <Dropdown  list={attributeList} />
-            <Textfield
-            placeholder="Some tags"
-            id=""
-            className="w-full"
-            label="Tags"
-        />
-        </Box>
-        </Box> 
-            <Box sx={Card} >
-        <Title icon={"fxemoji:deliverytruck"} className='mb-5'>Details </Title>
-            <Box className="flex gap-5 w-full flex-wrap">
-            <Textfield 
-                className='w-full'
-                placeholder="Stock"
-                id="stock"
-                type="number"
-                label="Stock"
-          />
-            <Box className='w-full flex flex-wrap gap-5'>
-            <Textfield
-            placeholder="... cm"
-            id="Width"
-            type="number"
-            label="Width"
-            className='w-1/2-gap-5'
-        />
-            <Textfield
-                placeholder="... cm"
-                id="Height"
-                type="number"
-                label="Height"
-                className='w-1/2-gap-5'
-            />
-            </Box>
-                <Box className='flex flex-wrap gap-5 w-full'>
-                <Textfield
-                placeholder="... cm"
-                id="Length"
-                type="number"
-                label="Length"
-                className='w-1/2-gap-5'
-            />
-            <Textfield
-                placeholder="... gram"
-                id="Weight"
-                type="number"
-                label="Weight"
-                className='w-1/2-gap-5'
-          />
-          </Box>
-            <Textfield
-                placeholder="Description"
-                id="description"
-                type="text"
-                label="Description"
-                className=" w-full"
-          />
-          </Box>
-        </Box>
+                    <Box className="flex flex-wrap items-center gap-5">
+                        <Textfield placeholder="Name" id="name" type="text" label="Name" className="w-1/2-gap-5" />
+                        <Box className="flex w-1/2-gap-5 gap-5">
+                            <Dropdown list={brand} size="xl" />
+                            <Dropdown list={category} size="xl" />
+                        </Box>
+
+                        <Box className="flex w-full gap-5">
+                            <Textfield
+                                placeholder="Bought Price"
+                                id="bought"
+                                label="Bought Price"
+                                className="w-1/2-gap-5"
+                            />
+                            <Textfield placeholder="Sell Price" id="sell" label="Sell Price" className=" w-1/2-gap-5" />
+                        </Box>
+                        <Dropdown list={attributeList} />
+                        <Textfield placeholder="Some tags" id="" className="w-full" label="Tags" />
+                    </Box>
+                </Box>
+                <Box sx={Card}>
+                    <Title icon={'fxemoji:deliverytruck'} className="mb-5">
+                        Details{' '}
+                    </Title>
+                    <Box className="flex w-full flex-wrap gap-5">
+                        <Textfield className="w-full" placeholder="Stock" id="stock" type="number" label="Stock" />
+                        <Box className="flex w-full flex-wrap gap-5">
+                            <Textfield
+                                placeholder="... cm"
+                                id="Width"
+                                type="number"
+                                label="Width"
+                                className="w-1/2-gap-5"
+                            />
+                            <Textfield
+                                placeholder="... cm"
+                                id="Height"
+                                type="number"
+                                label="Height"
+                                className="w-1/2-gap-5"
+                            />
+                        </Box>
+                        <Box className="flex w-full flex-wrap gap-5">
+                            <Textfield
+                                placeholder="... cm"
+                                id="Length"
+                                type="number"
+                                label="Length"
+                                className="w-1/2-gap-5"
+                            />
+                            <Textfield
+                                placeholder="... gram"
+                                id="Weight"
+                                type="number"
+                                label="Weight"
+                                className="w-1/2-gap-5"
+                            />
+                        </Box>
+                        <Textfield
+                            placeholder="Description"
+                            id="description"
+                            type="text"
+                            label="Description"
+                            className=" w-full"
+                        />
+                    </Box>
+                </Box>
             </Box>
             <Box className="my-7">
-                <InputUpload className=" h-1 "/>
+                <InputUpload className=" h-1 " />
             </Box>
             <Box className="my-7">
                 <Accordion>
                     <AccordionSummary
-                        className="text-md py-2 px-7 font-semibold"
+                        className="text-md px-7 py-2 font-semibold"
                         aria-controls="panel1-content"
                         id="panel1-header"
                     >
-        <Title icon={"logos:meilisearch"} >Search engine optimize </Title>
+                        <Title icon={'logos:meilisearch'}>Search engine optimize </Title>
                     </AccordionSummary>
-                    <AccordionDetails className='px-7'>
+                    <AccordionDetails className="px-7">
                         <Textfield className="mb-4" label="Url key" />
-                        <Textfield className="mb-4" label="Meta" /> 
+                        <Textfield className="mb-4" label="Meta" />
                         <Textfield className="mb-4" label="Enter value here"></Textfield>
                         <Textfield className="mb-4" label="Enter value here" />
                     </AccordionDetails>
@@ -269,47 +258,49 @@ const AddProductPage = () => {
                         aria-controls="panel1-content"
                         id="panel1-header"
                     >
-                    <Title icon="fluent-emoji:man-beard">Provider</Title>
-
+                        <Title icon="fluent-emoji:man-beard">Provider</Title>
                     </AccordionSummary>
-                    <AccordionDetails className='px-7 '>
-                    <Box className='flex gap-5 flex-wrap'>
-                        {providers.map((provider, index) => (
-                            <Box className='bg-slate-50 p-7 rounded-lg my-5 w-1/3-gap-5' key={index}>
-                            <Title className='mb-5' icon={`fluent-emoji:man-beard`}>Provider info {index +1}</Title>
-                            <Textfield
-                            className="mb-4"
-                            label="name"
-                            type="text"
-                            value={provider.name}
-                            onChange={(event) => handleProviderValueChange(event, index)}
-                            />
-                                <Textfield
-                                    className="mb-4"
-                                    label="Address"
-                                    type="text"
-                                    value={provider.address}
-                                    onChange={(event) => handleProviderValueChange(event, index)}
-                                />
-                                <Textfield
-                                    className="mb-4"
-                                    label="Phone number"
-                                    type="number"
-                                    value={provider.phoneNumber}
-                                    onChange={(event) => handleProviderValueChange(event, index)}
-                                />
-                                <Textfield
-                                    className="mb-4"
-                                    label="Provider email"
-                                    type="text"
-                                    value={provider.email}
-                                    onChange={(event) => handleProviderValueChange(event, index)}
-                                />
-                                <Button className="" color="red" onClick={() => removeProvider(index)}>
-                                    Remove
-                                </Button>
-                            </Box>
-                        ))}</Box>
+                    <AccordionDetails className="px-7 ">
+                        <Box className="flex flex-wrap gap-5">
+                            {providers.map((provider, index) => (
+                                <Box className="my-5 w-1/3-gap-5 rounded-lg bg-slate-50 p-7" key={index}>
+                                    <Title className="mb-5" icon={`fluent-emoji:man-beard`}>
+                                        Provider info {index + 1}
+                                    </Title>
+                                    <Textfield
+                                        className="mb-4"
+                                        label="name"
+                                        type="text"
+                                        value={provider.name}
+                                        onChange={(event) => handleProviderValueChange(event, index)}
+                                    />
+                                    <Textfield
+                                        className="mb-4"
+                                        label="Address"
+                                        type="text"
+                                        value={provider.address}
+                                        onChange={(event) => handleProviderValueChange(event, index)}
+                                    />
+                                    <Textfield
+                                        className="mb-4"
+                                        label="Phone number"
+                                        type="number"
+                                        value={provider.phoneNumber}
+                                        onChange={(event) => handleProviderValueChange(event, index)}
+                                    />
+                                    <Textfield
+                                        className="mb-4"
+                                        label="Provider email"
+                                        type="text"
+                                        value={provider.email}
+                                        onChange={(event) => handleProviderValueChange(event, index)}
+                                    />
+                                    <Button className="" color="red" onClick={() => removeProvider(index)}>
+                                        Remove
+                                    </Button>
+                                </Box>
+                            ))}
+                        </Box>
                         <Button color="primary" onClick={addProvider}>
                             Add new Provider
                         </Button>
@@ -326,14 +317,14 @@ const AddProductPage = () => {
                     </AccordionDetails>
                 </Accordion>
             </Box>
-            <Box className="gap-7 flex" gap="2rem">
-                <Button onClick={() => navigate(APP_ROUTER.PRODUCT)} size='sm'  color="green">
-                <Icon className="mx-[2px]" width={25} icon={APP_ICON.i_plus} />              
-                Create Product
+            <Box className="flex gap-7" gap="2rem">
+                <Button onClick={() => navigate(APP_ROUTER.PRODUCT)} size="sm" color="green">
+                    <Icon className="mx-[2px]" width={25} icon={APP_ICON.i_plus} />
+                    Create Product
                 </Button>
-                <Button onClick={() => navigate(APP_ROUTER.PRODUCT)} size='sm'  color="yellow">
-                <Icon className="mx-1" width={25} icon="ant-design:clear-outlined" />
-                Clear form
+                <Button onClick={() => navigate(APP_ROUTER.PRODUCT)} size="sm" color="yellow">
+                    <Icon className="mx-1" width={25} icon="ant-design:clear-outlined" />
+                    Clear form
                 </Button>
             </Box>
         </Box>
