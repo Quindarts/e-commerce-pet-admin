@@ -10,23 +10,26 @@ import { Zoom } from '@mui/material'
 import { themeSnackbar } from './Theme/themeSnackbar'
 import { Provider } from 'react-redux'
 import store from './store/store'
-
+import { LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
 root.render(
     <ThemeProvider theme={theme}>
         <I18nextProvider i18n={i18n}>
-            <SnackbarProvider
-                maxSnack={5}
-                TransitionComponent={Zoom}
-                Components={themeSnackbar}
-                autoHideDuration={2000}
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            >
-                <Provider store={store}>
-                    <App />
-                </Provider>
-            </SnackbarProvider>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <SnackbarProvider
+                    maxSnack={5}
+                    TransitionComponent={Zoom}
+                    Components={themeSnackbar}
+                    autoHideDuration={2000}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                >
+                    <Provider store={store}>
+                        <App />
+                    </Provider>
+                </SnackbarProvider>
+            </LocalizationProvider>
         </I18nextProvider>
     </ThemeProvider>,
 )

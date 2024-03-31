@@ -18,6 +18,7 @@ import Profile from '../Components/Shared/Header/Profile'
 import ProductPage from '../Pages/ProductPage'
 import ListProductPage from '../Pages/ProductPage/List'
 import AddProductPage from '../Pages/ProductPage/Add'
+import CalendarPage from '../Pages/CalendarPage'
 
 const router = createBrowserRouter([
     {
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
     },
     {
         path: APP_ROUTER.INDEX,
-        
+
         element: <MainLayout />,
 
         children: [
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
             {
                 path: APP_ROUTER.ORDER,
                 element: <OrderPage />,
+            },
+            {
+                path: APP_ROUTER.CALENDAR,
+                element: <CalendarPage />,
             },
             {
                 path: APP_ROUTER.USER,
