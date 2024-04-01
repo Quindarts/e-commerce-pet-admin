@@ -2,6 +2,7 @@ export const APP_ROUTER = {
     INDEX: '/',
     //
     HOME: '/home',
+    DETAILS: '/invoicedetails',
     INVOICE: '/createinvoice',
     COMPONENT: '/component',
     USER_NOW_PROFILE: '/user/profile',

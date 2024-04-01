@@ -19,6 +19,7 @@ import ProductPage from '../Pages/ProductPage'
 import ListProductPage from '../Pages/ProductPage/List'
 import AddProductPage from '../Pages/ProductPage/Add'
 import CreateInvoice from '../Pages/CreateInvoicePage/CreateInvoice'
+import InvoiceDetails from '../Pages/CreateInvoicePage/InvoiceDetails'
 const router = createBrowserRouter([
     {
         path: APP_ROUTER.INDEX,
@@ -38,6 +39,11 @@ const router = createBrowserRouter([
             {
                 path: APP_ROUTER.INVOICE,
                 element: <CreateInvoice />,
+                index: true,
+            },
+            {
+                path: APP_ROUTER.DETAILS,
+                element: <InvoiceDetails />,
                 index: true,
             },
             {

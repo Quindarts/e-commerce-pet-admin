@@ -17,15 +17,15 @@ const label = { inputProps: { 'aria-label': 'Switch demo' } }
 const CreateInvoice = () => {
     return (
         <div className="py-6">
-            <div className="max-lg:flex-col max-lg:w-full mx-auto my-0 flex w-[90%]">
-                <div className="max-lg:w-full mr-6 w-4/6 overflow-hidden rounded-lg bg-white p-6">
+            <div className="mx-auto my-0 flex w-[90%] max-lg:w-full max-lg:flex-col">
+                <div className="mr-6 w-4/6 overflow-hidden rounded-lg bg-white p-6 max-lg:w-full">
                     <div className="flex">
                         <div className="mr-1 text-2xl font-semibold text-[#121f43]">Invoice #</div>
                         <span className="mt-auto text-sm font-semibold  leading-6 text-[#8CA3BA]">12345678</span>
                     </div>
                     <hr className="col-start-1 col-end-4 my-2 border-t border-[#D3E6F3]" />
-                    <div className="max-sm:grid-cols-1 mt-4 grid grid-cols-2">
-                        <div className="max-sm:pr-0 pr-3">
+                    <div className="mt-4 grid grid-cols-2 max-sm:grid-cols-1">
+                        <div className="pr-3 max-sm:pr-0">
                             <div className="mb-3 text-sm font-semibold text-[#121f43]">Bill From:</div>
                             <Textfield type="text" placeholder="Name" label="Name" className="my-6" />
                             <Textfield type="text" placeholder="Email" label="Email" className="my-6" />
@@ -43,7 +43,7 @@ const CreateInvoice = () => {
                                 </span>
                             </label>
                         </div>
-                        <div className="max-sm:pl-0 pl-3">
+                        <div className="pl-3 max-sm:pl-0">
                             <div className="mb-3 text-sm font-semibold text-[#121f43]">Bill To:</div>
                             <Textfield type="text" placeholder="Name" label="Name" className="my-6" />
                             <Textfield type="text" placeholder="Email" label="Email" className="my-6" />
@@ -63,7 +63,7 @@ const CreateInvoice = () => {
                         </div>
                     </div>
                     <div className="scroll mt-7 block w-full overflow-x-auto">
-                        <div className="box-border grid h-auto w-[700px] grid-cols-12 gap-5 db-lg:w-full">
+                        <div className="db-lg:w-full box-border grid h-auto w-[700px] grid-cols-12 gap-5">
                             <div className="col-span-3 p-4 pl-0 text-left text-xs font-semibold text-[#121F43]">
                                 Item
                             </div>
@@ -147,11 +147,11 @@ const CreateInvoice = () => {
                     </div>
 
                     <hr className="col-start-1 col-end-4 mb-2 mt-4 border-t border-[#D3E6F3]" />
-                    <div className="max-sm:flex-col flex">
-                        <div className="max-sm:w-full w-2/3">
+                    <div className="flex max-sm:flex-col">
+                        <div className="w-2/3 max-sm:w-full">
                             <button className="text-sm font-semibold text-[#2499ef]">Add Item</button>
                         </div>
-                        <div className="max-sm:w-full max-sm:pl-0 mr-0 w-1/3 pl-6">
+                        <div className="mr-0 w-1/3 pl-6 max-sm:w-full max-sm:pl-0">
                             <div className="my-2 flex justify-between text-sm font-semibold text-[#121f43]">
                                 <div>Subtotal</div>
                                 <div>$ 50</div>
@@ -184,7 +184,7 @@ const CreateInvoice = () => {
                         ></textarea>
                     </div>
                 </div>
-                <div className="max-lg:w-full max-lg:mt-6 h-full w-2/6 overflow-hidden rounded-lg bg-white p-6">
+                <div className="h-full w-2/6 overflow-hidden rounded-lg bg-white p-6 max-lg:mt-6 max-lg:w-full">
                     <div>
                         <div className="mb-3 text-sm font-semibold text-[#121f43]">Currency</div>
                         <Dropdown list={ARRAY_LIST_CURRENCY} />
@@ -208,7 +208,7 @@ const CreateInvoice = () => {
                     <div className="w-full">
                         <div className="flex w-full flex-wrap justify-between gap-5">
                             <Button
-                                className="lg:w-1/2-gap-5 w-full font-semibold text-[#121f43]"
+                                className="w-full font-semibold text-[#121f43] lg:w-1/2-gap-5"
                                 size="sm"
                                 variant="outline"
                                 color="primary"
@@ -216,7 +216,7 @@ const CreateInvoice = () => {
                                 Preview
                             </Button>
                             <Button
-                                className=" lg:w-1/2-gap-5 w-full font-semibold text-[#121f43]"
+                                className=" w-full font-semibold text-[#121f43] lg:w-1/2-gap-5"
                                 size="sm"
                                 variant="outline"
                                 color="primary"
