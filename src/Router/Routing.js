@@ -19,6 +19,7 @@ import ProductPage from '../Pages/ProductPage'
 import ListProductPage from '../Pages/ProductPage/List'
 import AddProductPage from '../Pages/ProductPage/Add'
 import CreateInvoice from '../Pages/CreateInvoicePage/CreateInvoice'
+import PrivateRoutes from './PrivateRoute'
 const router = createBrowserRouter([
     {
         path: APP_ROUTER.INDEX,
@@ -27,7 +28,11 @@ const router = createBrowserRouter([
     {
         path: APP_ROUTER.INDEX,
 
-        element: <MainLayout />,
+        element: (
+            <PrivateRoutes>
+                <MainLayout />
+            </PrivateRoutes>
+        ),
 
         children: [
             {

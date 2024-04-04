@@ -34,10 +34,7 @@ function HomePage() {
                 <Box sx={Card} className="p-7 sm:col-span-5 lg:col-span-5 xl:col-span-3 2xl:col-span-2">
                     <PopularProduct />
                 </Box>
-                <Box
-                    sx={Card}
-                    className=" relative p-7 sm:col-span-5 lg:col-span-5 xl:col-span-2 2xl:col-span-1"
-                >
+                <Box sx={Card} className=" relative p-7 sm:col-span-5 lg:col-span-5 xl:col-span-2 2xl:col-span-1">
                     <Typography className="text-sm font-bold text-gray-700">Recent Orders</Typography>
                     <Box className="absolute right-0 top-6">
                         <Link to="/orders" className="no-underline">

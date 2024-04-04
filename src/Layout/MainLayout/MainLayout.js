@@ -1,19 +1,25 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Box } from '@mui/material'
 import Header from '../../Components/Shared/Header/Header'
 import TemporaryDrawer from '../../Components/Shared/Drawer/Drawer'
-import useUser from '../../hook/api/user'
+import { useCurrentUser } from '../../hook/api/auth'
+import Progress from '../../Components/ui/Progress/Progress'
 
 function MainLayout() {
     const [openNav, setOpenNav] = useState(false)
     const handleOpenNav = () => {
         setOpenNav(!openNav)
     }
-    const { handleGetUserById } = useUser()
-    useEffect(() => {
-        handleGetUserById('657fee4a8f8ba7c4e2ffebf4')
-    }, [])
+    const user = useCurrentUser()
+    if (!user) {
+        return (
+            <>
+                <Progress />
+            </>
+        )
+    }
+
     return (
         <Fragment>
             <Box className="main_layout flex bg-[#f3f4f9] " sx={{ maxWidth: '100vw', width: '100%' }}>
@@ -27,7 +33,7 @@ function MainLayout() {
                     }}
                 >
                     <main>
-                        <Header />
+                        <Header user={user} />
                         <Outlet />
                     </main>
                 </Box>

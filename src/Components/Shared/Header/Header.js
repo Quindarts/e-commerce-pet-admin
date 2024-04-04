@@ -8,7 +8,7 @@ import { StyledBox } from '../../Shared/Header/styles'
 import PopupLang from '../../ui/Popup/PopupLang'
 import i18n from '../../../translation/i18n'
 
-function Header() {
+function Header({ user }) {
     const BaseHeader = ({ className, children }) => {
         return <nav className={className}>{children}</nav>
     }
@@ -34,12 +34,7 @@ function Header() {
             i18n.changeLanguage(value)
         }
         const names = [{ name: 'Bob' }, { name: 'Bill' }, { name: 'Ben' }, { name: '' }]
-        const user = {
-            firstName: 'Than Nguyen Thanh',
-            lastName: 'Thien',
-            avt: 'https://img.freepik.com/premium-vector/avatar-icon-smiley-face-man_1692-130.jpg',
-            email: 'tntt@gmail.com',
-        }
+
         return () => (
             <StyledBox className="pr-15 flex justify-end gap-1 py-3">
                 <PopupLang list={listLanguage} handleChangeLanguage={handleChangeLanguage} />

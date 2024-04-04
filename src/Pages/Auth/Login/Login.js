@@ -12,8 +12,9 @@ import { Grid, Image, FormContainer, Box, Checkbox } from '../style.js'
 import { login } from '../../../services/api-auth.js'
 import { tokenService } from '../../../services/token.services.js'
 import Progress from '../../../Components/ui/Progress/Progress.js'
-import { useState } from 'react'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { signInFailure, signInStart, signInSuccess } from '../../../store/userSlice.js'
+import useAuthRedirect from '../../../hook/ui/useAuthRedirect.js'
 const schema = yup.object().shape({
     userName: yup
         .string()
@@ -35,40 +36,30 @@ const schema = yup.object().shape({
 })
 
 function Login() {
+    useAuthRedirect()
+    const dispatch = useDispatch()
     const { enqueueSnackbar } = useSnackbar()
-    const [isloading, setIsLoading] = useState(false)
-
+    const { loading } = useSelector((state) => state.user)
     const navigate = useNavigate()
 
-    const handleLogin = async (values, actions) => {
-        setIsLoading(true)
-
+    const handleLogin = async (values) => {
         try {
+            dispatch(signInStart())
             const service = tokenService()
             const result = await login(values)
-
-            if (result.user.role === ROLE.USER) {
-                enqueueSnackbar('Role client not access this Page', {
-                    variant: 'error',
-                })
-            }
-            if (result.success === true) {
-                enqueueSnackbar(result.message, {
-                    variant: 'success',
-                })
+            if (result.success && result.user.role === ROLE.OWNER) {
+                dispatch(signInSuccess(result))
+                enqueueSnackbar(result.message, { variant: 'success' })
                 service.setTokenList(result.tokenList)
-                setIsLoading(false)
                 navigate(APP_ROUTER.HOME)
             } else {
-                enqueueSnackbar(result.message, {
-                    variant: 'error',
-                })
+                enqueueSnackbar('Role client not access this Page', { variant: 'error' })
+                navigate(APP_ROUTER.LOGIN)
+                dispatch(signInFailure())
             }
         } catch (error) {
-            enqueueSnackbar(error.message, {
-                variant: 'error',
-            })
-            setIsLoading(false)
+            enqueueSnackbar(error.message, { variant: 'error' })
+            dispatch(signInFailure(error.message))
         }
     }
 
@@ -77,7 +68,7 @@ function Login() {
             className="grid-template-areas-2 md:grid-template-areas-4 bg-[ #f3f4f9] grid
             overflow-hidden "
         >
-            {isloading && <Progress />}
+            {loading && <Progress />}
             <FormContainer
                 className="form"
                 initialValues={{ userName: '', password: '' }}
@@ -96,7 +87,7 @@ function Login() {
                                 <span className="ml-1 text-blue-400">Create an account</span>
                             </Link>
                         </div>
-                        <div className=" md:flex md:justify-between mb-2 grid">
+                        <div className=" mb-2 grid md:flex md:justify-between">
                             <Textfield
                                 className="focus:shadow-outline w-full appearance-none  py-1 text-sm leading-tight text-gray-700 focus:outline-none"
                                 label="Username"
@@ -162,7 +153,7 @@ function Login() {
                                 color="primary"
                             >
                                 <Icon className="mr-2 text-xl" icon={APP_ICON.i_google} />{' '}
-                                <span className="text-sm font-normal text-gray-800">Signin with Google</span>
+                                <span className="text-sm font-normal text-gray-800">SignIn with Google</span>
                             </Button>
                             <Button
                                 className="text-darkgray focus:shadow-outline w-full rounded-lg border border-blue-200 bg-gray-100 px-4 py-3 font-bold focus:outline-none"
@@ -172,7 +163,7 @@ function Login() {
                                 color="primary"
                             >
                                 <Icon className="mr-2 text-xl" icon={APP_ICON.i_facebook} />
-                                <span className="text-sm font-normal text-gray-800"> Signin with Facebook</span>
+                                <span className="text-sm font-normal text-gray-800"> SignIn with Facebook</span>
                             </Button>
                             <Button
                                 className="text-darkgray focus:shadow-outline w-full rounded-lg border border-blue-200 bg-gray-100 px-4 py-3 font-bold focus:outline-none"
@@ -182,7 +173,7 @@ function Login() {
                                 color="primary"
                             >
                                 <Icon className="mr-2 text-lg" icon={APP_ICON.i_twitter} />
-                                <span className="text-sm font-normal text-gray-800"> Signin with Twitter</span>
+                                <span className="text-sm font-normal text-gray-800"> SignIn with Twitter</span>
                             </Button>
                         </div>
                     </Box>

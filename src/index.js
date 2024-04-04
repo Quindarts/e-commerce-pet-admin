@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom/client'
+import ReactDOM from 'react-dom'
 import App from './App'
 import './Styles/index.css'
 import { ThemeProvider } from '@mui/material/styles'
@@ -8,13 +8,13 @@ import i18n from './translation/i18n'
 import { SnackbarProvider } from 'notistack'
 import { Zoom } from '@mui/material'
 import { themeSnackbar } from './Theme/themeSnackbar'
+import { PersistGate } from 'redux-persist/integration/react'
 import { Provider } from 'react-redux'
-import store from './store/store'
+import { persistor, store } from './store/store'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-const root = ReactDOM.createRoot(document.getElementById('root'))
 
-root.render(
+ReactDOM.render(
     <ThemeProvider theme={theme}>
         <I18nextProvider i18n={i18n}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -26,10 +26,13 @@ root.render(
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                 >
                     <Provider store={store}>
-                        <App />
+                        <PersistGate persistor={persistor}>
+                            <App />
+                        </PersistGate>
                     </Provider>
                 </SnackbarProvider>
             </LocalizationProvider>
         </I18nextProvider>
     </ThemeProvider>,
+    document.getElementById('root'),
 )

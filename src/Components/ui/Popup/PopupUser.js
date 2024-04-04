@@ -5,6 +5,8 @@ import { APP_ROUTER } from '../../../Utils/Constants'
 import { Box, useMediaQuery } from '@mui/material'
 import { tokenService } from '../../../services/token.services'
 import { useSnackbar } from 'notistack'
+import { useDispatch } from 'react-redux'
+import { logout } from '../../../store/userSlice'
 const menuItems = [
     {
         title: 'Set Status',
@@ -28,11 +30,11 @@ const menuItems = [
     },
 ]
 function shortenName(fullName, maxLength = 13) {
-    if (fullName.length <= maxLength) {
+    if (fullName?.length <= maxLength) {
         return fullName
     }
-    var shortN = fullName[0].charAt(0).toUpperCase() + '.'
-    fullName.split('').map((w, k) => w === ' ' && k > 1 && (shortN += fullName[k + 1].charAt(0).toUpperCase() + '.'))
+    var shortN = fullName[0]?.charAt(0)?.toUpperCase() + '.'
+    fullName.split('').map((w, k) => w === ' ' && k > 1 && (shortN += fullName[k + 1]?.charAt(0)?.toUpperCase() + '.'))
     var resultShort = shortN.substring(0, shortN.length - 1)
     return resultShort
 }
@@ -53,12 +55,12 @@ function useClickOutside(ref, handler) {
 }
 
 const PopupUser = (props) => {
-    const { user, className, position } = props
+    const { user, className } = props
     const matches = useMediaQuery('(max-width:600px)')
     const [isOpenPopUp, setPopupOpen] = useState(false)
     const navigate = useNavigate()
     const popupUser = useRef(null)
-
+    const dispatch = useDispatch()
     const { enqueueSnackbar } = useSnackbar()
 
     const handleOpen = () => {
@@ -69,11 +71,15 @@ const PopupUser = (props) => {
     }
     const handleMenuItem = (link) => {
         let service = tokenService()
+
         if (link === APP_ROUTER.LOGIN) {
             service.removetokenList()
             enqueueSnackbar('Logout account success', { variant: 'success' })
+            dispatch(logout())
+            navigate(APP_ROUTER.LOGIN)
+        } else {
+            navigate(link)
         }
-        navigate(link)
         handleClose()
     }
     useClickOutside(popupUser, handleClose)
@@ -88,11 +94,11 @@ const PopupUser = (props) => {
                     <span className="mx-2">
                         Hi,{' '}
                         <strong className="font-semibold">
-                            {shortenName(user.firstName)} {user.lastName}
+                            {shortenName(user?.first_name)} {user?.last_name}
                         </strong>
                     </span>
                 )}
-                <Avatar src={user.avt} size="sm" badge={true} className="border-none" />
+                <Avatar src={user?.avt} size="sm" badge={true} className="border-none" />
             </button>
             {isOpenPopUp && (
                 <Box
@@ -102,19 +108,19 @@ const PopupUser = (props) => {
                         <Avatar src={user.avt} size="md" />
                         <Box className="">
                             <p className="text-sm font-medium">
-                                {shortenName(user.firstName)} {user.lastName}
+                                {shortenName(user?.first_name)} {user?.last_name}
                             </p>
-                            <p className="text-sm font-medium text-gray-500">{user.email}</p>
+                            <p className="text-sm font-medium text-gray-500">{user?.email}</p>
                         </Box>
                     </Box>
                     <Box className="pt-2">
                         {menuItems.map((item, index) => (
                             <Box key={index} className={`mb-2 border-b border-gray-200`}>
                                 <button
-                                    onClick={() => handleMenuItem(item.link)}
+                                    onClick={() => handleMenuItem(item?.link)}
                                     className="hup:bg-gray-200 block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-300"
                                 >
-                                    {item.title}
+                                    {item?.title}
                                 </button>
                             </Box>
                         ))}
