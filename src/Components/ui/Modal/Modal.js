@@ -27,5 +27,5 @@ function Modal(props) {
         </Fragment>
     )
 }
-//
+
 export default Modal

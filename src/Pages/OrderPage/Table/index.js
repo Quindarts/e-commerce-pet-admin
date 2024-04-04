@@ -11,12 +11,13 @@ import OrderDetails from '../Modal/OrderDetails'
 const OrderPageTable = (props) => {
     const { handleChangePanigation, page, rows, totalPage, products } = props
     const [value, setValue] = React.useState(2)
-    const [openOrder, setOpenOrder] = useState({ isOpen: false, order_id_id: '' })
-    const handleOpenEditModal = (id) => {
-        setOpenOrder({ isOpen: true, order_id: id })
+    const [openOrderModal, setOpenOrderModal] = useState({ isOpen: false, size: 'sm' })
+    const handleOpenOrderDetails = (option) => {
+        setOpenOrderModal({ isOpen: true, size: option })
     }
-    const handleCloseEditModal = () => {
-        setOpenOrder({ ...openOrder, isOpen: false })
+
+    const handleCloseOrderDetails = () => {
+        setOpenOrderModal({ ...openOrderModal, isOpen: false })
     }
     const createProductObject = (product) => {
         if (!product || !product.id) {
@@ -50,7 +51,7 @@ const OrderPageTable = (props) => {
             edit: (
                 <Stack direction="row">
                     <Button
-                        onClick={() => handleOpenEditModal(product.id)}
+                        onClick={() => handleOpenOrderDetails('md')}
                         className=""
                         size="md"
                         variant="outline"
@@ -131,7 +132,7 @@ const OrderPageTable = (props) => {
                 rows={products.map(createProductObject)}
                 handleChangePanigation={handleChangePanigation}
             />
-            <OrderDetails openOrder={openOrder} handleCloseEditModal={handleCloseEditModal} />
+            <OrderDetails openOrderModal={openOrderModal} setOpenOrderModal={setOpenOrderModal} />
         </>
     )
 }

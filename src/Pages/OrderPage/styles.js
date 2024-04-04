@@ -117,6 +117,7 @@ export const orderInfoContainer = {
 export const orderInfoHeader = {
     display: 'flex',
     alignItems: 'center',
+    
 }
 
 export const orderInfoTitle = {
@@ -160,8 +161,11 @@ export const orderInfoGridContainer = {
     display: 'flex',
     flexFlow: 'wrap',
     marginTop: '-24px',
-    width: 'calc(100% + 24px)',
-    marginLeft: '-24px',
+    width: 'fit-content',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    justifyContent: 'center',
+    
 }
 
 export const orderInfoGridItem = {

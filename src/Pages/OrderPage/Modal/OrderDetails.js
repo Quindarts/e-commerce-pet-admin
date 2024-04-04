@@ -3,11 +3,9 @@ import Modal from '../../../Components/ui/Modal/Modal'
 import Tabs from '../../../Components/ui/Tabs/Tabs'
 import { Typography, Box, Grid } from '@mui/material'
 import Table from '../../../Components/ui/Table/Table'
+import { COLOR } from '../../../Utils/Constants'
 import {
     Row,
-    Rows,
-    Col,
-    Cols,
     itemName,
     marginLeft,
     imageBox,
@@ -17,11 +15,8 @@ import {
     orderInfoHeader,
     orderInfoTitle,
     orderInfoCode,
-    orderInfoButton,
-    orderInfoButtonHover,
     orderInfoGridContainer,
     orderInfoGridItem,
-    orderInfoGridItemPadding,
     orderInfoSectionTitle,
     orderInfoSectionContent,
     orderInfoSectionItem,
@@ -33,42 +28,12 @@ import {
     orderInfoAvatarSubText,
     modalDivider,
 } from '../styles'
-import Avatar from '../../../Components/ui/Avatar/Avatar'
-import { qdmdb7, us4jxz, sb77p4, flexAlign, divider, flexCenter } from '../styles'
-const OrderDetails = ({ handleCloseOrderDetails, openOrder }) => {
-    const invoiceInfo = {
-        title: 'Invoice',
-        item: {
-            name: 'Nike airmax 270',
-            seller: 'Rave BD',
-            code: 'UY7234',
-            location: 'Arizona USA',
-        },
-        name: '02.05.2021',
+import { qdmdb7, us4jxz, sb77p4, flexAlign, flexCenter } from '../styles'
+const OrderDetails = ({ openOrderModal, setOpenOrderModal }) => {
+    const handleClose = () => {
+        setOpenOrderModal({ ...openOrderModal, isOpen: false })
     }
-    const orderInfo = {
-        id: 'UY3769',
-        customer: {
-            name: 'Mark Rufflo',
-            location: 'Arizona, USA',
-            phone: '+003344422',
-            role: 'Product Manager',
-        },
-        payment: {
-            method: 'Paypal',
-            amount: 789,
-            id: '00000-XH3453',
-            name: '03.02.2021',
-            total: 'paid',
-        },
-        billing: {
-            city: 'Corner view',
-            address: 'Corner view, Sylhet',
-            email: 'example@gmail.com',
-            phone: '+013145813',
-            postcode: '3100',
-        },
-    }
+
     const rows = [
         { id: '1', name: 'Nike airmax 270', quantity: 15, price: '$760', total: '850' },
         { id: '2', name: 'Nike airmax 270', quantity: 15, price: '$760', total: '850' },
@@ -79,25 +44,28 @@ const OrderDetails = ({ handleCloseOrderDetails, openOrder }) => {
             field: 'name',
             headerName: 'Product',
             flex: 0.7,
+            renderCell: (params) => <strong style={{ color: COLOR.dark_indigo }}>{params.value}</strong>,
         },
-
         {
             field: 'price',
             headerName: 'Price',
             flex: 0.5,
+            renderCell: (params) => <strong style={{ color: COLOR.dark_indigo }}>{params.value}</strong>,
         },
-
         {
             field: 'quantity',
             headerName: 'Quantity',
             flex: 0.5,
+            renderCell: (params) => <strong style={{ color: COLOR.dark_indigo }}>{params.value}</strong>,
         },
         {
             field: 'total',
             headerName: 'Total',
             flex: 0.5,
+            renderCell: (params) => <strong style={{ color: COLOR.dark_indigo }}>{params.value}</strong>,
         },
     ]
+
     const [page, setPage] = useState(1)
     const handleChangePanigation = (event, value) => {
         setPage(value)
@@ -179,14 +147,12 @@ const OrderDetails = ({ handleCloseOrderDetails, openOrder }) => {
                                 <Box sx={imageBox}>
                                     <img
                                         src="https://uko-react.vercel.app/static/products/nike.png"
-                                        
                                         alt=""
                                         sx={{
                                             objectFit: 'cover',
                                             width: '100%',
                                             height: '100%',
                                         }}
-                                       
                                     />
                                 </Box>
                                 <Box sx={{ marginLeft: '1rem', marginTop: '2.8rem' }}>
@@ -241,9 +207,11 @@ const OrderDetails = ({ handleCloseOrderDetails, openOrder }) => {
         },
     ]
     return (
-        <Modal className="" maxWidth="lg" onClose={handleCloseOrderDetails} open={openOrder.isOpen}>
-            <Tabs tabs={tabs} />
-        </Modal>
+        openOrderModal && (
+            <Modal fullwidth={false} maxWidth={openOrderModal.size} open={openOrderModal.isOpen} onClose={handleClose}>
+                <Tabs tabs={tabs} />
+            </Modal>
+        )
     )
 }
 
