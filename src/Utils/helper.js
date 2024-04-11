@@ -7,3 +7,13 @@ export function formatTableCategory(list) {
         id: category._id,
     }))
 }
+
+export function formatTableProduct(list) {
+    if (!list) {
+        return []
+    }
+    return list.map((product) => ({
+        ...product,
+        id: product._id,
+    }))
+}

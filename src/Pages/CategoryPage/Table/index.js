@@ -11,6 +11,7 @@ import Active from '../Modal/Active'
 
 function TableCategory(props) {
     const { handleChangePanigation, page, rows, totalPage } = props
+    console.log(rows)
     const [openCategory, setOpenCategory] = useState({ isOpen: false, category_id: '' })
     const [openDelete, setOpenDelete] = useState({ isOpen: false, category_id: '' })
     const [openActive, setOpenActive] = useState({ isOpen: false, category_id: '' })
