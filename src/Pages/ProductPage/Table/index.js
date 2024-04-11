@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import Table from '../../../Components/ui/Table/Table'
 import { Box, Typography } from '@mui/material'
 import Button from '../../../Components/ui/Button/Button'
@@ -11,68 +11,44 @@ import Rating from '@mui/material/Rating'
 const TableProductList = (props) => {
     const { handleChangePanigation, page, rows, totalPage } = props
     console.log(rows)
-    const [value, setValue] = React.useState(2)
-    // const createProductObject = (product) => {
-    //     if (!product || !product._id) {
-    //         console.error('Product or product id is not defined:', product)
-    //         return null
-    //     }
+    const [openActive, setOpenActive] = useState({ isOpen: false, category_id: '' })
 
-    //     return {
-    //         _id: product._id,
-    //         name: product.name,
-    //         email: product.email,
-    //         phone: product.phone,
-    //         code: product.code,
-    //         price: product.price,
-    //         stock: product.avaiable,
-    //         category: product.tags[0],
-    //         active: product.isActive,
-    //         description: product.description,
-    //         status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
-    //         rating: (
-    //             <Rating
-    //                 readOnly
-    //                 name="simple-controlled"
-    //                 value={value}
-    //                 size="small"
-    //                 onChange={(event, newValue) => {
-    //                     setValue(newValue)
-    //                 }}
-    //             />
-    //         ),
-    //         edit: (
-    //             <Stack direction="row">
-    //                 <Button className="" size="md" variant="outline" color="grey" icon>
-    //                     <Icon icon={APP_ICON.i_pen} />
-    //                 </Button>
-    //             </Stack>
-    //         ),
-    //         imageUrl: product.images && product.images[0] ? product.images[0].url : defaultImageUrl,
-    //     }
-    // }
+    const handleOpenActiveModal = (id) => {
+        setOpenActive({ isOpen: true, category_id: id })
+    }
+    const handleCloseActiveModal = () => {
+        setOpenActive({ ...openActive, isOpen: false })
+    }
+    const [value, setValue] = React.useState(5)
 
     const columns = [
         {
             field: 'detail',
             headerName: 'Product',
-            flex: 2,
+            flex: 1.5,
             renderCell: (params) => (
                 <Box className="group flex cursor-pointer gap-2 transition-colors">
-                    <img className="h-[50px] w-[50px] object-cover" src={params.row.imageUrl} alt="" />
+                    <img className="h-[50px] w-[50px] object-cover" src={params.row.images[0].url} alt="" />
                     <Box>
                         <Typography className="text-[13px] font-[600] text-gray-600  group-hover:text-sky-600">
-                            {params.rows?.name}
+                            {params.row?.name}
                         </Typography>
                         <Typography className="text-[11px] font-[500] text-gray-500 group-hover:text-sky-600">
-                            {params.rows?.category}
+                            {params.row?.description}
                         </Typography>
                     </Box>
                 </Box>
             ),
         },
         {
-            field: 'stock',
+            field: 'tags',
+            headerName: 'Category',
+            flex: 1,
+            headerAlign: 'center',
+            align: 'center',
+        },
+        {
+            field: 'avaiable',
             headerName: 'Stock',
             flex: 0.5,
             headerAlign: 'center',
@@ -86,19 +62,11 @@ const TableProductList = (props) => {
             headerAlign: 'center',
             align: 'center',
         },
-        {
-            field: 'status',
-            headerName: 'Status',
-            headerAlign: 'center',
-            align: 'center',
-            flex: 1,
-            renderCell: (params) => <Button className="font-500">{params.rows?.status}</Button>,
-        },
 
         {
             field: 'price',
             headerName: 'Price',
-            flex: 1,
+            flex: 0.5,
             headerAlign: 'center',
             align: 'center',
         },
@@ -108,23 +76,35 @@ const TableProductList = (props) => {
             headerAlign: 'center',
             align: 'center',
             flex: 1,
-            renderCell: (params) => <Box className="font-500 ">{params.rows?.rating}</Box>,
+            renderCell: (params) => (
+                <Rating
+                    readOnly
+                    name="read-only"
+                    value={value}
+                    onChange={(event, newValue) => {
+                        setValue(newValue)
+                    }}
+                />
+            ),
         },
         {
-            field: 'active',
-            headerName: 'Active',
+            field: 'status',
+            headerName: 'Status',
+            flex: 1,
             headerAlign: 'center',
             align: 'center',
-            flex: 0.7,
             renderCell: (params) => (
                 <Button
+                    onClick={() => {
+                        handleOpenActiveModal(params.id)
+                    }}
                     className={`cursor-pointer rounded-[20px] ${
-                        params.rows?.active
+                        params.row.isActive
                             ? 'bg-emerald-100 px-3 py-1 text-green-600'
                             : 'bg-red-100 px-3 py-1 text-red-600'
                     }`}
                 >
-                    {params.rows?.active ? 'active' : 'unactive'}
+                    {params.row.isActive ? 'active' : 'unactive'}
                 </Button>
             ),
         },
@@ -133,7 +113,7 @@ const TableProductList = (props) => {
             headerName: 'Edit',
             headerAlign: 'center',
             align: 'center',
-            flex: 1.2,
+            flex: 0.7,
             renderCell: (params) => (
                 <Box>
                     <Button size="lg" color="grey" variant="outline" icon>
