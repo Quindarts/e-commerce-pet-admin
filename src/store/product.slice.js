@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { fetchProductByParams, fetchProductBySearch } from '../services/api-product'
+import { fetchProductByFilterParams, fetchProductByParams, fetchProductBySearch } from '../services/api-product'
 
 export const TYPE_OF_RENDER = {
     ALL: 'all',
@@ -38,6 +38,15 @@ const productSlice = createSlice({
             if (parseInt(action.payload.total / state.params.limit) > 0) {
                 state.params.totalPage = parseInt(action.payload.total / state.params.limit) + 1
             } else state.params.totalPage = parseInt(action.payload.total / state.params.limit)
+        })
+        builder.addCase(fetchProductByFilterParams.fulfilled, (state, action) => {
+            state.renderTableProduct = []
+            state.renderTableProduct = [...action.payload.products]
+            state.params.page = 1
+            state.params.limit = 6
+            state.typeOfRender = TYPE_OF_RENDER.FILTER
+            state.isFetch = false
+            state.params.totalPage = parseInt(action.payload.params.totalPage)
         })
     },
 })
