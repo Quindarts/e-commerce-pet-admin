@@ -17,3 +17,8 @@ export function formatTableProduct(list) {
         id: product._id,
     }))
 }
+
+export function formatTableOrder(list) {
+    if (!list) return []
+    return list.map((order) => ({ ...order, id: order._id }))
+}

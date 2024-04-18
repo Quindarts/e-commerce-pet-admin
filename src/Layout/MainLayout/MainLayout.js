@@ -22,20 +22,17 @@ function MainLayout() {
 
     return (
         <Fragment>
-            <Box className="main_layout flex bg-[#f3f4f9] " sx={{ maxWidth: '100vw', width: '100%' }}>
-                <TemporaryDrawer className="hello" openNav={openNav} handleOpenNav={handleOpenNav} />
+            <Box className="flex bg-[#f3f4f9] " sx={{ maxWidth: '100vw', width: '100%' }} >
+                <TemporaryDrawer openNav={openNav} handleOpenNav={handleOpenNav} />
                 <Box
-                    className={`main_outlet px-[2rem] `}
+                    className={`px-[2rem] min-h-[100vh] `}
                     sx={{
                         width: '100%',
-                        minHeight: '100vh',
                         maxWidth: `${openNav ? 'calc(100% - 280px)' : 'calc(100% - 86px)'}`,
                     }}
                 >
-                    <main>
-                        <Header user={user} />
-                        <Outlet />
-                    </main>
+                    <Header user={user} />
+                    <Outlet />
                 </Box>
             </Box>
         </Fragment>
