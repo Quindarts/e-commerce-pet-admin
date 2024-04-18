@@ -113,7 +113,7 @@ const ListProductPage = () => {
                         Filter
                         <Icon className="mx-1" width={20} icon="fluent-mdl2:filter-descending" />
                     </Button>
-                    <Button className=" h-[47px]" color="primary" onClick={handleClearChoiceSearchQuery}>
+                    <Button className=" h-[47px]" color="yellow" onClick={handleClearChoiceSearchQuery}>
                         Clear
                         <Icon className="mx-1" width={20} icon="ant-design:clear-outlined" />
                     </Button>

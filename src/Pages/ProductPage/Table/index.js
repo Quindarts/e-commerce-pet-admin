@@ -12,13 +12,12 @@ import Delete from '../Modal/Delete'
 import Active from '../Modal/Active'
 import Modal from '../../../Components/ui/Modal/Modal'
 const TableProductList = (props) => {
-    const [openEdit, setOpenEdit] = useState({ isOpen: false, product_id: '' })
+    const [openEdit, setOpenEdit] = useState({ isOpen: false, product_id: '' ,size: 'lg'})
     const [openDelete, setOpenDelete] = useState({ isOpen: false, product_id: '' })
     const [openActive, setOpenActive] = useState({ isOpen: false, product_id: '' })
-
     
-    const handleOpenEditModal = (id) => {
-        setOpenEdit({ isOpen: true, product_id: id })
+    const handleOpenEditModal = (id,option) => {
+        setOpenEdit({ isOpen: true, product_id: id ,size: option})
     }
     const handleCloseEditModal = () => {
         setOpenEdit({ ...openEdit, isOpen: false })
@@ -137,7 +136,7 @@ const TableProductList = (props) => {
                 <Box>
                     
                     <Button  onClick={() => {
-                            handleOpenEditModal(params.id)
+                            handleOpenEditModal(params.id,'lg')
                         }} size="lg" color="grey" variant="outline" icon>
                         <Icon icon={APP_ICON.i_eye_open} className="text-sky-500" />
                     </Button>
@@ -163,7 +162,8 @@ const TableProductList = (props) => {
                     handleChangePanigation={handleChangePanigation}
                 />
             </Box>
-            <Modal open={openEdit.isOpen} onClose={handleCloseEditModal}>
+            
+            <Modal maxWidth={openEdit.size} open={openEdit.isOpen} onClose={handleCloseEditModal}>
                 <Edit
                     sx={{ width: '100%' }}
                     product_id={openEdit.product_id}
