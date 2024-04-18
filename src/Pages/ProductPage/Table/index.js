@@ -7,18 +7,37 @@ import { Icon } from '@iconify/react'
 import { Stack } from '@mui/material'
 import { BadgeWrapper } from '../../../Components/ui/Badge/Badge'
 import Rating from '@mui/material/Rating'
-
+import Edit from '../Modal/Edit'
+import Delete from '../Modal/Delete'
+import Active from '../Modal/Active'
+import Modal from '../../../Components/ui/Modal/Modal'
 const TableProductList = (props) => {
-    const { handleChangePanigation, page, rows, totalPage } = props
-    console.log(rows)
-    const [openActive, setOpenActive] = useState({ isOpen: false, category_id: '' })
+    const [openEdit, setOpenEdit] = useState({ isOpen: false, product_id: '' })
+    const [openDelete, setOpenDelete] = useState({ isOpen: false, product_id: '' })
+    const [openActive, setOpenActive] = useState({ isOpen: false, product_id: '' })
 
+    
+    const handleOpenEditModal = (id) => {
+        setOpenEdit({ isOpen: true, product_id: id })
+    }
+    const handleCloseEditModal = () => {
+        setOpenEdit({ ...openEdit, isOpen: false })
+    }
+    const handleOpenDeleteModal = (id) => {
+        setOpenDelete({ isOpen: true, product_id: id })
+    }
+    const handleCloseDeleteModal = () => {
+        setOpenDelete({ ...openDelete, isOpen: false })
+    }
     const handleOpenActiveModal = (id) => {
-        setOpenActive({ isOpen: true, category_id: id })
+        setOpenActive({ isOpen: true, product_id: id })
     }
     const handleCloseActiveModal = () => {
         setOpenActive({ ...openActive, isOpen: false })
     }
+
+    const { handleChangePanigation, page, rows, totalPage } = props
+    console.log(rows)
     const [value, setValue] = React.useState(5)
 
     const columns = [
@@ -116,10 +135,13 @@ const TableProductList = (props) => {
             flex: 0.7,
             renderCell: (params) => (
                 <Box>
-                    <Button size="lg" color="grey" variant="outline" icon>
+                    
+                    <Button  onClick={() => {
+                            handleOpenEditModal(params.id)
+                        }} size="lg" color="grey" variant="outline" icon>
                         <Icon icon={APP_ICON.i_eye_open} className="text-sky-500" />
                     </Button>
-                    <Button size="lg" color="grey" variant="outline" icon>
+                    <Button onClick={() => handleOpenDeleteModal(params.id)} size="lg" color="grey" variant="outline" icon>
                         <Icon icon="mdi:bin-outline" className="text-red-400" />
                     </Button>
                 </Box>
@@ -141,6 +163,19 @@ const TableProductList = (props) => {
                     handleChangePanigation={handleChangePanigation}
                 />
             </Box>
+            <Modal open={openEdit.isOpen} onClose={handleCloseEditModal}>
+                <Edit
+                    sx={{ width: '100%' }}
+                    product_id={openEdit.product_id}
+                    handleCloseEditModal={handleCloseEditModal}
+                />
+            </Modal>
+            <Modal open={openDelete.isOpen} onClose={handleCloseDeleteModal}>
+                <Delete product_id={openDelete.product_id} handleCloseDeleteModal={handleCloseDeleteModal} />
+            </Modal>
+            <Modal open={openActive.isOpen} onClose={handleCloseActiveModal}>
+                <Active product_id={openActive.product_id} handleCloseActiveModal={handleCloseActiveModal} />
+            </Modal>
         </Fragment>
     )
 }

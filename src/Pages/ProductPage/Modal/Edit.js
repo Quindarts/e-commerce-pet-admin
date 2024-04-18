@@ -6,7 +6,7 @@ import * as yup from 'yup'
 import Button from '../../../Components/ui/Button/Button'
 import Textfield from '../../../Components/ui/Textfield/Textfield'
 
-const EditModal = ({
+const Edit = ({
     isEditModalOpen,
     handleCloseEditModal,
     currentProduct,
@@ -215,4 +215,4 @@ const EditModal = ({
     )
 }
 
-export default EditModal
+export default Edit
