@@ -10,7 +10,7 @@ import Rating from '@mui/material/Rating'
 
 const TableProductList = (props) => {
     const { handleChangePanigation, page, rows, totalPage } = props
-    console.log(rows)
+
     const [openActive, setOpenActive] = useState({ isOpen: false, category_id: '' })
 
     const handleOpenActiveModal = (id) => {

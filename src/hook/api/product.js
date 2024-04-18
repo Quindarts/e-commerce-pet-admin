@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchProductByParams, fetchProductBySearch } from '../../services/api-product'
+import { fetchProductByFilterParams, fetchProductByParams, fetchProductBySearch } from '../../services/api-product'
 import { enqueueSnackbar } from 'notistack'
 import { setFetchingProduct } from '../../store/product.slice' // Update import path
 import { SEARCH_ENUM } from '../../Pages/ProductPage/List'
@@ -15,7 +15,6 @@ const useProduct = () => {
     const dispatch = useDispatch()
 
     const handleGetAllProductByParams = async (offset, limit) => {
-        console.log(offset)
         dispatch(setFetchingProduct(true))
         const resultAction = await dispatch(fetchProductByParams({ offset, limit }))
 
@@ -53,6 +52,17 @@ const useProduct = () => {
         }
     }
 
+    const handleFilterProduct = async (filterParams) => {
+        dispatch(setFetchingProduct(true))
+        const resultAction = await dispatch(fetchProductByFilterParams(filterParams))
+        if (fetchProductByFilterParams.rejected.match(resultAction)) {
+            enqueueSnackbar(resultAction.payload, {
+                variant: 'error',
+            })
+            dispatch(setFetchingProduct(false))
+        }
+    }
+
     return {
         renderTableProduct,
         typeOfRender,
@@ -62,6 +72,7 @@ const useProduct = () => {
         limit,
         handleGetAllProductByParams,
         handleSearchProduct,
+        handleFilterProduct,
     }
 }
 
