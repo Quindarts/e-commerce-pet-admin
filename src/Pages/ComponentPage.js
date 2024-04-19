@@ -417,7 +417,7 @@ function ComponentPage() {
             <Button onClick={handleResetClick}>Rest</Button>
             <h1 className="mt-3 font-bold">PopupUser</h1>
             <Box>
-                <PopupUser user={user} />
+                {/* <PopupUser user={user} /> */}
             </Box>
             <h1 className="mt-3 font-bold">PopupServ</h1>
             <Box>

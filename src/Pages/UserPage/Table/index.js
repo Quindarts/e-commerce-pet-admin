@@ -13,6 +13,7 @@ import Active from '../Modal/Active'
 
 function TableUserManager(props) {
     const { handleChangePanigation, currentPage = 1, className = '', rows, totalPage, hasPanigation } = props
+    console.log(rows)
     const [openEditRole, setOpenEditRole] = useState({ isOpen: false, user_id: '' })
     const [openEditUser, setOpenEditUser] = useState({ isOpen: false, user_id: '' })
     const [openDelete, setOpenDelete] = useState({ isOpen: false, user_id: '' })
@@ -52,7 +53,7 @@ function TableUserManager(props) {
                     <Box>
                         <Avatar
                             size="md"
-                            src="https://media.istockphoto.com/id/1247693979/photo/close-up-portrait-of-young-smiling-handsome-man-wearing-blue-shirt-and-glasses-feeling.jpg?s=612x612&w=0&k=20&c=PgpEGomO4XLVvRHlFxuqneqm0E68_zYkXVqzr5WN_eo="
+                            src={params.row.avatar}
                         />
                     </Box>
                     <Box>
@@ -82,7 +83,7 @@ function TableUserManager(props) {
         },
 
         {
-            field: 'dateOfBirth',
+            field: 'date',
             headerName: 'Date',
             headerAlign: 'center',
             align: 'center',
@@ -90,7 +91,7 @@ function TableUserManager(props) {
         },
 
         {
-            field: 'phoneNumber',
+            field: 'number',
             headerName: 'Phone Number',
             headerAlign: 'center',
             align: 'center',

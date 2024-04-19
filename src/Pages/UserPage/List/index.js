@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Table from '../../../Components/ui/Table/Table'
 import { useNavigate } from 'react-router-dom'
 import TableUserManager from '../Table'
@@ -10,6 +10,7 @@ import Button from '../../../Components/ui/Button/Button'
 import { APP_ICON, APP_ROUTER } from '../../../Utils/Constants'
 import { Icon } from '@iconify/react'
 import { CustomListUser } from './style'
+import client from '../../../services/api-context'
 
 const SEARCH_ENUM_USER = {
     NAME: 'name',
@@ -35,23 +36,32 @@ function ListUserPage() {
     const handleQuery = (event) => {
         setKeywords(event.target.value)
     }
-    const rows = [
-        {
-            id: 1,
-            userName: 'ownerPet123',
-            password: 'U2FsdGVkX18+Os3sN3O6JnLByZY81zBCUVIcJgJOCYU=',
-            email: 'quag82thcspb@gmail.com',
-            first_name: 'Le',
-            last_name: 'Minh Quang',
-            phoneNumber: '0364835692',
-            dateOfBirth: '19/02/2003',
-            address: 'Go Vap, HCM',
-            rewardPoints: 0,
-            role: 'owner',
-            isActive: true,
-            __v: 0,
-        },
-    ]
+
+    const [users, setUsers] = useState([])
+    const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        const fetchUsers = async () => {
+            setLoading(true)
+            try {
+                const response = await client.get('/users?limit=10&offset=1')
+                console.log(response)
+                setUsers(response.listUser.map((user) => ({ ...user, id: user._id })))
+                console.log(users)
+            } catch (error) {
+                console.error('Failed to fetch users:', error)
+                if (error.response) {
+                    console.error('Response data:', error.response.data)
+                    console.error('Response status:', error.response.status)
+                }
+            } finally {
+                setLoading(false)
+            }
+        }
+
+        fetchUsers()
+    }, [])
+
     return (
         <CustomListUser className="flew w-full flex-wrap">
             <Title icon="simple-line-icons:user">User Table Manager</Title>
@@ -90,7 +100,27 @@ function ListUserPage() {
                 </Box>
             </Box>
             <Box className="my-5 w-full">
-                <TableUserManager rows={rows} page={page} handleChangePanigation={handleChangePanigation} />
+                <TableUserManager
+                    rows={users.map((user) => ({
+                        id: user.id,
+                        first_name: user.first_name,
+                        last_name: user.last_name,
+                        email:user.email,
+                        address: user.address,
+                        active: user.isActive,
+                        avatar: user.avatar,
+                        role:user.role,
+                        date:user.date,
+                        number:user.number,
+                        edit: (
+                            <Button className="" size="md" variant="outline" color="grey" icon>
+                                <Icon icon={APP_ICON.i_pen} />
+                            </Button>
+                        ),
+                    }))}
+                    page={page}
+                    handleChangePanigation={handleChangePanigation}
+                />
             </Box>
         </CustomListUser>
     )
