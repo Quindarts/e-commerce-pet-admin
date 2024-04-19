@@ -27,7 +27,7 @@ function ListMenu(props) {
             <ListItemButton
                  onClick={() => {
                     navigate(APP_ROUTER.PRODUCT_LIST)
-                    setOpenCategory(!openProduct)
+                    setOpenProduct(!openProduct)
                 }}
             >
                 <ListItemIcon>
@@ -45,7 +45,6 @@ function ListMenu(props) {
                         <ListItemButton
                             onClick={() => {
                                 navigate(APP_ROUTER.ADD_PRODUCT)
-                                setOpenCategory(!openProduct)
                             }}
                             sx={{ pl: 4 }}
                         >
@@ -57,7 +56,6 @@ function ListMenu(props) {
                         <ListItemButton
                             onClick={() => {
                                 navigate(APP_ROUTER.PRODUCT_LIST)
-                                setOpenCategory(!openProduct)
                             }}
                             sx={{ pl: 4 }}
                         >
@@ -91,7 +89,6 @@ function ListMenu(props) {
                         <ListItemButton
                             onClick={() => {
                                 navigate(APP_ROUTER.CATEGORY_ADD)
-                                setOpenCategory(!openCategory)
                             }}
                             sx={{ pl: 4 }}
                         >
@@ -103,7 +100,6 @@ function ListMenu(props) {
                         <ListItemButton
                             onClick={() => {
                                 navigate(APP_ROUTER.CATEGORY_LIST)
-                                setOpenCategory(!openCategory)
                             }}
                             sx={{ pl: 4 }}
                         >
@@ -182,7 +178,6 @@ function ListMenu(props) {
                         <ListItemButton
                             onClick={() => {
                                 navigate(APP_ROUTER.USER_ADD)
-                                setOpenCategory(!openUser)
                             }}
                             sx={{ pl: 4 }}
                         >
@@ -197,7 +192,6 @@ function ListMenu(props) {
                         <ListItemButton
                             onClick={() => {
                                 navigate(APP_ROUTER.USER_LIST)
-                                setOpenCategory(!openUser)
                             }}
                             sx={{ pl: 4 }}
                         >
