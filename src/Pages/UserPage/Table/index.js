@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import Table from '../../../Components/ui/Table/Table'
 import { Box, Typography } from '@mui/material'
 import Button from '../../../Components/ui/Button/Button'
@@ -10,17 +10,26 @@ import Delete from '../Modal/Delete'
 import EditUser from '../Modal/EditUser'
 import Modal from '../../../Components/ui/Modal/Modal'
 import Active from '../Modal/Active'
+import client from '../../../services/api-context'
 
 function TableUserManager(props) {
-    const { handleChangePanigation, currentPage = 1, className = '', rows, totalPage, hasPanigation } = props
-    console.log(rows)
+    const {
+        handleChangePanigation,
+        handleGetUsersByParams,
+        currentPage,
+        className = '',
+        rows,
+        totalPage,
+        hasPanigation,
+    } = props
+    // console.log(rows)
     const [openEditRole, setOpenEditRole] = useState({ isOpen: false, user_id: '' })
     const [openEditUser, setOpenEditUser] = useState({ isOpen: false, user_id: '' })
     const [openDelete, setOpenDelete] = useState({ isOpen: false, user_id: '' })
     const [openActive, setOpenActive] = useState({ isOpen: false, user_id: '' })
 
-    const handleOpenEditUserModal = (id) => {
-        setOpenEditUser({ isOpen: true, user_id: id })
+    const handleOpenEditUserModal = (userId, addressId) => {
+        setOpenEditUser({ isOpen: true, user_id: userId, address_id: addressId })
     }
     const handleCloseEditUserModal = () => {
         setOpenEditUser({ ...openEditUser, isOpen: false })
@@ -43,6 +52,7 @@ function TableUserManager(props) {
     const handleCloseActiveModal = () => {
         setOpenActive({ ...openActive, isOpen: false })
     }
+   
     const columns = [
         {
             field: 'details',
@@ -51,10 +61,7 @@ function TableUserManager(props) {
             renderCell: (params) => (
                 <Box className="flex gap-2">
                     <Box>
-                        <Avatar
-                            size="md"
-                            src={params.row.avatar}
-                        />
+                        <Avatar size="md" src={params.row.avatar?.url} />
                     </Box>
                     <Box>
                         <Typography className="text-sm font-[700] text-slate-600">
@@ -64,6 +71,14 @@ function TableUserManager(props) {
                     </Box>
                 </Box>
             ),
+        },
+        {
+            field: 'gender',
+            headerName: 'Gender',
+            flex: 1,
+            headerAlign: 'center',
+            align: 'center',
+            renderCell: (params) => <Box className=" text-[14px] font-[500] text-slate-500">{params.row.gender}</Box>,
         },
         {
             field: 'email',
@@ -107,12 +122,12 @@ function TableUserManager(props) {
                 <Button
                     onClick={() => handleOpenActiveModal(params.id)}
                     className={`cursor-pointer rounded-[20px] ${
-                        params.row.isActive
+                        params.row.active
                             ? 'bg-emerald-100 px-3 py-1 text-green-600'
                             : 'bg-red-100 px-3 py-1 text-red-600'
                     }`}
                 >
-                    {params.row.isActive ? 'active' : 'unactive'}
+                    {params.row.active ? 'active' : 'unactive'}
                 </Button>
             ),
         },
@@ -123,6 +138,7 @@ function TableUserManager(props) {
             align: 'center',
             flex: 1,
             renderCell: (params) => (
+              
                 <Box>
                     <Button
                         onClick={() => handleOpenEditRoleModal(params.id)}
@@ -171,16 +187,35 @@ function TableUserManager(props) {
             </Box>
 
             <Modal open={openEditRole.isOpen} onClose={handleCloseEditRoleModal}>
-                <EditRole handleCloseEditRoleModal={handleCloseEditRoleModal} id={openEditRole.user_id} />
+                <EditRole
+                    handleGetUsersByParams={handleGetUsersByParams}
+                    handleCloseEditRoleModal={handleCloseEditRoleModal}
+                    id={openEditRole.user_id}
+                />
             </Modal>
             <Modal open={openDelete.isOpen} onClose={handleCloseDeleteModal}>
-                <Delete handleCloseDeleteModal={handleCloseDeleteModal} id={openDelete.user_id} />
+                <Delete
+                    handleGetUsersByParams={handleGetUsersByParams}
+                    handleCloseDeleteModal={handleCloseDeleteModal}
+                    id={openDelete.user_id}
+                />
             </Modal>
             <Modal open={openEditUser.isOpen} onClose={handleCloseEditUserModal}>
-                <EditUser handleCloseEditUserModal={handleCloseEditUserModal} id={openEditUser.user_id} />
+                <EditUser
+                    handleGetUsersByParams={handleGetUsersByParams}
+                    handleCloseEditUserModal={handleCloseEditUserModal}
+                    id={openEditUser.user_id}
+             
+                />
             </Modal>
             <Modal open={openActive.isOpen} onClose={handleCloseActiveModal}>
-                <Active handleCloseActiveModal={handleCloseActiveModal} id={openActive.user_id} />
+                <Active
+                    currentPage={currentPage}
+                    totalPage={totalPage}
+                    handleGetUsersByParams={handleGetUsersByParams}
+                    handleCloseActiveModal={handleCloseActiveModal}
+                    id={openActive.user_id}
+                />
             </Modal>
         </Fragment>
     )

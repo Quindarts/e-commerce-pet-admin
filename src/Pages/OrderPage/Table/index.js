@@ -7,98 +7,68 @@ import { Icon } from '@iconify/react'
 import { Stack } from '@mui/material'
 import { BadgeWrapper } from '../../../Components/ui/Badge/Badge'
 import Rating from '@mui/material/Rating'
-import OrderDetails from '../Modal/OrderDetails'
-const OrderPageTable = (props) => {
-    const { handleChangePanigation, page, rows, totalPage, products } = props
+import OrderDetails from '../Modal/OrderDetails/index.js'
+import Modal from '../../../Components/ui/Modal/Modal.js'
+
+const TableOrder = (props) => {
+    const { handleChangePanigation, renderTableOrder, totalPage, page } = props
     const [value, setValue] = React.useState(2)
-    const [openOrderModal, setOpenOrderModal] = useState({ isOpen: false, size: 'sm' })
-    const handleOpenOrderDetails = (option) => {
-        setOpenOrderModal({ isOpen: true, size: option })
+    const [openOrderModal, setOpenOrderModal] = useState({ isOpen: false, order_id: '' })
+
+    const handleOpenOrderDetails = (id) => {
+        setOpenOrderModal({ isOpen: true, order_id: id })
     }
 
     const handleCloseOrderDetails = () => {
         setOpenOrderModal({ ...openOrderModal, isOpen: false })
     }
-    const createProductObject = (product) => {
-        if (!product || !product.id) {
-            console.error('Product or product id is not defined:', product)
-            return null
-        }
-
-        return {
-            id: product.id,
-            name: product.name,
-            email: product.email,
-            phone: product.phone,
-            code: product.code,
-            price: product.price,
-            stock: product.avaiable,
-            category: product.tags[0],
-            active: product.isActive,
-            description: product.description,
-            status: <BadgeWrapper badgeContent={'Out of Stock'} shape="square" type="red_text"></BadgeWrapper>,
-            rating: (
-                <Rating
-                    readOnly
-                    name="simple-controlled"
-                    value={value}
-                    size="small"
-                    onChange={(event, newValue) => {
-                        setValue(newValue)
-                    }}
-                />
-            ),
-            edit: (
-                <Stack direction="row">
-                    <Button
-                        onClick={() => handleOpenOrderDetails('md')}
-                        className=""
-                        size="md"
-                        variant="outline"
-                        color="grey"
-                        icon
-                    >
-                        <Icon icon={APP_ICON.i_pen} />
-                    </Button>
-                </Stack>
-            ),
-            imageUrl: product.images && product.images[0] ? product.images[0].url : defaultImageUrl,
-        }
-    }
     const columns = [
         {
             field: 'detail',
             headerName: 'Order Number',
-            flex: 2,
+            flex: 1,
             renderCell: (params) => (
                 <Box className="flex gap-3">
-                    <Typography className="text-[14px] font-bold text-gray-600">{params.row.name}</Typography>
+                    <Typography className="text-[14px] font-bold text-gray-600">{params.row.code}</Typography>
                 </Box>
             ),
         },
         {
-            field: 'category',
+            field: 'shipping_detail.fullName',
             headerName: 'Customer',
             headerAlign: 'center',
             align: 'center',
-            flex: 1,
+            flex: 2,
 
-            renderCell: (params) => <Box className="text-[14px] text-gray-600">{params.formattedValue}</Box>,
+            renderCell: (params) => (
+                <Box className="text-[14px]  text-gray-600">
+                    <span className="font-[600]">FullName : </span>
+                    {'  '}
+                    <span className="font-500 text-gray-700">{params.row.shipping_detail.fullName} </span>
+                    <Box>
+                        <span className="font-[600]">Phone : </span>
+                        {'  '}
+                        <span className="font-500 text-gray-700">{params.row.shipping_detail.phone} </span>
+                    </Box>
+                </Box>
+            ),
         },
         {
-            field: 'stock',
+            field: 'date',
             headerName: 'Date',
             flex: 1,
             headerAlign: 'center',
             align: 'center',
+            renderCell: (params) => <Box>{params.row.dateCreated}</Box>,
         },
 
         {
-            field: 'code',
-            headerName: 'Total',
+            field: 'totalOrderItem',
+            headerName: 'Total Order Item',
             flex: 1.2,
             headerAlign: 'center',
             align: 'center',
+            renderCell: (params) => <Box>{params.row.totalOrderItem}</Box>,
         },
         {
             field: 'status',
@@ -115,26 +85,44 @@ const OrderPageTable = (props) => {
             headerAlign: 'center',
             align: 'center',
             flex: 1,
-            renderCell: (params) => <Box className="font-500">{params.row.edit}</Box>,
+            renderCell: (params) => (
+                <Box>
+                    <Button
+                        onClick={() => {
+                            handleOpenOrderDetails(params.row.id)
+                        }}
+                        size="lg"
+                        color="grey"
+                        variant="outline"
+                        icon
+                    >
+                        <Icon icon={APP_ICON.i_pen} className="text-sky-500" />
+                    </Button>
+                </Box>
+            ),
         },
     ]
-    const defaultImageUrl = ''
     return (
         <>
             <Table
-                className=" w-full"
+                className="w-full"
                 totalPage={totalPage}
                 pageSize={6}
                 currentPage={page}
-                hasCheckbox
                 hasPanigation
                 columns={columns}
-                rows={products.map(createProductObject)}
+                rows={renderTableOrder}
                 handleChangePanigation={handleChangePanigation}
             />
-            <OrderDetails openOrderModal={openOrderModal} setOpenOrderModal={setOpenOrderModal} />
+            <Modal onClose={handleCloseOrderDetails} open={openOrderModal.isOpen}>
+                <OrderDetails
+                    order_id={openOrderModal.order_id}
+                    handleOpenOrderDetails={handleOpenOrderDetails}
+                    handleCloseOrderDetails={handleCloseOrderDetails}
+                />
+            </Modal>
         </>
     )
 }
 
-export default OrderPageTable
+export default TableOrder

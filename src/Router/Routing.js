@@ -3,7 +3,6 @@ import ComponentPage from '../Pages/ComponentPage'
 import MainLayout from '../Layout/MainLayout/MainLayout'
 import { APP_ROUTER } from '../Utils/Constants'
 import HomePage from '../Pages/Home/HomePage'
-import OrderPage from '../Pages/OrderPage/OrderPage'
 import AuthLayout from '../Layout/AuthLayout/AuthLayout'
 import { loaderUser } from './loader/loaderAuth'
 import CategoryPage from '../Pages/CategoryPage/index'
@@ -20,6 +19,8 @@ import ListProductPage from '../Pages/ProductPage/List'
 import AddProductPage from '../Pages/ProductPage/Add'
 import CreateInvoice from '../Pages/CreateInvoicePage/CreateInvoice'
 import PrivateRoutes from './PrivateRoute'
+import OrderPage from '../Pages/OrderPage'
+import ListOrderPage from '../Pages/OrderPage/List/OrderPage'
 const router = createBrowserRouter([
     {
         path: APP_ROUTER.INDEX,
@@ -64,6 +65,13 @@ const router = createBrowserRouter([
             {
                 path: APP_ROUTER.ORDER,
                 element: <OrderPage />,
+                children: [
+                    {
+                        path: APP_ROUTER.ORDER_LIST,
+                        element: <ListOrderPage />,
+                        index: true,
+                    },
+                ],
             },
 
             {

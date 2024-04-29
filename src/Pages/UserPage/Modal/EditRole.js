@@ -14,10 +14,6 @@ function EditRole(props) {
     const [loading, setLoading] = useState(false)
     const ROLE_DROP_VALUE = [
         {
-            title: 'Admin',
-            value: ROLE.ADMIN,
-        },
-        {
             title: 'User',
             value: ROLE.USER,
         },
@@ -28,6 +24,10 @@ function EditRole(props) {
         {
             title: 'Owner',
             value: ROLE.OWNER,
+        },
+        {
+            title: 'Admin',
+            value: ROLE.ADMIN,
         },
     ]
 
@@ -51,12 +51,15 @@ function EditRole(props) {
 
         fetchUsers()
     }, [])
-    const [sortedRoles, setSortedRoles] = useState(ROLE_DROP_VALUE)
+    const [sortedRoles, setSortedRoles] = useState(ROLE_DROP_VALUE) 
     useEffect(() => {
         if (user && user.role) {
+            console.log(user.role)
             const userRoleItem = ROLE_DROP_VALUE.find((item) => item.value === user.role)
-            const otherRoles = ROLE_DROP_VALUE.filter((item) => item.value !== user.role)
-            setSortedRoles([userRoleItem, ...otherRoles])
+            if (userRoleItem) {
+                const otherRoles = ROLE_DROP_VALUE.filter((item) => item.value !== user.role)
+                setSortedRoles([userRoleItem, ...otherRoles])
+            }
         }
     }, [user])
 

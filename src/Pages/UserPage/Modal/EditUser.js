@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, alertClasses } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { Form, Formik } from 'formik'
 import Textfield from '../../../Components/ui/Textfield/Textfield'
@@ -11,45 +11,115 @@ import { enqueueSnackbar } from 'notistack'
 import client from '../../../services/api-context'
 import { Fragment } from 'react'
 import { CircularProgress } from '@mui/material'
+import Calendar from '../../../Components/ui/Calendar'
+import dayjs from 'dayjs'
+
 export const SEARCH_ENUM = {
     ADMIN: 'admin',
     USER: 'user',
     WAREHOUSE: 'warehouse',
     OWNER: 'owner',
 }
+const minDate = dayjs().subtract(60, 'year')
+const maxDate = dayjs().subtract(18, 'year')
 const list = [
     { title: 'User', value: SEARCH_ENUM.USER },
     { title: 'Admin', value: SEARCH_ENUM.ADMIN },
     { title: 'Warehouse', value: SEARCH_ENUM.WAREHOUSE },
     { title: 'Owner', value: SEARCH_ENUM.OWNER },
 ]
+const validationSchema = yup.object({
+    firstName: yup
+        .string()
+        .required('First name is required')
+        .matches(
+            /^[a-zA-ZàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ\s]+$/,
+            'First name should only contain alphabets',
+        ),
+
+    lastName: yup
+        .string()
+        .required('Last name is required')
+        .matches(
+            /^[a-zA-ZàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ\s]+$/,
+            'Last name should only contain alphabets',
+        ),
+    email: yup.string().required('Email is required').email('Email is invalid'),
+    ward: yup
+        .string()
+        .required('Ward is required')
+        .matches(
+            /^[a-zA-ZàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ\s]+$/,
+            'Ward should only contain alphabets',
+        ),
+    district: yup
+        .string()
+        .required('Required')
+        .matches(
+            /^[a-zA-ZàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ\s0-9]+$/,
+            'District should only contain alphabets',
+        ),
+
+    detail: yup
+        .string()
+        .required('Required')
+        .matches(
+            /^[a-zA-ZàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ\s0-9/,]+$/,
+            'Detail should only contain alphabets',
+        ),
+    phone: yup
+        .string()
+        .matches(/^0\d{9}$/, 'Must be 10 digits and start with 0')
+        .required('Required'),
+    province: yup
+        .string()
+        .required('Province is required')
+        .matches(
+            /^[a-zA-ZàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ\s]+$/,
+            'Province should only contain alphabets',
+        ),
+    birthday: yup
+        .date()
+        // .min(new Date(new Date().setFullYear(new Date().getFullYear() - 60)), 'You must be under 60 years old')
+        // .max(new Date(new Date().setFullYear(new Date().getFullYear() - 18)), 'You must be at least 18 years old')
+        .required('Required'),
+})
+
 function EditUser(props) {
-    const { handleCloseEditUserModal, id } = props
+    const { handleCloseEditUserModal, handleGetUsersByParams, id } = props
     const [page, setPage] = useState(1)
     const [keywords, setKeywords] = useState('')
     const [typeSearch, setTypeSearch] = useState(SEARCH_ENUM.NAME)
     const [avatarSrc, setAvatarSrc] = useState('https://uko-react.vercel.app/static/avatar/001-man.svg')
     const [user, setUser] = useState(null)
+    const [address, setAddress] = useState(null)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        const fetchUsers = async () => {
+        const getUserById = async () => {
             setLoading(true)
             try {
                 const response = await client.get(`/users/${id}`)
                 setUser(response.user)
+                const addresses = await client.get(`/addresses/${response.user?.address[0]?._id}`)
+                console.log(response)
+                console.log(addresses)
+                setAddress(addresses.address)
             } catch (error) {
-                console.error('Failed to fetch users:', error)
-                if (error.response) {
+                console.error('Failed to fetch:', error)
+                if (error.response || error.addresses) {
                     console.error('Response data:', error.response.data)
                     console.error('Response status:', error.response.status)
+                    console.error('Response data:', error.addresses.data)
+                    console.error('Response status:', error.addresses.status)
                 }
             } finally {
                 setLoading(false)
             }
         }
-        fetchUsers()
+        getUserById()
     }, [])
+
     const [sortedRoles, setSortedRoles] = useState(list)
     useEffect(() => {
         if (user && user.role) {
@@ -70,37 +140,30 @@ function EditUser(props) {
             reader.readAsDataURL(file)
         }
     }
-    const validationSchema = yup.object({
-        firstName: yup
-            .string()
-            .required('First name is required')
-            .matches(/^[a-zA-Z]+$/, 'First name should only contain alphabets'),
 
-        lastName: yup
-            .string()
-            .required('Last name is required')
-            .matches(/^[a-zA-Z]+$/, 'Last name should only contain alphabets'),
+    const [error, setError] = React.useState(null)
 
-        email: yup.string().required('Email is required').email('Email is invalid'),
-        location: yup.string().required('Required'),
-        phone: yup
-            .string()
-            .matches(/^[0-9]+$/, 'Must be only digits')
-            .required('Required'),
-        city: yup
-            .string()
-            .required('Required')
-            .matches(/^[a-zA-Z]+$/, 'City should only contain alphabets'),
-        birthday: yup
-            .date()
-            .min(new Date(new Date().setFullYear(new Date().getFullYear() - 60)), 'You must be under 60 years old')
-            .max(new Date(new Date().setFullYear(new Date().getFullYear() - 18)), 'You must be at least 18 years old')
-            .required('Required'),
-    })
-    const handleSubmitUser = () => {}
+    const errorMessage = React.useMemo(() => {
+        switch (error) {
+            case 'maxDate': {
+                return 'User need to be at least 18 years olds'
+            }
+            case 'minDate': {
+                return 'User need to be at most 60 years olds'
+            }
+
+            case 'invalidDate': {
+                return 'Your date is not valid'
+            }
+
+            default: {
+                return ''
+            }
+        }
+    }, [error])
     return (
         <Fragment>
-            {user ? (
+            {address ? (
                 <Box mx={2} mb={3} mt={1}>
                     <Typography
                         style={{ fontWeight: 'bold', fontSize: '20px', color: '#374151 ' }}
@@ -147,18 +210,80 @@ function EditUser(props) {
                     <Box>
                         <Formik
                             initialValues={{
-                                firstName: `${user?.first_name}`,
-                                lastName: `${user?.last_name}`,
-                                email: `${user?.email}`,
-                                location: `${user?.address}`,
-                                phone: `${user?.number}`,
-                                city: `${user?.address}`,
-                                birthday: `${user?.date}`,
+                                firstName: user.first_name || '',
+                                lastName: user.last_name || '',
+                                email: user.email || '',
+                                detail: address.detail || '',
+                                ward: address?.ward?.wardName || '',
+                                district: address?.district?.districtName || '',
+                                province: address?.province?.provinceName || '',
+                                phone: user.phone || '',
+                                birthday: dayjs(user.dateOfBirth) || '',
                             }}
                             validationSchema={validationSchema}
-                            onSubmit={handleSubmitUser}
+                            onSubmit={(values, { setSubmitting }) => {
+                                const addressId = user.address[0]._id
+                                console.log(values.birthday)
+                                const userData = {
+                                    _id: user._id,
+                                    first_name: values.firstName,
+                                    last_name: values.lastName,
+                                    email: values.email,
+                                    phone: values.phone,
+                                    dateOfBirth: values.birthday,
+                                }
+
+                                console.log(values.birthday)
+                                console.log(userData.dateOfBirth)
+                                const addressData = {
+                                    detail: values.detail,
+                                    ward: {
+                                        wardName: values.ward,
+                                    },
+                                    district: {
+                                        districtName: values.district,
+                                    },
+                                    province: {
+                                        provinceName: values.province,
+                                    },
+                                    country: 'VietNam',
+                                }
+                                console.log('value.birthday', values.birthday)
+                                const userRequest = client.post(`/users/${id}`, userData).catch((error) => {
+                                    console.log(userData)
+                                    console.log(id)
+                                    console.error('User request error:', error)
+                                    throw error
+                                })
+                                const addressRequest = client
+                                    .put(`/addresses/${addressId}`, addressData)
+                                    .catch((error) => {
+                                        console.error('Address request error:', error)
+                                        throw error
+                                    })
+                                Promise.all([userRequest, addressRequest])
+                                    .then((responses) => {
+                                        const userResponse = responses[0]
+                                        const addressResponse = responses[1]
+                                        console.log(userResponse)
+                                        console.log(addressResponse)
+                                        setSubmitting(false)
+                                        handleGetUsersByParams()
+                                        handleCloseEditUserModal()
+                                        enqueueSnackbar('Update successful', {
+                                            variant: 'success',
+                                        })
+                                    })
+                                    .catch((error) => {
+                                        console.error(error)
+                                        setSubmitting(false)
+                                        enqueueSnackbar('Fail to update', {
+                                            variant: 'error',
+                                        })
+                                    })
+                            }}
                         >
-                            {({ handleBlur, handleChange, values, errors, touched }) => (
+                            {({ setFieldValue, handleBlur, handleChange, values, errors, touched }) => (
                                 <Form>
                                     <Box width="100%" display={'flex'} gap={2}>
                                         <Box my={1} flex={1}>
@@ -193,6 +318,44 @@ function EditUser(props) {
                                     <Box width="100%" display={'flex'} gap={2}>
                                         <Box my={1} flex={1}>
                                             <Textfield
+                                                placeholder="0123456789"
+                                                id="phone"
+                                                type="text"
+                                                label="Phone"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.phone}
+                                                helperText={touched.phone && errors.phone ? errors.phone : ''}
+                                                error={touched.phone && errors.phone ? true : false}
+                                            />
+                                        </Box>
+                                        <Box my={1} flex={1}>
+                                            <Calendar
+                                                showDaysOutsideCurrentMonth
+                                                className="hover:border-white"
+                                                minDate={minDate}
+                                                maxDate={maxDate}
+                                                id="birthday"
+                                                label="Birthday"
+                                                value={values.birthday}
+                                                onBlur={handleBlur}
+                                                onChange={(newValue) => {
+                                                    setFieldValue('birthday', newValue)
+                                                }}
+                                                error={touched.birthday && errors.birthday ? true : false}
+                                                onError={(newError) => setError(newError)}
+                                                slotProps={{
+                                                    textField: {
+                                                        helperText: errorMessage,
+                                                    },
+                                                }}
+                                                helperText={touched.birthday && errors.birthday ? errors.birthday : ''}
+                                            />
+                                        </Box>
+                                    </Box>
+                                    <Box width="100%" display={'flex'} gap={2}>
+                                        <Box my={1} flex={1}>
+                                            <Textfield
                                                 placeholder="example@gmail.com"
                                                 id="email"
                                                 type="email"
@@ -206,58 +369,58 @@ function EditUser(props) {
                                         </Box>
                                         <Box my={1} flex={1}>
                                             <Textfield
-                                                placeholder="location"
-                                                id="location"
-                                                type="location"
-                                                label="Location"
+                                                placeholder="123, ABC street"
+                                                id="detail"
+                                                type="text"
+                                                label="Address Detail"
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
-                                                value={values.location}
-                                                helperText={touched.location && errors.location ? errors.location : ''}
-                                                error={touched.location && errors.location ? true : false}
+                                                value={values.detail}
+                                                helperText={touched.detail && errors.detail ? errors.detail : ''}
+                                                error={touched.detail && errors.detail ? true : false}
                                             />
                                         </Box>
                                     </Box>
                                     <Box width="100%" display={'flex'} gap={2}>
                                         <Box my={1} flex={1}>
                                             <Textfield
-                                                placeholder="0123456789"
-                                                id="phone"
-                                                type="phone"
-                                                label="Phone"
+                                                placeholder="Ward"
+                                                id="ward"
+                                                type="text"
+                                                label="Ward"
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
-                                                value={values.phone}
-                                                helperText={touched.phone && errors.phone ? errors.phone : ''}
-                                                error={touched.phone && errors.phone ? true : false}
+                                                value={values.ward}
+                                                helperText={touched.ward && errors.ward ? errors.ward : ''}
+                                                error={touched.ward && errors.ward ? true : false}
                                             />
                                         </Box>
                                         <Box my={1} flex={1}>
                                             <Textfield
-                                                placeholder="City"
-                                                id="city"
-                                                type="city"
-                                                label="City"
+                                                placeholder="District"
+                                                id="district"
+                                                type="text"
+                                                label="District"
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
-                                                value={values.city}
-                                                helperText={touched.city && errors.city ? errors.city : ''}
-                                                error={touched.city && errors.city ? true : false}
+                                                value={values.district}
+                                                helperText={touched.district && errors.district ? errors.district : ''}
+                                                error={touched.district && errors.district ? true : false}
                                             />
                                         </Box>
                                     </Box>
                                     <Box width="100%" display={'flex'} gap={2}>
                                         <Box my={1} flex={1}>
                                             <Textfield
-                                                placeholder="MM/DD/YYYY"
-                                                id="birthday"
-                                                type="birthday"
-                                                label="Birthday"
+                                                placeholder="Province"
+                                                id="province"
+                                                type="text"
+                                                label="Province"
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
-                                                value={values.birthday}
-                                                helperText={touched.birthday && errors.birthday ? errors.birthday : ''}
-                                                error={touched.birthday && errors.birthday ? true : false}
+                                                value={values.province}
+                                                helperText={touched.province && errors.province ? errors.province : ''}
+                                                error={touched.province && errors.province ? true : false}
                                             />
                                         </Box>
                                         <Box my={1} flex={1}>
@@ -283,7 +446,7 @@ function EditUser(props) {
                                         </Button>
                                         <Button type="submit" sx={{ width: '50%' }} color="primary">
                                             <Icon width={20} style={{ marginRight: 4 }} icon="iconamoon:edit" />
-                                            Create User
+                                            Update User
                                         </Button>
                                     </Box>
                                 </Form>

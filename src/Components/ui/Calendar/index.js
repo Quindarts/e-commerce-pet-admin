@@ -1,103 +1,66 @@
 import * as React from 'react'
-import { styled } from '@mui/material/styles'
 import { COLOR } from '../../../Utils/Constants'
-import { PickersLayout, DesktopDatePicker } from '@mui/x-date-pickers'
+import { StyledPickersLayout } from './style'
+import { DesktopDatePicker } from '@mui/x-date-pickers'
+import { Typography, Box, TextField, Button } from '@mui/material'
+import { TextFieldCustomMUI } from '../Textfield/style'
+import { StyledTextField } from './style'
+
 function Calendar(props) {
-    const { className, ...rest } = props
+    const {
+        onChange,
+        className,
+        inputcss,
+        type = 'date',
+        label,
+        helperText,
+        value,
+        defaultValue,
+        icon,
+        ...rest
+    } = props
 
-    const StyledPickersLayout = styled(PickersLayout)({
-        '.MuiDateCalendar-root': {
-            color: COLOR.light_blue,
-            borderRadius: '40px',
-            borderColor: COLOR.light_blue,
-            backgroundColor: COLOR.white,
-        },
-        '.MuiPickersCalendarHeader-root': {
-            color: COLOR.light_blue,
-            borderRadius: '20px',
-            backgroundColor: COLOR.white,
-        },
-        '.MuiPickersCalendarHeader-label': {
-            color: COLOR.light_blue,
-            borderRadius: '20px',
-            backgroundColor: COLOR.white,
-        },
-        '.MuiPickersCalendarHeader-labelContainer': {
-            color: COLOR.light_blue,
-            borderRadius: '20px',
-            backgroundColor: COLOR.white,
-        },
-        '.MuiPickersCalendarHeader-switchViewButton': {
-            color: COLOR.light_blue,
-            borderRadius: '20px',
-            borderColor: '#2196f3',
-            backgroundColor: COLOR.white,
-        },
-        '.MuiPickersCalendarHeader-switchViewIcon': {
-            color: COLOR.light_blue,
-            borderRadius: '20px',
-            backgroundColor: COLOR.white,
-        },
-        '.MuiDayCalendar-root': {
-            color: COLOR.light_blue,
-            borderRadius: '20px',
-            backgroundColor: COLOR.white,
-        },
-        '.MuiDayCalendar-weekDayLabel': {
-            color: COLOR.light_blue,
-            borderRadius: '20px',
-            backgroundColor: COLOR.white,
-        },
-        '.MuiDayCalendar-weekContainer': {
-            color: COLOR.light_blue,
-            borderRadius: '20px',
-            backgroundColor: COLOR.white,
-        },
-        '.MuiDayCalendar-weekNumberLabel': {
-            color: COLOR.light_blue,
-            borderRadius: '20px',
-            backgroundColor: COLOR.white,
-        },
-        '.MuiDayCalendar-weekNumber': {
-            color: COLOR.light_blue,
-            borderRadius: '20px',
-            backgroundColor: COLOR.white,
-        },
-        '.MuiSvgIcon-root': {
-            color: COLOR.light_blue,
-        },
-        '.MuiPickersDay-root': {
-            color: COLOR.light_blue,
-        },
-        '.MuiPickersDay-today': {
-            color: COLOR.white,
-            borderRadius: '20px',
-            border: '0px solid',
-            backgroundColor: COLOR.blue,
-        },
+    const [selectedDate, setSelectedDate] = React.useState(value || defaultValue)
+    const [hasError, setHasError] = React.useState(false)
 
-        '.MuiPickersMonth-root': {
-            color: COLOR.light_blue,
-            borderRadius: '20px',
-            backgroundColor: COLOR.white,
-        },
-        '.MuiPickersMonth-monthButton': {
-            color: COLOR.light_blue,
-            borderRadius: '20px',
-            backgroundColor: COLOR.white,
-        },
-        '.Mui-selected MuiPickersDay-dayWithMargin': {
-            color: COLOR.white,
-            borderRadius: '20px',
-            backgroundColor: COLOR.light_blue,
-        },
-    })
+    React.useEffect(() => {
+        setSelectedDate(value || defaultValue)
+    }, [value, defaultValue])
+
+    const handleDateChange = (date) => {
+        setSelectedDate(date)
+        const eighteenYearsAgo = new Date()
+        eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18)
+        setHasError(date < eighteenYearsAgo)
+        onChange(date)
+    }
+
     return (
-        <DesktopDatePicker
-            slots={{
-                layout: StyledPickersLayout,
-            }}
-        />
+        <Box className={`${className}`}>
+            <Box className="relative">
+                <DesktopDatePicker
+                    error={hasError}
+                    label={label}
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            {...(hasError ? { error: true } : {})}
+                            {...(hasError ? { helperText: 'You must be at least 18 years old' } : {})}
+                            disabled={hasError}
+                        />
+                    )}
+                    {...rest}
+                    slots={{
+                        layout: StyledPickersLayout,
+                        textField: StyledTextField,
+                    }}
+                    defaultValue={defaultValue}
+                />
+            </Box>
+            {hasError && <Typography>{helperText}</Typography>}
+        </Box>
     )
 }
 

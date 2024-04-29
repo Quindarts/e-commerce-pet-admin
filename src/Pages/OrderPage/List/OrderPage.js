@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { Box } from '@mui/material'
-import Button from '../../Components/ui/Button/Button.js'
-import OrderPageTable from './Table/index.js'
-import OrderDetails from './Modal/OrderDetails.js'
-import SearchBar from '../../Components/ui/Search/SearchBar.js'
-import { APP_ROUTER } from '../../Utils/Constants.js'
+import Button from '../../../Components/ui/Button/Button.js'
+import ListOrderPageTable from '../Table/index.js'
+import SearchBar from '../../../Components/ui/Search/SearchBar.js'
+import { APP_ROUTER } from '../../../Utils/Constants.js'
 import { useNavigate } from 'react-router-dom'
-import Dropdown from '../../Components/ui/Dropdown/Dropdown.js'
-import { APP_ICON } from '../../Utils/Constants.js'
+import Dropdown from '../../../Components/ui/Dropdown/Dropdown.js'
+import { APP_ICON } from '../../../Utils/Constants.js'
 import { Icon } from '@iconify/react'
-import Title from '../../Components/ui/Title/Title.js'
+import Title from '../../../Components/ui/Title/Title.js'
+import useOrder from '../../../hook/api/order.js'
+import { formatTableOrder } from '../../../Utils/helper.js'
+import TableOrder from '../Table/index.js'
+import OrderDetails from '../Modal/OrderDetails/demo.js'
 export const SEARCH_ENUM = {
     NAME: 'name',
     CODE: 'code',
@@ -19,26 +22,35 @@ const RENDER_LIST_CATEGORY_ENUM = {
     FILTER: 'filter',
     SEARCH: 'search',
 }
-
-const OrderPage = () => {
-    const [query, setQuery] = useState('')
+const list = [
+    { title: 'Name', value: SEARCH_ENUM.NAME },
+    { title: 'Code', value: SEARCH_ENUM.CODE },
+]
+const ListOrderPage = () => {
     const navigate = useNavigate()
-    const handleQuery = (event) => {
-        setQuery(event.target.value)
-    }
-    const [typeRender, setTypeRender] = useState(RENDER_LIST_CATEGORY_ENUM.ALL)
-    const [page, setPage] = useState(1)
+
+    const [query, setQuery] = useState('')
     const [keywords, setKeywords] = useState('')
+
+    const [page, setPage] = useState(1)
+
+    const [typeRender, setTypeRender] = useState(RENDER_LIST_CATEGORY_ENUM.ALL)
     const [typeSearch, setTypeSearch] = useState(SEARCH_ENUM.NAME)
     const [productsUpdated, setProductsUpdated] = useState(false)
     const [loading, setLoading] = useState(false)
+
+    const { typeOfRender, renderTableOrder, currentPage, limit, totalPage, handleGetAllOrderByParams } = useOrder()
+
+    useEffect(() => {
+        handleGetAllOrderByParams(6, page)
+    }, [])
+
     const handleChangePanigation = (event, value) => {
         setPage(value)
     }
-    const list = [
-        { title: 'Name', value: SEARCH_ENUM.NAME },
-        { title: 'Code', value: SEARCH_ENUM.CODE },
-    ]
+    const handleQuery = (event) => {
+        setQuery(event.target.value)
+    }
     const hanldeClearChoiceSearchQuery = () => {
         setKeywords('')
         setTypeRender(RENDER_LIST_CATEGORY_ENUM.ALL)
@@ -46,31 +58,8 @@ const OrderPage = () => {
         setPage(1)
     }
 
-    const [products, setProducts] = useState([])
-
-    const fetchProducts = async () => {
-        setLoading(true)
-        try {
-            const response = await fetch('https://e-commerce-pet-server-quindarts.vercel.app/products?offset=4&limit=4')
-            const json = await response.json()
-
-            setProducts(json.list.map((product) => ({ ...product, id: product._id })))
-        } catch (error) {
-            console.error('Failed to fetch products:', error)
-        } finally {
-            setLoading(false)
-        }
-    }
-    useEffect(() => {
-        fetchProducts()
-    }, [productsUpdated])
-
-    useEffect(() => {
-        fetchProducts()
-    }, [])
-
     return (
-        <Box className="border-box max-h-maxo mx-auto h-full w-full max-w-7xl justify-center">
+        <Box>
             <Title icon="material-symbols-light:order-approve-outline">Order Table Manager</Title>
             <Box className="contain my-3 flex flex-wrap justify-between gap-4">
                 <Box className="contain__left h-[2.5rem] ">
@@ -106,11 +95,16 @@ const OrderPage = () => {
                     </Button>
                 </Box>
             </Box>
-
-            <OrderPageTable page={page} products={products} handleChangePanigation={handleChangePanigation} />
-            <OrderDetails />
+            <Box>
+                <TableOrder
+                    page={currentPage}
+                    totalPage={totalPage}
+                    renderTableOrder={formatTableOrder(renderTableOrder)}
+                    handleChangePanigation={handleChangePanigation}
+                />
+            </Box>
         </Box>
     )
 }
 
-export default OrderPage
+export default ListOrderPage

@@ -11,7 +11,8 @@ import { APP_ICON, APP_ROUTER } from '../../../Utils/Constants'
 import { Icon } from '@iconify/react'
 import { CustomListUser } from './style'
 import client from '../../../services/api-context'
-
+import { formatTableUser } from '../../../Utils/helper'
+import { CircularProgress } from '@mui/material'
 const SEARCH_ENUM_USER = {
     NAME: 'name',
     CODE: 'code',
@@ -25,42 +26,41 @@ const list = [
     { title: 'Phone', value: SEARCH_ENUM_USER.PHONE },
 ]
 function ListUserPage() {
-    const [page, setPage] = useState(1)
+    const [totalPage, setTotalPage] = useState(10)
+    const [currentPage, setCurrentPage] = useState(1)
     const [keywords, setKeywords] = useState('')
     const [typeRender, setTypeRender] = useState('')
     const [typeSearch, setTypeSearch] = useState('')
     const navigate = useNavigate()
     const handleChangePanigation = (event, value) => {
-        setPage(value)
+        setCurrentPage(value)
     }
     const handleQuery = (event) => {
         setKeywords(event.target.value)
     }
-
     const [users, setUsers] = useState([])
     const [loading, setLoading] = useState(false)
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            setLoading(true)
-            try {
-                const response = await client.get('/users?limit=10&offset=1')
-                console.log(response)
-                setUsers(response.listUser.map((user) => ({ ...user, id: user._id })))
-                console.log(users)
-            } catch (error) {
-                console.error('Failed to fetch users:', error)
-                if (error.response) {
-                    console.error('Response data:', error.response.data)
-                    console.error('Response status:', error.response.status)
-                }
-            } finally {
-                setLoading(false)
+    const handleGetUsersByParams = async () => {
+        setLoading(true)
+        try {
+            const response = await client.get(`/users?limit=${totalPage}&offset=${currentPage}`)
+            console.log(response)
+            setUsers(formatTableUser(response.listUser))
+        } catch (error) {
+            console.error('Failed to fetch users:', error)
+            if (error.response) {
+                console.error('Response data:', error.response.data)
+                console.error('Response status:', error.response.status)
             }
+        } finally {
+            setLoading(false)
         }
+    }
 
-        fetchUsers()
-    }, [])
+    useEffect(() => {
+        handleGetUsersByParams()
+    }, [currentPage])
 
     return (
         <CustomListUser className="flew w-full flex-wrap">
@@ -100,27 +100,35 @@ function ListUserPage() {
                 </Box>
             </Box>
             <Box className="my-5 w-full">
-                <TableUserManager
-                    rows={users.map((user) => ({
-                        id: user.id,
-                        first_name: user.first_name,
-                        last_name: user.last_name,
-                        email:user.email,
-                        address: user.address,
-                        active: user.isActive,
-                        avatar: user.avatar,
-                        role:user.role,
-                        date:user.date,
-                        number:user.number,
-                        edit: (
-                            <Button className="" size="md" variant="outline" color="grey" icon>
-                                <Icon icon={APP_ICON.i_pen} />
-                            </Button>
-                        ),
-                    }))}
-                    page={page}
-                    handleChangePanigation={handleChangePanigation}
-                />
+                {loading ? (
+                    <Box display="flex" alignItems="center" justifyContent="center" height={500}>
+                        <CircularProgress />
+                    </Box>
+                ) : (
+                    <TableUserManager
+                        rows={users.map((user) => ({
+                            id: user.id,
+                            first_name: user.first_name,
+                            last_name: user.last_name,
+                            email: user.email,
+                            address: user.address[0]?.province?.provinceName,
+                            active: user.isActive,
+                            avatar: user.avatar,
+                            role: user.role,
+                            date: user.date,
+                            number: user.number,
+                            edit: (
+                                <Button className="" size="md" variant="outline" color="grey" icon>
+                                    <Icon icon={APP_ICON.i_pen} />
+                                </Button>
+                            ),
+                        }))}
+                        totalPage={totalPage}
+                        currentPage={currentPage}
+                        handleGetUsersByParams={handleGetUsersByParams}
+                        handleChangePanigation={handleChangePanigation}
+                    />
+                )}
             </Box>
         </CustomListUser>
     )

@@ -11,6 +11,8 @@ export const APP_ROUTER = {
     USER_ADD: '/user/add',
 
     ORDER: '/order',
+    ORDER_LIST: '/order/list',
+
     PRODUCT: '/product',
     PRODUCT_LIST: '/product/list',
     ADD_PRODUCT: '/product/add-product',

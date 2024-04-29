@@ -8,6 +8,16 @@ export function formatTableCategory(list) {
     }))
 }
 
+export function formatTableUser(list) {
+    if (!list) {
+        return []
+    }
+    return list.map((user) => ({
+        ...user,
+        id: user._id,
+    }))
+}
+
 export function formatTableProduct(list) {
     if (!list) {
         return []
@@ -16,4 +26,9 @@ export function formatTableProduct(list) {
         ...product,
         id: product._id,
     }))
+}
+
+export function formatTableOrder(list) {
+    if (!list) return []
+    return list.map((order) => ({ ...order, id: order._id }))
 }

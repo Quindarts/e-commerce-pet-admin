@@ -1,11 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '../../../Components/ui/Button/Button'
 import { Typography } from '@mui/material'
 import { Icon } from '@iconify/react'
 import { Box } from '@mui/system'
+import client from '../../../services/api-context'
 
 function Active(props) {
-    const { handleCloseActiveModal, id } = props
+    const { handleCloseActiveModal, id, handleGetUsersByParams, totalPage, currentPage } = props
+
+    const changeUserActive = async () => {
+        try {
+            const response = await client.put(`/users/change_active/${id}`)
+            console.log(response)
+            console.log(response.user.isActive)
+            if (response.success) {
+                handleGetUsersByParams()
+            }
+        } catch (error) {
+            console.error('Failed to fetch users:', error)
+            if (error.response) {
+                console.error('Response data:', error.response.data)
+                console.error('Response status:', error.response.status)
+            }
+        } finally {
+            handleCloseActiveModal()
+        }
+    }
     return (
         <Box
             height={300}
@@ -32,7 +52,7 @@ function Active(props) {
                     <Icon width={20} style={{ marginRight: 4 }} icon="mdi:cancel-outline" />
                     Cancel
                 </Button>
-                <Button type="submit" sx={{ width: '50%' }} color="yellow">
+                <Button onClick={() => changeUserActive()} type="submit" sx={{ width: '50%' }} color="yellow">
                     <Icon width={20} style={{ marginRight: 4 }} icon="bx:save" />
                     Change this active
                 </Button>
