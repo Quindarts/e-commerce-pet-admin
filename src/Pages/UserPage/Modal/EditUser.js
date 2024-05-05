@@ -86,6 +86,7 @@ const validationSchema = yup.object({
 })
 
 function EditUser(props) {
+    
     const { handleCloseEditUserModal, handleGetUsersByParams, id } = props
     const [page, setPage] = useState(1)
     const [keywords, setKeywords] = useState('')
@@ -233,6 +234,7 @@ function EditUser(props) {
                                         console.error('Address request error:', error)
                                         throw error
                                     })
+                                    
                                 Promise.all([userRequest, addressRequest])
                                     .then((responses) => {
                                         const userResponse = responses[0]

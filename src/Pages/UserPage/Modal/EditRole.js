@@ -4,13 +4,11 @@ import Button from '../../../Components/ui/Button/Button'
 import { ROLE } from '../../../Utils/Constants'
 import { Icon } from '@iconify/react'
 import React, { useEffect, useState } from 'react'
-import client from '../../../services/api-context'
 import { Fragment } from 'react'
 import { CircularProgress } from '@mui/material'
 
 function EditRole(props) {
-    const { handleCloseEditRoleModal, id } = props
-    const [user, setUser] = useState(null)
+    const { handleCloseEditRoleModal, role } = props
     const [loading, setLoading] = useState(false)
     const ROLE_DROP_VALUE = [
         {
@@ -31,48 +29,27 @@ function EditRole(props) {
         },
     ]
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            setLoading(true)
-            try {
-                const response = await client.get(`/users/${id}`)
-                console.log(response)
-                setUser(response.user)
-            } catch (error) {
-                console.error('Failed to fetch users:', error)
-                if (error.response) {
-                    console.error('Response data:', error.response.data)
-                    console.error('Response status:', error.response.status)
-                }
-            } finally {
-                setLoading(false)
-            }
-        }
-
-        fetchUsers()
-    }, [])
     const [sortedRoles, setSortedRoles] = useState(ROLE_DROP_VALUE)
     useEffect(() => {
-        if (user && user.role) {
-            console.log(user.role)
-            const userRoleItem = ROLE_DROP_VALUE.find((item) => item.value === user.role)
-            if (userRoleItem) {
-                const otherRoles = ROLE_DROP_VALUE.filter((item) => item.value !== user.role)
-                setSortedRoles([userRoleItem, ...otherRoles])
+        if (role) {
+            console.log(role)
+            const RoleItem = ROLE_DROP_VALUE.find((item) => item.value === role)
+            if (RoleItem) {
+                const otherRoles = ROLE_DROP_VALUE.filter((item) => item.value !== role)
+                setSortedRoles([RoleItem, ...otherRoles])
             }
         }
-    }, [user])
-
+    }, [])
     return (
         <Fragment>
-            {user ? (
+            {role ? (
                 <Box mx={2} mb={2} mt={1}>
                     <Typography
                         style={{ fontWeight: 'bold', fontSize: '20px', color: '#374151 ' }}
                         mb={20}
                         variant="h7"
                     >
-                        Change role user
+                        Change role
                     </Typography>
                     <Dropdown
                         key={sortedRoles.map((role) => role.value).join(',')}

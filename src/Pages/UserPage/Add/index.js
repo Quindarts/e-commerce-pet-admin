@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import { Form, Formik, useFormikContext } from 'formik'
 import Textfield from '../../../Components/ui/Textfield/Textfield'
 import Button from '../../../Components/ui/Button/Button'
@@ -12,7 +12,6 @@ import { enqueueSnackbar } from 'notistack'
 import dayjs from 'dayjs'
 import Calendar from '../../../Components/ui/Calendar'
 import Dropdown from '../../../Components/ui/Dropdown/Dropdown'
-import { ROLE } from '../../../Utils/Constants'
 
 export const SEARCH_ENUM = {
     ADMIN: 'admin',
@@ -83,7 +82,7 @@ const validationSchema = yup.object({
             'Province should only contain alphabets',
         ),
     birthday: yup.object().shape({
-        date: yup.date().nonNullable(false),
+        date: yup.date().nonNullable(true),
     }),
 })
 const MyFormComponent = (props) => {
@@ -91,16 +90,8 @@ const MyFormComponent = (props) => {
 
     const [error, setError] = React.useState(null)
     const [cleared, setCleared] = React.useState(false)
-    React.useEffect(() => {
-        if (cleared) {
-            const timeout = setTimeout(() => {
-                setCleared(false)
-            }, 1500)
 
-            return () => clearTimeout(timeout)
-        }
-        return () => {}
-    }, [cleared])
+    // useReducer()
     const errorMessage = React.useMemo(() => {
         switch (error) {
             case 'maxDate': {
@@ -109,7 +100,9 @@ const MyFormComponent = (props) => {
             case 'minDate': {
                 return 'User need to be at most 60 years olds'
             }
-
+            case 'required': {
+                return 'Birthday missing.'
+            }
             default: {
                 return ''
             }
@@ -118,22 +111,13 @@ const MyFormComponent = (props) => {
 
     const { resetForm } = useFormikContext()
     const [selectedDate, setSelectedDate] = useState(values?.birthday)
-
     const handleSubmit = () => {
-        console.log(values.birthday)
-        console.log(values.birthday)
-        console.log(errorMessage)
-        setSelectedDate({})
-        resetForm()
-        handleClear()
-        setFieldValue('birthday', null)
+        // if (values.birthday === '') {
+        //     setError('required')
+        // }
+        alert(error)
         setCleared(true)
     }
-    const handleClear = () => {
-        setFieldValue('birthday', null)
-        setCleared(true)
-    }
-
     return (
         <Form>
             <Box width="100%" display={'flex'} gap={2}>
@@ -141,7 +125,6 @@ const MyFormComponent = (props) => {
                     <Textfield
                         placeholder="First Name"
                         id="firstName"
-                        // type="text"
                         label="First Name"
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -154,7 +137,6 @@ const MyFormComponent = (props) => {
                     <Textfield
                         placeholder="Last Name"
                         id="lastName"
-                        // type="text"
                         label="Last Name"
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -169,7 +151,6 @@ const MyFormComponent = (props) => {
                     <Textfield
                         placeholder="0123456789"
                         id="phone"
-                        // type="text"
                         label="Phone"
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -201,9 +182,6 @@ const MyFormComponent = (props) => {
                             },
                             field: {
                                 clearable: true,
-                                onClear: () => {
-                                    handleClear()
-                                },
                             },
                         }}
                     />
@@ -214,7 +192,6 @@ const MyFormComponent = (props) => {
                     <Textfield
                         placeholder="example@gmail.com"
                         id="email"
-                        // type="email"
                         label="Email"
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -227,7 +204,6 @@ const MyFormComponent = (props) => {
                     <Textfield
                         placeholder="123, ABC street"
                         id="detail"
-                        // type="string"
                         label="Address Detail"
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -242,7 +218,6 @@ const MyFormComponent = (props) => {
                     <Textfield
                         placeholder="Ward"
                         id="ward"
-                        // type="text"
                         label="Ward"
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -255,7 +230,6 @@ const MyFormComponent = (props) => {
                     <Textfield
                         placeholder="District"
                         id="district"
-                        // type="text"
                         label="District"
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -270,7 +244,6 @@ const MyFormComponent = (props) => {
                     <Textfield
                         placeholder="Province"
                         id="province"
-                        // type="text"
                         label="Province"
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -284,14 +257,7 @@ const MyFormComponent = (props) => {
                 </Box>
             </Box>
             <Box mt={2} sx={{ display: 'flex', gap: 2 }}>
-                <Button
-                    sx={{ width: '50%' }}
-                    color="primary"
-                    variant="outline"
-                    onClick={() => {
-                        handleSubmit()
-                    }}
-                >
+                <Button onClick={handleSubmit} sx={{ width: '50%' }} color="primary" variant="outline" type="reset">
                     <Icon width={20} style={{ marginRight: 4 }} icon="mdi:cancel-outline" />
                     Clear
                 </Button>
@@ -402,11 +368,7 @@ function UserAddPage(props) {
                             },
                             country: 'VietNam',
                         }
-                        console.log('value.birthday', values.birthday)
                         const userRequest = client.post(`/users/${id}`, userData).catch((error) => {
-                            console.log(userData)
-                            console.log(id)
-                            console.error('User request error:', error)
                             throw error
                         })
                         const addressRequest = client.post(`/addresses/${addressId}`, addressData).catch((error) => {
