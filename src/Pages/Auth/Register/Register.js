@@ -99,10 +99,10 @@ function Register() {
                                 <span className=" ml-1 text-blue-400">Login</span>
                             </Link>
                         </div>
-                        <div className="md:flex md:justify-between mb-4 grid py-1">
+                        <div className="mb-4 grid py-1 md:flex md:justify-between">
                             <Textfield
                                 placeholder="First Name"
-                                className="focus:shadow-outline md:mb-0 md:mr-2 mb-6 w-full appearance-none text-sm leading-tight text-gray-700 focus:outline-none"
+                                className="focus:shadow-outline mb-6 w-full appearance-none text-sm leading-tight text-gray-700 focus:outline-none md:mb-0 md:mr-2"
                                 id="firstName"
                                 type="text"
                                 label="First Name"
@@ -114,7 +114,7 @@ function Register() {
                             />
                             <Textfield
                                 placeholder="Last Name"
-                                className="focus:shadow-outline md:ml-2 md:mt-0 w-full appearance-none text-sm leading-tight text-gray-700 focus:outline-none"
+                                className="focus:shadow-outline w-full appearance-none text-sm leading-tight text-gray-700 focus:outline-none md:ml-2 md:mt-0"
                                 id="lastName"
                                 type="text"
                                 label="Last Name"
@@ -125,7 +125,7 @@ function Register() {
                                 error={touched.lastName && errors.lastName ? true : false}
                             />
                         </div>
-                        <div className=" md:flex md:justify-between mb-4 grid">
+                        <div className=" mb-4 grid md:flex md:justify-between">
                             <Textfield
                                 className="focus:shadow-outline w-full appearance-none py-1 text-sm leading-tight text-gray-700 focus:outline-none"
                                 label="Username"

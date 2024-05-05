@@ -83,7 +83,7 @@ const validationSchema = yup.object({
             'Province should only contain alphabets',
         ),
     birthday: yup.object().shape({
-        date: yup.date().nullable(),
+        date: yup.date().nonNullable(false),
     }),
 })
 const MyFormComponent = (props) => {
@@ -108,10 +108,6 @@ const MyFormComponent = (props) => {
             }
             case 'minDate': {
                 return 'User need to be at most 60 years olds'
-            }
-
-            case 'invalidDate': {
-                return 'Your date is not valid'
             }
 
             default: {
@@ -201,6 +197,7 @@ const MyFormComponent = (props) => {
                         slotProps={{
                             textField: {
                                 helperText: errorMessage,
+                                error: errorMessage !== '' ? true : false,
                             },
                             field: {
                                 clearable: true,

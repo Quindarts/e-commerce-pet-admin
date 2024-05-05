@@ -12,12 +12,12 @@ import Delete from '../Modal/Delete'
 import Active from '../Modal/Active'
 import Modal from '../../../Components/ui/Modal/Modal'
 const TableProductList = (props) => {
-    const [openEdit, setOpenEdit] = useState({ isOpen: false, product_id: '' ,size: 'lg'})
+    const [openEdit, setOpenEdit] = useState({ isOpen: false, product_id: '', size: 'lg' })
     const [openDelete, setOpenDelete] = useState({ isOpen: false, product_id: '' })
     const [openActive, setOpenActive] = useState({ isOpen: false, product_id: '' })
-    
-    const handleOpenEditModal = (id,option) => {
-        setOpenEdit({ isOpen: true, product_id: id ,size: option})
+
+    const handleOpenEditModal = (id, option) => {
+        setOpenEdit({ isOpen: true, product_id: id, size: option })
     }
     const handleCloseEditModal = () => {
         setOpenEdit({ ...openEdit, isOpen: false })
@@ -134,13 +134,24 @@ const TableProductList = (props) => {
             flex: 0.7,
             renderCell: (params) => (
                 <Box>
-                    
-                    <Button  onClick={() => {
-                            handleOpenEditModal(params.id,'lg')
-                        }} size="lg" color="grey" variant="outline" icon>
+                    <Button
+                        onClick={() => {
+                            handleOpenEditModal(params.id, 'lg')
+                        }}
+                        size="lg"
+                        color="grey"
+                        variant="outline"
+                        icon
+                    >
                         <Icon icon={APP_ICON.i_eye_open} className="text-sky-500" />
                     </Button>
-                    <Button onClick={() => handleOpenDeleteModal(params.id)} size="lg" color="grey" variant="outline" icon>
+                    <Button
+                        onClick={() => handleOpenDeleteModal(params.id)}
+                        size="lg"
+                        color="grey"
+                        variant="outline"
+                        icon
+                    >
                         <Icon icon="mdi:bin-outline" className="text-red-400" />
                     </Button>
                 </Box>
@@ -162,7 +173,7 @@ const TableProductList = (props) => {
                     handleChangePanigation={handleChangePanigation}
                 />
             </Box>
-            
+
             <Modal maxWidth={openEdit.size} open={openEdit.isOpen} onClose={handleCloseEditModal}>
                 <Edit
                     sx={{ width: '100%' }}

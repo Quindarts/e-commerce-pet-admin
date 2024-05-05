@@ -25,14 +25,14 @@ export const gridStyles = {
     '@media (min-width: 1260px)': {
         gridTemplateColumns: 'repeat(5, 1fr)',
     },
-};
+}
 
 export const imageStyles = {
     height: '100%',
     width: '100%',
     borderRadius: '50%',
     objectFit: 'cover',
-};
+}
 
 export const gridColumnStyles = {
     gridColumn: 'span 2',
@@ -52,7 +52,7 @@ export const gridColumnStyles = {
     '@media (min-width: 1260px)': {
         gridColumn: 'span 3',
     },
-};
+}
 
 export const cardStyles = {
     maxHeight: '296px',
@@ -75,4 +75,4 @@ export const cardStyles = {
         gridColumn: 'span 2',
         gridRow: 'span 1',
     },
-};
+}

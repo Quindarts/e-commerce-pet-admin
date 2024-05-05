@@ -52,7 +52,7 @@ function TableUserManager(props) {
     const handleCloseActiveModal = () => {
         setOpenActive({ ...openActive, isOpen: false })
     }
-   
+
     const columns = [
         {
             field: 'details',
@@ -138,7 +138,6 @@ function TableUserManager(props) {
             align: 'center',
             flex: 1,
             renderCell: (params) => (
-              
                 <Box>
                     <Button
                         onClick={() => handleOpenEditRoleModal(params.id)}
@@ -205,7 +204,6 @@ function TableUserManager(props) {
                     handleGetUsersByParams={handleGetUsersByParams}
                     handleCloseEditUserModal={handleCloseEditUserModal}
                     id={openEditUser.user_id}
-             
                 />
             </Modal>
             <Modal open={openActive.isOpen} onClose={handleCloseActiveModal}>

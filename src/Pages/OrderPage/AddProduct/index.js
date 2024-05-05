@@ -39,7 +39,7 @@ const AddProduct = () => {
         setProviders([...providers, { name: '', value: '' }])
     }
     const [newProviderName, setNewProviderName] = useState('')
-    
+
     const handleProviderChange = (event, index) => {
         const selectedValue = event.target.value
         if (selectedValue === 'placeholder') {
@@ -140,12 +140,8 @@ const AddProduct = () => {
                 <Textfield placeholder="Name" id="name" type="text" label="Name" className=" col-span-4"></Textfield>
                 <Dropdown className=" col-span-4" list={brand} size="xl" />
                 <Dropdown className="col-span-4" list={category} size="xl" />
-              
-                <Dropdown
-                    className="col-span-4"
-                    list={attributeList}
-                    
-                />
+
+                <Dropdown className="col-span-4" list={attributeList} />
                 <Textfield
                     placeholder="Bought Price"
                     id="bought"

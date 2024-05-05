@@ -51,7 +51,7 @@ function EditRole(props) {
 
         fetchUsers()
     }, [])
-    const [sortedRoles, setSortedRoles] = useState(ROLE_DROP_VALUE) 
+    const [sortedRoles, setSortedRoles] = useState(ROLE_DROP_VALUE)
     useEffect(() => {
         if (user && user.role) {
             console.log(user.role)

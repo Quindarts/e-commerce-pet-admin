@@ -102,17 +102,9 @@ function EditUser(props) {
                 const response = await client.get(`/users/${id}`)
                 setUser(response.user)
                 const addresses = await client.get(`/addresses/${response.user?.address[0]?._id}`)
-                console.log(response)
-                console.log(addresses)
                 setAddress(addresses.address)
             } catch (error) {
                 console.error('Failed to fetch:', error)
-                if (error.response || error.addresses) {
-                    console.error('Response data:', error.response.data)
-                    console.error('Response status:', error.response.status)
-                    console.error('Response data:', error.addresses.data)
-                    console.error('Response status:', error.addresses.status)
-                }
             } finally {
                 setLoading(false)
             }
@@ -141,26 +133,6 @@ function EditUser(props) {
         }
     }
 
-    const [error, setError] = React.useState(null)
-
-    const errorMessage = React.useMemo(() => {
-        switch (error) {
-            case 'maxDate': {
-                return 'User need to be at least 18 years olds'
-            }
-            case 'minDate': {
-                return 'User need to be at most 60 years olds'
-            }
-
-            case 'invalidDate': {
-                return 'Your date is not valid'
-            }
-
-            default: {
-                return ''
-            }
-        }
-    }, [error])
     return (
         <Fragment>
             {address ? (
@@ -343,13 +315,7 @@ function EditUser(props) {
                                                     setFieldValue('birthday', newValue)
                                                 }}
                                                 error={touched.birthday && errors.birthday ? true : false}
-                                                onError={(newError) => setError(newError)}
-                                                slotProps={{
-                                                    textField: {
-                                                        helperText: errorMessage,
-                                                    },
-                                                }}
-                                                helperText={touched.birthday && errors.birthday ? errors.birthday : ''}
+                                                // helperText={touched.birthday && errors.birthday ? errors.birthday : ''}
                                             />
                                         </Box>
                                     </Box>
