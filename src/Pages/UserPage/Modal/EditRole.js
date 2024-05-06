@@ -7,10 +7,15 @@ import React, { useEffect, useState } from 'react'
 import client from '../../../services/api-context'
 import { Fragment } from 'react'
 import { CircularProgress } from '@mui/material'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchUserById } from '../../../services/api-User'
 
 function EditRole(props) {
     const { handleCloseEditRoleModal, id } = props
-    const [user, setUser] = useState(null)
+    const dispatch = useDispatch()
+    const userStatus = useSelector((state) => state.users.status)
+    const userData = useSelector((state) => state)
+    const [user, setUser] = useState(userData)
     const [loading, setLoading] = useState(false)
     const ROLE_DROP_VALUE = [
         {
@@ -30,28 +35,58 @@ function EditRole(props) {
             value: ROLE.ADMIN,
         },
     ]
-
+    console.log('User id:', id)
+    console.log('userStatus:', userStatus)
+    console.log('user Entity:', user)
     useEffect(() => {
-        const fetchUsers = async () => {
-            setLoading(true)
-            try {
-                const response = await client.get(`/users/${id}`)
-                console.log(response)
-                setUser(response.user)
-            } catch (error) {
-                console.error('Failed to fetch users:', error)
-                if (error.response) {
-                    console.error('Response data:', error.response.data)
-                    console.error('Response status:', error.response.status)
-                }
-            } finally {
-                setLoading(false)
+        console.log(userStatus)
+        dispatch(fetchUserById(id)).then((resultAction) => {
+            if (fetchUserById.fulfilled.match(resultAction)) {
+                console.log('Result:', resultAction.payload)
+                setUser(resultAction.payload)
+            } else if (fetchUserById.rejected.match(resultAction)) {
+                console.log('Error:', resultAction.error.message)
             }
-        }
+        })
+    }, [userStatus, dispatch, id])
 
-        fetchUsers()
-    }, [])
-    const [sortedRoles, setSortedRoles] = useState(ROLE_DROP_VALUE) 
+    // useEffect(() => {
+    //     if (userStatus === 'idle') {
+    //         alert('bla')
+    //         dispatch(fetchUser(id)).then((resultAction) => {
+    //             if (fetchUser.fulfilled.match(resultAction)) {
+    //                 console.log('Result:', resultAction.payload)
+    //             } else if (fetchUser.rejected.match(resultAction)) {
+    //                 console.log('Error:', resultAction.error.message)
+    //             }
+    //         })
+    //     }
+    // }, [userStatus, dispatch, id])
+
+    // console.log('User data:', user)
+    // console.log('Status:', userStatus)
+
+    // useEffect(() => {
+    //     const fetchUsers = async () => {
+    //         setLoading(true)
+    //         try {
+    //             const response = await client.get(`/users/${id}`)
+    //             console.log(response)
+    //             setUser(response.user)
+    //         } catch (error) {
+    //             console.error('Failed to fetch users:', error)
+    //             if (error.response) {
+    //                 console.error('Response data:', error.response.data)
+    //                 console.error('Response status:', error.response.status)
+    //             }
+    //         } finally {
+    //             setLoading(false)
+    //         }
+    //     }
+
+    //     fetchUsers()
+    // }, [])
+    const [sortedRoles, setSortedRoles] = useState(ROLE_DROP_VALUE)
     useEffect(() => {
         if (user && user.role) {
             console.log(user.role)
