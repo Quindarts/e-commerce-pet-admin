@@ -13,12 +13,10 @@ import { enqueueSnackbar } from 'notistack'
 
 export const UserForm = (props) => {
     const { values, id } = props
-    // const { resetForm } = useFormikContext()
     const [avatarSrc, setAvatarSrc] = useState('https://uko-react.vercel.app/static/avatar/001-man.svg')
     const [user, setUser] = useState(null)
     const [selectedDate, setSelectedDate] = useState(values?.birthday)
     const [error, setError] = React.useState(null)
-    // useReducer()
     const errorMessage = React.useMemo(() => {
         switch (error) {
             case 'maxDate': {
@@ -36,10 +34,8 @@ export const UserForm = (props) => {
         }
     }, [error])
     const handleClear = () => {
-        if (selectedDate === '') {
-            setError('required')
-        }
-        // setSelectedDate('')
+        setSelectedDate('')
+        setError('')
     }
     const minDate = dayjs().subtract(60, 'year')
     const maxDate = dayjs().subtract(18, 'year')
@@ -117,81 +113,63 @@ export const UserForm = (props) => {
         if (values === undefined) {
             setError('required')
         }
-        const addressId = user.address[0]._id
+        const addressId = user?.address[0]._id
 
-        const userData = {
-            _id: user._id,
-            first_name: values.firstName,
-            last_name: values.lastName,
-            email: values.email,
-            phone: values.phone,
-            dateOfBirth: values.birthday,
-            role: values.role,
-            avatar: avatarSrc,
-        }
+        if (values !== undefined) {
+            const userData = {
+                _id: user._id,
+                first_name: values.firstName,
+                last_name: values.lastName,
+                email: values.email,
+                phone: values.phone,
+                dateOfBirth: values.birthday,
+                role: values.role,
+                avatar: avatarSrc,
+            }
 
-        console.log(values.birthday)
-        console.log(userData.dateOfBirth)
-        const addressData = {
-            detail: values.detail,
-            ward: {
-                wardName: values.ward,
-            },
-            district: {
-                districtName: values.district,
-            },
-            province: {
-                provinceName: values.province,
-            },
-            country: 'VietNam',
-        }
-        const userRequest = client.post(`/users/${id}`, userData).catch((error) => {
-            throw error
-        })
-        const addressRequest = client.post(`/addresses/${addressId}`, addressData).catch((error) => {
-            console.error('Address request error:', error)
-            throw error
-        })
-        Promise.all([userRequest, addressRequest])
-            .then((responses) => {
-                alert('DADA')
-                console.log(responses)
-                const userResponse = responses[0]
-                const addressResponse = responses[1]
-                console.log(userResponse)
-                console.log(addressResponse)
-                if (userResponse.status === 200 && addressResponse.status === 200) {
-                    enqueueSnackbar('Update successful', {
-                        variant: 'success',
-                    })
-                }
-                // resetForm()
+            const addressData = {
+                detail: values.detail,
+                ward: {
+                    wardName: values.ward,
+                },
+                district: {
+                    districtName: values.district,
+                },
+                province: {
+                    provinceName: values.province,
+                },
+                country: 'VietNam',
+            }
+            const userRequest = client.post(`/users/${id}`, userData).catch((error) => {
+                throw error
             })
-            .catch((error) => {
-                console.error(error)
-                enqueueSnackbar('Fail to update', {
-                    variant: 'error',
+            const addressRequest = client.post(`/addresses/${addressId}`, addressData).catch((error) => {
+                console.error('Address request error:', error)
+                throw error
+            })
+            Promise.all([userRequest, addressRequest])
+                .then((responses) => {
+                    alert('DADA')
+                    console.log(responses)
+                    const userResponse = responses[0]
+                    const addressResponse = responses[1]
+                    console.log(userResponse)
+                    console.log(addressResponse)
+                    if (userResponse.status === 200 && addressResponse.status === 200) {
+                        enqueueSnackbar('Update successful', {
+                            variant: 'success',
+                        })
+                    }
+                    // resetForm()
                 })
-            })
+                .catch((error) => {
+                    console.error(error)
+                    enqueueSnackbar('Fail to update', {
+                        variant: 'error',
+                    })
+                })
+        }
     }
-    // // useReducer()
-    // const errorMessage = React.useMemo(() => {
-    //     switch (error) {
-    //         case 'maxDate': {
-    //             return 'User need to be at least 18 years olds'
-    //         }
-    //         case 'minDate': {
-    //             return 'User need to be at most 60 years olds'
-    //         }
-    //         case 'required': {
-    //             return 'Birthday missing.'
-    //         }
-    //         default: {
-    //             return ''
-    //         }
-    //     }
-    // }, [error])
-
     return (
         <Formik
             initialValues={{
