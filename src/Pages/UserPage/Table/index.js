@@ -23,7 +23,7 @@ function TableUserManager(props) {
         hasPanigation,
     } = props
     // console.log(rows)
-    const [openEditRole, setOpenEditRole] = useState({ isOpen: false, user_id: '' })
+    const [openEditRole, setOpenEditRole] = useState({ isOpen: false, role: '' })
     const [openEditUser, setOpenEditUser] = useState({ isOpen: false, user_id: '' })
     const [openDelete, setOpenDelete] = useState({ isOpen: false, user_id: '' })
     const [openActive, setOpenActive] = useState({ isOpen: false, user_id: '' })
@@ -34,8 +34,8 @@ function TableUserManager(props) {
     const handleCloseEditUserModal = () => {
         setOpenEditUser({ ...openEditUser, isOpen: false })
     }
-    const handleOpenEditRoleModal = (id) => {
-        setOpenEditRole({ isOpen: true, user_id: id })
+    const handleOpenEditRoleModal = (role) => {
+        setOpenEditRole({ isOpen: true, role: role })
     }
     const handleCloseEditRoleModal = () => {
         setOpenEditRole({ ...openEditRole, isOpen: false })
@@ -52,7 +52,7 @@ function TableUserManager(props) {
     const handleCloseActiveModal = () => {
         setOpenActive({ ...openActive, isOpen: false })
     }
-   
+
     const columns = [
         {
             field: 'details',
@@ -67,7 +67,7 @@ function TableUserManager(props) {
                         <Typography className="text-sm font-[700] text-slate-600">
                             {params.row.first_name} {params.row.last_name}
                         </Typography>
-                        <button className="rounded-xl text-sm font-[500] text-orange-400">{params.row.role}</button>
+                        <button className="rounded-xl text-sm font-[500] text-orange-400">{params?.row?.role}</button>
                     </Box>
                 </Box>
             ),
@@ -138,10 +138,11 @@ function TableUserManager(props) {
             align: 'center',
             flex: 1,
             renderCell: (params) => (
-              
                 <Box>
                     <Button
-                        onClick={() => handleOpenEditRoleModal(params.id)}
+                        onClick={() => {
+                            handleOpenEditRoleModal(params?.row?.role)
+                        }}
                         size="md"
                         color="grey"
                         variant="outline"
@@ -190,7 +191,7 @@ function TableUserManager(props) {
                 <EditRole
                     handleGetUsersByParams={handleGetUsersByParams}
                     handleCloseEditRoleModal={handleCloseEditRoleModal}
-                    id={openEditRole.user_id}
+                    role={openEditRole.role}
                 />
             </Modal>
             <Modal open={openDelete.isOpen} onClose={handleCloseDeleteModal}>
@@ -205,7 +206,6 @@ function TableUserManager(props) {
                     handleGetUsersByParams={handleGetUsersByParams}
                     handleCloseEditUserModal={handleCloseEditUserModal}
                     id={openEditUser.user_id}
-             
                 />
             </Modal>
             <Modal open={openActive.isOpen} onClose={handleCloseActiveModal}>

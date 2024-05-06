@@ -416,9 +416,7 @@ function ComponentPage() {
             <Button onClick={handleCompleteClick}>Complete</Button>
             <Button onClick={handleResetClick}>Rest</Button>
             <h1 className="mt-3 font-bold">PopupUser</h1>
-            <Box>
-                {/* <PopupUser user={user} /> */}
-            </Box>
+            <Box>{/* <PopupUser user={user} /> */}</Box>
             <h1 className="mt-3 font-bold">PopupServ</h1>
             <Box>
                 <PopupServ avatars={avatars} names={names} />

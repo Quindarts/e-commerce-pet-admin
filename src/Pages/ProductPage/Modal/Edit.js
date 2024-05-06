@@ -4,7 +4,7 @@ import AccordionSummary from '@mui/material/AccordionSummary'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import { Typography } from '@mui/material'
 import Button from '../../../Components/ui/Button/Button.js'
-import { Card} from '../styles.js'
+import { Card } from '../styles.js'
 import Textfield from '../../../Components/ui/Textfield/Textfield.js'
 import InputUpload from '../../../Components/ui/InputUpload/InputUpload.js'
 import { APP_ICON, APP_ROUTER } from '../../../Utils/Constants.js'
@@ -204,7 +204,10 @@ const Edit = () => {
                     </div>
                 </div>
                 <div style={Card}>
-                    <Title icon={'fxemoji:deliverytruck'} style={{gap: '1rem', display: 'flex', marginBottom: '1.25rem' }}>
+                    <Title
+                        icon={'fxemoji:deliverytruck'}
+                        style={{ gap: '1rem', display: 'flex', marginBottom: '1.25rem' }}
+                    >
                         Details{' '}
                     </Title>
                     <div style={{ display: 'flex', width: '100%', flexWrap: 'wrap', gap: '1.25rem' }}>
@@ -251,7 +254,7 @@ const Edit = () => {
                         aria-controls="panel1-content"
                         id="panel1-header"
                     >
-                        <Title style={{ display: 'flex', gap: '1rem'}} icon={'logos:meilisearch'}>
+                        <Title style={{ display: 'flex', gap: '1rem' }} icon={'logos:meilisearch'}>
                             Search engine optimize{' '}
                         </Title>
                     </AccordionSummary>
@@ -276,7 +279,7 @@ const Edit = () => {
                         aria-controls="panel1-content"
                         id="panel1-header"
                     >
-                        <Title style={{ display: 'flex',gap: '1rem', }} icon="fluent-emoji:man-beard">
+                        <Title style={{ display: 'flex', gap: '1rem' }} icon="fluent-emoji:man-beard">
                             Provider
                         </Title>
                     </AccordionSummary>
@@ -293,7 +296,10 @@ const Edit = () => {
                                     }}
                                     key={index}
                                 >
-                                    <Title style={{ marginBottom: '1.25rem',gap: '1rem' }} icon={`fluent-emoji:man-beard`}>
+                                    <Title
+                                        style={{ marginBottom: '1.25rem', gap: '1rem' }}
+                                        icon={`fluent-emoji:man-beard`}
+                                    >
                                         Provider info {index + 1}
                                     </Title>
                                     <Textfield

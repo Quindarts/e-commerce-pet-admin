@@ -22,10 +22,10 @@ function MainLayout() {
 
     return (
         <Fragment>
-            <Box className="flex bg-[#f3f4f9] " sx={{ maxWidth: '100vw', width: '100%' }} >
+            <Box className="flex bg-[#f3f4f9] " sx={{ maxWidth: '100vw', width: '100%' }}>
                 <TemporaryDrawer openNav={openNav} handleOpenNav={handleOpenNav} />
                 <Box
-                    className={`px-[2rem] min-h-[100vh] `}
+                    className={`min-h-[100vh] px-[2rem] `}
                     sx={{
                         width: '100%',
                         maxWidth: `${openNav ? 'calc(100% - 280px)' : 'calc(100% - 86px)'}`,

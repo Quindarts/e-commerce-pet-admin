@@ -2,7 +2,6 @@ import { Box, Typography } from '@mui/material'
 import React from 'react'
 import Avatar from '../../../../../../Components/ui/Avatar/Avatar'
 
-
 function DetailOrderTab(props) {
     const { children, value, order_details, index, ...other } = props
 
