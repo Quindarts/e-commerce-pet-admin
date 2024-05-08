@@ -115,8 +115,10 @@ function ListUserPage() {
                             active: user.isActive,
                             avatar: user.avatar,
                             role: user.role,
-                            date: user.date,
                             number: user.number,
+                            gender: user.gender ? user.gender : 'Unknown',
+                            dateOfBirth: new Date(user.dateOfBirth).toISOString().slice(0, 10),
+                            phone: user.phone,
                             edit: (
                                 <Button className="" size="md" variant="outline" color="grey" icon>
                                     <Icon icon={APP_ICON.i_pen} />

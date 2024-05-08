@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react'
 import Table from '../../../Components/ui/Table/Table'
 import { Box, Typography } from '@mui/material'
 import Button from '../../../Components/ui/Button/Button'
-import { APP_ICON } from '../../../Utils/Constants'
+import { APP_ICON, COLOR } from '../../../Utils/Constants'
 import { Icon } from '@iconify/react'
 import Avatar from '../../../Components/ui/Avatar/Avatar'
 import EditRole from '../Modal/EditRole'
@@ -58,19 +58,38 @@ function TableUserManager(props) {
             field: 'details',
             headerName: 'User detail',
             flex: 1.3,
-            renderCell: (params) => (
-                <Box className="flex gap-2">
-                    <Box>
-                        <Avatar size="md" src={params.row.avatar?.url} />
+            renderCell: (params) => {
+                let color
+                switch (params.row.role) {
+                    case 'admin':
+                        color = 'purple-500'
+                        break
+                    case 'owner':
+                        color = 'sky-600'
+                        break
+                    case 'warehouse':
+                        color = 'orange-400'
+                        break
+                    default:
+                        color = 'gray-500'
+                }
+                return (
+                    <Box className="flex gap-2">
+                        <Box>
+                            <Avatar size="md" src={params.row.avatar?.url} />
+                        </Box>
+                        <Box>
+                            <Typography className="text-sm font-[700] text-slate-600">
+                                {params.row.first_name} {params.row.last_name}
+                            </Typography>
+
+                            <button className={`rounded-xl text-sm font-[500] text-${color}`}>
+                                {params?.row?.role}
+                            </button>
+                        </Box>
                     </Box>
-                    <Box>
-                        <Typography className="text-sm font-[700] text-slate-600">
-                            {params.row.first_name} {params.row.last_name}
-                        </Typography>
-                        <button className="rounded-xl text-sm font-[500] text-orange-400">{params?.row?.role}</button>
-                    </Box>
-                </Box>
-            ),
+                )
+            },
         },
         {
             field: 'gender',
@@ -78,7 +97,24 @@ function TableUserManager(props) {
             flex: 1,
             headerAlign: 'center',
             align: 'center',
-            renderCell: (params) => <Box className=" text-[14px] font-[500] text-slate-500">{params.row.gender}</Box>,
+
+            renderCell: (params) => {
+                let color
+                switch (params.row.gender) {
+                    case 'MALE':
+                        color = 'sky'
+                        break
+                    case 'FEMALE':
+                        color = 'red'
+                        break
+                    case 'OTHER':
+                        color = 'purple'
+                        break
+                    default:
+                        color = 'gray'
+                }
+                return <Box className={`text-[14px] font-[500] text-${color}-500`}>{params.row.gender}</Box>
+            },
         },
         {
             field: 'email',
@@ -94,7 +130,7 @@ function TableUserManager(props) {
             flex: 1,
             headerAlign: 'center',
             align: 'center',
-            renderCell: (params) => <Box className="text-sm font-[500] text-slate-500">{params.formattedValue}</Box>,
+            renderCell: (params) => <Box className="text-sm font-[500] text-slate-500">{params.row.address}</Box>,
         },
 
         {
@@ -103,6 +139,7 @@ function TableUserManager(props) {
             headerAlign: 'center',
             align: 'center',
             flex: 1,
+            renderCell: (params) => <Box className="text-sm font-[500] text-slate-500">{params.row.dateOfBirth}</Box>,
         },
 
         {
@@ -111,6 +148,7 @@ function TableUserManager(props) {
             headerAlign: 'center',
             align: 'center',
             flex: 1,
+            renderCell: (params) => <Box className="text-sm font-[500] text-slate-500">{params.row.phone}</Box>,
         },
         {
             field: 'status',

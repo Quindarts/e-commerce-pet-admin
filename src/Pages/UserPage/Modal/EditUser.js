@@ -1,4 +1,4 @@
-import { Box, Typography, alertClasses } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { Form, Formik } from 'formik'
 import Textfield from '../../../Components/ui/Textfield/Textfield'
@@ -13,6 +13,20 @@ import { Fragment } from 'react'
 import { CircularProgress } from '@mui/material'
 import Calendar from '../../../Components/ui/Calendar'
 import dayjs from 'dayjs'
+
+const GENDER_ENUM = {
+    MALE: 'MALE',
+    FEMALE: 'FEMALE',
+    OTHER: 'OTHER',
+    UNKNOWN: 'UNKNOWN',
+}
+
+const genderList = [
+    { title: 'Male', value: GENDER_ENUM.MALE },
+    { title: 'Female', value: GENDER_ENUM.FEMALE },
+    { title: 'Other', value: GENDER_ENUM.OTHER },
+    { title: 'Unknown', value: GENDER_ENUM.UNKNOWN },
+]
 
 export const SEARCH_ENUM = {
     ADMIN: 'admin',
@@ -54,7 +68,7 @@ const validationSchema = yup.object({
         ),
     district: yup
         .string()
-        .required('Required')
+        .required('District is required')
         .matches(
             /^[a-zA-ZàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ\s0-9]+$/,
             'District should only contain alphabets',
@@ -62,7 +76,7 @@ const validationSchema = yup.object({
 
     detail: yup
         .string()
-        .required('Required')
+        .required('Address detail is required')
         .matches(
             /^[a-zA-ZàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ\s0-9/,]+$/,
             'Detail should only contain alphabets',
@@ -70,7 +84,7 @@ const validationSchema = yup.object({
     phone: yup
         .string()
         .matches(/^0\d{9}$/, 'Must be 10 digits and start with 0')
-        .required('Required'),
+        .required('Phone number is required'),
     province: yup
         .string()
         .required('Province is required')
@@ -78,22 +92,15 @@ const validationSchema = yup.object({
             /^[a-zA-ZàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ\s]+$/,
             'Province should only contain alphabets',
         ),
-    birthday: yup
-        .date()
-        // .min(new Date(new Date().setFullYear(new Date().getFullYear() - 60)), 'You must be under 60 years old')
-        // .max(new Date(new Date().setFullYear(new Date().getFullYear() - 18)), 'You must be at least 18 years old')
-        .required('Required'),
+    birthday: yup.date().required('Required'),
+    gender: yup.string().required('Gender is required'),
 })
 
 function EditUser(props) {
     const { handleCloseEditUserModal, handleGetUsersByParams, id } = props
-    const [page, setPage] = useState(1)
-    const [keywords, setKeywords] = useState('')
-    const [typeSearch, setTypeSearch] = useState(SEARCH_ENUM.NAME)
     const [avatarSrc, setAvatarSrc] = useState('https://uko-react.vercel.app/static/avatar/001-man.svg')
     const [user, setUser] = useState(null)
     const [address, setAddress] = useState(null)
-    const [loading, setLoading] = useState(true)
     const initialValues = {
         firstName: user?.first_name,
         lastName: user?.last_name,
@@ -104,10 +111,10 @@ function EditUser(props) {
         province: address?.province?.provinceName,
         phone: user?.phone,
         birthday: dayjs(user?.dateOfBirth),
+        gender: user?.gender,
     }
     useEffect(() => {
         const getUserById = async () => {
-            setLoading(true)
             try {
                 const response = await client.get(`/users/${id}`)
                 setUser(response.user)
@@ -115,8 +122,6 @@ function EditUser(props) {
                 setAddress(addresses.address)
             } catch (error) {
                 console.error('Failed to fetch:', error)
-            } finally {
-                setLoading(false)
             }
         }
         getUserById()
@@ -130,6 +135,19 @@ function EditUser(props) {
             setSortedRoles([userRoleItem, ...otherRoles])
         }
     }, [user])
+    const [sortedGenders, setSortedGenders] = useState(genderList)
+    useEffect(() => {
+        if (user) {
+            let userGender = user.gender
+            if (userGender === null) {
+                userGender = GENDER_ENUM.UNKNOWN
+            }
+            const userGenderItem = genderList.find((item) => item.value === userGender)
+            const otherGenders = genderList.filter((item) => item.value !== userGender)
+            setSortedGenders([userGenderItem, ...otherGenders])
+        }
+    }, [user])
+
     const handleEditUser = (values, { setSubmitting }) => {
         const addressId = user.address[0]._id
         const userData = {
@@ -139,6 +157,7 @@ function EditUser(props) {
             email: values.email,
             phone: values.phone,
             dateOfBirth: values.birthday,
+            gender: values.gender,
         }
         const addressData = {
             detail: values.detail,
@@ -203,41 +222,7 @@ function EditUser(props) {
                     >
                         Edit User
                     </Typography>
-                    <Box display="flex" flexDirection={'column'} alignItems={'center'}>
-                        <Box
-                            position={'relative'}
-                            height={'120px'}
-                            width={'120px'}
-                            mb={3}
-                            sx={{ borderRadius: '50%', bgcolor: '#f3f3f9' }}
-                        >
-                            <img style={{ borderRadius: '50%' }} alt="" src={avatarSrc} />
-                            <Box
-                                sx={{ border: '3px solid white', backgroundColor: '#2499ef', cursor: 'pointer' }}
-                                borderRadius={'50%'}
-                                height={32}
-                                width={32}
-                                position={'absolute'}
-                                top={0}
-                                right={'4px'}
-                                color={'white'}
-                                display={'flex'}
-                                alignItems={'center'}
-                                justifyContent={'center'}
-                            >
-                                <label style={{ cursor: 'pointer' }}>
-                                    <Icon width={20} height={20} icon={APP_ICON.i_camera} />
-                                    <input
-                                        type="file"
-                                        style={{ display: 'none' }}
-                                        onChange={(event) => {
-                                            handleImageUpload(event)
-                                        }}
-                                    />
-                                </label>
-                            </Box>
-                        </Box>
-                    </Box>
+
                     <Box>
                         <Formik
                             initialValues={initialValues}
@@ -248,34 +233,88 @@ function EditUser(props) {
                                 <Form>
                                     <Box width="100%" display={'flex'} gap={2}>
                                         <Box my={1} flex={1}>
-                                            <Textfield
-                                                placeholder="First Name"
-                                                id="firstName"
-                                                type="text"
-                                                label="First Name"
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                value={values.firstName}
-                                                helperText={
-                                                    touched.firstName && errors.firstName ? errors.firstName : ''
-                                                }
-                                                error={touched.firstName && errors.firstName ? true : false}
-                                            />
+                                            <Box display="flex" flexDirection={'column'} alignItems={'center'}>
+                                                <Box
+                                                    position={'relative'}
+                                                    height={'70%'}
+                                                    width={'70%'}
+                                                    mb={1}
+                                                    mt={2}
+                                                    sx={{ borderRadius: '50%', bgcolor: '#f3f3f9' }}
+                                                >
+                                                    <img style={{ borderRadius: '50%' }} alt="" src={avatarSrc} />
+                                                    <Box
+                                                        sx={{
+                                                            border: '3px solid white',
+                                                            backgroundColor: '#2499ef',
+                                                            cursor: 'pointer',
+                                                        }}
+                                                        borderRadius={'50%'}
+                                                        height={32}
+                                                        width={32}
+                                                        position={'absolute'}
+                                                        top={0}
+                                                        right={'4px'}
+                                                        color={'white'}
+                                                        display={'flex'}
+                                                        alignItems={'center'}
+                                                        justifyContent={'center'}
+                                                    >
+                                                        <label style={{ cursor: 'pointer' }}>
+                                                            <Icon width={20} height={20} icon={APP_ICON.i_camera} />
+                                                            <input
+                                                                type="file"
+                                                                style={{ display: 'none' }}
+                                                                onChange={(event) => {
+                                                                    handleImageUpload(event)
+                                                                }}
+                                                            />
+                                                        </label>
+                                                    </Box>
+                                                </Box>
+                                            </Box>
                                         </Box>
                                         <Box my={1} flex={1}>
-                                            <Textfield
-                                                placeholder="Last Name"
-                                                id="lastName"
-                                                type="text"
-                                                label="Last Name"
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                value={values.lastName}
-                                                helperText={touched.lastName && errors.lastName ? errors.lastName : ''}
-                                                error={touched.lastName && errors.lastName ? true : false}
-                                            />
+                                            <Box my={2}>
+                                                <Textfield
+                                                    placeholder="First Name"
+                                                    id="firstName"
+                                                    type="text"
+                                                    label="First Name"
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    value={values.firstName}
+                                                    helperText={
+                                                        touched.firstName && errors.firstName ? errors.firstName : ''
+                                                    }
+                                                    error={touched.firstName && errors.firstName ? true : false}
+                                                />
+                                            </Box>
+                                            <Box my={2}>
+                                                <Textfield
+                                                    placeholder="Last Name"
+                                                    id="lastName"
+                                                    type="text"
+                                                    label="Last Name"
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    value={values.lastName}
+                                                    helperText={
+                                                        touched.lastName && errors.lastName ? errors.lastName : ''
+                                                    }
+                                                    error={touched.lastName && errors.lastName ? true : false}
+                                                />
+                                            </Box>
+                                            <Box>
+                                                <Dropdown
+                                                    key={sortedGenders.map((gender) => gender?.value).join(',')}
+                                                    list={sortedGenders}
+                                                    onChange={(e) => setFieldValue('gender', e.target.value)}
+                                                />
+                                            </Box>
                                         </Box>
                                     </Box>
+
                                     <Box width="100%" display={'flex'} gap={2}>
                                         <Box my={1} flex={1}>
                                             <Textfield
@@ -379,16 +418,16 @@ function EditUser(props) {
                                         </Box>
                                         <Box my={1} flex={1}>
                                             <Dropdown
-                                                key={sortedRoles.map((role) => role.value).join(',')}
+                                                key={sortedRoles.map((role) => role?.value).join(',')}
                                                 list={sortedRoles}
-                                                onChange={(e) => setTypeSearch(e.target.value)}
+                                                onChange={(e) => setFieldValue('gender', e.target.value)}
                                                 sx={{
                                                     pointerEvents: 'none',
                                                 }}
                                             />
                                         </Box>
                                     </Box>
-                                    <Box mt={2} sx={{ display: 'flex', gap: 2 }}>
+                                    <Box mt={1} sx={{ display: 'flex', gap: 2 }}>
                                         <Button
                                             onClick={handleCloseEditUserModal}
                                             sx={{ width: '50%' }}
