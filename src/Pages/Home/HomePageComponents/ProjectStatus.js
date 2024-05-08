@@ -136,9 +136,7 @@ const ProjectStatus = () => {
                 <Chart options={options} series={data} type="donut" className="mx-auto" />
             </Box>
             <Box className=" absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
-                <Typography className="sm:text-md mb-2 font-semibold text-gray-400 lg:text-sm">
-                    Avg Range
-                </Typography>
+                <Typography className="sm:text-md mb-2 font-semibold text-gray-400 lg:text-sm">Avg Range</Typography>
                 <Typography className="ml-3 font-semibold sm:text-3xl lg:text-3xl">140</Typography>
             </Box>
         </Box>

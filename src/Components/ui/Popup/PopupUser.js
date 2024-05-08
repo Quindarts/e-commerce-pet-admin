@@ -33,11 +33,13 @@ function shortenName(fullName, maxLength = 13) {
     if (fullName?.length <= maxLength) {
         return fullName
     }
-    if(fullName){
+    if (fullName) {
         var shortN = fullName[0]?.charAt(0)?.toUpperCase() + '.'
         return shortN
     }
-    fullName?.split('')?.map((w, k) => w === ' ' && k > 1 && (shortN += fullName[k + 1]?.charAt(0)?.toUpperCase() + '.'))
+    fullName
+        ?.split('')
+        ?.map((w, k) => w === ' ' && k > 1 && (shortN += fullName[k + 1]?.charAt(0)?.toUpperCase() + '.'))
     var resultShort = shortN.substring(0, shortN.length - 1)
     return resultShort
 }

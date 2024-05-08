@@ -4,6 +4,8 @@ const initialState = {
     currentUser: null,
     error: null,
     loading: false,
+    entity: {},
+    status: 'idle',
 }
 
 const userSlice = createSlice({

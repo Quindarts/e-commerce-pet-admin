@@ -111,7 +111,7 @@ function TableCategory(props) {
                     <Button
                         onClick={() => handleOpenDeleteModal(params.id)}
                         size="lg"
-                        color="grey"    
+                        color="grey"
                         variant="outline"
                         icon
                     >

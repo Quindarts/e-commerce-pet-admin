@@ -1,10 +1,10 @@
-import styled from "@emotion/styled";
-import { Box } from "@mui/material";
+import styled from '@emotion/styled'
+import { Box } from '@mui/material'
 
 export const CustomListProduct = styled(Box)`
     & .contain {
         width: 100%;
-        &__left{
+        &__left {
             @media (min-width: 1024px) {
                 width: 30%;
             }

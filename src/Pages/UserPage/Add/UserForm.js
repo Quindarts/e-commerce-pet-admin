@@ -11,6 +11,7 @@ import * as yup from 'yup'
 import client from '../../../services/api-context'
 import { enqueueSnackbar } from 'notistack'
 import { useReducer } from 'react'
+import { APP_ICON } from '../../../Utils/Constants'
 export const UserForm = (props) => {
     const { values, id } = props
     const [avatarSrc, setAvatarSrc] = useState('https://uko-react.vercel.app/static/avatar/001-man.svg')
@@ -27,6 +28,7 @@ export const UserForm = (props) => {
         province: '',
         phone: '',
         birthday: '',
+        gender: '',
     }
 
     //userReducer
@@ -46,7 +48,17 @@ export const UserForm = (props) => {
             }
         }
     }, [error])
+    const handleImageUpload = (event) => {
+        let file = event.target.files[0]
+        let reader = new FileReader()
+        reader.onloadend = () => {
+            setAvatarSrc(reader.result)
+        }
 
+        if (file) {
+            reader.readAsDataURL(file)
+        }
+    }
     const handleClear = () => {
         setSelectedDate({})
         setError('')
@@ -96,7 +108,7 @@ export const UserForm = (props) => {
             .string()
             .required('Ward is required')
             .matches(
-                /^[a-zA-ZàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ\s]+$/,
+                /^[a-zA-ZàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ\s0-9]+$/,
                 'Ward should only contain alphabets',
             ),
         district: yup
@@ -106,7 +118,6 @@ export const UserForm = (props) => {
                 /^[a-zA-ZàáãạảăắằẳẵặâấầẩẫậèéẹẻẽêềếểễệđìíĩỉịòóõọỏôốồổỗộơớờởỡợùúũụủưứừửữựỳỵỷỹýÀÁÃẠẢĂẮẰẲẴẶÂẤẦẨẪẬÈÉẸẺẼÊỀẾỂỄỆĐÌÍĨỈỊÒÓÕỌỎÔỐỒỔỖỘƠỚỜỞỠỢÙÚŨỤỦƯỨỪỬỮỰỲỴỶỸÝ\s0-9]+$/,
                 'District should only contain alphabets',
             ),
-
         detail: yup
             .string()
             .required('Required')
@@ -128,6 +139,7 @@ export const UserForm = (props) => {
         birthday: yup.object().shape({
             date: yup.date().nonNullable(true),
         }),
+        gender: yup.string().required('Gender is required'),
     })
 
     const handleAddUser = () => {
@@ -146,6 +158,7 @@ export const UserForm = (props) => {
                 dateOfBirth: values.birthday,
                 role: values.role,
                 avatar: avatarSrc,
+                gender: values.gender,
             }
 
             const addressData = {
@@ -196,32 +209,77 @@ export const UserForm = (props) => {
                 <Form>
                     <Box width="100%" display={'flex'} gap={2}>
                         <Box my={1} flex={1}>
-                            <Textfield
-                                name="firstName"
-                                placeholder="First Name"
-                                id="firstName"
-                                label="First Name"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.firstName}
-                                helperText={touched.firstName && errors.firstName ? errors.firstName : ''}
-                                error={touched.firstName && errors.firstName ? true : false}
-                            />
+                            <Box display="flex" flexDirection={'column'} alignItems={'center'}>
+                                <Box
+                                    position={'relative'}
+                                    height={'70%'}
+                                    width={'70%'}
+                                    mb={1}
+                                    mt={2}
+                                    sx={{ borderRadius: '50%', bgcolor: '#f3f3f9' }}
+                                >
+                                    <img style={{ borderRadius: '50%' }} alt="" src={avatarSrc} />
+                                    <Box
+                                        sx={{
+                                            border: '3px solid white',
+                                            backgroundColor: '#2499ef',
+                                            cursor: 'pointer',
+                                        }}
+                                        borderRadius={'50%'}
+                                        height={32}
+                                        width={32}
+                                        position={'absolute'}
+                                        top={0}
+                                        right={'4px'}
+                                        color={'white'}
+                                        display={'flex'}
+                                        alignItems={'center'}
+                                        justifyContent={'center'}
+                                    >
+                                        <label style={{ cursor: 'pointer' }}>
+                                            <Icon width={20} height={20} icon={APP_ICON.i_camera} />
+                                            <input
+                                                type="file"
+                                                style={{ display: 'none' }}
+                                                onChange={(event) => {
+                                                    handleImageUpload(event)
+                                                }}
+                                            />
+                                        </label>
+                                    </Box>
+                                </Box>
+                            </Box>
                         </Box>
                         <Box my={1} flex={1}>
-                            <Textfield
-                                placeholder="Last Name"
-                                id="lastName"
-                                label="Last Name"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.lastName}
-                                helperText={touched.lastName && errors.lastName ? errors.lastName : ''}
-                                error={touched.lastName && errors.lastName ? true : false}
-                            />
-                        </Box>
-                        <Box my={1} flex={1}>
-                            <Dropdown id="gender" list={genderList} size="xl" />
+                            <Box my={2}>
+                                <Textfield
+                                    placeholder="First Name"
+                                    id="firstName"
+                                    type="text"
+                                    label="First Name"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.firstName}
+                                    helperText={touched.firstName && errors.firstName ? errors.firstName : ''}
+                                    error={touched.firstName && errors.firstName ? true : false}
+                                />
+                            </Box>
+                            <Box my={2}>
+                                <Textfield
+                                    placeholder="Last Name"
+                                    id="lastName"
+                                    type="text"
+                                    label="Last Name"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.lastName}
+                                    helperText={touched.lastName && errors.lastName ? errors.lastName : ''}
+                                    error={touched.lastName && errors.lastName ? true : false}
+                                />
+                            </Box>
+                            <Box>
+                                <Dropdown id="gender" list={genderList} size="xl" />
+                            </Box>
                         </Box>
                     </Box>
                     <Box width="100%" display={'flex'} gap={2}>
@@ -356,4 +414,3 @@ export const UserForm = (props) => {
         </Formik>
     )
 }
-

@@ -19,6 +19,7 @@ function ModalAdd(props) {
     const [loading, setLoading] = useState(false)
 
     const handleSubmitAddForm = async (values, actions) => {
+        alert(values)
         setLoading(true)
         apiCreateCategory(values)
             .then((res) => {

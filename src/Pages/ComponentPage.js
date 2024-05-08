@@ -61,12 +61,12 @@ const warehouseItem = [
     'https://attribute.hstatic.net/200000312481/attribute/olc31002_1_c01afc3a5c614cb2880b3740179ed447_master.jpg',
     'https://attribute.hstatic.net/200000312481/attribute/aho2002_1_4c1c4e1db1ed4450b31da91840bf92d7_master.jpg',
 ]
-// const user = {
-//     firstName: 'Than Nguyen Thanh',
-//     lastName: 'Thien',
-//     avt: 'https://img.freepik.com/premium-vector/avatar-icon-smiley-face-man_1692-130.jpg',
-//     email: 'tntt@gmail.com',
-// }
+const user = {
+    firstName: 'Than Nguyen Thanh',
+    lastName: 'Thien',
+    avt: 'https://img.freepik.com/premium-vector/avatar-icon-smiley-face-man_1692-130.jpg',
+    email: 'tntt@gmail.com',
+}
 const listLanguage = [
     { title: 'Vietnamese', value: 'vi' },
     { title: 'English', value: 'en' },
@@ -416,7 +416,7 @@ function ComponentPage() {
             <Button onClick={handleCompleteClick}>Complete</Button>
             <Button onClick={handleResetClick}>Rest</Button>
             <h1 className="mt-3 font-bold">PopupUser</h1>
-            <Box></Box>
+            <Box>{/* <PopupUser user={user} /> */}</Box>
             <h1 className="mt-3 font-bold">PopupServ</h1>
             <Box>
                 <PopupServ avatars={avatars} names={names} />

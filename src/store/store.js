@@ -4,10 +4,12 @@ import storage from 'redux-persist/lib/storage'
 import appReducer from './app.slice'
 import categoryReducer from './category.slice'
 import userReducer from './userSlice'
+import usersReducer from './user.slice'
 import productReducer from './product.slice'
 import orderReducer from './order.slice'
 const rootReducer = combineReducers({
     user: userReducer,
+    users: usersReducer,
     app: appReducer,
     categorys: categoryReducer,
     products: productReducer,

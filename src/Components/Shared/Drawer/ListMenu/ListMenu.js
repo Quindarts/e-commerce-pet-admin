@@ -25,7 +25,7 @@ function ListMenu(props) {
             {/** Product  */}
 
             <ListItemButton
-                 onClick={() => {
+                onClick={() => {
                     navigate(APP_ROUTER.PRODUCT_LIST)
                     setOpenProduct(!openProduct)
                 }}
@@ -157,7 +157,6 @@ function ListMenu(props) {
             )}
             {/** User */}
             <ListItemButton
-          
                 onClick={() => {
                     navigate(APP_ROUTER.USER_LIST)
                     setOpenUser(!openUser)

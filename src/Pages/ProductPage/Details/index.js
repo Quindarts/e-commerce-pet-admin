@@ -1,9 +1,7 @@
 import React from 'react'
 
 function DetailProductPage() {
-  return (
-    <div>DetailProductPage</div>
-  )
+    return <div>DetailProductPage</div>
 }
 
 export default DetailProductPage
