@@ -59,7 +59,7 @@ const TableOrder = (props) => {
             flex: 1,
             headerAlign: 'center',
             align: 'center',
-            renderCell: (params) => <Box>{params.row.dateCreated}</Box>,
+            renderCell: (params) => <Box>{new Date(params.row.dateCreated).toISOString().slice(0, 10)}</Box>,
         },
 
         {
