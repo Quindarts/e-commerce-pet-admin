@@ -86,7 +86,6 @@ const validationSchema = yup.object({
 })
 
 function EditUser(props) {
-    
     const { handleCloseEditUserModal, handleGetUsersByParams, id } = props
     const [page, setPage] = useState(1)
     const [keywords, setKeywords] = useState('')
@@ -95,7 +94,17 @@ function EditUser(props) {
     const [user, setUser] = useState(null)
     const [address, setAddress] = useState(null)
     const [loading, setLoading] = useState(true)
-
+    const initialValues = {
+        firstName: user?.first_name,
+        lastName: user?.last_name,
+        email: user?.email,
+        detail: address?.detail,
+        ward: address?.ward?.wardName,
+        district: address?.district?.districtName,
+        province: address?.province?.provinceName,
+        phone: user?.phone,
+        birthday: dayjs(user?.dateOfBirth),
+    }
     useEffect(() => {
         const getUserById = async () => {
             setLoading(true)
@@ -121,7 +130,56 @@ function EditUser(props) {
             setSortedRoles([userRoleItem, ...otherRoles])
         }
     }, [user])
-
+    const handleEditUser = (values, { setSubmitting }) => {
+        const addressId = user.address[0]._id
+        const userData = {
+            _id: user._id,
+            first_name: values.firstName,
+            last_name: values.lastName,
+            email: values.email,
+            phone: values.phone,
+            dateOfBirth: values.birthday,
+        }
+        const addressData = {
+            detail: values.detail,
+            ward: {
+                wardName: values.ward,
+            },
+            district: {
+                districtName: values.district,
+            },
+            province: {
+                provinceName: values.province,
+            },
+            country: 'VietNam',
+        }
+        const userRequest = client.post(`/users/${id}`, userData).catch((error) => {
+            console.error('User request error:', error)
+            throw error
+        })
+        const addressRequest = client.put(`/addresses/${addressId}`, addressData).catch((error) => {
+            console.error('Address request error:', error)
+            throw error
+        })
+        Promise.all([userRequest, addressRequest])
+            .then((responses) => {
+                const userResponse = responses[0]
+                const addressResponse = responses[1]
+                setSubmitting(false)
+                handleGetUsersByParams()
+                handleCloseEditUserModal()
+                enqueueSnackbar('Update user successful', {
+                    variant: 'success',
+                })
+            })
+            .catch((error) => {
+                console.error(error)
+                setSubmitting(false)
+                enqueueSnackbar('Fail to update user', {
+                    variant: 'error',
+                })
+            })
+    }
     const handleImageUpload = (event) => {
         let file = event.target.files[0]
         let reader = new FileReader()
@@ -182,80 +240,9 @@ function EditUser(props) {
                     </Box>
                     <Box>
                         <Formik
-                            initialValues={{
-                                firstName: user.first_name || '',
-                                lastName: user.last_name || '',
-                                email: user.email || '',
-                                detail: address.detail || '',
-                                ward: address?.ward?.wardName || '',
-                                district: address?.district?.districtName || '',
-                                province: address?.province?.provinceName || '',
-                                phone: user.phone || '',
-                                birthday: dayjs(user.dateOfBirth) || '',
-                            }}
+                            initialValues={initialValues}
                             validationSchema={validationSchema}
-                            onSubmit={(values, { setSubmitting }) => {
-                                const addressId = user.address[0]._id
-                                console.log(values.birthday)
-                                const userData = {
-                                    _id: user._id,
-                                    first_name: values.firstName,
-                                    last_name: values.lastName,
-                                    email: values.email,
-                                    phone: values.phone,
-                                    dateOfBirth: values.birthday,
-                                }
-
-                                console.log(values.birthday)
-                                console.log(userData.dateOfBirth)
-                                const addressData = {
-                                    detail: values.detail,
-                                    ward: {
-                                        wardName: values.ward,
-                                    },
-                                    district: {
-                                        districtName: values.district,
-                                    },
-                                    province: {
-                                        provinceName: values.province,
-                                    },
-                                    country: 'VietNam',
-                                }
-                                console.log('value.birthday', values.birthday)
-                                const userRequest = client.post(`/users/${id}`, userData).catch((error) => {
-                                    console.log(userData)
-                                    console.log(id)
-                                    console.error('User request error:', error)
-                                    throw error
-                                })
-                                const addressRequest = client
-                                    .put(`/addresses/${addressId}`, addressData)
-                                    .catch((error) => {
-                                        console.error('Address request error:', error)
-                                        throw error
-                                    })
-                                    
-                                Promise.all([userRequest, addressRequest])
-                                    .then((responses) => {
-                                        const userResponse = responses[0]
-                                        const addressResponse = responses[1]
-                                        console.log(userResponse)
-                                        console.log(addressResponse)
-                                        setSubmitting(false)
-                                        handleGetUsersByParams()
-                                        handleCloseEditUserModal()
-                                        enqueueSnackbar('Update successful', {
-                                            variant: 'success',
-                                        })
-                                    })
-                                    .catch((error) => {
-                                        console.error(error)
-                                        setSubmitting(false)
-                                        enqueueSnackbar('Fail to update', {
-                                            variant: 'error',
-                                        })
-                                    })
-                            }}
+                            onSubmit={handleEditUser}
                         >
                             {({ setFieldValue, handleBlur, handleChange, values, errors, touched }) => (
                                 <Form>
@@ -317,7 +304,6 @@ function EditUser(props) {
                                                     setFieldValue('birthday', newValue)
                                                 }}
                                                 error={touched.birthday && errors.birthday ? true : false}
-                                                // helperText={touched.birthday && errors.birthday ? errors.birthday : ''}
                                             />
                                         </Box>
                                     </Box>

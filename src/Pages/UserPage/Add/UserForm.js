@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form, Formik, useFormikContext } from 'formik'
 import Textfield from '../../../Components/ui/Textfield/Textfield'
 import Button from '../../../Components/ui/Button/Button'
@@ -10,31 +10,63 @@ import Dropdown from '../../../Components/ui/Dropdown/Dropdown'
 import * as yup from 'yup'
 import client from '../../../services/api-context'
 import { enqueueSnackbar } from 'notistack'
-
+import { useReducer } from 'react'
 export const UserForm = (props) => {
     const { values, id } = props
     const [avatarSrc, setAvatarSrc] = useState('https://uko-react.vercel.app/static/avatar/001-man.svg')
     const [user, setUser] = useState(null)
     const [selectedDate, setSelectedDate] = useState(values?.birthday)
     const [error, setError] = React.useState(null)
-    const errorMessage = React.useMemo(() => {
-        switch (error) {
-            case 'maxDate': {
-                return 'User need to be at least 18 years olds'
-            }
-            case 'minDate': {
-                return 'User need to be at most 60 years olds'
-            }
-            case 'required': {
+    const initialValues = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        detail: '',
+        ward: '',
+        district: '',
+        province: '',
+        phone: '',
+        birthday: '',
+    }
+
+    //userReducer
+    // const errorMessage = React.useMemo(() => {
+    //     switch (action.type) {
+    //         case 'maxDate': {
+    //             return 'User need to be at least 18 years olds'
+    //         }
+    //         case 'minDate': {
+    //             return 'User need to be at most 60 years olds'
+    //         }
+    //         case 'required': {
+    //             return 'Birthday missing.'
+    //         }
+    //         default: {
+    //             return ''
+    //         }
+    //     }
+    // }, [error])
+    const errorReducer = (state, action) => {
+        switch (action.type) {
+            case 'maxDate':
+                return 'User need to be at least 18 years old'
+            case 'minDate':
+                return 'User need to be at most 60 years old'
+            case 'required':
                 return 'Birthday missing.'
-            }
-            default: {
+            default:
                 return ''
-            }
         }
-    }, [error])
+    }
+
+    // const initialErrorMessageState = { errorMessage: '' }
+    const [errorMessageState, dispatchErrorMessage] = React.useReducer(errorReducer, '')
+    useEffect(() => {
+        // dispatchErrorMessage({ type: 'maxDate' })
+        console.log(errorMessageState.errorMessage)
+    }, [])
     const handleClear = () => {
-        setSelectedDate('')
+        setSelectedDate({})
         setError('')
     }
     const minDate = dayjs().subtract(60, 'year')
@@ -109,7 +141,7 @@ export const UserForm = (props) => {
         }),
     })
 
-    const handleSubmit = () => {
+    const handleAddUser = () => {
         if (values === undefined) {
             setError('required')
         }
@@ -171,21 +203,7 @@ export const UserForm = (props) => {
         }
     }
     return (
-        <Formik
-            initialValues={{
-                firstName: '',
-                lastName: '',
-                email: '',
-                detail: '',
-                ward: '',
-                district: '',
-                province: '',
-                phone: '',
-                birthday: '',
-            }}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-        >
+        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleAddUser}>
             {({ setFieldValue, handleBlur, handleChange, values, errors, touched }) => (
                 <Form>
                     <Box width="100%" display={'flex'} gap={2}>
@@ -243,11 +261,15 @@ export const UserForm = (props) => {
                                     setFieldValue('birthday', newValue)
                                 }}
                                 views={['month', 'day', 'year']}
-                                onError={(newError) => setError(newError)}
+                                onError={(newError) => {
+                                    if (newError) {
+                                        dispatchErrorMessage({ type: newError.type })
+                                    }
+                                }}
                                 slotProps={{
                                     textField: {
-                                        helperText: errorMessage,
-                                        error: errorMessage !== '' ? true : false,
+                                        helperText: errorMessageState,
+                                        error: errorMessageState !== '',
                                     },
                                     field: {
                                         clearable: true,
@@ -337,7 +359,7 @@ export const UserForm = (props) => {
                             Clear
                         </Button>
 
-                        <Button onClick={handleSubmit} type="submit" sx={{ width: '50%' }} color="primary">
+                        <Button onClick={handleAddUser} type="submit" sx={{ width: '50%' }} color="primary">
                             <Icon width={20} style={{ marginRight: 4 }} icon="iconamoon:edit" />
                             Create User
                         </Button>
