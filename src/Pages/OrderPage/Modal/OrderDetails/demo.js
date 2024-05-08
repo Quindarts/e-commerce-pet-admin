@@ -169,7 +169,7 @@
 //                         </Box>
 
 //                         <Box sx={Row}>
-//                             <Table
+//                             {/* <Table
 //                                 hasCheckbox
 //                                 hasPanigation
 //                                 sx={{ width: '100%' }}
@@ -179,7 +179,7 @@
 //                                 pageSize={3}
 //                                 currentPage={page}
 //                                 handleChangePanigation={handleChangePanigation}
-//                             />
+//                             /> */}
 //                         </Box>
 //                         <Box sx={Row}>
 //                             <Box sx={sb77p4}>

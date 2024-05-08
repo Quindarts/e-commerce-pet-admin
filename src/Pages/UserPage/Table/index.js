@@ -78,7 +78,7 @@ function TableUserManager(props) {
             flex: 1,
             headerAlign: 'center',
             align: 'center',
-            renderCell: (params) => <Box className="text-sm font-[500] text-slate-500">{params.formattedValue}</Box>,
+            renderCell: (params) => <Box className="text-sm font-[500] text-slate-500">{params.row.address}</Box>,
         },
 
         {
@@ -87,6 +87,7 @@ function TableUserManager(props) {
             headerAlign: 'center',
             align: 'center',
             flex: 1,
+            renderCell: (params) => <Box className="text-sm font-[500] text-slate-500">{params.row.dateOfBirth}</Box>,
         },
 
         {
@@ -95,6 +96,7 @@ function TableUserManager(props) {
             headerAlign: 'center',
             align: 'center',
             flex: 1,
+            renderCell: (params) => <Box className="text-sm font-[500] text-slate-500">{params.row.phone}</Box>,
         },
         {
             field: 'status',
