@@ -15,8 +15,8 @@ const TableOrder = (props) => {
     const [value, setValue] = React.useState(2)
     const [openOrderModal, setOpenOrderModal] = useState({ isOpen: false, order_id: '' })
 
-    const handleOpenOrderDetails = (id) => {
-        setOpenOrderModal({ isOpen: true, order_id: id })
+    const handleOpenOrderDetails = (id, option) => {
+        setOpenOrderModal({ isOpen: true, order_id: id, size: option })
     }
 
     const handleCloseOrderDetails = () => {
@@ -89,7 +89,7 @@ const TableOrder = (props) => {
                 <Box>
                     <Button
                         onClick={() => {
-                            handleOpenOrderDetails(params.row.id)
+                            handleOpenOrderDetails(params.row.id, 'md')
                         }}
                         size="lg"
                         color="grey"
@@ -114,7 +114,12 @@ const TableOrder = (props) => {
                 rows={renderTableOrder}
                 handleChangePanigation={handleChangePanigation}
             />
-            <Modal onClose={handleCloseOrderDetails} open={openOrderModal.isOpen}>
+            <Modal
+                fullwidth={false}
+                maxWidth={openOrderModal.size}
+                onClose={handleCloseOrderDetails}
+                open={openOrderModal.isOpen}
+            >
                 <OrderDetails
                     order_id={openOrderModal.order_id}
                     handleOpenOrderDetails={handleOpenOrderDetails}

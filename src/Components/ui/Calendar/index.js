@@ -1,10 +1,10 @@
-import * as React from 'react'
 import { COLOR } from '../../../Utils/Constants'
 import { StyledPickersLayout } from './style'
 import { DesktopDatePicker } from '@mui/x-date-pickers'
 import { Typography, Box, TextField, Button } from '@mui/material'
 import { TextFieldCustomMUI } from '../Textfield/style'
 import { StyledTextField } from './style'
+import React, { useEffect } from 'react'
 
 function Calendar(props) {
     const {
@@ -23,7 +23,7 @@ function Calendar(props) {
     const [selectedDate, setSelectedDate] = React.useState(value || defaultValue)
     const [hasError, setHasError] = React.useState(false)
 
-    React.useEffect(() => {
+    useEffect(() => {
         setSelectedDate(value || defaultValue)
     }, [value, defaultValue])
 

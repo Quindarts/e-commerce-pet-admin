@@ -15,9 +15,9 @@ const useUser = () => {
             dispatch(setLoading(true))
         }
         if (fetchUserById.fulfilled.match(resultAction)) {
-            enqueueSnackbar(`Welcome back ${resultAction.payload.first_name} ${resultAction.payload.last_name}`, {
-                variant: 'success',
-            })
+            // enqueueSnackbar(`Welcome back ${resultAction.payload.first_name} ${resultAction.payload.last_name}`, {
+            //     variant: 'success',
+            // })
             dispatch(setLoading(false))
         }
         if (fetchUserById.rejected.match(resultAction)) {
