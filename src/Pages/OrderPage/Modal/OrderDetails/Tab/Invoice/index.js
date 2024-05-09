@@ -2,7 +2,6 @@ import { Box, Icon, Typography } from '@mui/material'
 import React from 'react'
 import TableInvoice from './Table'
 import Button from '../../../../../../Components/ui/Button/Button'
-import Textfield from '../../../../../../Components/ui/Textfield/Textfield'
 import { COLOR } from '../../../../../../Utils/Constants'
 
 function InvoiceTab(props) {
