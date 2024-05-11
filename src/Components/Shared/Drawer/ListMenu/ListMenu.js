@@ -117,7 +117,6 @@ function ListMenu(props) {
             <ListItemButton
                 onClick={() => {
                     navigate(APP_ROUTER.ORDER_LIST)
-                    setOpenOrder(!openOrder)
                 }}
             >
                 <ListItemIcon>
@@ -132,7 +131,12 @@ function ListMenu(props) {
             {checkDetailTitle && (
                 <Collapse id="order_item" in={openOrder} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
-                        <ListItemButton sx={{ pl: 4 }}>
+                        <ListItemButton
+                            onClick={() => {
+                                navigate(APP_ROUTER.ADD_PRODUCT)
+                            }}
+                            sx={{ pl: 4 }}
+                        >
                             <ListItemIcon>
                                 <Icon width={20} icon="system-uicons:create" />
                             </ListItemIcon>
