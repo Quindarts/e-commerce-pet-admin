@@ -96,7 +96,7 @@ const ListOrderPage = () => {
                 </Box>
             </Box>
             <Box>
-                <TableOrder
+                <TableOrder 
                     page={currentPage}
                     totalPage={totalPage}
                     renderTableOrder={formatTableOrder(renderTableOrder)}

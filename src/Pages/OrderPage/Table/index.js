@@ -114,7 +114,7 @@ const TableOrder = (props) => {
                 rows={renderTableOrder}
                 handleChangePanigation={handleChangePanigation}
             />
-            <Modal onClose={handleCloseOrderDetails} open={openOrderModal.isOpen}>
+            <Modal  onClose={handleCloseOrderDetails} open={openOrderModal.isOpen}>
                 <OrderDetails
                     order_id={openOrderModal.order_id}
                     handleOpenOrderDetails={handleOpenOrderDetails}

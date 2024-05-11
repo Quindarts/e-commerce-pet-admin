@@ -20,7 +20,7 @@ function TabOrder({ order_details }) {
         <>
             <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                 <Tab label="Order Details" />
-                <Tab label="Invoice" />
+                <Tab label="Invoice" /> 
             </Tabs>
             <DetailOrderTab value={value} index={0} order_details={order_details} />
             <InvoiceTab value={value} index={1} order_details={order_details} />

@@ -11,7 +11,7 @@ function InvoiceTab(props) {
         <Box
             role="tabpanel"
             hidden={value !== index}
-            id={`simple-tabpanel-${index}`}
+            id={`simple-tabpanel-${index}`} 
             aria-labelledby={`simple-tab-${index}`}
             {...other}
         >
@@ -24,7 +24,7 @@ function InvoiceTab(props) {
                         {order_details?.code}
                     </Typography>
                 </Box>
-                <Box className="mx-auto max-w-[580px] justify-center px-8 py-9" mx={2} mb={3} mt={1}>
+                <Box className="mx-auto max-w-[600px] justify-center px-8 py-9" mx={2} mb={3} mt={1}>
                     <Box sx={{ fontWeight: 500 }} my={1} width="100%" display={'flex'} gap={2}>
                         <Box flex={1}>Bill to:</Box>
                         <Box flex={1} sx={{ textAlign: 'right' }}>
@@ -71,7 +71,7 @@ function InvoiceTab(props) {
                     </Box>
                 </Box>
                 <TableInvoice />
-                <Box className="mx-auto max-w-[580px] justify-center px-8 py-9" mx={2} mt={1}>
+                <Box className="mx-auto max-w-[600px] justify-center px-8 py-9" mx={2} mt={1}>
                     <Box>
                         <Box width="100%" display={'flex'} gap={2}>
                             <Box flex={1}>
@@ -108,7 +108,6 @@ function InvoiceTab(props) {
                                     <Box display={'flex'}>
                                         <Box sx={{ fontWeight: 500 }}> Status</Box>
                                     </Box>
-
                                     <Box flex={1} sx={{ textAlign: 'right' }}>
                                         <Box sx={{ color: COLOR.gray_600 }}>{order_details?.status}</Box>
                                     </Box>
