@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Box } from '@mui/material'
 import Button from '../../../Components/ui/Button/Button.js'
-import ListOrderPageTable from '../Table/index.js'
 import SearchBar from '../../../Components/ui/Search/SearchBar.js'
 import { APP_ROUTER } from '../../../Utils/Constants.js'
 import { useNavigate } from 'react-router-dom'
@@ -12,7 +11,6 @@ import Title from '../../../Components/ui/Title/Title.js'
 import useOrder from '../../../hook/api/order.js'
 import { formatTableOrder } from '../../../Utils/helper.js'
 import TableOrder from '../Table/index.js'
-import OrderDetails from '../Modal/OrderDetails/demo.js'
 export const SEARCH_ENUM = {
     NAME: 'name',
     CODE: 'code',
@@ -96,7 +94,7 @@ const ListOrderPage = () => {
                 </Box>
             </Box>
             <Box>
-                <TableOrder 
+                <TableOrder
                     page={currentPage}
                     totalPage={totalPage}
                     renderTableOrder={formatTableOrder(renderTableOrder)}

@@ -52,6 +52,7 @@ function TableInvoice() {
             sx={{ width: '100%' }}
             columns={columns}
             rows={rows}
+            rowHeight={54}
             totalPage={3}
             pageSize={3}
             currentPage={page}

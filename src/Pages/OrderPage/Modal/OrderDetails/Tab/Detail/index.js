@@ -28,8 +28,21 @@ function DetailOrderTab(props) {
                 </Typography>
             </Box>
             <Box>
-                <Box width={'100%'} sx={{ display: 'flex', padding: '0 8% 0 15%' }}>
-                    <Box sx={{ justifyContent: 'center', textAlign: 'left' }} width={'33.3%'}>
+                <Box minHeight={160} width={'100%'} justifyContent={'center'} display={'flex'} gap={5} px={4}>
+                    <Box display="flex" gap={2}>
+                        <Box>
+                            <Avatar size="lg" alt="User Avatar" border={true} src={user?.user_detail?.avatar?.url} />
+                        </Box>
+                        <Box>
+                            <Typography fontSize={14} fontWeight="600">
+                                {order_details?.shipping_detail?.fullName}
+                            </Typography>{' '}
+                            <Typography fontSize={12} color="gray">
+                                {order_details?.shipping_detail?.email}
+                            </Typography>
+                        </Box>
+                    </Box>
+                    <Box sx={{ textAlign: 'left' }} width="w-1/4-gap-5">
                         <Typography mb={2} fontSize={14} fontWeight="bold">
                             Order From
                         </Typography>
@@ -43,7 +56,7 @@ function DetailOrderTab(props) {
                             + {order_details?.shipping_detail?.phone}
                         </Typography>
                     </Box>
-                    <Box sx={{ justifyContent: 'center', textAlign: 'left' }} width={'33.3%'}>
+                    <Box sx={{ justifyContent: 'center', textAlign: 'left' }} width="w-1/4-gap-5">
                         <Typography mb={2} fontSize={14} fontWeight="bold">
                             Payment Method
                         </Typography>
@@ -57,7 +70,7 @@ function DetailOrderTab(props) {
                             Status: {order_details?.status}
                         </Typography>
                     </Box>
-                    <Box sx={{ justifyContent: 'center', textAlign: 'left' }} width={'33.3%'}>
+                    <Box sx={{ justifyContent: 'center', textAlign: 'left' }} width="w-1/4-gap-5">
                         <Typography mb={2} fontSize={14} fontWeight="bold">
                             Billing Address
                         </Typography>
@@ -71,19 +84,6 @@ function DetailOrderTab(props) {
                             Country:{'   '} {order_details?.shipping_detail?.address?.country}
                         </Typography>
                     </Box>
-                </Box>
-            </Box>
-            <Box display="flex" mb={2} mt={1} ml={2} alignItems={'center'} gap={2}>
-                <Box>
-                    <Avatar size="md" alt="User Avatar" border="false" src={user.user_detail.avatar?.url} />
-                </Box>
-                <Box>
-                    <Typography fontSize={14} fontWeight="600">
-                        {order_details?.shipping_detail?.fullName}
-                    </Typography>{' '}
-                    <Typography fontSize={12} color="gray">
-                        {order_details?.shipping_detail?.email}
-                    </Typography>
                 </Box>
             </Box>
         </Box>

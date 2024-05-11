@@ -14,6 +14,7 @@ function Table(props) {
         className,
         height,
         label,
+        rowHeight = 80,
         handleChangePanigation,
         ...rest
     } = props
@@ -22,16 +23,16 @@ function Table(props) {
             {label && <Typography className="text-[1rem] font-bold text-[#464f6c]">{label}</Typography>}
             <CustomTable
                 {...rest}
-                rowHeight={80}
+                rowHeight={rowHeight}
                 className={`${className} border-none`}
                 checkboxSelection={hasCheckbox}
                 // autoHeight={true}
-                sx={{ height: 80 * (pageSize + 2) }}
+                sx={{ height: rowHeight * (pageSize + 2) }}
                 slots={{ noRowsOverlay: CustomNoRowsOverlay }}
                 hideFooter
             />
 
-            <Box className="mt-4 flex w-full items-center justify-end">
+            <Box display={'flex'} width={'full'} justifyContent={'end'} sx={{ mt: 2 }}>
                 {hasPanigation && (
                     <Pagination
                         count={totalPage}
