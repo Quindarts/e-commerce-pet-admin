@@ -1,7 +1,4 @@
 import React from 'react'
-
-import { qdmdb7, us4jxz, sb77p4, flexAlign } from './style'
-
 import { Box, Grid, Tab, Tabs, Typography } from '@mui/material'
 import DetailOrderTab from './Detail'
 import InvoiceTab from './Invoice'

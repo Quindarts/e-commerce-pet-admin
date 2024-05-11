@@ -325,16 +325,16 @@ export const UserForm = (props) => {
                     </Box>
                     <Box width="100%" display={'flex'} gap={2}>
                         <Box my={1} flex={1}>
-                            <Textfield
-                                placeholder="example@gmail.com"
-                                id="email"
-                                label="Email"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.email}
-                                helperText={touched.email && errors.email ? errors.email : ''}
-                                error={touched.email && errors.email ? true : false}
-                            />
+                                <Textfield
+                                    placeholder="example@gmail.com"
+                                    id="email"
+                                    label="Email"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.email}
+                                    helperText={touched.email && errors.email ? errors.email : ''}
+                                    error={touched.email && errors.email ? true : false}
+                                />
                         </Box>
                         <Box my={1} flex={1}>
                             <Textfield

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Table from '../../../../../../../Components/ui/Table/Table'
 import { COLOR } from '../../../../../../../Utils/Constants'
+import { Box } from '@mui/material'
 
 function TableInvoice() {
     const rows = [
@@ -19,18 +20,24 @@ function TableInvoice() {
             field: 'price',
             headerName: 'Price',
             flex: 0.5,
+            align: 'center',
+            headerAlign: 'center',
             renderCell: (params) => <strong style={{ color: COLOR.dark_indigo }}>{params.value}</strong>,
         },
         {
             field: 'quantity',
             headerName: 'Quantity',
             flex: 0.5,
+            align: 'center',
+            headerAlign: 'center',
             renderCell: (params) => <strong style={{ color: COLOR.dark_indigo }}>{params.value}</strong>,
         },
         {
             field: 'total',
             headerName: 'Total',
             flex: 0.5,
+            align: 'center',
+            headerAlign: 'center',
             renderCell: (params) => <strong style={{ color: COLOR.dark_indigo }}>{params.value}</strong>,
         },
     ]
@@ -41,7 +48,6 @@ function TableInvoice() {
     }
     return (
         <Table
-            hasCheckbox
             hasPanigation
             sx={{ width: '100%' }}
             columns={columns}

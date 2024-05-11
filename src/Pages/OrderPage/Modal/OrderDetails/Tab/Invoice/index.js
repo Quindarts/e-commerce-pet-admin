@@ -2,7 +2,6 @@ import { Box, Icon, Typography } from '@mui/material'
 import React from 'react'
 import TableInvoice from './Table'
 import Button from '../../../../../../Components/ui/Button/Button'
-import Textfield from '../../../../../../Components/ui/Textfield/Textfield'
 import { COLOR } from '../../../../../../Utils/Constants'
 
 function InvoiceTab(props) {
@@ -14,9 +13,10 @@ function InvoiceTab(props) {
             id={`simple-tabpanel-${index}`} 
             aria-labelledby={`simple-tab-${index}`}
             {...other}
+            mx={2}
         >
-            <Box sx={{ p: 3 }}>
-                <Box alignItems={'center'} display={'flex'} sx={{ fontWeight: 500 }}>
+            <Box>
+                <Box mt={2} alignItems={'center'} display={'flex'} sx={{ fontWeight: 500 }}>
                     <Typography fontWeight="bold" fontSize={20}>
                         Invoice #{'\u00A0'}
                     </Typography>
@@ -24,7 +24,7 @@ function InvoiceTab(props) {
                         {order_details?.code}
                     </Typography>
                 </Box>
-                <Box className="mx-auto max-w-[600px] justify-center px-8 py-9" mx={2} mb={3} mt={1}>
+                <Box className="mx-auto max-w-[580px] justify-center px-8 py-9" mx={2} mb={3} mt={1}>
                     <Box sx={{ fontWeight: 500 }} my={1} width="100%" display={'flex'} gap={2}>
                         <Box flex={1}>Bill to:</Box>
                         <Box flex={1} sx={{ textAlign: 'right' }}>
@@ -71,12 +71,10 @@ function InvoiceTab(props) {
                     </Box>
                 </Box>
                 <TableInvoice />
-                <Box className="mx-auto max-w-[600px] justify-center px-8 py-9" mx={2} mt={1}>
+                <Box className="mx-auto max-w-[580px] justify-center px-8 py-9" mx={2} mt={1}>
                     <Box>
-                        <Box width="100%" display={'flex'} gap={2}>
-                            <Box flex={1}>
-                                {/* <Textfield placeholder="First Name" id="firstName" type="text" label="First Name" /> */}
-                            </Box>
+                        <Box width="100%" display={'flex'} gap={30}>
+                            <Box flex={1}></Box>
                             <Box sx={{ fontWeight: 400 }} flex={1}>
                                 <Box my={1} width="100%" display={'flex'} gap={2}>
                                     <Box flex={1}>Subtotal</Box>
@@ -112,7 +110,7 @@ function InvoiceTab(props) {
                                         <Box sx={{ color: COLOR.gray_600 }}>{order_details?.status}</Box>
                                     </Box>
                                 </Box>
-                                <Box my={1} width="100%" display={'flex'} justifyContent="space-between">
+                                <Box my={2} width="100%" display={'flex'} justifyContent="space-between">
                                     <Button flex={1} color="primary" variant="outline">
                                         PDF
                                     </Button>

@@ -13,6 +13,7 @@ import Dropdown from '../../../Components/ui/Dropdown/Dropdown.js'
 import Modal from '../../../Components/ui/Modal/Modal.js'
 import { Icon } from '@iconify/react'
 import Title from '../../../Components/ui/Title/Title.js'
+import { ProductForm } from './ProductForm.js'
 
 const ICON_PRODVIDER_RANDOM = [
     'fluent-emoji-flat--man-pouting-light',
@@ -156,80 +157,8 @@ const AddProductPage = () => {
                 </Box>
                 Adding New product
             </Typography>
-
-            <Box className="my-7 flex items-start gap-7 ">
-                <Box sx={Card}>
-                    <Title icon={'noto-v1:information'} className="mb-5">
-                        Basic infomation
-                    </Title>
-
-                    <Box className="flex flex-wrap items-center gap-5">
-                        <Textfield placeholder="Name" id="name" type="text" label="Name" className="w-1/2-gap-5" />
-                        <Box className="flex w-1/2-gap-5 gap-5">
-                            <Dropdown list={brand} size="xl" />
-                            <Dropdown list={category} size="xl" />
-                        </Box>
-
-                        <Box className="flex w-full gap-5">
-                            <Textfield
-                                placeholder="Bought Price"
-                                id="bought"
-                                label="Bought Price"
-                                className="w-1/2-gap-5"
-                            />
-                            <Textfield placeholder="Sell Price" id="sell" label="Sell Price" className=" w-1/2-gap-5" />
-                        </Box>
-                        <Dropdown list={attributeList} />
-                        <Textfield placeholder="Some tags" id="" className="w-full" label="Tags" />
-                    </Box>
-                </Box>
-                <Box sx={Card}>
-                    <Title icon={'fxemoji:deliverytruck'} className="mb-5">
-                        Details{' '}
-                    </Title>
-                    <Box className="flex w-full flex-wrap gap-5">
-                        <Textfield className="w-full" placeholder="Stock" id="stock" type="number" label="Stock" />
-                        <Box className="flex w-full flex-wrap gap-5">
-                            <Textfield
-                                placeholder="... cm"
-                                id="Width"
-                                type="number"
-                                label="Width"
-                                className="w-1/2-gap-5"
-                            />
-                            <Textfield
-                                placeholder="... cm"
-                                id="Height"
-                                type="number"
-                                label="Height"
-                                className="w-1/2-gap-5"
-                            />
-                        </Box>
-                        <Box className="flex w-full flex-wrap gap-5">
-                            <Textfield
-                                placeholder="... cm"
-                                id="Length"
-                                type="number"
-                                label="Length"
-                                className="w-1/2-gap-5"
-                            />
-                            <Textfield
-                                placeholder="... gram"
-                                id="Weight"
-                                type="number"
-                                label="Weight"
-                                className="w-1/2-gap-5"
-                            />
-                        </Box>
-                        <Textfield
-                            placeholder="Description"
-                            id="description"
-                            type="text"
-                            label="Description"
-                            className=" w-full"
-                        />
-                    </Box>
-                </Box>
+            <Box className="my-7">
+                <ProductForm />
             </Box>
             <Box className="my-7">
                 <InputUpload className=" h-1 " />

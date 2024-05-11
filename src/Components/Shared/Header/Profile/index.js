@@ -33,7 +33,7 @@ function Profile() {
                         border={true}
                         size="lg"
                     >
-                        <Avatar src={user?.avatar?.url} size="lg" alt="User Avatar" border="false" />
+                        <Avatar  src={user?.avatar?.url} size="lg" alt="User Avatar" border="false" />
                     </BadgeWrapper>
                     <Typography className="text-[16px] font-semibold">
                         {`${user?.first_name} ${user?.last_name}`}
