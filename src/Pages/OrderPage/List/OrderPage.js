@@ -37,7 +37,7 @@ const ListOrderPage = () => {
     const [productsUpdated, setProductsUpdated] = useState(false)
     const [loading, setLoading] = useState(false)
 
-    const { typeOfRender, renderTableOrder, currentPage, limit, totalPage, handleGetAllOrderByParams } = useOrder()
+    const { typeOfRender, renderTableOrder, currentPage, totalPage, handleGetAllOrderByParams } = useOrder()
 
     useEffect(() => {
         handleGetAllOrderByParams(6, page)

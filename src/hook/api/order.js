@@ -14,8 +14,7 @@ export default function useOrder() {
 
     const handleGetAllOrderByParams = async (limit, offset) => {
         dispatch(setFetching(true))
-        const resultAction = await dispatch(fetchOrderByParams({ limit, offset }))
-
+        const resultAction = dispatch(fetchOrderByParams({ limit, offset }))
         if (fetchOrderByParams.rejected.match(resultAction)) {
             enqueueSnackbar(resultAction.payload, {
                 variant: 'error',

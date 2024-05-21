@@ -47,7 +47,8 @@ function Login() {
             dispatch(signInStart())
             const service = tokenService()
             const result = await login(values)
-            if (result.success && result.user.role === ROLE.OWNER) {
+            console.log("🚀 ~ handleLogin ~ result:", result)
+            if (result.success) {
                 dispatch(signInSuccess(result))
                 enqueueSnackbar(result.message, { variant: 'success' })
                 service.setTokenList(result.tokenList)
