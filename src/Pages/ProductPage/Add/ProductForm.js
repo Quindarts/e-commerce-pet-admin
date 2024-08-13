@@ -10,56 +10,62 @@ import Title from '../../../Components/ui/Title/Title'
 import { Card } from '../styles'
 import { Fragment } from 'react'
 import TagsInput from '../../../Components/ui/TagsInput/TagsInput'
-import Modal from '../../../Components/ui/Modal/Modal'
-import { AttributeList } from '../../AttributePage/List'
 import Autocomplete from '../../../Components/ui/Autocomplete/Autocomplete'
 import InputUpload from '../../../Components/ui/InputUpload/InputUpload'
 // import ImageUpload from '../../../Components/ui/InputUpload/InputUpload'
 import Button from '../../../Components/ui/Button/Button'
 import { APP_ICON } from '../../../Utils/Constants'
-export const ProductForm = (props) => {
-    const initialValues = {
-        name: '',
-        images: [
-            {
-                url: '',
-            },
-        ],
-        attribute_product: [],
-        brand: '',
-        price: '',
-        available: '',
-        description: '',
-        tags: [],
-        dimensions: {
-            length: '',
-            width: '',
-            weight: '',
-            height: '',
+import axios from 'axios'
+
+const initialValues = {
+    name: '',
+    images: [
+        {
+            url: '',
         },
-        category: '',
-    }
+    ],
+    attribute_product: [],
+    brand: '',
+    price: '',
+    available: '',
+    description: '',
+    tags: [],
+    dimensions: {
+        length: '',
+        width: '',
+        weight: '',
+        height: '',
+    },
+    category: '',
+}
 
-    const validationSchema = yup.object().shape({
-        name: yup.string().required('Required'),
-        tags: yup.array().of(yup.string()).required('At least one tag is required'),
-        attribute_product: yup.array().of(yup.string()).required('At least one attribute is required'),
-        brand: yup.string().required('Required'),
-        price: yup.number().required('Required').positive('Must be positive').integer('Must be an integer'),
-        available: yup.number().required('Required').positive('Must be positive').integer('Must be an integer'),
-        description: yup.string().required('Required'),
-        dimensions: yup
-            .object()
-            .shape({
-                length: yup.number().required('Required').positive('Must be positive').integer('Must be an integer'),
-                width: yup.number().required('Required').positive('Must be positive').integer('Must be an integer'),
-                weight: yup.number().required('Required').positive('Must be positive').integer('Must be an integer'),
-                height: yup.number().required('Required').positive('Must be positive').integer('Must be an integer'),
-            })
-            .required('Dimensions are required'),
-        category: yup.string().required('Required'),
-    })
+const validationSchema = yup.object().shape({
+    name: yup.string().required('Required'),
+    tags: yup.array().of(yup.string()).required('At least one tag is required'),
+    attribute_product: yup.array().of(yup.string()).required('At least one attribute is required'),
+    brand: yup.string().required('Required'),
+    price: yup.number().required('Required').positive('Must be positive').integer('Must be an integer'),
+    available: yup.number().required('Required').positive('Must be positive').integer('Must be an integer'),
+    description: yup.string().required('Required'),
+    dimensions: yup
+        .object()
+        .shape({
+            length: yup.number().required('Required').positive('Must be positive').integer('Must be an integer'),
+            width: yup.number().required('Required').positive('Must be positive').integer('Must be an integer'),
+            weight: yup.number().required('Required').positive('Must be positive').integer('Must be an integer'),
+            height: yup.number().required('Required').positive('Must be positive').integer('Must be an integer'),
+        })
+        .required('Dimensions are required'),
+    category: yup.string().required('Required'),
+})
 
+const axiosUpload = axios.create()
+
+const createProduct = async () => {
+    axiosUpload.post()
+}
+
+export const ProductForm = (props) => {
     const [categories, setCategories] = useState([])
     const [categoriesList, setCategoriesList] = useState([])
     const [loading, setLoading] = useState(false)
@@ -83,7 +89,8 @@ export const ProductForm = (props) => {
     const handleTakeImages = (images) => {
         setImages(images)
     }
-    // alert(images)
+
+
     const fetchAttributes = async () => {
         setLoading(true)
         try {
@@ -98,7 +105,6 @@ export const ProductForm = (props) => {
             setLoading(false)
         }
     }
-
     const handleGetCategoryByParams = () => {
         setLoading(true)
         client
@@ -141,14 +147,19 @@ export const ProductForm = (props) => {
             )
         }
     }, [categories])
+
     const handleAddProduct = async (values) => {
         const formattedValues = {
             name: values.name,
-            images: images,
+            images: [
+                {
+                    url: images[0],
+                },
+            ],
             attribute_product: selectedAttributeIds,
             brand: values.brand,
             price: values.price,
-            available: values.available,
+            avaiable: values.available,
             description: values.description,
             tags: tags,
             dimensions: {
@@ -159,7 +170,6 @@ export const ProductForm = (props) => {
             },
             category: selectedCategoryId,
         }
-        console.log(formattedValues)
         client
             .post(`/products`, formattedValues)
             .then((response) => {
