@@ -19,20 +19,17 @@ import client from '../../../services/api-context.js'
 import Autocomplete from '../../../Components/ui/Autocomplete/Autocomplete.js'
 import { AttributeList } from '../List/index.js'
 
-const AttributeAddPage = () => {
+const Add = () => {
     const navigate = useNavigate()
     const { enqueueSnackbar } = useSnackbar()
-    const [value, setValue] = useState([
-        { title: 'Select attribute value', value: '1' },
-        { title: 'Blue', value: '2' },
-    ])
+
     const AttributeSchema = Yup.object().shape({
         name: Yup.string().min(2, 'Name not found').required('Name is required'),
         avaiable: Yup.number('Avaiable must be number type').required('Avaiable is required'),
         value: Yup.string().min(2, 'Value not found').required('Value is required'),
     })
     const handleSubmitEditForm = async (values, actions) => {
-     
+        console.log('values?', values)
         client
             .post(`/attributeProducts`, values)
             .then((res) => {
@@ -96,7 +93,7 @@ const AttributeAddPage = () => {
                                 display: 'flex',
                                 alignItems: 'start',
                                 gap: '1.75rem',
-                                flex: 1, // This ensures that the Box takes up equal space on both sides
+                                flex: 1,
                             }}
                         >
                             <Box
@@ -108,7 +105,16 @@ const AttributeAddPage = () => {
                                 }}
                             >
                                 <Box style={{ width: 'calc(100% - 1.25rem)' }}>
-                                    <Autocomplete></Autocomplete>
+                                    <Textfield
+                                        label="Name"
+                                        name="name"
+                                        id="name"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.name}
+                                        error={touched.name && errors.name}
+                                        helperText={errors.name}
+                                    />
                                 </Box>
                                 <Box style={{ width: 'calc(100% - 1.25rem)' }}>
                                     <Textfield
@@ -120,6 +126,18 @@ const AttributeAddPage = () => {
                                         value={values.value}
                                         error={touched.value && errors.value}
                                         helperText={errors.value}
+                                    />
+                                </Box>{' '}
+                                <Box style={{ width: 'calc(100% - 1.25rem)' }}>
+                                    <Textfield
+                                        label="Number"
+                                        name="avaiable"
+                                        id="avaiable"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.avaiable}
+                                        error={touched.avaiable && errors.avaiable}
+                                        helperText={errors.avaiable}
                                     />
                                 </Box>{' '}
                                 <Button type="submit" size="sm" color="green">
@@ -143,7 +161,7 @@ const AttributeAddPage = () => {
                                 flex: 1,
                             }}
                         >
-                            <AttributeList></AttributeList>
+                            {/* <AttributeList></AttributeList> */}
                         </Box>
                     </Box>
                 </Form>
@@ -152,4 +170,4 @@ const AttributeAddPage = () => {
     )
 }
 
-export default AttributeAddPage
+export default Add

@@ -47,6 +47,7 @@ function Login() {
             dispatch(signInStart())
             const service = tokenService()
             const result = await login(values)
+            console.log(result)
             if (result.success && result.user.role === ROLE.OWNER) {
                 dispatch(signInSuccess(result))
                 enqueueSnackbar(result.message, { variant: 'success' })

@@ -21,6 +21,9 @@ import CreateInvoice from '../Pages/CreateInvoicePage/CreateInvoice'
 import PrivateRoutes from './PrivateRoute'
 import OrderPage from '../Pages/OrderPage'
 import ListOrderPage from '../Pages/OrderPage/List/OrderPage'
+import AttributePage from '../Pages/AttributePage'
+import AttributeAddPage from '../Pages/AttributePage/Add'
+import ListAttributePage from '../Pages/AttributePage/List'
 const router = createBrowserRouter([
     {
         path: APP_ROUTER.INDEX,
@@ -52,6 +55,14 @@ const router = createBrowserRouter([
                 children: [
                     { path: APP_ROUTER.CATEGORY_LIST, element: <ListCategoryPage />, index: true },
                     { path: APP_ROUTER.CATEGORY_ADD, element: <CategoryAddPage /> },
+                ],
+            },
+            {
+                path: APP_ROUTER.ATTRIBUTE,
+                element: <AttributePage />,
+                children: [
+                    { path: APP_ROUTER.ATTRIBUTE_LIST, element: <ListAttributePage />, index: true },
+                    { path: APP_ROUTER.ADD_ATTRIBUTE, element: <AttributeAddPage /> },
                 ],
             },
             {

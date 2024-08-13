@@ -16,7 +16,7 @@ function ImageCard(props) {
                     onClick={() => handleRemoveUploadImage(src)}
                 />
             </Box>
-            <img className="absolute h-[5rem] w-[5rem] object-cover " src={src} alt="" />
+            <img crossOrigin="anonymous" className="absolute h-[5rem] w-[5rem] object-cover " src={src} alt="" />
         </Box>
     )
 }

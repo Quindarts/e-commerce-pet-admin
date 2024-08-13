@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
-import useUploadImage from '../../../hook/ui/uploadImage'
+import React, { useEffect, useState, useRef } from 'react'
 import { Box, Typography } from '@mui/material'
 import Button from '../Button/Button'
 import { styled } from '@mui/material/styles'
 import { Icon } from '@iconify/react'
 import ImageCard from './ImageCard'
+import { getBase64Image } from '../../../hook/ui/getBase64Image'
+import { toast } from 'sonner' // Ensure 'sonner' is properly installed and imported
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -19,25 +20,57 @@ const VisuallyHiddenInput = styled('input')({
 })
 
 function InputUpload(props) {
-    const { listUpload } = props
-    const [listImg, setListImg] = useState(listUpload ? listUpload : [])
-    const [imageSrc, setimageSrc] = useState('')
-    const { handleImageUpload } = useUploadImage()
+    const { listUpload, handleTakeImages } = props
+    const [listImg, setListImg] = useState(listUpload || [])
+    const [base64Image, setBase64Image] = useState('')
+    const [hovered, setHovered] = useState(false)
+    const fileInputRef = useRef(null)
+
     const handleRemoveUploadImage = (src) => {
-        setListImg((listImg) => listImg.filter((item) => item !== src))
+        setListImg((prevList) => prevList.filter((item) => item !== src))
     }
     const handleRemoveAllImage = () => {
         setListImg([])
     }
+
     useEffect(() => {
-        if (imageSrc !== '')
-            setListImg((listImg) => {
-                return [...listImg, imageSrc]
-            })
-    }, [imageSrc])
+        if (base64Image) {
+            setListImg((prevList) => [...prevList, base64Image])
+        }
+    }, [base64Image])
+
+    useEffect(() => {
+        handleTakeImages(listImg)
+    }, [listImg])
+
+    const handleFileChange = async (event) => {
+        const file = event.target.files[0]
+        if (file) {
+            try {
+                const base64String = await getBase64Image(file)
+                setBase64Image(base64String)
+
+                const reader = new FileReader()
+                reader.onload = () => {
+                    setBase64Image(reader.result)
+                }
+                reader.readAsDataURL(file)
+            } catch (error) {
+                toast.error('Failed to convert image to Base64: ' + error.message)
+                console.error('Failed to convert image to Base64:', error)
+            }
+        }
+    }
+    const handleFileInputClick = () => {
+        fileInputRef.current.click()
+    }
 
     return (
-        <Box className="flex w-full  border-spacing-1 flex-col justify-center gap-5 rounded-2xl border-2 bg-white shadow-md ">
+        <Box
+            className="flex w-full border-spacing-1 flex-col justify-center gap-5 rounded-2xl border-2 bg-white shadow-md"
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+        >
             <Button
                 className="mt-5"
                 component="label"
@@ -47,12 +80,7 @@ function InputUpload(props) {
                 <Typography className="font-[700] text-gray-600" variant="h6" component="h6">
                     Upload Image here
                 </Typography>
-                <VisuallyHiddenInput
-                    type="file"
-                    onChange={(event) => {
-                        handleImageUpload(event, setimageSrc)
-                    }}
-                />
+                <VisuallyHiddenInput type="file" onChange={handleFileChange} ref={fileInputRef} />
             </Button>
             <Box className="flex h-[11rem] w-full border-spacing-1 flex-wrap gap-5 rounded-md px-[2rem]">
                 {listImg.length > 0 &&

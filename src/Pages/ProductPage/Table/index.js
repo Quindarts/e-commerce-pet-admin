@@ -12,7 +12,7 @@ import Delete from '../Modal/Delete'
 import Active from '../Modal/Active'
 import Modal from '../../../Components/ui/Modal/Modal'
 const TableProductList = (props) => {
-    const [openEdit, setOpenEdit] = useState({ isOpen: false, product_id: '', size: 'lg' })
+    const [openEdit, setOpenEdit] = useState({ isOpen: false, product_id: '' })
     const [openDelete, setOpenDelete] = useState({ isOpen: false, product_id: '' })
     const [openActive, setOpenActive] = useState({ isOpen: false, product_id: '' })
 
@@ -60,10 +60,29 @@ const TableProductList = (props) => {
         },
         {
             field: 'tags',
-            headerName: 'Category',
-            flex: 1,
+            headerName: 'Tags',
+            flex: 0.8,
             headerAlign: 'center',
             align: 'center',
+        },
+        {
+            field: 'brand',
+            headerName: 'Brand',
+            flex: 0.8,
+            headerAlign: 'center',
+            align: 'center',
+        },
+        {
+            field: 'category',
+            headerName: 'Category',
+            flex: 1.1,
+            renderCell: (params) => (
+                <Typography className="text-[13px] text-gray-600  group-hover:text-sky-600">
+                    {params.row?.category?.name}
+                </Typography>
+            ),
+            align: 'center',
+            headerAlign: 'center',
         },
         {
             field: 'avaiable',
@@ -76,7 +95,7 @@ const TableProductList = (props) => {
         {
             field: 'code',
             headerName: 'SKU',
-            flex: 1,
+            flex: 0.8,
             headerAlign: 'center',
             align: 'center',
         },
@@ -175,11 +194,7 @@ const TableProductList = (props) => {
             </Box>
 
             <Modal maxWidth={openEdit.size} open={openEdit.isOpen} onClose={handleCloseEditModal}>
-                <Edit
-                    sx={{ width: '100%' }}
-                    product_id={openEdit.product_id}
-                    handleCloseEditModal={handleCloseEditModal}
-                />
+                <Edit product_id={openEdit.product_id} handleCloseEditModal={handleCloseEditModal} />
             </Modal>
             <Modal open={openDelete.isOpen} onClose={handleCloseDeleteModal}>
                 <Delete product_id={openDelete.product_id} handleCloseDeleteModal={handleCloseDeleteModal} />

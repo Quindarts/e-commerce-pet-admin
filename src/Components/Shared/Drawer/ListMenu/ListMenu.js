@@ -8,6 +8,7 @@ import { CustomListMenu } from './style'
 import { useNavigate } from 'react-router-dom'
 function ListMenu(props) {
     const { openNav, isHovered } = props
+    const [openAttribute, setOpenAttribute] = useState(false)
     const [openProduct, setOpenProduct] = useState(false)
     const [openCategory, setOpenCategory] = useState(false)
     const [openOrder, setOpenOrder] = useState(false)
@@ -22,6 +23,35 @@ function ListMenu(props) {
                 </ListItemIcon>
                 {checkDetailTitle && <ListItemText primary="Dashboard" />}
             </ListItemButton>
+
+            {checkDetailTitle && (
+                <Collapse in={openAttribute} timeout="auto" unmountOnExit>
+                    <List component="div" disablePadding>
+                        <ListItemButton
+                            onClick={() => {
+                                navigate(APP_ROUTER.ADD_ATTRIBUTE)
+                            }}
+                            sx={{ pl: 4 }}
+                        >
+                            <ListItemIcon>
+                                <Icon width={20} icon="system-uicons:box-add" />
+                            </ListItemIcon>
+                            {checkDetailTitle && <ListItemText primary="Add attribute" />}
+                        </ListItemButton>
+                        <ListItemButton
+                            onClick={() => {
+                                navigate(APP_ROUTER.ATTRIBUTE_LIST)
+                            }}
+                            sx={{ pl: 4 }}
+                        >
+                            <ListItemIcon>
+                                <Icon width={20} icon="quill:inbox-list" />
+                            </ListItemIcon>
+                            <ListItemText primary="List attribute" />
+                        </ListItemButton>
+                    </List>
+                </Collapse>
+            )}
             {/** Product  */}
 
             <ListItemButton
@@ -60,9 +90,20 @@ function ListMenu(props) {
                             sx={{ pl: 4 }}
                         >
                             <ListItemIcon>
-                                <Icon width={20} icon="quill:inbox-list" />
+                                <Icon width={20} icon="fluent-mdl2:product-variant" />
                             </ListItemIcon>
                             <ListItemText primary="List product" />
+                        </ListItemButton>
+                        <ListItemButton
+                            onClick={() => {
+                                navigate(APP_ROUTER.ATTRIBUTE_LIST)
+                            }}
+                            sx={{ pl: 4 }}
+                        >
+                            <ListItemIcon>
+                                <Icon width={20} icon="ant-design:product-outlined" />
+                            </ListItemIcon>
+                            <ListItemText primary="List attribute" />
                         </ListItemButton>
                     </List>
                 </Collapse>

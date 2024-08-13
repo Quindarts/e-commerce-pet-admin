@@ -1,334 +1,373 @@
-import { Box } from '@mui/material'
+import { Box, CircularProgress, Icon } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { Form, Formik, useFormikContext } from 'formik'
 import Textfield from '../../../Components/ui/Textfield/Textfield'
-import Button from '../../../Components/ui/Button/Button'
-import { Icon } from '@iconify/react'
-import dayjs from 'dayjs'
-import Calendar from '../../../Components/ui/Calendar'
 import Dropdown from '../../../Components/ui/Dropdown/Dropdown'
 import * as yup from 'yup'
 import client from '../../../services/api-context'
 import { enqueueSnackbar } from 'notistack'
-import { useReducer } from 'react'
-import { APP_ICON } from '../../../Utils/Constants'
 import Title from '../../../Components/ui/Title/Title'
 import { Card } from '../styles'
+import { Fragment } from 'react'
+import TagsInput from '../../../Components/ui/TagsInput/TagsInput'
+import Modal from '../../../Components/ui/Modal/Modal'
+import { AttributeList } from '../../AttributePage/List'
+import Autocomplete from '../../../Components/ui/Autocomplete/Autocomplete'
+import InputUpload from '../../../Components/ui/InputUpload/InputUpload'
+// import ImageUpload from '../../../Components/ui/InputUpload/InputUpload'
+import Button from '../../../Components/ui/Button/Button'
+import { APP_ICON } from '../../../Utils/Constants'
 export const ProductForm = (props) => {
-    const { values, id } = props
-    const [avatarSrc, setAvatarSrc] = useState('https://uko-react.vercel.app/static/avatar/001-man.svg')
-    const [user, setUser] = useState(null)
-    const [selectedDate, setSelectedDate] = useState(values?.birthday)
-    const [error, setError] = React.useState(null)
     const initialValues = {
         name: '',
-        bought: '',
-        sell: '',
-        stock: '',
-        Width: '',
-        Height: '',
-        Length: '',
-        Weight: '',
+        images: [
+            {
+                url: '',
+            },
+        ],
+        attribute_product: [],
+        brand: '',
+        price: '',
+        available: '',
         description: '',
+        tags: [],
+        dimensions: {
+            length: '',
+            width: '',
+            weight: '',
+            height: '',
+        },
+        category: '',
     }
 
-    //userReducer
-    const errorMessage = React.useMemo(() => {
-        switch (error) {
-            case 'maxDate': {
-                return 'User need to be at least 18 years olds'
-            }
-            case 'minDate': {
-                return 'User need to be at most 60 years olds'
-            }
-            case 'required': {
-                return 'Birthday missing.'
-            }
-            default: {
-                return ''
-            }
-        }
-    }, [error])
-    const handleImageUpload = (event) => {
-        let file = event.target.files[0]
-        let reader = new FileReader()
-        reader.onloadend = () => {
-            setAvatarSrc(reader.result)
-        }
-
-        if (file) {
-            reader.readAsDataURL(file)
-        }
-    }
-    const handleClear = () => {
-        setSelectedDate({})
-        setError('')
-    }
-    const minDate = dayjs().subtract(60, 'year')
-    const maxDate = dayjs().subtract(18, 'year')
-    const SEARCH_ENUM = {
-        ADMIN: 'admin',
-        USER: 'user',
-        WAREHOUSE: 'warehouse',
-    }
-
-    const list = [
-        { title: 'Admin', value: SEARCH_ENUM.ADMIN },
-        { title: 'User', value: SEARCH_ENUM.USER },
-        { title: 'Warehouse', value: SEARCH_ENUM.WAREHOUSE },
-    ]
-    const GENDER_ENUM = {
-        MALE: 'male',
-        FEMALE: 'female',
-        PREFER_NOT_TO_SAY: null,
-    }
-
-    const genderList = [
-        { title: 'Male', value: GENDER_ENUM.MALE },
-        { title: 'Female', value: GENDER_ENUM.FEMALE },
-        { title: 'Prefer not to say', value: GENDER_ENUM.PREFER_NOT_TO_SAY },
-    ]
-    const [brand, setBrand] = useState([
-        { title: 'Brand 1', value: '1' },
-        { title: 'Brand 2', value: '2' },
-    ])
-
-    const [category, setCategory] = useState([
-        { title: 'Category 1', value: '1' },
-        { title: 'Category 2', value: '2' },
-    ])
-
-    const [attributeList, setAttributeList] = useState([
-        { title: 'Select Attribute', value: 'placeholder' },
-        { title: 'Create new Attribute', value: 'create_new_attribute' },
-    ])
-    const [providerList, setProviderList] = useState([
-        { title: 'Select Provider', value: 'placeholder' },
-        { title: 'Create new Provider', value: 'create_new_provider' },
-    ])
     const validationSchema = yup.object().shape({
         name: yup.string().required('Required'),
-        bought: yup.number().required('Required').positive('Must be positive').integer('Must be an integer'),
-        sell: yup.number().required('Required').positive('Must be positive').integer('Must be an integer'),
-        stock: yup.number().required('Required').positive('Must be positive').integer('Must be an integer'),
-        Width: yup.number().required('Required').positive('Must be positive'),
-        Height: yup.number().required('Required').positive('Must be positive'),
-        Length: yup.number().required('Required').positive('Must be positive'),
-        Weight: yup.number().required('Required').positive('Must be positive'),
+        tags: yup.array().of(yup.string()).required('At least one tag is required'),
+        attribute_product: yup.array().of(yup.string()).required('At least one attribute is required'),
+        brand: yup.string().required('Required'),
+        price: yup.number().required('Required').positive('Must be positive').integer('Must be an integer'),
+        available: yup.number().required('Required').positive('Must be positive').integer('Must be an integer'),
         description: yup.string().required('Required'),
+        dimensions: yup
+            .object()
+            .shape({
+                length: yup.number().required('Required').positive('Must be positive').integer('Must be an integer'),
+                width: yup.number().required('Required').positive('Must be positive').integer('Must be an integer'),
+                weight: yup.number().required('Required').positive('Must be positive').integer('Must be an integer'),
+                height: yup.number().required('Required').positive('Must be positive').integer('Must be an integer'),
+            })
+            .required('Dimensions are required'),
+        category: yup.string().required('Required'),
     })
 
-    const handleAddProduct = () => {
-        if (values === undefined) {
-            setError('required')
-        }
-        const addressId = user?.address[0]._id
+    const [categories, setCategories] = useState([])
+    const [categoriesList, setCategoriesList] = useState([])
+    const [loading, setLoading] = useState(false)
+    const [attributes, setAttributes] = useState([])
+    const [selectedAttributeIds, setSelectedAttributeIds] = useState([])
+    const [tags, setTags] = useState([])
+    const [selectedCategoryId, setSelectedCategoryId] = useState('')
+    const [images, setImages] = useState([])
 
-        if (values !== undefined) {
-            const productData = {
-                _id: user._id,
-                first_name: values.firstName,
-                last_name: values.lastName,
-                email: values.email,
-                phone: values.phone,
-                dateOfBirth: values.birthday,
-                role: values.role,
-                avatar: avatarSrc,
-                gender: values.gender,
-            }
-
-            const productDimensions = {
-                detail: values.detail,
-                ward: {
-                    wardName: values.ward,
-                },
-                district: {
-                    districtName: values.district,
-                },
-                province: {
-                    provinceName: values.province,
-                },
-                country: 'VietNam',
-            }
-            const userRequest = client.post(`/users/${id}`, productData).catch((error) => {
-                throw error
-            })
-            const addressRequest = client.post(`/addresses/${addressId}`, productDimensions).catch((error) => {
-                console.error('Address request error:', error)
-                throw error
-            })
-            Promise.all([userRequest, addressRequest])
-                .then((responses) => {
-                    console.log(responses)
-                    const userResponse = responses[0]
-                    const addressResponse = responses[1]
-                    console.log(userResponse)
-                    console.log(addressResponse)
-                    if (userResponse.status === 200 && addressResponse.status === 200) {
-                        enqueueSnackbar('Update successful', {
-                            variant: 'success',
-                        })
-                    }
-                    // resetForm()
-                })
-                .catch((error) => {
-                    console.error(error)
-                    enqueueSnackbar('Fail to update', {
-                        variant: 'error',
-                    })
-                })
+    const handleSelectAttribute = (event, newValue) => {
+        const ids = newValue.map((option) => option._id)
+        setSelectedAttributeIds(ids)
+        console.log('Selected Attribute IDs:', ids)
+    }
+    const handleTagsUpdate = (updatedTags) => {
+        const tag = updatedTags.map((option) => option)
+        setTags(tag)
+        console.log('Selected tag:', tag)
+        console.log('Tags:', tags)
+    }
+    const handleTakeImages = (images) => {
+        setImages(images)
+    }
+    // alert(images)
+    const fetchAttributes = async () => {
+        setLoading(true)
+        try {
+            const response = await fetch(
+                'https://e-commerce-pet-server-quindarts.vercel.app/attributeProducts?limit=100&offset=1',
+            )
+            const json = await response.json()
+            setAttributes(json.list.map((attribute) => ({ ...attribute, id: attribute._id })))
+        } catch (error) {
+            console.error('Failed to fetch attributes:', error)
+        } finally {
+            setLoading(false)
         }
     }
-    return (
-        <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={(values, { setSubmitting }) => {
-                // handle form submission
-            }}
-        >
-            {({ values, errors, touched, handleChange, handleBlur }) => (
-                <Form className=" grid grid-cols-4 items-start gap-7">
-                    <Box sx={Card} className="col-span-2 grid grid-cols-8 gap-5">
-                        <Box className=" col-span-8">
-                            <Title icon={'noto-v1:information'} className="mb-5">
-                                Basic infomation
-                            </Title>
-                        </Box>
-                        <Textfield
-                            placeholder="Name"
-                            id="name"
-                            type="text"
-                            label="Name"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.name}
-                            helperText={touched.name && errors.name ? errors.name : ''}
-                            error={touched.name && errors.name ? true : false}
-                            className="col-span-4"
-                        />
-                        <Dropdown className="col-span-2" list={brand} size="xl" />
-                        <Dropdown className="col-span-2" list={category} size="xl" />
-                        <Dropdown className="col-span-8" list={attributeList} />
-                        <Textfield
-                            placeholder="Bought Price"
-                            id="bought"
-                            type="number"
-                            label="Bought Price"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.bought}
-                            helperText={touched.bought && errors.bought ? errors.bought : ''}
-                            error={touched.bought && errors.bought ? true : false}
-                            className="col-span-4"
-                        />
-                        <Textfield
-                            placeholder="Sell Price"
-                            id="sell"
-                            type="number"
-                            label="Sell Price"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.sell}
-                            helperText={touched.sell && errors.sell ? errors.sell : ''}
-                            error={touched.sell && errors.sell ? true : false}
-                            className="col-span-4"
-                        />
-                        <Textfield
-                            placeholder="Some tags"
-                            id="tags"
-                            type="text"
-                            label="Tags"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.tags}
-                            helperText={touched.tags && errors.tags ? errors.tags : ''}
-                            error={touched.tags && errors.tags ? true : false}
-                            className="col-span-8"
-                        />
-                    </Box>
-                    <Box sx={Card} className="col-span-2 grid grid-cols-4 gap-5">
-                        <Box className=" col-span-4">
-                            <Title icon={'fxemoji:deliverytruck'} className=" mb-5">
-                                Details
-                            </Title>
-                        </Box>
 
-                        <Textfield
-                            placeholder="Stock"
-                            id="stock"
-                            type="number"
-                            label="Stock"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.stock}
-                            helperText={touched.stock && errors.stock ? errors.stock : ''}
-                            error={touched.stock && errors.stock ? true : false}
-                            className="col-span-4"
-                        />
-                        <Textfield
-                            placeholder="... cm"
-                            id="Height"
-                            type="number"
-                            label="Height"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.Height}
-                            helperText={touched.Height && errors.Height ? errors.Height : ''}
-                            error={touched.Height && errors.Height ? true : false}
-                            className="col-span-2"
-                        />
-                        <Textfield
-                            placeholder="... cm"
-                            id="Length"
-                            type="number"
-                            label="Length"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.Length}
-                            helperText={touched.Length && errors.Length ? errors.Length : ''}
-                            error={touched.Length && errors.Length ? true : false}
-                            className="col-span-2"
-                        />
-                        <Textfield
-                            placeholder="... cm"
-                            id="Width"
-                            type="number"
-                            label="Width"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.Width}
-                            helperText={touched.Width && errors.Width ? errors.Width : ''}
-                            error={touched.Width && errors.Width ? true : false}
-                            className="col-span-2"
-                        />
-                        <Textfield
-                            placeholder="... gram"
-                            id="Weight"
-                            type="number"
-                            label="Weight"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.Weight}
-                            helperText={touched.Weight && errors.Weight ? errors.Weight : ''}
-                            error={touched.Weight && errors.Weight ? true : false}
-                            className="col-span-2"
-                        />
-                        <Textfield
-                            placeholder="Description"
-                            id="description"
-                            type="text"
-                            label="Description"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.description}
-                            helperText={touched.description && errors.description ? errors.description : ''}
-                            error={touched.description && errors.description ? true : false}
-                            className="col-span-4"
-                        />
-                    </Box>
-                </Form>
+    const handleGetCategoryByParams = () => {
+        setLoading(true)
+        client
+            .get(`/categorys?limit=60&offset=1`)
+            .then((response) => {
+                return response.listCategory
+            })
+            .then((categories) => {
+                setCategories(categories)
+
+                setCategoriesList(
+                    categories.map((item) => ({
+                        title: item.name,
+                        value: item._id,
+                    })),
+                )
+            })
+            .catch((error) => {
+                console.error('Failed to fetch category:', error)
+                enqueueSnackbar('Fail to update', {
+                    variant: 'error',
+                })
+            })
+            .finally(() => {
+                setLoading(false)
+            })
+    }
+
+    useEffect(() => {
+        fetchAttributes()
+        handleGetCategoryByParams()
+    }, [])
+    useEffect(() => {
+        if (categories.length > 0) {
+            setCategoriesList(
+                categories.map((item) => ({
+                    title: item.name,
+                    value: item._id,
+                })),
+            )
+        }
+    }, [categories])
+    const handleAddProduct = async (values) => {
+        const formattedValues = {
+            name: values.name,
+            images: images,
+            attribute_product: selectedAttributeIds,
+            brand: values.brand,
+            price: values.price,
+            available: values.available,
+            description: values.description,
+            tags: tags,
+            dimensions: {
+                length: values.length,
+                width: values.width,
+                weight: values.weight,
+                height: values.height,
+            },
+            category: selectedCategoryId,
+        }
+        console.log(formattedValues)
+        client
+            .post(`/products`, formattedValues)
+            .then((response) => {
+                console.log(response)
+                enqueueSnackbar('Product added successfully', { variant: 'success' })
+            })
+            .catch((error) => {
+                console.error('Failed to add product:', error)
+                enqueueSnackbar('Fail to add product', { variant: 'error' })
+            })
+            .finally(() => {
+                setLoading(false)
+            })
+    }
+    return (
+        <Fragment>
+            {!loading ? (
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={(values) => handleAddProduct(values)}
+                >
+                    {({ handleBlur, handleChange, values, errors, touched }) => (
+                        <Form className=" grid grid-cols-4 items-start gap-7">
+                            <Box sx={Card} className="col-span-2 grid grid-cols-8 gap-5">
+                                <Box className=" col-span-8">
+                                    <Title icon={'noto-v1:information'} className="mb-5">
+                                        Basic infomation
+                                    </Title>
+                                </Box>
+                                <Textfield
+                                    placeholder="Name"
+                                    id="name"
+                                    type="text"
+                                    label="Name"
+                                    name="name"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.name}
+                                    helperText={touched.name && errors.name ? errors.name : ''}
+                                    error={touched.name && errors.name ? true : false}
+                                    className="col-span-4"
+                                />
+                                <Textfield
+                                    placeholder="Brand"
+                                    id="brand"
+                                    type="text"
+                                    label="Brand"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.brand}
+                                    helperText={touched.brand && errors.brand ? errors.brand : ''}
+                                    error={touched.brand && errors.brand ? true : false}
+                                    className="col-span-4"
+                                />
+                                <TagsInput
+                                    className="col-span-4"
+                                    id="tags"
+                                    value={values.tags}
+                                    helperText={touched.tags && errors.tags ? errors.tags : ''}
+                                    error={touched.tags && errors.tags ? true : false}
+                                    onTagsRemove={(tags) => console.log(`Removed tags: ${tags}`)}
+                                    onTagsChange={handleTagsUpdate}
+                                />
+
+                                {!loading && categoriesList.length > 0 && (
+                                    <Dropdown
+                                        className="col-span-4"
+                                        list={categoriesList}
+                                        size="xl"
+                                        onChange={(e) => setSelectedCategoryId(e.target.value)}
+                                    />
+                                )}
+
+                                <Textfield
+                                    placeholder="Price"
+                                    id="price"
+                                    type="number"
+                                    label="Price"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.price}
+                                    helperText={touched.price && errors.price ? errors.price : ''}
+                                    error={touched.price && errors.price ? true : false}
+                                    className="col-span-4"
+                                />
+
+                                <Box className="col-span-4" gap="2rem">
+                                    <Autocomplete
+                                        multiple
+                                        options={attributes}
+                                        getOptionLabel={(option) => option.name}
+                                        onChange={handleSelectAttribute}
+                                        renderInput={(params) => (
+                                            <Textfield {...params} label="Attributes" placeholder="Attributes" />
+                                        )}
+                                    />
+                                </Box>
+                            </Box>
+                            <Box sx={Card} className="col-span-2 grid grid-cols-4 gap-5">
+                                <Box className=" col-span-4">
+                                    <Title icon={'fxemoji:deliverytruck'} className=" mb-5">
+                                        Details
+                                    </Title>
+                                </Box>
+
+                                <Textfield
+                                    placeholder="... cm"
+                                    id="height"
+                                    type="number"
+                                    label="Height"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.height}
+                                    helperText={touched.height && errors.height ? errors.height : ''}
+                                    error={touched.height && errors.height ? true : false}
+                                    className="col-span-2"
+                                />
+                                <Textfield
+                                    placeholder="... cm"
+                                    id="length"
+                                    type="number"
+                                    label="Length"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.length}
+                                    helperText={touched.length && errors.length ? errors.length : ''}
+                                    error={touched.length && errors.length ? true : false}
+                                    className="col-span-2"
+                                />
+                                <Textfield
+                                    placeholder="... cm"
+                                    id="width"
+                                    type="number"
+                                    label="Width"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.width}
+                                    helperText={touched.width && errors.width ? errors.width : ''}
+                                    error={touched.width && errors.width ? true : false}
+                                    className="col-span-2"
+                                />
+                                <Textfield
+                                    placeholder="... gram"
+                                    id="weight"
+                                    type="number"
+                                    label="Weight"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.weight}
+                                    helperText={touched.weight && errors.weight ? errors.weight : ''}
+                                    error={touched.weight && errors.weight ? true : false}
+                                    className="col-span-2"
+                                />
+                                <Textfield
+                                    placeholder="Stock"
+                                    id="available"
+                                    type="number"
+                                    label="Stock"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.available}
+                                    helperText={touched.available && errors.available ? errors.available : ''}
+                                    error={touched.available && errors.available ? true : false}
+                                    className="col-span-2"
+                                />
+                                <Textfield
+                                    placeholder="Description"
+                                    id="description"
+                                    type="text"
+                                    label="Description"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.description}
+                                    helperText={touched.description && errors.description ? errors.description : ''}
+                                    error={touched.description && errors.description ? true : false}
+                                    className="col-span-2"
+                                />
+                            </Box>
+                            <Box className="col-span-4 gap-5">
+                                <InputUpload
+                                    handleTakeImages={handleTakeImages}
+                                    // images={images}
+                                    // onDeleteImage={onDeleteImage}
+                                    // className="h-1"
+                                    // onImageAdd={onImageAdd}
+                                    // handleRemoveAllImage={handleRemoveAllImage}
+                                />
+                                {/* <ImageUpload></ImageUpload> */}
+                            </Box>
+                            <Box className="flex gap-7" gap="2rem">
+                                <Button onClick={() => handleAddProduct(values)} size="sm" color="green">
+                                    <Icon className="mx-[2px]" width={25} icon={APP_ICON.i_plus} />
+                                    Create Product
+                                </Button>
+                                <Button type="clear" size="sm" color="yellow">
+                                    <Icon className="mx-1" width={25} icon="ant-design:clear-outlined" />
+                                    Clear form
+                                </Button>
+                            </Box>
+                        </Form>
+                    )}
+                </Formik>
+            ) : (
+                <Box display="flex" alignItems="center" justifyContent="center" height={500}>
+                    <CircularProgress />
+                </Box>
             )}
-        </Formik>
+        </Fragment>
     )
 }

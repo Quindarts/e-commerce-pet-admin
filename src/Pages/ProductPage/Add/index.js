@@ -148,7 +148,7 @@ const AddProductPage = () => {
         setAttributeList([...attributeList, { title: newAttributeName, value: newAttributeName }])
         setAttributeModalOpen(false)
     }
-
+    console.log(attributes)
     return (
         <Box className="mb-7">
             <Typography className="flex items-center gap-4 text-xl font-bold text-sky-700">
@@ -160,93 +160,10 @@ const AddProductPage = () => {
             <Box className="my-7">
                 <ProductForm />
             </Box>
-            <Box className="my-7">
+            {/* <Box className="my-7">
                 <InputUpload className=" h-1 " />
-            </Box>
-            <Box className="my-7">
-                <Accordion>
-                    <AccordionSummary
-                        className="text-md px-7 py-2 font-semibold"
-                        aria-controls="panel1-content"
-                        id="panel1-header"
-                    >
-                        <Title icon={'logos:meilisearch'}>Search engine optimize </Title>
-                    </AccordionSummary>
-                    <AccordionDetails className="px-7">
-                        <Textfield className="mb-4" label="Url key" />
-                        <Textfield className="mb-4" label="Meta" />
-                        <Textfield className="mb-4" label="Enter value here"></Textfield>
-                        <Textfield className="mb-4" label="Enter value here" />
-                    </AccordionDetails>
-                </Accordion>{' '}
-            </Box>
-            <Box className="my-7">
-                <Accordion>
-                    <AccordionSummary
-                        className="text-md px-7 py-2 font-semibold"
-                        aria-controls="panel1-content"
-                        id="panel1-header"
-                    >
-                        <Title icon="fluent-emoji:man-beard">Provider</Title>
-                    </AccordionSummary>
-                    <AccordionDetails className="px-7 ">
-                        <Box className="flex flex-wrap gap-5">
-                            {providers.map((provider, index) => (
-                                <Box className="my-5 w-1/3-gap-5 rounded-lg bg-slate-50 p-7" key={index}>
-                                    <Title className="mb-5" icon={`fluent-emoji:man-beard`}>
-                                        Provider info {index + 1}
-                                    </Title>
-                                    <Textfield
-                                        className="mb-4"
-                                        label="name"
-                                        type="text"
-                                        value={provider.name}
-                                        onChange={(event) => handleProviderValueChange(event, index)}
-                                    />
-                                    <Textfield
-                                        className="mb-4"
-                                        label="Address"
-                                        type="text"
-                                        value={provider.address}
-                                        onChange={(event) => handleProviderValueChange(event, index)}
-                                    />
-                                    <Textfield
-                                        className="mb-4"
-                                        label="Phone number"
-                                        type="number"
-                                        value={provider.phoneNumber}
-                                        onChange={(event) => handleProviderValueChange(event, index)}
-                                    />
-                                    <Textfield
-                                        className="mb-4"
-                                        label="Provider email"
-                                        type="text"
-                                        value={provider.email}
-                                        onChange={(event) => handleProviderValueChange(event, index)}
-                                    />
-                                    <Button className="" color="red" onClick={() => removeProvider(index)}>
-                                        Remove
-                                    </Button>
-                                </Box>
-                            ))}
-                        </Box>
-                        <Button color="primary" onClick={addProvider}>
-                            Add new Provider
-                        </Button>
-                        <Modal open={providerModalOpen} onClose={() => setProviderModalOpen(false)}>
-                            <h2>Add Provider</h2>
-                            <Textfield
-                                label="Provider name"
-                                value={newProviderName}
-                                onChange={handleNewProviderNameChange}
-                            />
-                            <Button onClick={saveNewProvider}>Save</Button>
-                            <Button onClick={cancelNewProvider}>Cancel</Button>
-                        </Modal>
-                    </AccordionDetails>
-                </Accordion>
-            </Box>
-            <Box className="flex gap-7" gap="2rem">
+            </Box> */}
+            {/* <Box className="flex gap-7" gap="2rem">
                 <Button onClick={() => navigate(APP_ROUTER.PRODUCT)} size="sm" color="green">
                     <Icon className="mx-[2px]" width={25} icon={APP_ICON.i_plus} />
                     Create Product
@@ -255,7 +172,7 @@ const AddProductPage = () => {
                     <Icon className="mx-1" width={25} icon="ant-design:clear-outlined" />
                     Clear form
                 </Button>
-            </Box>
+            </Box> */}
         </Box>
     )
 }

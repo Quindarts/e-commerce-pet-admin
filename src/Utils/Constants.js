@@ -13,9 +13,14 @@ export const APP_ROUTER = {
     ORDER: '/order',
     ORDER_LIST: '/order/list',
 
+    ATTRIBUTE: '/attribute',
+    ADD_ATTRIBUTE: '/attribute/add',
+    ATTRIBUTE_LIST: '/attribute/list',
+
+
     PRODUCT: '/product',
     PRODUCT_LIST: '/product/list',
-    ADD_PRODUCT: '/product/add-product',
+    ADD_PRODUCT: '/product/add',
 
     CATEGORY: '/categorys',
     CATEGORY_LIST: '/categorys/list',
@@ -43,7 +48,9 @@ export const APP_ICON = {
     i_google: 'flat-color-icons:google',
     i_menu: 'fe:app-menu',
     list: 'ph:list',
-    product: 'fluent-mdl2:product-release',
+    
+    product: 'fluent-mdl2:product',
+    i_attribute: 'fluent-mdl2:product-release',
     order: 'carbon:order-details',
     list_user: 'ph:user-list',
     i_avatar: 'ooui:user-avatar',

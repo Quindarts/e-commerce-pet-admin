@@ -14,7 +14,6 @@ const Avatar = (props) => {
         reader.onloadend = () => {
             setAvatarSrc(reader.result)
         }
-
         if (file) {
             reader.readAsDataURL(file)
         }

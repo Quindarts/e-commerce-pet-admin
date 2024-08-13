@@ -18,6 +18,7 @@ function TableCategory(props) {
 
     const handleOpenEditModal = (id) => {
         setOpenCategory({ isOpen: true, category_id: id })
+        console.log('id', id)
     }
     const handleCloseEditModal = () => {
         setOpenCategory({ ...openCategory, isOpen: false })
