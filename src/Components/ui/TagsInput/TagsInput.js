@@ -13,28 +13,20 @@ export default function TagsInput(props) {
         variant = 'container',
         helperText,
         error,
-        value,
         defaultValue,
         icon,
+        value = [],
         onTagRemove,
         size = 'xl',
         ...rest
     } = props
 
-    // Initialize state for tags
-    const [tags, setTags] = React.useState([])
-
-    // Handle selection changes
     const handleChange = (event, newValue) => {
-        setTags(newValue)
         console.log('Current tags:', newValue)
         if (onTagsChange) {
-            onTagsChange(newValue) // Correctly notifying the parent component here
+            onTagsChange(newValue)
         }
-
-        // Optionally, call onTagRemove for each removed tag
-        // Note: This logic needs adjustment since it currently checks for added tags instead of removed ones
-        const previouslyAddedTags = tags.filter((tag) => !newValue.includes(tag))
+        const previouslyAddedTags = value.filter((tag) => !newValue.includes(tag))
         previouslyAddedTags.forEach((tag) => {
             if (onTagRemove) {
                 onTagRemove(tag)
@@ -47,12 +39,21 @@ export default function TagsInput(props) {
             <Autocomplete
                 multiple
                 id="tags-filled"
-                options={[]} // Assuming you have an array of available options
+                options={[]}
                 defaultValue={defaultValue || []}
                 freeSolo
-                value={tags} // Control the selected values
+                value={value} // Use value from props
                 onChange={handleChange}
-                renderInput={(params) => <Textfield {...params} variant="filled" label="Tags" placeholder="Tags" />}
+                renderInput={(params) => (
+                    <Textfield
+                        {...params}
+                        variant="filled"
+                        label={label || 'Tags'}
+                        placeholder="Tags"
+                        error={error}
+                        helperText={helperText}
+                    />
+                )}
             />
         </Box>
     )
