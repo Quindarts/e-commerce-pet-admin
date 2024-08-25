@@ -164,45 +164,49 @@ export const ProductForm = (props) => {
         }
     }, [categories])
 
-    const handleAddProduct = (values, actions) => {
-        const formattedValues = {
-            name: values.name,
-            images: [
-                {
-                    url: listImg[0],
-                },
-            ],
-            attribute_product: selectedAttributeIds,
-            brand: values.brand,
-            price: values.price,
-            avaiable: values.avaiable,
-            description: values.description,
-            tags: tags,
-            dimensions: {
-                length: values.length,
-                width: values.width,
-                weight: values.weight,
-                height: values.height,
-            },
-            category: selectedCategoryId,
-        }
+    // const handleAddProduct = (values, actions) => {
+    //     const formattedValues = {
+    //         name: values.name,
+    //         images: [
+    //             {
+    //                 url: listImg[0],
+    //             },
+    //         ],
+    //         attribute_product: selectedAttributeIds,
+    //         brand: values.brand,
+    //         price: values.price,
+    //         avaiable: values.avaiable,
+    //         description: values.description,
+    //         tags: tags,
+    //         dimensions: {
+    //             length: values.length,
+    //             width: values.width,
+    //             weight: values.weight,
+    //             height: values.height,
+    //         },
+    //         category: selectedCategoryId,
+    //     }
 
-        client
-            .post(`/products`, formattedValues)
-            .then((response) => {
-                console.log(response)
-                enqueueSnackbar('Product added successfully', { variant: 'success' })
-                handleReset()
-            })
-            .catch((error) => {
-                console.log(formattedValues)
-                console.log(images)
-                console.error('Failed to add product:', error)
-                enqueueSnackbar('Fail to add product', { variant: 'error' })
-            })
-            .finally(() => {
-                setLoading(false)
-            })
+    //     client
+    //         .post(`/products`, formattedValues)
+    //         .then((response) => {
+    //             console.log(response)
+    //             enqueueSnackbar('Product added successfully', { variant: 'success' })
+    //             handleReset()
+    //         })
+    //         .catch((error) => {
+    //             console.log(formattedValues)
+    //             console.log(images)
+    //             console.error('Failed to add product:', error)
+    //             enqueueSnackbar('Fail to add product', { variant: 'error' })
+    //         })
+    //         .finally(() => {
+    //             setLoading(false)
+    //         })
+    // }
+    const handleAddProduct = (values, actions) => {
+        console.log('Submitted values:', values)
+        // Gửi dữ liệu lên server...
     }
 
     return (
@@ -216,12 +220,18 @@ export const ProductForm = (props) => {
                         handleAddProduct(values, actions)
                     }}
                 >
-                    {({ handleReset, handleSubmit, handleBlur, handleChange, values, errors, touched, resetForm }) => (
-                        <form
-                            onReset={handleReset}
-                            onSubmit={handleSubmit}
-                            className=" grid grid-cols-4 items-start gap-7"
-                        >
+                    {({
+                        handleReset,
+                        handleSubmit,
+                        onSubmit,
+                        handleBlur,
+                        handleChange,
+                        values,
+                        errors,
+                        touched,
+                        resetForm,
+                    }) => (
+                        <Form handleSubmit={handleSubmit} className=" grid grid-cols-4 items-start gap-7">
                             <Box sx={Card} className="col-span-2 grid grid-cols-8 gap-5">
                                 <Box className=" col-span-8">
                                     <Title icon={'noto-v1:information'} className="mb-5">
@@ -396,7 +406,7 @@ export const ProductForm = (props) => {
                                     Clear form
                                 </Button>
                             </Box>
-                        </form>
+                        </Form>
                     )}
                 </Formik>
             ) : (
