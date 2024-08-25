@@ -135,12 +135,10 @@ export const ProductForm = (props) => {
         if (tagsInputRef.current) {
             tagsInputRef.current.setTags([])
         }
-
         setSelectedCategoryId('')
         if (autocompleteRef.current) {
             autocompleteRef.current.setValue([])
         }
-
         handleRemoveAllImage()
         if (autocompleteRef.current) {
             const clearButton = autocompleteRef.current.querySelector('button[aria-label="Clear"]')

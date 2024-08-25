@@ -11,13 +11,14 @@ import Button from '../../../Components/ui/Button/Button.js'
 import ukoLogo from '../../../assets/img/ukoLogo.png'
 import sideImage from '../../../assets/img/sideImage.png'
 import { Grid, Image, FormContainer, Box } from '../style.js'
+import client from '../../../services/api-context.js'
 
 const schema = yup.object().shape({
-    firstName: yup
+    first_name: yup
         .string()
         .required('First name is required')
         .matches(/^[a-zA-Z]+$/, 'First name should only contain alphabets'),
-    lastName: yup
+    last_name: yup
         .string()
         .required('Last name is required')
         .matches(/^[a-zA-Z]+$/, 'Last name should only contain alphabets'),
@@ -47,43 +48,30 @@ const schema = yup.object().shape({
 
 function Register() {
     const { enqueueSnackbar } = useSnackbar()
-
     const handleSubmit = async (values, actions) => {
-        if (values.password !== values.confirmPassword) {
-            enqueueSnackbar('Passwords do not match!', { variant: 'error' })
-            return
+        const formattedValues = {
+            email: values.email,
+            userName: values.userName,
+            password: values.password,
+            first_name: values.first_name,
+            last_name: values.last_name,
         }
-
-        try {
-            const response = await fetch('https://e-commerce-pet-server-quindarts.vercel.app/auth/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(values),
+        client
+            .post(`/auth/register`, formattedValues)
+            .then((response) => {
+                console.log(response)
+                enqueueSnackbar('Register successfully', { variant: 'success' })
             })
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`)
-            }
-
-            const data = await response.json()
-
-            if (data.success) {
-                enqueueSnackbar(data.message, { variant: 'success' })
-            } else {
-                enqueueSnackbar(data.message, { variant: 'error' })
-            }
-        } catch (error) {
-            enqueueSnackbar('An error occurred', { variant: 'error' })
-            console.error('Error during API call: ', error)
-        }
+            .catch((error) => {
+                console.error('Failed to Register:', error, formattedValues)
+                enqueueSnackbar('Fail to Register', { variant: 'error' })
+            })
     }
 
     return (
         <Grid className=" grid-template-areas-2 md:grid-template-areas-4 grid min-h-screen bg-gray-100">
             <FormContainer
-                initialValues={{ firstName: '', lastName: '', password: '', email: '', confirmPassword: '' }}
+                initialValues={{ first_name: '', last_name: '', password: '', email: '' }}
                 validationSchema={schema}
                 onSubmit={handleSubmit}
             >
@@ -103,26 +91,26 @@ function Register() {
                             <Textfield
                                 placeholder="First Name"
                                 className="focus:shadow-outline mb-6 w-full appearance-none text-sm leading-tight text-gray-700 focus:outline-none md:mb-0 md:mr-2"
-                                id="firstName"
+                                id="first_name"
                                 type="text"
                                 label="First Name"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.firstName}
-                                helperText={touched.firstName && errors.firstName ? errors.firstName : ''}
-                                error={touched.firstName && errors.firstName ? true : false}
+                                value={values.first_name}
+                                helperText={touched.first_name && errors.first_name ? errors.first_name : ''}
+                                error={touched.first_name && errors.first_name ? true : false}
                             />
                             <Textfield
                                 placeholder="Last Name"
                                 className="focus:shadow-outline w-full appearance-none text-sm leading-tight text-gray-700 focus:outline-none md:ml-2 md:mt-0"
-                                id="lastName"
+                                id="last_name"
                                 type="text"
                                 label="Last Name"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.lastName}
-                                helperText={touched.lastName && errors.lastName ? errors.lastName : ''}
-                                error={touched.lastName && errors.lastName ? true : false}
+                                value={values.last_name}
+                                helperText={touched.last_name && errors.last_name ? errors.last_name : ''}
+                                error={touched.last_name && errors.last_name ? true : false}
                             />
                         </div>
                         <div className=" mb-4 grid md:flex md:justify-between">
